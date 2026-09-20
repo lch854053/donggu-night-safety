@@ -55,7 +55,7 @@ export interface SafetyDataset {
   riskZones: FeatureCollection<Polygon | LineString, RiskZoneProperties>;
   roadSegments: FeatureCollection<LineString, RoadSegmentInputProperties>;
   metadata: {
-    sourceKind: "mock" | "supabase";
+    sourceKind: "mock" | "static" | "supabase";
     scoreKind: "client" | "precomputed";
     updatedAt: string;
   };

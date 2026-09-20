@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-09-20",
+  "sources": {
+    "streetlight": {
+      "count": 4631,
+      "dataAsOf": "2025-12-23"
+    }
+  },
+  "pending": {
+    "old_building": "안전디딤돌 IF_0002는 WMS 전용 — 건축물대장 API 연결 필요",
+    "cpted": "IF_0023에 좌표 없음 — 지오코딩 연결 후 수집",
+    "risk_zones": "좌표 공개 소스 없음 — 샘플 유지",
+    "road_segments": "도로 소스 미정(OSM 추출 예정) — 샘플 유지"
+  }
+}

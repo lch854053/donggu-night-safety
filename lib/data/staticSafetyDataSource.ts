@@ -8,7 +8,11 @@ import type {
   SafetyFeatureProperties,
 } from "@/types/safety";
 
-async function fetchGeoJson<T>(url: string): Promise<T> {
+interface DataMeta {
+  generatedAt?: string;
+}
+
+async function fetchJson<T>(url: string): Promise<T> {
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -18,18 +22,20 @@ async function fetchGeoJson<T>(url: string): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export class MockSafetyDataSource implements SafetyDataSource {
+// scripts/fetch-real-data.mjs가 생성한 정적 공공데이터 GeoJSON을 읽는 공급자.
+export class StaticSafetyDataSource implements SafetyDataSource {
   async load(): Promise<SafetyDataset> {
-    const [features, riskZones, roadSegments] = await Promise.all([
-      fetchGeoJson<FeatureCollection<Point, SafetyFeatureProperties>>(
+    const [features, riskZones, roadSegments, meta] = await Promise.all([
+      fetchJson<FeatureCollection<Point, SafetyFeatureProperties>>(
         "/data/safety-features.geojson",
       ),
-      fetchGeoJson<FeatureCollection<Polygon | LineString, RiskZoneProperties>>(
+      fetchJson<FeatureCollection<Polygon | LineString, RiskZoneProperties>>(
         "/data/risk-zones.geojson",
       ),
-      fetchGeoJson<FeatureCollection<LineString, RoadSegmentInputProperties>>(
+      fetchJson<FeatureCollection<LineString, RoadSegmentInputProperties>>(
         "/data/road-segments.geojson",
       ),
+      fetchJson<DataMeta>("/data/meta.json").catch(() => ({}) as DataMeta),
     ]);
 
     return {
@@ -37,9 +43,9 @@ export class MockSafetyDataSource implements SafetyDataSource {
       riskZones,
       roadSegments,
       metadata: {
-        sourceKind: "mock",
+        sourceKind: "static",
         scoreKind: "client",
-        updatedAt: "2026-09-20",
+        updatedAt: meta.generatedAt ?? "",
       },
     };
   }
