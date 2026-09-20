@@ -1,6 +1,23 @@
 # 광주 동구 밤길 안심지도
 
-광주 동구의 안심 인프라와 주변 환경을 조합해 도로별 상대적 밤길 안전 참고지수를 보여주는 Phase 1 MVP입니다. 현재 화면의 모든 시설과 주의구간은 기능 검증용 mock 데이터입니다.
+광주 동구의 안심 인프라와 주변 환경을 조합해 도로별 상대적 밤길 안전 참고지수를 보여주는 MVP입니다. 보안등·CCTV·비상벨·편의점은 공공데이터 실측 자료이고, 주의구간과 도로 링크는 아직 기능 검증용 샘플입니다.
+
+## 데이터 갱신
+
+**자동(기본)**: CCTV·비상벨·편의점은 GitHub Actions가 **매월 5일 09:00 KST**에 전국 데이터를 받아 동구권으로 걸러 커밋하고, 푸시된 내용은 Vercel이 자동 배포합니다(`.github/workflows/refresh-data.yml`). 최초 1회 저장소 Settings → Secrets and variables → Actions에 `SAFEMAP_SERVICE_KEY`, `MOIS_SERVICE_KEY`를 등록하면 됩니다(커밋 금지, Actions Secret만). 수집이 실패하면 알림 이슈가 자동 생성됩니다.
+
+**수동**: 로컬에서 즉시 갱신할 수도 있습니다. 인증키는 `.env.local`에 둡니다.
+
+```bash
+# 보안등만 갱신
+node scripts/fetch-real-data.mjs --only=streetlights
+# 전체 갱신 (CCTV 전국 스캔 포함, 약 15분)
+node scripts/fetch-real-data.mjs
+```
+
+보안등은 API가 좌표를 공개하지 않아 동구청 제공 CSV를 사용합니다. `scripts/data/donggu-streetlights.csv`를 최신 자료로 교체한 뒤 위 명령으로 반영하세요. 자료가 매년 말 기준이라 매년 1월 15일에 GitHub Actions가 갱신 알림 이슈를 자동 생성합니다(`.github/workflows/streetlight-refresh-reminder.yml`).
+
+노후건물·범죄주의구간은 안전디딤돌 WMS 전용(좌표 미공개)이라 아직 미포함입니다. CPTED(IF_0023)는 좌표가 없어 지오코딩 연결 후 수집합니다. 현재 상태는 `public/data/meta.json`에 기록됩니다.
 
 ## 실행
 
@@ -20,7 +37,7 @@ Node.js 20 이상이 필요합니다. 현재 GitHub 저장소를 직접 가져�
 지도는 MapTiler Cloud의 `streets-v2` 스타일을 사용합니다. 로컬 `.env.local`과 Vercel Production 환경에 다음 값을 설정해야 합니다.
 
 ```dotenv
-NEXT_PUBLIC_SPATIAL_DATA_SOURCE=mock
+NEXT_PUBLIC_SPATIAL_DATA_SOURCE=static
 NEXT_PUBLIC_MAPTILER_KEY=MapTiler에서_발급한_공개키
 ```
 
@@ -34,9 +51,11 @@ components/map/              MapLibre 지도, source/layer, 도로 팝업
 components/panel/            레이어 제어, 범례, 안내문
 config/mapLayers.ts          레이어 표시 메타데이터
 config/safetyWeights.ts      거리 반경, 가감점, 점수 등급
-lib/data/                    데이터 공급자 인터페이스와 mock 구현
+lib/data/                    데이터 공급자 인터페이스와 정적 GeoJSON 구현
 lib/scoring/                 Turf 기반 도로 구간 점수 계산
-public/data/                 mock GeoJSON
+scripts/fetch-real-data.mjs  공공데이터 수집 스크립트
+public/data/                 수집된 GeoJSON과 수집 기록(meta.json)
+public/data/mock-samples/    기능 검증용 샘플 백업
 types/                       공간 데이터와 UI 공유 타입
 docs/architecture.md         PostGIS 전환 설계
 ```

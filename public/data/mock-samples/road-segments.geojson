@@ -1,0 +1,65 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "id": "road-01", "name": "금남로 서측", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9138,35.1470],[126.9160,35.1470],[126.9182,35.1471],[126.9204,35.1471]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-02", "name": "금남로 동측", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9204,35.1471],[126.9227,35.1471],[126.9250,35.1472],[126.9271,35.1475]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-03", "name": "충장로 서측", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9145,35.1452],[126.9168,35.1452],[126.9192,35.1454],[126.9214,35.1454]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-04", "name": "충장로 동측", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9214,35.1454],[126.9236,35.1452],[126.9258,35.1453],[126.9280,35.1456]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-05", "name": "제봉로 남측", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9232,35.1370],[126.9230,35.1402],[126.9228,35.1434],[126.9227,35.1462]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-06", "name": "제봉로 북측", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9227,35.1462],[126.9229,35.1490],[126.9234,35.1518],[126.9242,35.1543]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-07", "name": "동명로", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9241,35.1494],[126.9265,35.1499],[126.9290,35.1504],[126.9314,35.1510]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-08", "name": "동계천로", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9162,35.1506],[126.9190,35.1505],[126.9218,35.1508],[126.9245,35.1512],[126.9270,35.1517]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-09", "name": "산수동 생활도로", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9298,35.1520],[126.9317,35.1528],[126.9334,35.1538],[126.9352,35.1546]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-10", "name": "문화전당로", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9178,35.1424],[126.9201,35.1427],[126.9223,35.1431],[126.9246,35.1435],[126.9267,35.1438]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-11", "name": "학동 생활도로", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9247,35.1383],[126.9271,35.1388],[126.9294,35.1394],[126.9315,35.1402]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "road-12", "name": "서남로", "source": "mock" },
+      "geometry": { "type": "LineString", "coordinates": [[126.9256,35.1392],[126.9260,35.1414],[126.9264,35.1436],[126.9268,35.1458],[126.9272,35.1480]] }
+    }
+  ]
+}

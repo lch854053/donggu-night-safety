@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "id": "risk-01", "type": "relative_caution", "name": "충장동 상대적 주의구간", "riskLevel": 3, "source": "mock", "note": "실제 범죄 발생을 의미하지 않는 기능 검증용 범위" },
+      "geometry": { "type": "Polygon", "coordinates": [[[126.9154,35.1438],[126.9191,35.1437],[126.9194,35.1460],[126.9158,35.1463],[126.9154,35.1438]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "risk-02", "type": "relative_caution", "name": "산수동 상대적 주의구간", "riskLevel": 4, "source": "mock", "note": "실제 범죄 발생을 의미하지 않는 기능 검증용 범위" },
+      "geometry": { "type": "Polygon", "coordinates": [[[126.9303,35.1516],[126.9345,35.1515],[126.9350,35.1545],[126.9310,35.1551],[126.9303,35.1516]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "risk-03", "type": "relative_caution", "name": "학동 상대적 주의구간", "riskLevel": 2, "source": "mock", "note": "실제 범죄 발생을 의미하지 않는 기능 검증용 범위" },
+      "geometry": { "type": "Polygon", "coordinates": [[[126.9246,35.1378],[126.9290,35.1377],[126.9297,35.1403],[126.9251,35.1410],[126.9246,35.1378]]] }
+    }
+  ]
+}

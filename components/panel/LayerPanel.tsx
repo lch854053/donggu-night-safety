@@ -167,7 +167,10 @@ export function LayerPanel({
             <strong>데이터 연결 상태를 확인해 주세요.</strong>
           ) : (
             <>
-              <strong>기능 검증용 mock 데이터</strong> · 기준일 {data?.metadata.updatedAt ?? "확인 중"}
+              <strong>
+                {data?.metadata.sourceKind === "mock" ? "기능 검증용 mock 데이터" : "공공데이터 실측 자료"}
+              </strong>
+              · 기준일 {data?.metadata.updatedAt || "확인 중"}
             </>
           )}
         </p>

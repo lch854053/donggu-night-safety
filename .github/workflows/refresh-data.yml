@@ -1,0 +1,56 @@
+# 매월 공공데이터(CCTV·비상벨·편의점)를 자동 수집해 커밋합니다.
+# 커밋이 푸시되면 Vercel이 자동으로 재배포합니다.
+#
+# 사전 준비(한 번만): 저장소 Settings → Secrets and variables → Actions에 등록
+#   - SAFEMAP_SERVICE_KEY  (안전디딤돌 오픈API 인증키)
+#   - MOIS_SERVICE_KEY     (공공데이터포털 행정안전부 인증키)
+#
+# 보안등은 공개 API가 없어(동구청 CSV 수동 교체) 자동 수집 대상이 아닙니다.
+# 보안등 갱신 알림은 streetlight-refresh-reminder.yml을 참고하세요.
+name: 공공데이터 월간 자동 수집
+
+on:
+  schedule:
+    - cron: "0 0 5 * *" # 매월 5일 09:00 KST
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 데이터 수집
+        env:
+          SAFEMAP_SERVICE_KEY: ${{ secrets.SAFEMAP_SERVICE_KEY }}
+          MOIS_SERVICE_KEY: ${{ secrets.MOIS_SERVICE_KEY }}
+        run: node scripts/fetch-real-data.mjs
+
+      - name: 변경분 커밋·푸시
+        run: |
+          if git status --porcelain public/data | grep -q .; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/data
+            git commit -m "chore: 공공데이터 월간 갱신 ($(date +%F))"
+            git push
+          else
+            echo "변경 없음 — 커밋 생략"
+          fi
+
+      - name: 실패 시 알림 이슈 생성
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh issue create --title "공공데이터 자동 수집 실패 — 로그 확인 필요" \
+            --body "월간 자동 수집 워크플로가 실패했습니다. [실행 로그](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${{ github.run_id }})를 확인하세요. 흔한 원인: API 일일 한도 초과, 인증키 만료·미등록(Secrets), 데이터 형식 변경. 수집 스크립트는 자가검사로 비정상 데이터 커밋은 차단합니다."
