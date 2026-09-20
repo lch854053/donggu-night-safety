@@ -1,0 +1,8 @@
+.next/
+node_modules/
+.env*
+!.env.example
+.vercel/
+.impeccable/
+public/vendor/maplibre-gl-worker.mjs
+public/vendor/maplibre-gl-shared.mjs
