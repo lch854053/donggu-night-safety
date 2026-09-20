@@ -15,9 +15,16 @@ npm run dev
 npm run build
 ```
 
-Node.js 20 이상이 필요합니다. Vercel에서는 프로젝트 Root Directory를 `donggu-night-safety`로 지정하면 별도 설정 없이 배포할 수 있습니다.
+Node.js 20 이상이 필요합니다. 현재 GitHub 저장소를 직접 가져오는 경우 Vercel Root Directory는 기본값인 `./`을 사용합니다.
 
-Phase 1 basemap은 OpenStreetMap 표준 타일을 사용합니다. 공개 서비스 트래픽이 늘기 전에는 OSM 타일 사용 정책에 맞는 상용 공급자 또는 자체 벡터 타일로 교체해야 합니다.
+지도는 MapTiler Cloud의 `streets-v2` 스타일을 사용합니다. 로컬 `.env.local`과 Vercel Production 환경에 다음 값을 설정해야 합니다.
+
+```dotenv
+NEXT_PUBLIC_SPATIAL_DATA_SOURCE=mock
+NEXT_PUBLIC_MAPTILER_KEY=MapTiler에서_발급한_공개키
+```
+
+MapTiler 키는 브라우저에서 사용되는 공개 키이므로 MapTiler 관리 화면에서 운영 도메인 `donggu-night-safety.vercel.app`과 사용자 도메인만 허용하도록 제한합니다. Vercel 환경변수를 변경한 뒤에는 새 배포가 필요합니다.
 
 ## 구조
 

@@ -24,9 +24,9 @@ export function NightSafetyApp() {
   useEffect(() => {
     let active = true;
 
-    getSafetyDataSource()
-      .load()
-      .then((dataset) => {
+    async function loadSafetyData() {
+      try {
+        const dataset = await getSafetyDataSource().load();
         const scoredRoadSegments =
           dataset.metadata.scoreKind === "precomputed"
             ? (dataset.roadSegments as ScoredRoadSegments)
@@ -37,12 +37,14 @@ export function NightSafetyApp() {
           setRoadSegments(scoredRoadSegments);
           setSelectedRoadId(scoredRoadSegments.features[0]?.properties.id ?? "");
         }
-      })
-      .catch((reason: unknown) => {
+      } catch (reason: unknown) {
         if (active) {
           setError(reason instanceof Error ? reason.message : "지도 데이터를 불러오지 못했습니다.");
         }
-      });
+      }
+    }
+
+    void loadSafetyData();
 
     return () => {
       active = false;

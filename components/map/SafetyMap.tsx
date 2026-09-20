@@ -14,30 +14,12 @@ import type {
 } from "@/types/safety";
 
 const DONGGU_CENTER: [number, number] = [126.9232, 35.1461];
+const MAPTILER_KEY = process.env.NEXT_PUBLIC_MAPTILER_KEY?.trim();
+const MAPTILER_STYLE_URL = MAPTILER_KEY
+  ? `https://api.maptiler.com/maps/streets-v2/style.json?key=${encodeURIComponent(MAPTILER_KEY)}`
+  : null;
 const [verySafeBand, safeBand, averageBand, cautionBand, highCautionBand] =
   SAFETY_SCORE_BANDS;
-
-const BASEMAP_STYLE: maplibregl.StyleSpecification = {
-  version: 8,
-  sources: {
-    openStreetMap: {
-      type: "raster",
-      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-      tileSize: 256,
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    },
-  },
-  layers: [
-    {
-      id: "open-street-map",
-      type: "raster",
-      source: "openStreetMap",
-      minzoom: 0,
-      maxzoom: 19,
-    },
-  ],
-};
 
 interface SafetyMapProps {
   data: SafetyDataset | null;
@@ -106,14 +88,17 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [styleReady, setStyleReady] = useState(false);
+  const [mapError, setMapError] = useState<string | null>(
+    MAPTILER_STYLE_URL ? null : "Vercel 환경변수 NEXT_PUBLIC_MAPTILER_KEY를 설정해 주세요.",
+  );
 
   useEffect(() => {
-    if (!containerRef.current || mapRef.current) return;
+    if (!containerRef.current || mapRef.current || !MAPTILER_STYLE_URL) return;
 
     maplibregl.setWorkerUrl("/vendor/maplibre-gl-worker.mjs");
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: BASEMAP_STYLE,
+      style: MAPTILER_STYLE_URL,
       center: DONGGU_CENTER,
       zoom: 14,
       minZoom: 11,
@@ -124,8 +109,16 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     mapRef.current = map;
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
+    const handleInitialError = () => {
+      setMapError("MapTiler 지도를 불러오지 못했습니다. API 키와 허용 도메인을 확인해 주세요.");
+    };
+    map.once("error", handleInitialError);
     map.once("load", () => {
-      if (mapRef.current === map) setStyleReady(true);
+      if (mapRef.current === map) {
+        map.off("error", handleInitialError);
+        setMapError(null);
+        setStyleReady(true);
+      }
     });
 
     return () => {
@@ -283,7 +276,16 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
   return (
     <div className="map-region">
       <div ref={containerRef} className="map-canvas" aria-label="광주 동구 밤길 안심지도" />
-      {!styleReady ? <div className="map-loading">지도를 불러오는 중입니다</div> : null}
+      {mapError ? (
+        <div className="map-loading map-error" role="alert">
+          <strong>지도를 표시할 수 없습니다</strong>
+          <span>{mapError}</span>
+        </div>
+      ) : !styleReady ? (
+        <div className="map-loading" role="status">
+          지도를 불러오는 중입니다
+        </div>
+      ) : null}
     </div>
   );
 }

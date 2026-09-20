@@ -69,6 +69,26 @@ input {
   font-weight: 700;
 }
 
+.map-error {
+  display: grid;
+  width: min(24rem, calc(100vw - 2rem));
+  gap: 0.3rem;
+  color: #7b2d28;
+  background: #fff9f7;
+  text-align: center;
+}
+
+.map-error strong {
+  font-size: 0.82rem;
+}
+
+.map-error span {
+  color: #6d514e;
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
 .control-panel {
   position: absolute;
   z-index: 3;

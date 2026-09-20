@@ -6,7 +6,7 @@ const dataSources: Record<string, SafetyDataSource> = {
 };
 
 export function getSafetyDataSource() {
-  const sourceName = process.env.NEXT_PUBLIC_SPATIAL_DATA_SOURCE ?? "mock";
+  const sourceName = process.env.NEXT_PUBLIC_SPATIAL_DATA_SOURCE?.trim() || "mock";
   const source = dataSources[sourceName];
 
   if (!source) {
