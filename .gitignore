@@ -6,3 +6,7 @@ node_modules/
 .impeccable/
 public/vendor/maplibre-gl-worker.mjs
 public/vendor/maplibre-gl-shared.mjs
+.venv/
+__pycache__/
+*.pyc
+*.tsbuildinfo

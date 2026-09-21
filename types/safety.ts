@@ -32,13 +32,19 @@ export interface RoadSegmentInputProperties {
   id: string;
   name: string;
   source: string;
+  sourceIds?: string[];
+  adminDong?: string;
+  roadClass?: string;
+  widthMeters?: number;
+  lanes?: number;
+  pedestrianAccess?: "unverified";
 }
 
 export interface RoadSegmentProperties extends RoadSegmentInputProperties {
   lengthMeters: number;
   lightingScore: number;
   surveillanceScore: number;
-  crimeScore: number;
+  crimeScore: number | null;
   environmentScore: number;
   safetyScore: number;
   streetlightCount: number;
@@ -62,5 +68,13 @@ export interface SafetyDataset {
 }
 
 export type ScoredRoadSegments = FeatureCollection<LineString, RoadSegmentProperties>;
+
+export interface ScoredRoadFile extends ScoredRoadSegments {
+  scoreMetadata: {
+    kind: "precomputed";
+    generatedAt: string;
+    inputHashes: Record<string, string>;
+  };
+}
 
 export type LayerVisibility = Record<LayerKey, boolean>;

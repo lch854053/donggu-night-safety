@@ -72,14 +72,16 @@ function roadPopupContent(properties: Record<string, unknown>) {
     const term = document.createElement("dt");
     const detail = document.createElement("dd");
     term.textContent = label;
-    detail.textContent = `${numericProperty(properties, key as keyof RoadSegmentProperties)}점`;
+    detail.textContent = key === "crimeScore" && properties[key] == null
+      ? "미수집"
+      : `${numericProperty(properties, key as keyof RoadSegmentProperties)}점`;
     row.append(term, detail);
     metrics.append(row);
   });
 
   const note = document.createElement("p");
   note.className = "road-popup-note";
-  note.textContent = "여러 공간지표를 조합한 상대적 참고값입니다.";
+  note.textContent = `${numericProperty(properties, "lengthMeters")}m 구간 · ${String(properties.source ?? "")} · 보행 가능 여부 미검증`;
   content.append(name, label, scoreRow, metrics, note);
   return content;
 }
@@ -133,7 +135,10 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
 
     map.addSource("safety-features", { type: "geojson", data: data.features });
     map.addSource("risk-zones", { type: "geojson", data: data.riskZones });
-    map.addSource("road-segments", { type: "geojson", data: roadSegments });
+    map.addSource("road-segments", {
+      type: "geojson", data: roadSegments,
+      attribution: '도로: 국토지리정보원 · 경계: <a href="https://sgis.kostat.go.kr">SGIS</a> / <a href="https://github.com/vuski/admdongkor">vuski/admdongkor</a> (CC BY 4.0)',
+    });
 
     map.addLayer({
       id: "risk-zone-fill",
