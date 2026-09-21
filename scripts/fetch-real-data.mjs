@@ -311,7 +311,7 @@ async function main() {
         pending: {
           old_building: "안전디딤돌 IF_0002는 WMS 전용 — 건축물대장 API 연결 필요",
           cpted: "IF_0023에 좌표 없음 — 지오코딩 연결 후 수집",
-          risk_zones: "좌표 공개 소스 없음 — 미수집, 점수 감점 미적용",
+          risk_zones: "벡터 좌표 미공개 — 대신 public/data/crime-risk.json(safemap WMS 샘플링)으로 상대적 주의도 반영",
         },
       },
       null,

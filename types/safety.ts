@@ -8,7 +8,7 @@ export type SafetyFeatureType =
   | "cpted"
   | "old_building";
 
-export type LayerKey = SafetyFeatureType | "risk_zone";
+export type LayerKey = SafetyFeatureType | "risk_zone" | "crime_overlay";
 
 export interface SafetyFeatureProperties {
   id: string;
@@ -52,6 +52,8 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
   lightingUniformityScore: number;
   surveillanceScore: number;
   crimeScore: number | null;
+  /** 상대적 주의도 산출에 쓴 WMS 샘플 수. 데이터가 없는 구간은 null. */
+  crimeSampleCount: number | null;
   environmentScore: number;
   sidewalkContribution: number;
   safetyScore: number;
@@ -73,6 +75,30 @@ export interface SafetyDataset {
     scoreKind: "client" | "precomputed";
     updatedAt: string;
   };
+  /**
+   * 생활안전지도(경찰청 밀도분석) WMS를 도로별로 샘플링한 상대적 주의도.
+   * 이 파일 자체는 사전 처리 산출물이며, 구간에 없으면 해당 도로는
+   * crimeScore가 null(미수집)이 된다 — 0(낮음)과 다른 의미다.
+   */
+  crimeRiskByRoad?: Record<string, CrimeRiskSummary>;
+}
+
+/** 공간 데이터와 UI가 공유하는 도로별 상대적 주의도 요약. */
+export interface CrimeRiskSummary {
+  /** mean/max/highRiskRatio 가중 합산 (0~1). */
+  crimeRisk: number;
+  /** 0~5 감점 단계 (SAFETY_WEIGHTS.crimeRisk 키). */
+  level: number;
+  /** 샘플 평균 정규화 위험도 (0~1). */
+  mean: number;
+  /** 샘플 최고 정규화 위험도 (0~1). */
+  max: number;
+  /** 고위험 등급 샘플 비율 (0~1). */
+  highRiskRatio: number;
+  /** 범례에 매칭된 샘플 수. */
+  sampleCount: number;
+  /** noData(투명·미매칭) 샘플 비율. noData는 위험도 0이 아니다. */
+  noDataRatio: number;
 }
 
 export type ScoredRoadSegments = FeatureCollection<LineString, RoadSegmentProperties>;
@@ -86,3 +112,10 @@ export interface ScoredRoadFile extends ScoredRoadSegments {
 }
 
 export type LayerVisibility = Record<LayerKey, boolean>;
+
+/** 사전 처리된 WMS 래스터 오버레이(서비스키 없는 정적 이미지). */
+export interface CrimeOverlayInfo {
+  imageUrl: string;
+  /** 지도 image source용 모서리 4점 [lon, lat] (좌상단부터 시계방향). */
+  coordinates: [[number, number], [number, number], [number, number], [number, number]];
+}

@@ -4,6 +4,20 @@ export interface ProximityWeight {
   maxOccurrences: number;
 }
 
+/** 범죄 상대적 주의도(WMS raster sampling) 설정. 실제 범죄 발생 확률이 아니다. */
+export interface CrimeRiskConfig {
+  /** 도로 LineString 따라 샘플링할 간격(미터). 최소 1개 샘플 보장. */
+  sampleIntervalMeters: number;
+  /** highRiskRatio 계산에 쓸 고위험 기준(생활안전지도 10등급 기준). */
+  highRiskLevel: number;
+  /** crimeRisk = mean*w + max*w + highRatio*w (0~1). */
+  weights: { mean: number; max: number; high: number };
+  /** crimeRisk 0~1을 0~5 감점 단계로 나눌 폭. */
+  levelStep: number;
+  /** 픽셀↔범례색 최근접 매칭 최대 유클리드 거리(안티앨리어싱 허용폭). */
+  maxColorDistance: number;
+}
+
 /**
  * 보안등 위치 기반 상대적 조명 환경 설정. 실제 조도(lux) 데이터가 아니므로
  * 모든 값은 보안등 좌표와 거리 분포에서 나온 추정 기준값이다.
@@ -72,6 +86,15 @@ export const SAFETY_WEIGHTS = {
     4: -18,
     5: -25,
   },
+  // 상대적 주의도는 생활안전지도(경찰청 밀도분석 10등급) WMS를 도로 주변에서
+  // 샘플링해 산출한다. 실제 범죄 발생 가능성을 예측하는 수치가 아니다.
+  crime: {
+    sampleIntervalMeters: 20,
+    highRiskLevel: 6,
+    weights: { mean: 0.5, max: 0.2, high: 0.3 },
+    levelStep: 0.2,
+    maxColorDistance: 30,
+  },
   oldBuilding: {
     radiusMeters: 100,
     points: -2,
@@ -86,6 +109,7 @@ export const SAFETY_WEIGHTS = {
   cpted: ProximityWeight;
   sidewalk: { missingPenalty: number };
   crimeRisk: Record<0 | 1 | 2 | 3 | 4 | 5, number>;
+  crime: CrimeRiskConfig;
   oldBuilding: ProximityWeight;
 };
 
