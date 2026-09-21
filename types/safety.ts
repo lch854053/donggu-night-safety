@@ -28,6 +28,8 @@ export interface RiskZoneProperties {
   note: string;
 }
 
+export type PedestrianAccess = "yes" | "partial" | "no" | "unverified";
+
 export interface RoadSegmentInputProperties {
   id: string;
   name: string;
@@ -37,7 +39,8 @@ export interface RoadSegmentInputProperties {
   roadClass?: string;
   widthMeters?: number;
   lanes?: number;
-  pedestrianAccess?: "unverified";
+  pedestrianAccess?: PedestrianAccess;
+  sidewalkWidthMeters?: number | null;
 }
 
 export interface RoadSegmentProperties extends RoadSegmentInputProperties {
@@ -46,6 +49,7 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
   surveillanceScore: number;
   crimeScore: number | null;
   environmentScore: number;
+  sidewalkContribution: number;
   safetyScore: number;
   streetlightCount: number;
   cctvCount: number;

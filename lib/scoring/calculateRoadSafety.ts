@@ -106,6 +106,9 @@ export function calculateRoadSafety(
         SAFETY_WEIGHTS.oldBuilding,
       );
       const crimeContribution = SAFETY_WEIGHTS.crimeRisk[riskLevel];
+      // 인도는 점 시설과 달리 import-sidewalks.py가 미리 계산한 구간 속성을 읽는다.
+      const sidewalkContribution =
+        road.properties.pedestrianAccess === "no" ? SAFETY_WEIGHTS.sidewalk.missingPenalty : 0;
 
       const safetyScore = Math.round(
         clamp(
@@ -116,6 +119,7 @@ export function calculateRoadSafety(
             storeContribution +
             cptedContribution +
             oldBuildingContribution +
+            sidewalkContribution +
             crimeContribution,
         ),
       );
@@ -152,6 +156,7 @@ export function calculateRoadSafety(
               oldBuildingRatio * 50,
           ),
         ),
+        sidewalkContribution,
         safetyScore,
         streetlightCount,
         cctvCount,
