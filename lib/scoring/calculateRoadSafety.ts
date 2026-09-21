@@ -40,46 +40,50 @@ function availabilityScore(count: number, maximum: number) {
   return Math.round(clamp((Math.min(count, maximum) / maximum) * 100));
 }
 
-export function calculateRoadSafety(dataset: SafetyDataset): ScoredRoadSegments {
+export function calculateRoadSafety(
+  dataset: SafetyDataset,
+  candidatesForRoad?: (road: Feature<LineString>) => Feature<Point, SafetyFeatureProperties>[],
+): ScoredRoadSegments {
   const pointFeatures = dataset.features.features;
   const maximumCrimePenalty = Math.abs(SAFETY_WEIGHTS.crimeRisk[5]);
 
   return {
     type: "FeatureCollection",
     features: dataset.roadSegments.features.map((road) => {
+      const candidates = candidatesForRoad?.(road) ?? pointFeatures;
       const streetlightCount = pointsNearRoad(
         road,
-        pointFeatures,
+        candidates,
         "streetlight",
         SAFETY_WEIGHTS.lighting.radiusMeters,
       );
       const cctvCount = pointsNearRoad(
         road,
-        pointFeatures,
+        candidates,
         "cctv",
         SAFETY_WEIGHTS.cctv.radiusMeters,
       );
       const emergencyBellCount = pointsNearRoad(
         road,
-        pointFeatures,
+        candidates,
         "emergency_bell",
         SAFETY_WEIGHTS.emergencyBell.radiusMeters,
       );
       const convenienceStoreCount = pointsNearRoad(
         road,
-        pointFeatures,
+        candidates,
         "convenience_store",
         SAFETY_WEIGHTS.convenienceStore.radiusMeters,
       );
       const cptedCount = pointsNearRoad(
         road,
-        pointFeatures,
+        candidates,
         "cpted",
         SAFETY_WEIGHTS.cpted.radiusMeters,
       );
       const oldBuildingCount = pointsNearRoad(
         road,
-        pointFeatures,
+        candidates,
         "old_building",
         SAFETY_WEIGHTS.oldBuilding.radiusMeters,
       );
@@ -133,7 +137,7 @@ export function calculateRoadSafety(dataset: SafetyDataset): ScoredRoadSegments 
             Math.min(emergencyBellCount, SAFETY_WEIGHTS.emergencyBell.maxOccurrences),
           surveillanceMaximum,
         ),
-        crimeScore: Math.round(
+        crimeScore: dataset.riskZones.features.length === 0 ? null : Math.round(
           clamp(100 - (Math.abs(crimeContribution) / maximumCrimePenalty) * 100),
         ),
         environmentScore: Math.round(

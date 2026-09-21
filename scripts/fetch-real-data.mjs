@@ -12,8 +12,9 @@
 //   편의점      안전디딤돌 IF_0039               Web Mercator(3857) 좌표 ✅
 //   CPTED      안전디딤돌 IF_0023               좌표 없음(지번주소만) → 지오코딩 전까지 수집 제외
 //   노후건물/범죄주의구간  안전디딤돌 WMS 전용(좌표 미공개) → 좌표 API 확보 후 추가
-//   주의구간·도로 링크  별도 소스 없음 → 기존 샘플 파일 유지
+//   도로 링크  국토지리정보원 도로중심선 → 시설 갱신 후 점수 자동 재계산
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -302,12 +303,12 @@ async function main() {
     JSON.stringify(
       {
         generatedAt: started.toISOString().slice(0, 10),
-        sources: { ...keptMetaSources, ...metaSources },
+        sources: { ...keptMetaSources, ...metaSources,
+          road_segments: { source: "국토지리정보원 연속수치지형도", metadata: "/data/roads-meta.json" } },
         pending: {
           old_building: "안전디딤돌 IF_0002는 WMS 전용 — 건축물대장 API 연결 필요",
           cpted: "IF_0023에 좌표 없음 — 지오코딩 연결 후 수집",
-          risk_zones: "좌표 공개 소스 없음 — 샘플 유지",
-          road_segments: "도로 소스 미정(OSM 추출 예정) — 샘플 유지",
+          risk_zones: "좌표 공개 소스 없음 — 미수집, 점수 감점 미적용",
         },
       },
       null,
@@ -315,6 +316,10 @@ async function main() {
     ),
     "utf8",
   );
+
+  execFileSync(process.execPath, ["--import", "tsx", "scripts/score-roads.ts"], {
+    cwd: ROOT, stdio: "inherit",
+  });
 
   const byType = {};
   for (const f of features) byType[f.properties.type] = (byType[f.properties.type] ?? 0) + 1;

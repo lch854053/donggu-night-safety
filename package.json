@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "score-roads": "tsx scripts/score-roads.ts",
+    "test": "tsx --test test/*.test.ts",
     "postinstall": "node scripts/copy-maplibre-worker.mjs"
   },
   "engines": {
@@ -25,6 +27,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.0"
   }
 }

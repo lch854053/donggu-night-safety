@@ -1,9 +1,10 @@
 import type { FeatureCollection, LineString, Point, Polygon } from "geojson";
 
 import type { SafetyDataSource } from "@/lib/data/SafetyDataSource";
+import { validateScoredRoads } from "@/lib/data/validateScoredRoads";
 import type {
   RiskZoneProperties,
-  RoadSegmentInputProperties,
+  ScoredRoadFile,
   SafetyDataset,
   SafetyFeatureProperties,
 } from "@/types/safety";
@@ -32,7 +33,7 @@ export class StaticSafetyDataSource implements SafetyDataSource {
       fetchJson<FeatureCollection<Polygon | LineString, RiskZoneProperties>>(
         "/data/risk-zones.geojson",
       ),
-      fetchJson<FeatureCollection<LineString, RoadSegmentInputProperties>>(
+      fetchJson<ScoredRoadFile>(
         "/data/road-segments.geojson",
       ),
       fetchJson<DataMeta>("/data/meta.json").catch(() => ({}) as DataMeta),
@@ -41,10 +42,10 @@ export class StaticSafetyDataSource implements SafetyDataSource {
     return {
       features,
       riskZones,
-      roadSegments,
+      roadSegments: validateScoredRoads(roadSegments),
       metadata: {
         sourceKind: "static",
-        scoreKind: "client",
+        scoreKind: "precomputed",
         updatedAt: meta.generatedAt ?? "",
       },
     };

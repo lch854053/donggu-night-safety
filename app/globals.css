@@ -372,7 +372,8 @@ input {
   line-height: 1.45;
 }
 
-.road-lookup select {
+.road-lookup select,
+.road-lookup input[type="search"] {
   width: 100%;
   min-height: 2.25rem;
   padding: 0.42rem 2rem 0.42rem 0.6rem;
@@ -381,6 +382,49 @@ input {
   color: var(--ink);
   background: var(--card);
   font-size: 0.72rem;
+}
+
+.road-lookup input[type="search"] {
+  margin-top: 0.4rem;
+  padding-right: 0.6rem;
+}
+
+.road-pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.road-pagination button {
+  min-height: 2.75rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.3rem;
+  color: var(--ink);
+  background: var(--card);
+  cursor: pointer;
+}
+
+.road-pagination button:hover:not(:disabled) {
+  background: var(--paper);
+}
+
+.road-pagination button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.road-lookup :is(input, select, button):focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.road-lookup-result > p {
+  margin: 0 0 0.6rem;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
 }
 
 .road-lookup-result {
