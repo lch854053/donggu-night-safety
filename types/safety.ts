@@ -8,7 +8,7 @@ export type SafetyFeatureType =
   | "cpted"
   | "old_building";
 
-export type LayerKey = SafetyFeatureType | "risk_zone" | "crime_overlay";
+export type LayerKey = SafetyFeatureType;
 
 export interface SafetyFeatureProperties {
   id: string;
@@ -112,10 +112,3 @@ export interface ScoredRoadFile extends ScoredRoadSegments {
 }
 
 export type LayerVisibility = Record<LayerKey, boolean>;
-
-/** 사전 처리된 WMS 래스터 오버레이(서비스키 없는 정적 이미지). */
-export interface CrimeOverlayInfo {
-  imageUrl: string;
-  /** 지도 image source용 모서리 4점 [lon, lat] (좌상단부터 시계방향). */
-  coordinates: [[number, number], [number, number], [number, number], [number, number]];
-}

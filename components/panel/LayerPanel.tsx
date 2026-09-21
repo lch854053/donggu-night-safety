@@ -48,7 +48,6 @@ export function LayerPanel({
     const type = feature.properties.type;
     featureCounts.set(type, (featureCounts.get(type) ?? 0) + 1);
   });
-  featureCounts.set("risk_zone", data?.riskZones.features.length ?? 0);
 
   return (
     <aside className="control-panel" aria-label="지도 레이어 설정">
@@ -101,19 +100,6 @@ export function LayerPanel({
                 </label>
               ))}
             </div>
-
-            <label className="layer-row">
-              <input
-                type="checkbox"
-                checked={visibility.crime_overlay}
-                onChange={() => onToggle("crime_overlay")}
-              />
-              <span className="layer-swatch is-area" style={{ "--layer-color": "#bd0026" } as React.CSSProperties} aria-hidden="true" />
-              <span className="layer-copy">
-                <strong>범죄 상대적 주의구간 표시</strong>
-                <small>생활안전지도 WMS 원본(경찰청 밀도분석) — 시각 참고용</small>
-              </span>
-            </label>
 
             <div className="score-legend" aria-labelledby="legend-heading">
               <h2 id="legend-heading">밤길 안전 참고지수</h2>

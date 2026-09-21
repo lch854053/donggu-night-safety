@@ -31,13 +31,6 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
     kind: "point",
   },
   {
-    key: "risk_zone",
-    label: "상대적 주의구간",
-    description: "여러 지표로 표현한 비교용 주의 범위",
-    color: "#c85d43",
-    kind: "area",
-  },
-  {
     key: "convenience_store",
     label: "편의점",
     description: "야간 이용 가능한 생활시설",
@@ -67,9 +60,6 @@ export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   convenience_store: true,
   cpted: true,
   old_building: false,
-  risk_zone: true,
-  // WMS 원본 오버레이는 시각 참고용이라 기본 꺼짐 — 지도 성능 유지.
-  crime_overlay: false,
 };
 
 export const POINT_LAYER_KEYS = MAP_LAYER_DEFINITIONS.filter(
