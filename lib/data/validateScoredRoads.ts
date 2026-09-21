@@ -2,7 +2,8 @@ import type { ScoredRoadFile } from "@/types/safety";
 
 /** Fail visibly instead of accidentally doing millions of distance checks on the client. */
 export function validateScoredRoads(value: ScoredRoadFile): ScoredRoadFile {
-  const numericFields = ["lengthMeters", "lightingScore", "surveillanceScore", "environmentScore",
+  const numericFields = ["lengthMeters", "lightingScore", "lightingCoverage", "maxDarkGapMeters",
+    "lightingUniformityScore", "surveillanceScore", "environmentScore",
     "safetyScore", "streetlightCount", "cctvCount", "emergencyBellCount", "convenienceStoreCount",
     "cptedCount", "oldBuildingCount", "riskLevel", "sidewalkContribution"] as const;
   if (value?.type !== "FeatureCollection" || value.scoreMetadata?.kind !== "precomputed" ||

@@ -11,7 +11,7 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 export async function scoreRoads() {
   const paths = ["scripts/data/road-segments.geojson", "public/data/safety-features.geojson",
     "public/data/risk-zones.geojson", "config/safetyWeights.ts", "lib/scoring/calculateRoadSafety.ts",
-    "lib/scoring/roadPointIndex.ts", "scripts/score-roads.ts"];
+    "lib/scoring/roadPointIndex.ts", "lib/scoring/lighting.ts", "scripts/score-roads.ts"];
   const contents = await Promise.all(paths.map((path) => readFile(resolve(root, path), "utf8")));
   const dataset: SafetyDataset = {
     roadSegments: JSON.parse(contents[0]), features: JSON.parse(contents[1]), riskZones: JSON.parse(contents[2]),

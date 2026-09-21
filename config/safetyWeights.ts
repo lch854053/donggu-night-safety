@@ -4,12 +4,40 @@ export interface ProximityWeight {
   maxOccurrences: number;
 }
 
+/**
+ * 보안등 위치 기반 상대적 조명 환경 설정. 실제 조도(lux) 데이터가 아니므로
+ * 모든 값은 보안등 좌표와 거리 분포에서 나온 추정 기준값이다.
+ */
+export interface LightingConfig {
+  sampleIntervalMeters: number;
+  influenceSigmaMeters: number;
+  /** 이 거리 밖 보안등은 영향이 1% 미만(≈3σ)이라 후보 탐색에서 제외한다. */
+  influenceCutoffMeters: number;
+  /** streetlightCount(UI 표시·디버깅용) 집계 반경. 기존 50m 기준을 유지한다. */
+  countRadiusMeters: number;
+  coverageThreshold: number;
+  /** 기존 보안등 최대 가점(8점×2개)과 같은 수준을 유지하기 위한 상한. */
+  contributionPoints: number;
+  weights: { coverage: number; darkGap: number; uniformity: number };
+  /** [암구간 길이(m), 점수] 오름차순 — 구간 사이는 선형 보간한다. */
+  darkGapBreakpoints: readonly (readonly [gapMeters: number, score: number])[];
+  /** 균일도 계산에 쓸 하위 샘플 비율(가장 어두운 쪽 대표값). */
+  uniformityDarkShare: number;
+}
+
 export const SAFETY_WEIGHTS = {
   baseScore: 50,
+  // 보안등은 개수가 아니라 구간 샘플별 감쇠 영향(위치·거리 분포)으로 조명 환경을 평가한다.
   lighting: {
-    radiusMeters: 50,
-    points: 8,
-    maxOccurrences: 2,
+    sampleIntervalMeters: 5,
+    influenceSigmaMeters: 20,
+    influenceCutoffMeters: 60,
+    countRadiusMeters: 50,
+    coverageThreshold: 0.25,
+    contributionPoints: 16,
+    weights: { coverage: 0.5, darkGap: 0.3, uniformity: 0.2 },
+    darkGapBreakpoints: [[0, 100], [10, 90], [20, 70], [30, 45], [40, 20], [50, 0]],
+    uniformityDarkShare: 0.2,
   },
   cctv: {
     radiusMeters: 100,
@@ -51,7 +79,7 @@ export const SAFETY_WEIGHTS = {
   },
 } as const satisfies {
   baseScore: number;
-  lighting: ProximityWeight;
+  lighting: LightingConfig;
   cctv: ProximityWeight;
   emergencyBell: ProximityWeight;
   convenienceStore: ProximityWeight;

@@ -166,8 +166,24 @@ export function LayerPanel({
                   </div>
                   <dl>
                     <div>
-                      <dt>보안등</dt>
+                      <dt>조명 환경</dt>
                       <dd>{selectedRoad.properties.lightingScore}점</dd>
+                    </div>
+                    <div>
+                      <dt>보안등</dt>
+                      <dd>{selectedRoad.properties.streetlightCount}개</dd>
+                    </div>
+                    <div>
+                      <dt>조명 커버리지</dt>
+                      <dd>{selectedRoad.properties.lightingCoverage}%</dd>
+                    </div>
+                    <div>
+                      <dt>최대 암구간</dt>
+                      <dd>{selectedRoad.properties.maxDarkGapMeters}m</dd>
+                    </div>
+                    <div>
+                      <dt>조명 균일도</dt>
+                      <dd>{selectedRoad.properties.lightingUniformityScore}</dd>
                     </div>
                     <div>
                       <dt>CCTV·비상벨</dt>
@@ -192,7 +208,7 @@ export function LayerPanel({
                 이 지수는 안심 인프라와 주변 환경 데이터를 조합한 상대적 참고값이며, 특정 장소의
                 절대적인 안전을 보장하지 않습니다.
               </p>
-              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 주의구간·노후건물·CPTED는 미수집으로 점수에 반영되지 않습니다.</p>
+              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 조명 환경은 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 주의구간·노후건물·CPTED는 미수집으로 점수에 반영되지 않습니다.</p>
               <p><a href="/data/roads-meta.json" target="_blank" rel="noreferrer">도로 출처·가공 정보</a> · <a href="/data/sidewalks-meta.json" target="_blank" rel="noreferrer">인도 출처·가공 정보</a> · 국토지리정보원<br />경계: SGIS / vuski·admdongkor (CC BY 4.0)</p>
             </div>
           </>
