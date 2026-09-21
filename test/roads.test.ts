@@ -7,6 +7,7 @@ import { calculateRoadSafety } from "../lib/scoring/calculateRoadSafety";
 import { createRoadPointIndex } from "../lib/scoring/roadPointIndex";
 import { validateScoredRoads } from "../lib/data/validateScoredRoads";
 import { StaticSafetyDataSource } from "../lib/data/staticSafetyDataSource";
+import { SAFETY_WEIGHTS } from "../config/safetyWeights";
 import type { SafetyDataset, SafetyFeatureType, ScoredRoadFile } from "../types/safety";
 
 const readJson = (path: string) => JSON.parse(readFileSync(path, "utf8"));
@@ -81,4 +82,40 @@ test("static provider uses the shipped precomputed collection", async (t) => {
   assert.equal(loaded.metadata.scoreKind, "precomputed");
   assert.equal(loaded.roadSegments.features.length, roads.features.length);
   assert.deepEqual(loaded.roadSegments.features[0], roads.features[0]);
+});
+
+test("sidewalk penalty applies only to segments without adjacent sidewalks", () => {
+  const base = dataset.roadSegments.features[0];
+  const withAccess = (access: "yes" | "partial" | "no") => calculateRoadSafety({ ...dataset,
+    roadSegments: featureCollection([
+      { ...base, properties: { ...base.properties, pedestrianAccess: access } }]) });
+  const missing = withAccess("no").features[0].properties;
+  const present = withAccess("yes").features[0].properties;
+  const partial = withAccess("partial").features[0].properties;
+  assert.equal(missing.sidewalkContribution, SAFETY_WEIGHTS.sidewalk.missingPenalty);
+  assert.equal(present.sidewalkContribution, 0);
+  assert.equal(partial.sidewalkContribution, 0);
+  assert.equal(missing.safetyScore, present.safetyScore + SAFETY_WEIGHTS.sidewalk.missingPenalty);
+});
+
+test("shipped segments carry sidewalk attributes matching the import report", () => {
+  const meta = readJson("public/data/sidewalks-meta.json");
+  const distribution = { yes: 0, partial: 0, no: 0 };
+  const byId = new Map(roads.features.map((f) => [f.properties.id, f]));
+  for (const segment of dataset.roadSegments.features) {
+    const access = segment.properties.pedestrianAccess;
+    if (access !== "yes" && access !== "partial" && access !== "no") {
+      assert.fail(`${segment.properties.id}: pedestrianAccess=${String(access)}`);
+    }
+    distribution[access] += 1;
+    const scored = byId.get(segment.properties.id);
+    assert.ok(scored, segment.properties.id);
+    assert.equal(scored.properties.pedestrianAccess, access);
+    assert.equal(scored.properties.sidewalkContribution,
+      access === "no" ? SAFETY_WEIGHTS.sidewalk.missingPenalty : 0);
+    const width = segment.properties.sidewalkWidthMeters;
+    assert.ok(width == null || (width > 0 && width < 30), `${segment.properties.id}: ${width}`);
+  }
+  assert.deepEqual(meta.access, distribution);
+  assert.ok(distribution.yes + distribution.partial > 0, "no sidewalk-aware segments at all");
 });

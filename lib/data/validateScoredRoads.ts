@@ -4,7 +4,7 @@ import type { ScoredRoadFile } from "@/types/safety";
 export function validateScoredRoads(value: ScoredRoadFile): ScoredRoadFile {
   const numericFields = ["lengthMeters", "lightingScore", "surveillanceScore", "environmentScore",
     "safetyScore", "streetlightCount", "cctvCount", "emergencyBellCount", "convenienceStoreCount",
-    "cptedCount", "oldBuildingCount", "riskLevel"] as const;
+    "cptedCount", "oldBuildingCount", "riskLevel", "sidewalkContribution"] as const;
   if (value?.type !== "FeatureCollection" || value.scoreMetadata?.kind !== "precomputed" ||
       !Array.isArray(value.features) || !value.features.length ||
       value.features.some((f) => !f.properties || f.geometry?.type !== "LineString" ||

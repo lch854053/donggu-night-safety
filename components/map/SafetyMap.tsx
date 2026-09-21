@@ -79,9 +79,19 @@ function roadPopupContent(properties: Record<string, unknown>) {
     metrics.append(row);
   });
 
+  const width = Number(properties.sidewalkWidthMeters);
+  const sidewalkLabel = properties.pedestrianAccess === "yes"
+    ? `인도 있음${width > 0 ? ` · 폭 약 ${width.toFixed(1)}m` : ""}`
+    : properties.pedestrianAccess === "partial"
+      ? "인도 일부 구간만 인접"
+      : properties.pedestrianAccess === "no"
+        ? "인도 없음"
+        : "보행로 미검증";
+
   const note = document.createElement("p");
   note.className = "road-popup-note";
-  note.textContent = `${numericProperty(properties, "lengthMeters")}m 구간 · ${String(properties.source ?? "")} · 보행 가능 여부 미검증`;
+  note.textContent =
+    `${numericProperty(properties, "lengthMeters")}m 구간 · ${String(properties.source ?? "")} · ${sidewalkLabel}`;
   content.append(name, label, scoreRow, metrics, note);
   return content;
 }

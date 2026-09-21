@@ -12,6 +12,8 @@
 //   편의점      안전디딤돌 IF_0039               Web Mercator(3857) 좌표 ✅
 //   CPTED      안전디딤돌 IF_0023               좌표 없음(지번주소만) → 지오코딩 전까지 수집 제외
 //   노후건물/범죄주의구간  안전디딤돌 WMS 전용(좌표 미공개) → 좌표 API 확보 후 추가
+//   인도        국토지리정보원 보행로(N3L_A0033320 계열) → import-sidewalks.py, 연 1회 수동 ✅
+//              (안전디딤돌 IF_0095는 같은 데이터의 무좌표 속성 API라 미사용)
 //   도로 링크  국토지리정보원 도로중심선 → 시설 갱신 후 점수 자동 재계산
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
@@ -304,7 +306,8 @@ async function main() {
       {
         generatedAt: started.toISOString().slice(0, 10),
         sources: { ...keptMetaSources, ...metaSources,
-          road_segments: { source: "국토지리정보원 연속수치지형도", metadata: "/data/roads-meta.json" } },
+          road_segments: { source: "국토지리정보원 연속수치지형도", metadata: "/data/roads-meta.json" },
+          sidewalks: { source: "국토지리정보원 연속수치지형도 보행로(인도)", metadata: "/data/sidewalks-meta.json" } },
         pending: {
           old_building: "안전디딤돌 IF_0002는 WMS 전용 — 건축물대장 API 연결 필요",
           cpted: "IF_0023에 좌표 없음 — 지오코딩 연결 후 수집",

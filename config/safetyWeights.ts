@@ -31,6 +31,11 @@ export const SAFETY_WEIGHTS = {
     points: 8,
     maxOccurrences: 1,
   },
+  // 인도 인접 여부는 import-sidewalks.py가 구간별로 계산해 pedestrianAccess로 반영한다.
+  // 미커버 구간은 실제 부재와 지형도 미작성이 섞여 있어 감점은 보수적으로 유지한다.
+  sidewalk: {
+    missingPenalty: -3,
+  },
   crimeRisk: {
     0: 0,
     1: -3,
@@ -51,6 +56,7 @@ export const SAFETY_WEIGHTS = {
   emergencyBell: ProximityWeight;
   convenienceStore: ProximityWeight;
   cpted: ProximityWeight;
+  sidewalk: { missingPenalty: number };
   crimeRisk: Record<0 | 1 | 2 | 3 | 4 | 5, number>;
   oldBuilding: ProximityWeight;
 };

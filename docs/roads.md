@@ -3,6 +3,7 @@
 ## 출처
 
 - 도로: 사용자가 내려받은 국토지리정보원 **(연속수치지형도)도로중심선_광주**, `N3L_A0020000_29`. EPSG:5179 / DBF CP949.
+- 인도: 국가공간정보포털 수치지도 보행로 레이어, `N3L_A0033320` 계열. 도로와 같은 좌표계·인코딩이며 연 1회 수동 교체를 전제로 한다. 안전디딤돌 IF_0095는 같은 데이터에서 좌표를 제거한 속성 API이므로 사용하지 않는다.
 - 원본 XML 생성일: 2023-02-17. 실제 도로 조사·갱신 기준일은 미확인.
 - 경계: [vuski/admdongkor 2026-07-01판](https://github.com/vuski/admdongkor/blob/dd1881663fcabc69b81393604e91ebf3a4202e9a/ver20260701/HangJeongDong_ver20260701.geojson), `adm_cd2`가 `12210`으로 시작하는 동구 13개 행정동. 커밋을 고정하고 추출본을 저장한다.
 - 경계의 행정동 이름은 도로명이 없을 때 표시 이름으로 사용한다. 도로명 `RDNM`은 원본 전체에서 공란이고 `NAME`은 일부 노선명만 있다.
@@ -21,13 +22,24 @@
 
 초기 결과: 원본 171,254건 → 동구 14,111건 → 클립된 선 14,128개 → 체인 6,672개 → 최종 10,660개 구간, 총 356.377km. 상세 수치는 `public/data/roads-meta.json`에 저장된다.
 
+## 인도 인접 속성
+
+`scripts/import-sidewalks.py`는 `import-roads.py` 다음에 실행한다(도로 재임포트 시 인도 속성이 지워진다).
+
+1. 인도 원본을 경계 합집합으로 자르고 4326으로 변환해 `scripts/data/donggu-sidewalks.geojson`에 보관한다.
+2. 각 도로 구간을 5179로 되투영해, 구간 길이 중 10m 반경 내 인도에 덮인 비율을 계산한다.
+3. 덮임 비율로 `pedestrianAccess`를 매긴다: `yes` 80% 이상, `partial` 30% 이상, `no` 미만. 10m 내 인도에서 측정된 폭원(`WIDT>0`)의 평균을 `sidewalkWidthMeters`로 남긴다.
+4. `pedestrianAccess=no` 구간은 `calculateRoadSafety`에서 −3점 감점한다(`safetyWeights.sidewalk.missingPenalty`). 미커버 구간에는 실제 부재와 지형도 미작성이 섞여 있어 감점을 보수적으로 유지한다.
+
+처리 결과와 원본 해시는 `public/data/sidewalks-meta.json`에 저장된다.
+
 ## 점수와 갱신
 
 `scripts/score-roads.ts`는 `scripts/data/road-segments.geojson`, 실제 시설, 운영 주의구간을 읽는다. R-tree 후보 검색은 탐색 범위만 줄이고 거리·가중치·상한 계산은 `calculateRoadSafety`를 그대로 사용한다. 입력 파일·가중치·계산 함수의 SHA-256을 산출물에 기록한다. `npm test`는 입력과 결과가 함께 갱신됐는지 확인한다.
 
 운영 주의구간은 빈 FeatureCollection이다. 기존 가상 구간은 `public/data/mock-samples`에만 남겨두며 실제 도로 점수의 감점에 쓰지 않는다. 주의구간 미수집 시 `crimeScore: null`로 표시한다. 보안등 등의 가중치와 기본점수는 유지한다. 범죄정보 부재가 안전을 뜻하지 않는다.
 
-시설 수집 후에는 같은 스크립트가 점수도 다시 계산한다. 도로 원본 갱신은 수동 import 후 `npm run score-roads`를 실행한다. 월간 갱신에는 Python이나 원본 SHP가 필요 없다.
+시설 수집 후에는 같은 스크립트가 점수도 다시 계산한다. 도로·인도 원본 갱신은 수동 import 후 `npm run score-roads`를 실행한다. 월간 갱신에는 Python이나 원본 SHP가 필요 없다.
 
 ## 검증 범위와 한계
 
