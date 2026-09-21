@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { MAP_LAYER_DEFINITIONS, POINT_LAYER_KEYS } from "@/config/mapLayers";
 import { getSafetyBand, SAFETY_SCORE_BANDS } from "@/config/safetyWeights";
 import type {
-  CrimeOverlayInfo,
   LayerVisibility,
   RoadSegmentProperties,
   SafetyDataset,
@@ -26,7 +25,6 @@ interface SafetyMapProps {
   data: SafetyDataset | null;
   roadSegments: ScoredRoadSegments | null;
   visibility: LayerVisibility;
-  crimeOverlay?: CrimeOverlayInfo | null;
 }
 
 function pointLayerId(type: SafetyFeatureType) {
@@ -116,7 +114,7 @@ function roadPopupContent(properties: Record<string, unknown>) {
   return content;
 }
 
-export function SafetyMap({ data, roadSegments, visibility, crimeOverlay }: SafetyMapProps) {
+export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [styleReady, setStyleReady] = useState(false);
@@ -164,41 +162,9 @@ export function SafetyMap({ data, roadSegments, visibility, crimeOverlay }: Safe
     if (!map || !styleReady || !data || !roadSegments) return;
 
     map.addSource("safety-features", { type: "geojson", data: data.features });
-    map.addSource("risk-zones", { type: "geojson", data: data.riskZones });
     map.addSource("road-segments", {
       type: "geojson", data: roadSegments,
       attribution: '도로: 국토지리정보원 · 경계: <a href="https://sgis.kostat.go.kr">SGIS</a> / <a href="https://github.com/vuski/admdongkor">vuski/admdongkor</a> (CC BY 4.0)',
-    });
-
-    map.addLayer({
-      id: "risk-zone-fill",
-      type: "fill",
-      source: "risk-zones",
-      paint: {
-        "fill-color": [
-          "match",
-          ["get", "riskLevel"],
-          5,
-          "#b43c32",
-          4,
-          "#cf684c",
-          3,
-          "#dd9a5a",
-          "#e9bd73",
-        ],
-        "fill-opacity": 0.2,
-      },
-    });
-    map.addLayer({
-      id: "risk-zone-line",
-      type: "line",
-      source: "risk-zones",
-      paint: {
-        "line-color": "#a84635",
-        "line-width": 1.5,
-        "line-dasharray": [3, 2],
-        "line-opacity": 0.8,
-      },
     });
 
     map.addLayer({
@@ -281,11 +247,10 @@ export function SafetyMap({ data, roadSegments, visibility, crimeOverlay }: Safe
         const id = pointLayerId(type);
         if (map.getLayer(id)) map.removeLayer(id);
       });
-      ["road-safety", "road-safety-casing", "risk-zone-line", "risk-zone-fill"].forEach((id) => {
+      ["road-safety", "road-safety-casing"].forEach((id) => {
         if (map.getLayer(id)) map.removeLayer(id);
       });
       if (map.getSource("road-segments")) map.removeSource("road-segments");
-      if (map.getSource("risk-zones")) map.removeSource("risk-zones");
       if (map.getSource("safety-features")) map.removeSource("safety-features");
     };
   }, [data, roadSegments, styleReady]);
@@ -300,48 +265,7 @@ export function SafetyMap({ data, roadSegments, visibility, crimeOverlay }: Safe
         map.setLayoutProperty(id, "visibility", visibility[type] ? "visible" : "none");
       }
     });
-
-    ["risk-zone-fill", "risk-zone-line"].forEach((id) => {
-      if (map.getLayer(id)) {
-        map.setLayoutProperty(id, "visibility", visibility.risk_zone ? "visible" : "none");
-      }
-    });
   }, [data, styleReady, visibility]);
-
-  // 범죄 상대적 주의구간 WMS 원본 오버레이(사전 처리된 정적 이미지, 시각 참고용).
-  // 도로 선 아래에 깔아 도로 가독성을 유지한다.
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !styleReady) return;
-    const sourceId = "crime-wms-overlay";
-    const turnOff = () => {
-      if (map.getLayer(sourceId)) map.removeLayer(sourceId);
-      if (map.getSource(sourceId)) map.removeSource(sourceId);
-    };
-    if (!visibility.crime_overlay || !crimeOverlay) {
-      turnOff();
-      return;
-    }
-    if (!map.getSource(sourceId)) {
-      map.addSource(sourceId, {
-        type: "image",
-        url: crimeOverlay.imageUrl,
-        coordinates: crimeOverlay.coordinates,
-      });
-    }
-    if (!map.getLayer(sourceId)) {
-      map.addLayer(
-        {
-          id: sourceId,
-          type: "raster",
-          source: sourceId,
-          paint: { "raster-opacity": 0.55, "raster-fade-duration": 0 },
-        },
-        "road-safety-casing",
-      );
-    }
-    return turnOff;
-  }, [crimeOverlay, styleReady, visibility.crime_overlay]);
 
   return (
     <div className="map-region">
