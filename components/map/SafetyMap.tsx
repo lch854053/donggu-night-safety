@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { MAP_LAYER_DEFINITIONS, POINT_LAYER_KEYS } from "@/config/mapLayers";
 import { getSafetyBand, SAFETY_SCORE_BANDS } from "@/config/safetyWeights";
 import type {
+  CrimeOverlayInfo,
   LayerVisibility,
   RoadSegmentProperties,
   SafetyDataset,
@@ -25,6 +26,7 @@ interface SafetyMapProps {
   data: SafetyDataset | null;
   roadSegments: ScoredRoadSegments | null;
   visibility: LayerVisibility;
+  crimeOverlay?: CrimeOverlayInfo | null;
 }
 
 function pointLayerId(type: SafetyFeatureType) {
@@ -104,10 +106,17 @@ function roadPopupContent(properties: Record<string, unknown>) {
   lightingNote.textContent =
     "※ 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다.";
   content.append(name, label, scoreRow, metrics, note, lightingNote);
+  if (properties.crimeScore != null) {
+    const crimeNote = document.createElement("p");
+    crimeNote.className = "road-popup-note";
+    crimeNote.textContent =
+      "※ 상대적 주의도는 생활안전지도에서 제공하는 경찰청 범죄 밀도분석 기반 구간 정보를 도로 주변에서 분석한 값이며, 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다.";
+    content.append(crimeNote);
+  }
   return content;
 }
 
-export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
+export function SafetyMap({ data, roadSegments, visibility, crimeOverlay }: SafetyMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [styleReady, setStyleReady] = useState(false);
@@ -298,6 +307,41 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       }
     });
   }, [data, styleReady, visibility]);
+
+  // 범죄 상대적 주의구간 WMS 원본 오버레이(사전 처리된 정적 이미지, 시각 참고용).
+  // 도로 선 아래에 깔아 도로 가독성을 유지한다.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !styleReady) return;
+    const sourceId = "crime-wms-overlay";
+    const turnOff = () => {
+      if (map.getLayer(sourceId)) map.removeLayer(sourceId);
+      if (map.getSource(sourceId)) map.removeSource(sourceId);
+    };
+    if (!visibility.crime_overlay || !crimeOverlay) {
+      turnOff();
+      return;
+    }
+    if (!map.getSource(sourceId)) {
+      map.addSource(sourceId, {
+        type: "image",
+        url: crimeOverlay.imageUrl,
+        coordinates: crimeOverlay.coordinates,
+      });
+    }
+    if (!map.getLayer(sourceId)) {
+      map.addLayer(
+        {
+          id: sourceId,
+          type: "raster",
+          source: sourceId,
+          paint: { "raster-opacity": 0.55, "raster-fade-duration": 0 },
+        },
+        "road-safety-casing",
+      );
+    }
+    return turnOff;
+  }, [crimeOverlay, styleReady, visibility.crime_overlay]);
 
   return (
     <div className="map-region">

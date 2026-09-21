@@ -99,6 +99,10 @@ export function calculateRoadSafety(
         .map((zone) => zone.properties.riskLevel);
       const riskLevel = Math.max(0, ...intersectingRiskLevels) as 0 | 1 | 2 | 3 | 4 | 5;
 
+      // 상대적 주의도는 벡터 주의구간과 WMS 샘플링 결과를 합친다.
+      // WMS 항목이 없는 구간은 미수집(null)이며 위험도 0과 다르게 취급한다.
+      const crimeEntry = dataset.crimeRiskByRoad?.[road.properties.id];
+
       const cctvContribution = weightedContribution(cctvCount, SAFETY_WEIGHTS.cctv);
       const bellContribution = weightedContribution(emergencyBellCount, SAFETY_WEIGHTS.emergencyBell);
       const storeContribution = weightedContribution(
@@ -110,7 +114,9 @@ export function calculateRoadSafety(
         oldBuildingCount,
         SAFETY_WEIGHTS.oldBuilding,
       );
-      const crimeContribution = SAFETY_WEIGHTS.crimeRisk[riskLevel];
+      const crimeContribution = SAFETY_WEIGHTS.crimeRisk[
+        Math.max(riskLevel, crimeEntry?.level ?? 0) as 0 | 1 | 2 | 3 | 4 | 5
+      ];
       // 기존 보안등 가점 상한(8점×2개=16점)을 유지하도록 조명 환경 점수를 정규화한다.
       const lightingContribution =
         (lighting.lightingScore / 100) * SAFETY_WEIGHTS.lighting.contributionPoints;
@@ -152,9 +158,10 @@ export function calculateRoadSafety(
             Math.min(emergencyBellCount, SAFETY_WEIGHTS.emergencyBell.maxOccurrences),
           surveillanceMaximum,
         ),
-        crimeScore: dataset.riskZones.features.length === 0 ? null : Math.round(
+        crimeScore: crimeEntry || dataset.riskZones.features.length > 0 ? Math.round(
           clamp(100 - (Math.abs(crimeContribution) / maximumCrimePenalty) * 100),
-        ),
+        ) : null,
+        crimeSampleCount: crimeEntry?.sampleCount ?? null,
         environmentScore: Math.round(
           clamp(
             50 +

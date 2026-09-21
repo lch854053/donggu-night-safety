@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { destination, featureCollection, length, lineString, point } from "@turf/turf";
 import { calculateRoadSafety } from "../lib/scoring/calculateRoadSafety";
@@ -12,11 +12,13 @@ import type { SafetyDataset, SafetyFeatureType, ScoredRoadFile } from "../types/
 
 const readJson = (path: string) => JSON.parse(readFileSync(path, "utf8"));
 const roads: ScoredRoadFile = readJson("public/data/road-segments.geojson");
+const crimeFile = existsSync("public/data/crime-risk.json") ? readJson("public/data/crime-risk.json") : null;
 const dataset: SafetyDataset = {
   roadSegments: readJson("scripts/data/road-segments.geojson"),
   features: readJson("public/data/safety-features.geojson"),
   riskZones: readJson("public/data/risk-zones.geojson"),
   metadata: { sourceKind: "static", scoreKind: "client", updatedAt: "" },
+  crimeRiskByRoad: crimeFile?.roads,
 };
 
 test("shipped roads are current, unique, valid-length real segments with no sample risk penalties", () => {
@@ -32,10 +34,32 @@ test("shipped roads are current, unique, valid-length real segments with no samp
     const meters = length(road, { units: "kilometers" }) * 1000;
     assert.ok(meters > 0 && meters < 50.3, `${road.properties.id}: ${meters}m`);
     assert.ok(road.properties.safetyScore >= 0 && road.properties.safetyScore <= 100);
-    assert.equal(road.properties.crimeScore, null);
+    // crimeScore null = WMS 미커버(미수집), 숫자 = 샘플링 결과. 둘은 다른 의미다.
+    assert.ok(road.properties.crimeScore === null || Number.isFinite(road.properties.crimeScore));
+    assert.equal(road.properties.crimeScore === null, road.properties.crimeSampleCount === null,
+      `${road.properties.id}: crimeScore와 샘플 수의 null 여부가 일치해야 한다`);
+    if (road.properties.crimeSampleCount !== null) {
+      assert.ok(road.properties.crimeSampleCount >= 1);
+    }
     assert.equal(road.properties.riskLevel, 0);
     assert.match(road.properties.source, /국토지리정보원/);
   }
+});
+
+test("shipped crime risk matches the WMS sampling report", () => {
+  if (!crimeFile) return; // WMS 데이터 없이 배포하는 경우: crimeScore 전체 null은 위 테스트가 검증
+  const byId = new Map(roads.features.map((f) => [f.properties.id, f]));
+  let withCrime = 0;
+  for (const [id, entry] of Object.entries(crimeFile.roads)) {
+    const road = byId.get(id);
+    assert.ok(road, `${id}: crime-risk.json의 도로가 배포 데이터에 없다`);
+    assert.equal(road.properties.crimeScore === null, false);
+    assert.ok(Number.isFinite((entry as { crimeRisk: number }).crimeRisk));
+    withCrime++;
+  }
+  assert.equal(withCrime, crimeFile.summary.withData);
+  assert.ok(crimeFile.legend.length === 10, "생활안전지도 10등급 범례를 그대로 보존해야 한다");
+  assert.match(String(crimeFile.legendWarning), /경찰청/);
 });
 
 test("indexed and shipped scores equal brute-force Turf on spatially distributed real roads", () => {

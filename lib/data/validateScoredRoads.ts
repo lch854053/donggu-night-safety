@@ -10,7 +10,8 @@ export function validateScoredRoads(value: ScoredRoadFile): ScoredRoadFile {
       !Array.isArray(value.features) || !value.features.length ||
       value.features.some((f) => !f.properties || f.geometry?.type !== "LineString" ||
         !f.properties.id || numericFields.some((key) => !Number.isFinite(f.properties[key])) ||
-        (f.properties.crimeScore !== null && !Number.isFinite(f.properties.crimeScore)))) {
+        (f.properties.crimeScore !== null && !Number.isFinite(f.properties.crimeScore)) ||
+        (f.properties.crimeSampleCount !== null && !Number.isFinite(f.properties.crimeSampleCount)))) {
     throw new Error("도로 점수 데이터가 준비되지 않았습니다. score-roads를 실행해 주세요.");
   }
   return value;

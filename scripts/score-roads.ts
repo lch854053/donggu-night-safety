@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { existsSync } from "node:fs";
 import { readFile, writeFile, rename } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
@@ -11,11 +12,17 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 export async function scoreRoads() {
   const paths = ["scripts/data/road-segments.geojson", "public/data/safety-features.geojson",
     "public/data/risk-zones.geojson", "config/safetyWeights.ts", "lib/scoring/calculateRoadSafety.ts",
-    "lib/scoring/roadPointIndex.ts", "lib/scoring/lighting.ts", "scripts/score-roads.ts"];
+    "lib/scoring/roadPointIndex.ts", "lib/scoring/lighting.ts", "lib/scoring/crimeRisk.ts",
+    "scripts/score-roads.ts"];
+  // WMS 샘플링 결과가 있을 때만 점수 입력에 포함한다. 없으면 crimeScore는 null(미수집).
+  const crimeRiskPath = resolve(root, "public/data/crime-risk.json");
+  const hasCrimeRisk = existsSync(crimeRiskPath);
+  if (hasCrimeRisk) paths.push("public/data/crime-risk.json");
   const contents = await Promise.all(paths.map((path) => readFile(resolve(root, path), "utf8")));
   const dataset: SafetyDataset = {
     roadSegments: JSON.parse(contents[0]), features: JSON.parse(contents[1]), riskZones: JSON.parse(contents[2]),
     metadata: { sourceKind: "static", scoreKind: "client", updatedAt: "" },
+    ...(hasCrimeRisk ? { crimeRiskByRoad: JSON.parse(contents[contents.length - 1]).roads } : {}),
   };
   if (!dataset.roadSegments.features.length || !dataset.features.features.length) {
     throw new Error("Cannot score empty roads or facilities");

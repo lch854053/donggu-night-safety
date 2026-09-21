@@ -68,6 +68,8 @@ export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   cpted: true,
   old_building: false,
   risk_zone: true,
+  // WMS 원본 오버레이는 시각 참고용이라 기본 꺼짐 — 지도 성능 유지.
+  crime_overlay: false,
 };
 
 export const POINT_LAYER_KEYS = MAP_LAYER_DEFINITIONS.filter(

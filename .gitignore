@@ -10,3 +10,4 @@ public/vendor/maplibre-gl-shared.mjs
 __pycache__/
 *.pyc
 *.tsbuildinfo
+.cache/

@@ -102,6 +102,19 @@ export function LayerPanel({
               ))}
             </div>
 
+            <label className="layer-row">
+              <input
+                type="checkbox"
+                checked={visibility.crime_overlay}
+                onChange={() => onToggle("crime_overlay")}
+              />
+              <span className="layer-swatch is-area" style={{ "--layer-color": "#bd0026" } as React.CSSProperties} aria-hidden="true" />
+              <span className="layer-copy">
+                <strong>범죄 상대적 주의구간 표시</strong>
+                <small>생활안전지도 WMS 원본(경찰청 밀도분석) — 시각 참고용</small>
+              </span>
+            </label>
+
             <div className="score-legend" aria-labelledby="legend-heading">
               <h2 id="legend-heading">밤길 안전 참고지수</h2>
               <p>현재 표시된 도로끼리 비교하는 5단계 범례입니다.</p>
@@ -208,8 +221,8 @@ export function LayerPanel({
                 이 지수는 안심 인프라와 주변 환경 데이터를 조합한 상대적 참고값이며, 특정 장소의
                 절대적인 안전을 보장하지 않습니다.
               </p>
-              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 조명 환경은 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 주의구간·노후건물·CPTED는 미수집으로 점수에 반영되지 않습니다.</p>
-              <p><a href="/data/roads-meta.json" target="_blank" rel="noreferrer">도로 출처·가공 정보</a> · <a href="/data/sidewalks-meta.json" target="_blank" rel="noreferrer">인도 출처·가공 정보</a> · 국토지리정보원<br />경계: SGIS / vuski·admdongkor (CC BY 4.0)</p>
+              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 조명 환경은 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 상대적 주의도는 생활안전지도에서 제공하는 경찰청 범죄 밀도분석 기반 구간 정보로, 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다. 주의구간 원본 좌표·노후건물·CPTED는 미수집입니다.</p>
+              <p><a href="/data/roads-meta.json" target="_blank" rel="noreferrer">도로 출처·가공 정보</a> · <a href="/data/sidewalks-meta.json" target="_blank" rel="noreferrer">인도 출처·가공 정보</a> · 국토지리정보원<br />주의구간: <a href="https://www.safemap.go.kr" target="_blank" rel="noreferrer">행정안전부 생활안전지도</a> / 경찰청<br />경계: SGIS / vuski·admdongkor (CC BY 4.0)</p>
             </div>
           </>
         )}
