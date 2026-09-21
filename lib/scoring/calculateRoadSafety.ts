@@ -7,6 +7,7 @@ import {
 import type { Feature, LineString, Point } from "geojson";
 
 import { SAFETY_WEIGHTS, type ProximityWeight } from "@/config/safetyWeights";
+import { computeLightingMetrics } from "@/lib/scoring/lighting";
 import type {
   RoadSegmentProperties,
   SafetyDataset,
@@ -55,8 +56,13 @@ export function calculateRoadSafety(
         road,
         candidates,
         "streetlight",
-        SAFETY_WEIGHTS.lighting.radiusMeters,
+        SAFETY_WEIGHTS.lighting.countRadiusMeters,
       );
+      // 조명 환경은 개수가 아니라 구간 샘플별 감쇠 영향(위치·거리 분포)으로 산출한다.
+      const streetlightFeatures = candidates.filter(
+        (candidate) => candidate.properties.type === "streetlight",
+      );
+      const lighting = computeLightingMetrics(road, streetlightFeatures, SAFETY_WEIGHTS.lighting);
       const cctvCount = pointsNearRoad(
         road,
         candidates,
@@ -93,7 +99,6 @@ export function calculateRoadSafety(
         .map((zone) => zone.properties.riskLevel);
       const riskLevel = Math.max(0, ...intersectingRiskLevels) as 0 | 1 | 2 | 3 | 4 | 5;
 
-      const lightingContribution = weightedContribution(streetlightCount, SAFETY_WEIGHTS.lighting);
       const cctvContribution = weightedContribution(cctvCount, SAFETY_WEIGHTS.cctv);
       const bellContribution = weightedContribution(emergencyBellCount, SAFETY_WEIGHTS.emergencyBell);
       const storeContribution = weightedContribution(
@@ -106,6 +111,9 @@ export function calculateRoadSafety(
         SAFETY_WEIGHTS.oldBuilding,
       );
       const crimeContribution = SAFETY_WEIGHTS.crimeRisk[riskLevel];
+      // 기존 보안등 가점 상한(8점×2개=16점)을 유지하도록 조명 환경 점수를 정규화한다.
+      const lightingContribution =
+        (lighting.lightingScore / 100) * SAFETY_WEIGHTS.lighting.contributionPoints;
       // 인도는 점 시설과 달리 import-sidewalks.py가 미리 계산한 구간 속성을 읽는다.
       const sidewalkContribution =
         road.properties.pedestrianAccess === "no" ? SAFETY_WEIGHTS.sidewalk.missingPenalty : 0;
@@ -135,7 +143,10 @@ export function calculateRoadSafety(
       const properties: RoadSegmentProperties = {
         ...road.properties,
         lengthMeters: Math.round(length(road, { units: "kilometers" }) * 1000),
-        lightingScore: availabilityScore(streetlightCount, SAFETY_WEIGHTS.lighting.maxOccurrences),
+        lightingScore: lighting.lightingScore,
+        lightingCoverage: Math.round(lighting.coverageScore),
+        maxDarkGapMeters: Math.round(lighting.maxDarkGapMeters),
+        lightingUniformityScore: Math.round(lighting.uniformityScore),
         surveillanceScore: availabilityScore(
           Math.min(cctvCount, SAFETY_WEIGHTS.cctv.maxOccurrences) +
             Math.min(emergencyBellCount, SAFETY_WEIGHTS.emergencyBell.maxOccurrences),

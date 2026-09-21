@@ -62,19 +62,25 @@ function roadPopupContent(properties: Record<string, unknown>) {
 
   const metrics = document.createElement("dl");
   metrics.className = "road-popup-metrics";
-  [
-    ["보안등 수준", "lightingScore"],
-    ["CCTV·비상벨 접근성", "surveillanceScore"],
-    ["상대적 주의도", "crimeScore"],
-    ["생활시설·주변 환경", "environmentScore"],
-  ].forEach(([label, key]) => {
+  (
+    [
+      ["조명 환경", "lightingScore", "점"],
+      ["보안등", "streetlightCount", "개"],
+      ["조명 커버리지", "lightingCoverage", "%"],
+      ["최대 암구간", "maxDarkGapMeters", "m"],
+      ["조명 균일도", "lightingUniformityScore", ""],
+      ["CCTV·비상벨 접근성", "surveillanceScore", "점"],
+      ["상대적 주의도", "crimeScore", "점"],
+      ["생활시설·주변 환경", "environmentScore", "점"],
+    ] as const
+  ).forEach(([label, key, suffix]) => {
     const row = document.createElement("div");
     const term = document.createElement("dt");
     const detail = document.createElement("dd");
     term.textContent = label;
     detail.textContent = key === "crimeScore" && properties[key] == null
       ? "미수집"
-      : `${numericProperty(properties, key as keyof RoadSegmentProperties)}점`;
+      : `${numericProperty(properties, key)}${suffix}`;
     row.append(term, detail);
     metrics.append(row);
   });
@@ -92,7 +98,12 @@ function roadPopupContent(properties: Record<string, unknown>) {
   note.className = "road-popup-note";
   note.textContent =
     `${numericProperty(properties, "lengthMeters")}m 구간 · ${String(properties.source ?? "")} · ${sidewalkLabel}`;
-  content.append(name, label, scoreRow, metrics, note);
+
+  const lightingNote = document.createElement("p");
+  lightingNote.className = "road-popup-note";
+  lightingNote.textContent =
+    "※ 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다.";
+  content.append(name, label, scoreRow, metrics, note, lightingNote);
   return content;
 }
 

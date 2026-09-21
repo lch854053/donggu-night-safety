@@ -45,7 +45,11 @@ export interface RoadSegmentInputProperties {
 
 export interface RoadSegmentProperties extends RoadSegmentInputProperties {
   lengthMeters: number;
+  /** 보안등 위치·거리 분포 기반 상대적 조명 환경(0~100). 실제 조도(lux)가 아니다. */
   lightingScore: number;
+  lightingCoverage: number;
+  maxDarkGapMeters: number;
+  lightingUniformityScore: number;
   surveillanceScore: number;
   crimeScore: number | null;
   environmentScore: number;

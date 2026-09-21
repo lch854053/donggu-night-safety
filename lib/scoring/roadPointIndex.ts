@@ -1,6 +1,7 @@
 import { geojsonRbush, length } from "@turf/turf";
 import type { Feature, LineString, Point } from "geojson";
 import { SAFETY_WEIGHTS } from "@/config/safetyWeights";
+import type { ProximityWeight } from "@/config/safetyWeights";
 import type { SafetyDataset, SafetyFeatureProperties } from "@/types/safety";
 
 /** Conservative candidate envelope; the shared scorer still measures exact Turf distances. */
@@ -8,10 +9,11 @@ export function createRoadPointIndex(dataset: SafetyDataset) {
   const tree = geojsonRbush<Point, SafetyFeatureProperties>();
   // rbush adds bbox fields; do not mutate the dataset used by other consumers.
   tree.load({ ...dataset.features, features: dataset.features.features.map((f) => ({ ...f })) });
+  const proximityWeights: ProximityWeight[] = [SAFETY_WEIGHTS.cctv, SAFETY_WEIGHTS.emergencyBell,
+    SAFETY_WEIGHTS.convenienceStore, SAFETY_WEIGHTS.cpted, SAFETY_WEIGHTS.oldBuilding];
   const radius = Math.max(
-    ...[SAFETY_WEIGHTS.lighting, SAFETY_WEIGHTS.cctv, SAFETY_WEIGHTS.emergencyBell,
-      SAFETY_WEIGHTS.convenienceStore, SAFETY_WEIGHTS.cpted, SAFETY_WEIGHTS.oldBuilding]
-      .map((weight) => weight.radiusMeters),
+    SAFETY_WEIGHTS.lighting.influenceCutoffMeters, SAFETY_WEIGHTS.lighting.countRadiusMeters,
+    ...proximityWeights.map((weight) => weight.radiusMeters),
   );
   return (road: Feature<LineString>): Feature<Point, SafetyFeatureProperties>[] => {
     // Any point near the line is at most (line length + radius) from its first
