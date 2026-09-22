@@ -1,0 +1,18 @@
+name: Inspect CPTED source
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect public source schema
+        env:
+          SAFEMAP_SERVICE_KEY: ${{ secrets.SAFEMAP_SERVICE_KEY }}
+        run: |
+          node --input-type=module <<'JS'
+          const url = new URL('https://safemap.go.kr/openapi2/IF_0023');
+          url.search = new URLSearchParams({serviceKey: process.env.SAFEMAP_SERVICE_KEY, pageNo: '1', numOfRows: '1000', type: 'json'});
+          const body = await (await fetch(url)).json();
+          console.log(JSON.stringify(body));
+          JS
