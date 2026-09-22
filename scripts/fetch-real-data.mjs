@@ -61,7 +61,7 @@ async function getWithRetry(url, tries = 5) {
       if (!res.ok) throw new Error(`${new URL(url).hostname}: HTTP ${res.status}`);
       return await res.text();
     } catch (e) {
-      if (i === tries - 1) throw new Error(`${new URL(url).hostname}: ${e.message}`);
+      if (i === tries - 1) throw new Error(`${new URL(url).hostname}: ${e.message}${e.cause?.code ? ` (${e.cause.code})` : ""}`);
       console.warn(`  ${new URL(url).hostname} 요청 재시도 ${i + 1}/${tries - 1}`);
       await sleep(3000 * (i + 1));
     }
