@@ -35,9 +35,12 @@ jobs:
           SAFEMAP_SERVICE_KEY: ${{ secrets.SAFEMAP_SERVICE_KEY }}
         run: |
           node --input-type=module <<'JS'
-          const url = new URL('https://safemap.go.kr/openapi2/IF_0023');
+          const url = new URL('https://www.safemap.go.kr/openapi2/IF_0023');
           url.search = new URLSearchParams({serviceKey: process.env.SAFEMAP_SERVICE_KEY, pageNo: '1', numOfRows: '1000', type: 'json'});
-          console.log(JSON.stringify(await (await fetch(url)).json()));
+          for (let i = 0; i < 3; i++) {
+            try { console.log(JSON.stringify(await (await fetch(url)).json())); break; }
+            catch { console.log('Retry', i + 1); }
+          }
           JS
 
       - run: exit 1
@@ -66,7 +69,7 @@ jobs:
           fi
 
       - name: 실패 시 알림 이슈 생성
-        if: failure()
+        if: failure() && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
