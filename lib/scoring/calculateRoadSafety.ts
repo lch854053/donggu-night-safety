@@ -8,6 +8,10 @@ import type { Feature, LineString, Point } from "geojson";
 
 import { SAFETY_WEIGHTS, type ProximityWeight } from "@/config/safetyWeights";
 import { computeLightingMetrics } from "@/lib/scoring/lighting";
+import { computeActivityScore } from "@/lib/scoring/activity";
+import { computeEnvironmentScore } from "@/lib/scoring/environment";
+import { computeSurveillanceScore } from "@/lib/scoring/surveillance";
+import { combineDimensionScores } from "@/lib/scoring/weightedAverage";
 import type {
   RoadSegmentProperties,
   SafetyDataset,
@@ -37,16 +41,17 @@ function weightedContribution(count: number, weight: ProximityWeight) {
   return Math.min(count, weight.maxOccurrences) * weight.points;
 }
 
-function availabilityScore(count: number, maximum: number) {
-  return Math.round(clamp((Math.min(count, maximum) / maximum) * 100));
-}
-
 export function calculateRoadSafety(
   dataset: SafetyDataset,
   candidatesForRoad?: (road: Feature<LineString>) => Feature<Point, SafetyFeatureProperties>[],
 ): ScoredRoadSegments {
   const pointFeatures = dataset.features.features;
   const maximumCrimePenalty = Math.abs(SAFETY_WEIGHTS.crimeRisk[5]);
+  // 데이터셋에 좌표가 하나라도 있는 시설 타입만 점수에 반영한다. 아예 수집되지
+  // 않은 타입은 0점이 아니라 미수집(null)으로 재정규화 대상이 된다.
+  const availableTypes = new Set<SafetyFeatureType>(
+    pointFeatures.map((feature) => feature.properties.type),
+  );
 
   return {
     type: "FeatureCollection",
@@ -138,13 +143,40 @@ export function calculateRoadSafety(
         ),
       );
 
-      const surveillanceMaximum =
-        SAFETY_WEIGHTS.cctv.maxOccurrences + SAFETY_WEIGHTS.emergencyBell.maxOccurrences;
-      const environmentPositiveMaximum =
-        SAFETY_WEIGHTS.convenienceStore.maxOccurrences + SAFETY_WEIGHTS.cpted.maxOccurrences;
-      const oldBuildingRatio =
-        Math.min(oldBuildingCount, SAFETY_WEIGHTS.oldBuilding.maxOccurrences) /
-        SAFETY_WEIGHTS.oldBuilding.maxOccurrences;
+      // ── v2: 개념별 5차원. 기존 crimeScore(0~100)·조명 점수를 그대로 재사용한다.
+      const surveillance = computeSurveillanceScore(road, candidates, availableTypes);
+      const activity = computeActivityScore(road, candidates, availableTypes);
+      const environment = computeEnvironmentScore(road, candidates, availableTypes);
+      const crimeScore = crimeEntry || dataset.riskZones.features.length > 0 ? Math.round(
+        clamp(100 - (Math.abs(crimeContribution) / maximumCrimePenalty) * 100),
+      ) : null;
+      const safetyScoreV2 = combineDimensionScores({
+        lighting: lighting.lightingScore,
+        surveillance: surveillance.score,
+        activity: activity.score,
+        environment: environment.score,
+        crime: crimeScore,
+      });
+
+      // v2 세부 점수는 수집된 것(숫자)만 결과에 남기고 미수집(null)은 생략해
+      // 데이터 파일 크기를 억제한다. UI는 없는 필드를 "데이터 없음"으로 표시한다.
+      const detailScores = {
+        cctvScore: surveillance.cctvScore,
+        emergencyBellScore: surveillance.emergencyBellScore,
+        cptedScore: surveillance.cptedScore,
+        policeScore: surveillance.policeScore,
+        nightActivityScore: activity.nightActivityScore,
+        transitScore: activity.transitScore,
+        roadActivityScore: activity.roadActivityScore,
+        convenienceStoreScore: activity.convenienceStoreScore,
+        vacancyScore: environment.vacancyScore,
+        deteriorationScore: environment.deteriorationScore,
+        sidewalkScore: environment.sidewalkScore,
+        spatialStructureScore: environment.spatialStructureScore,
+      };
+      const details = Object.fromEntries(
+        Object.entries(detailScores).filter(([, value]) => value !== null),
+      ) as Partial<RoadSegmentProperties>;
 
       const properties: RoadSegmentProperties = {
         ...road.properties,
@@ -153,28 +185,13 @@ export function calculateRoadSafety(
         lightingCoverage: Math.round(lighting.coverageScore),
         maxDarkGapMeters: Math.round(lighting.maxDarkGapMeters),
         lightingUniformityScore: Math.round(lighting.uniformityScore),
-        surveillanceScore: availabilityScore(
-          Math.min(cctvCount, SAFETY_WEIGHTS.cctv.maxOccurrences) +
-            Math.min(emergencyBellCount, SAFETY_WEIGHTS.emergencyBell.maxOccurrences),
-          surveillanceMaximum,
-        ),
-        crimeScore: crimeEntry || dataset.riskZones.features.length > 0 ? Math.round(
-          clamp(100 - (Math.abs(crimeContribution) / maximumCrimePenalty) * 100),
-        ) : null,
+        surveillanceScore: surveillance.score,
+        activityScore: activity.score,
+        environmentScore: environment.score,
+        crimeScore,
         crimeSampleCount: crimeEntry?.sampleCount ?? null,
-        environmentScore: Math.round(
-          clamp(
-            50 +
-              (50 *
-                (Math.min(
-                  convenienceStoreCount,
-                  SAFETY_WEIGHTS.convenienceStore.maxOccurrences,
-                ) + Math.min(cptedCount, SAFETY_WEIGHTS.cpted.maxOccurrences))) /
-                environmentPositiveMaximum -
-              oldBuildingRatio * 50,
-          ),
-        ),
         sidewalkContribution,
+        safetyScoreV2,
         safetyScore,
         streetlightCount,
         cctvCount,
@@ -183,6 +200,7 @@ export function calculateRoadSafety(
         cptedCount,
         oldBuildingCount,
         riskLevel,
+        ...details,
       };
 
       return { ...road, properties };

@@ -36,6 +36,20 @@ function numericProperty(properties: Record<string, unknown>, key: keyof RoadSeg
   return Number.isFinite(value) ? value : 0;
 }
 
+/** v2 점수 필드는 null(미수집)이 허용된다. 0으로 표시하지 않는다. */
+function nullableScore(properties: Record<string, unknown>, key: keyof RoadSegmentProperties) {
+  const value = properties[key];
+  return value === null || value === undefined ? null : Number(value);
+}
+
+// 팝업 하단 관찰 메시지 임계값. 데이터가 수집된 항목에서만 표시한다.
+const SIGNAL_THRESHOLDS = {
+  lightingCoverageGood: 60,
+  cctvClose: 80,
+  nightActivityLow: 40,
+  vacancyPresent: 70,
+} as const;
+
 function roadPopupContent(properties: Record<string, unknown>) {
   const content = document.createElement("article");
   content.className = "road-popup";
@@ -46,44 +60,79 @@ function roadPopupContent(properties: Record<string, unknown>) {
 
   const label = document.createElement("p");
   label.className = "road-popup-label";
-  label.textContent = "밤길 안전 참고지수";
+  label.textContent = "밤길 참고지수 (v2)";
 
-  const score = numericProperty(properties, "safetyScore");
-  const band = getSafetyBand(score);
+  const scoreV2 = nullableScore(properties, "safetyScoreV2");
   const scoreRow = document.createElement("div");
   scoreRow.className = "road-popup-score";
-  scoreRow.innerHTML = `<strong>${score}</strong><span>/ 100</span>`;
+  scoreRow.innerHTML = scoreV2 === null
+    ? `<span>데이터 없음</span>`
+    : `<strong>${scoreV2}</strong><span>/ 100</span>`;
 
-  const badge = document.createElement("span");
-  badge.className = "road-popup-band";
-  badge.style.setProperty("--band-color", band.color);
-  badge.textContent = band.label;
-  scoreRow.append(badge);
+  if (scoreV2 !== null) {
+    const band = getSafetyBand(scoreV2);
+    const badge = document.createElement("span");
+    badge.className = "road-popup-band";
+    badge.style.setProperty("--band-color", band.color);
+    badge.textContent = band.label;
+    scoreRow.append(badge);
+  }
 
   const metrics = document.createElement("dl");
   metrics.className = "road-popup-metrics";
   (
     [
-      ["조명 환경", "lightingScore", "점"],
-      ["보안등", "streetlightCount", "개"],
-      ["조명 커버리지", "lightingCoverage", "%"],
-      ["최대 암구간", "maxDarkGapMeters", "m"],
-      ["조명 균일도", "lightingUniformityScore", ""],
-      ["CCTV·비상벨 접근성", "surveillanceScore", "점"],
-      ["상대적 주의도", "crimeScore", "점"],
-      ["생활시설·주변 환경", "environmentScore", "점"],
+      ["조명·가시성", "lightingScore", undefined],
+      ["감시·긴급대응", "surveillanceScore", undefined],
+      ["야간활동·자연감시", "activityScore", undefined],
+      ["공간환경·방치도", "environmentScore", undefined],
+      ["범죄 상대주의도", "crimeScore", "미수집"],
     ] as const
-  ).forEach(([label, key, suffix]) => {
+  ).forEach(([label, key, nullText]) => {
     const row = document.createElement("div");
     const term = document.createElement("dt");
     const detail = document.createElement("dd");
+    const score = nullableScore(properties, key);
     term.textContent = label;
-    detail.textContent = key === "crimeScore" && properties[key] == null
-      ? "미수집"
-      : `${numericProperty(properties, key)}${suffix}`;
+    detail.textContent = score === null
+      ? nullText ?? "데이터 없음"
+      : `${Math.round(score)}점`;
     row.append(term, detail);
     metrics.append(row);
   });
+
+  // 관찰 메시지는 실제 수집된 데이터에서만 만든다. 없는 요소를 임의로 표시하지 않는다.
+  const signals: string[] = [];
+  if (numericProperty(properties, "lightingCoverage") >= SIGNAL_THRESHOLDS.lightingCoverageGood) {
+    signals.push("✓ 조명 커버리지 양호");
+  }
+  const cctvScore = nullableScore(properties, "cctvScore");
+  if (cctvScore !== null && cctvScore >= SIGNAL_THRESHOLDS.cctvClose) {
+    signals.push("✓ CCTV 가까움");
+  }
+  const nightActivityScore = nullableScore(properties, "nightActivityScore");
+  if (nightActivityScore !== null && nightActivityScore < SIGNAL_THRESHOLDS.nightActivityLow) {
+    signals.push("△ 야간 개방시설 적음");
+  }
+  if (properties.pedestrianAccess === "no") {
+    signals.push("△ 인도 없음");
+  } else if (properties.pedestrianAccess === "partial") {
+    signals.push("△ 인도 일부만 인접");
+  }
+  const vacancyScore = nullableScore(properties, "vacancyScore");
+  if (vacancyScore !== null && vacancyScore < SIGNAL_THRESHOLDS.vacancyPresent) {
+    signals.push("△ 주변 빈집 존재");
+  }
+  if (signals.length) {
+    const signalList = document.createElement("ul");
+    signalList.className = "road-popup-signals";
+    for (const signal of signals) {
+      const item = document.createElement("li");
+      item.textContent = signal;
+      signalList.append(item);
+    }
+    content.append(signalList);
+  }
 
   const width = Number(properties.sidewalkWidthMeters);
   const sidewalkLabel = properties.pedestrianAccess === "yes"
@@ -97,14 +146,14 @@ function roadPopupContent(properties: Record<string, unknown>) {
   const note = document.createElement("p");
   note.className = "road-popup-note";
   note.textContent =
-    `${numericProperty(properties, "lengthMeters")}m 구간 · ${String(properties.source ?? "")} · ${sidewalkLabel}`;
+    `${numericProperty(properties, "lengthMeters")}m 구간 · ${String(properties.source ?? "")} · ${sidewalkLabel} · 기존 지수(v1) ${numericProperty(properties, "safetyScore")}`;
 
   const lightingNote = document.createElement("p");
   lightingNote.className = "road-popup-note";
   lightingNote.textContent =
     "※ 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다.";
   content.append(name, label, scoreRow, metrics, note, lightingNote);
-  if (properties.crimeScore != null) {
+  if (nullableScore(properties, "crimeScore") !== null) {
     const crimeNote = document.createElement("p");
     crimeNote.className = "road-popup-note";
     crimeNote.textContent =
@@ -184,7 +233,8 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       paint: {
         "line-color": [
           "step",
-          ["get", "safetyScore"],
+          // v2 참고지수 기준. 미수집(null) 구간은 최하값으로만 칠해지지 않도록 coalesce한다.
+          ["coalesce", ["get", "safetyScoreV2"], 0],
           highCautionBand.color,
           cautionBand.min,
           cautionBand.color,

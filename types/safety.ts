@@ -6,7 +6,17 @@ export type SafetyFeatureType =
   | "emergency_bell"
   | "convenience_store"
   | "cpted"
-  | "old_building";
+  | "old_building"
+  /** 경찰서·지구대·파출소. 좌표 API 확보 전까지 데이터 없음(policeScore null). */
+  | "police_station"
+  /** 야간 영업 POI(음식점·카페·약국·PC방 등). 데이터 연결은 TODO. */
+  | "night_activity"
+  /** 버스정류장. 데이터 연결은 TODO. */
+  | "bus_stop"
+  /** 지하철 출입구. 데이터 연결은 TODO. */
+  | "subway_entrance"
+  /** 빈집. 데이터 연결은 TODO. */
+  | "vacant_house";
 
 export type LayerKey = SafetyFeatureType;
 
@@ -45,18 +55,32 @@ export interface RoadSegmentInputProperties {
 
 export interface RoadSegmentProperties extends RoadSegmentInputProperties {
   lengthMeters: number;
-  /** 보안등 위치·거리 분포 기반 상대적 조명 환경(0~100). 실제 조도(lux)가 아니다. */
+  /**
+   * v1(legacy) 최종 점수. 비교·롤백을 위해 보존되며 신규 표시는 safetyScoreV2가 기준.
+   * 기본점수 50에 시설별 가감점을 합산한 구버전 모델이다.
+   */
+  safetyScore: number;
+  /**
+   * v2 최종 밤길 안전 참고지수(0~100). 5개 차원의 가중 평균이며,
+   * 미수집 차원은 재정규화해 제외한다. 차원이 전혀 없으면 null(0과 다른 의미).
+   */
+  safetyScoreV2: number | null;
+  /** 보안등 위치·거리 분포 기반 상대적 조명 환경(0~100). 실제 조도(lux)가 아니다. v2 조명·가시성 차원. */
   lightingScore: number;
   lightingCoverage: number;
   maxDarkGapMeters: number;
   lightingUniformityScore: number;
-  surveillanceScore: number;
+  /** v2 감시·긴급대응 차원(0~100). CCTV·CPTED·비상벨·경찰시설 중 수집된 항목만 재정규화 평균. */
+  surveillanceScore: number | null;
+  /** v2 야간활동·자연감시 차원(0~100). */
+  activityScore: number | null;
+  /** v2 공간환경·방치도 차원(0~100). 100점에서 취약요인만큼 감점. */
+  environmentScore: number | null;
   crimeScore: number | null;
   /** 상대적 주의도 산출에 쓴 WMS 샘플 수. 데이터가 없는 구간은 null. */
   crimeSampleCount: number | null;
-  environmentScore: number;
+  /** v1(legacy) 인도 없음 감점 기록. v2에서는 sidewalkScore로 흡수됐다. */
   sidewalkContribution: number;
-  safetyScore: number;
   streetlightCount: number;
   cctvCount: number;
   emergencyBellCount: number;
@@ -64,6 +88,20 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
   cptedCount: number;
   oldBuildingCount: number;
   riskLevel: number;
+
+  // ── v2 세부 점수. 데이터가 수집된 항목만 숫자로 기록하고 미수집은 필드 자체를 생략한다.
+  cctvScore?: number | null;
+  emergencyBellScore?: number | null;
+  cptedScore?: number | null;
+  policeScore?: number | null;
+  nightActivityScore?: number | null;
+  transitScore?: number | null;
+  roadActivityScore?: number | null;
+  convenienceStoreScore?: number | null;
+  vacancyScore?: number | null;
+  deteriorationScore?: number | null;
+  sidewalkScore?: number | null;
+  spatialStructureScore?: number | null;
 }
 
 export interface SafetyDataset {
