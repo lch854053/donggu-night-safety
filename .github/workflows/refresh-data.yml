@@ -12,8 +12,6 @@
 name: 공공데이터 월간 자동 수집
 
 on:
-  push:
-    branches: [feat/cpted-vworld]
   schedule:
     - cron: "0 0 5 * *" # 매월 5일 09:00 KST
   workflow_dispatch:
@@ -48,9 +46,7 @@ jobs:
           VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN }}
           ONLY: ${{ inputs.only }}
         run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            npm run score-roads
-          elif [ "$ONLY" = "cpted" ]; then
+          if [ "$ONLY" = "cpted" ]; then
             node scripts/fetch-real-data.mjs --only=cpted
           else
             node scripts/fetch-real-data.mjs
@@ -58,13 +54,6 @@ jobs:
 
       - name: 도로 점수·입력 데이터 정합성 검증
         run: npm test
-
-      - name: Close integration probe alert
-        if: github.event_name == 'push'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-        run: gh issue close 9 --comment "CPTED 연동 브랜치의 연결 확인 알림입니다. 실제 주소 좌표화 및 데이터 검증을 완료했습니다."
 
       - name: 변경분 커밋·푸시
         run: |
