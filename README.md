@@ -4,20 +4,30 @@
 
 ## 데이터 갱신
 
-**자동(기본)**: CCTV·비상벨·편의점은 GitHub Actions가 **매월 5일 09:00 KST**에 전국 데이터를 받아 동구권으로 걸러 커밋하고, 푸시된 내용은 Vercel이 자동 배포합니다(`.github/workflows/refresh-data.yml`). 최초 1회 저장소 Settings → Secrets and variables → Actions에 `SAFEMAP_SERVICE_KEY`, `MOIS_SERVICE_KEY`를 등록하면 됩니다(커밋 금지, Actions Secret만). 수집이 실패하면 알림 이슈가 자동 생성됩니다.
+**자동(기본)**: CCTV·비상벨·편의점·CPTED는 GitHub Actions가 **매월 5일 09:00 KST**에 전국 데이터를 받아 동구권으로 걸러 커밋하고, 푸시된 내용은 Vercel이 자동 배포합니다(`.github/workflows/refresh-data.yml`). 최초 1회 저장소 Settings → Secrets and variables → Actions에 `SAFEMAP_SERVICE_KEY`, `MOIS_SERVICE_KEY`, `VWORLD_API_KEY`를 등록하면 됩니다(커밋 금지, Actions Secret만). VWORLD 키에 서비스 URL 설정이 필요한 경우 Actions Variable `VWORLD_DOMAIN`도 등록합니다. 수집이 실패하면 알림 이슈가 자동 생성됩니다.
 
 **수동**: 로컬에서 즉시 갱신할 수도 있습니다. 인증키는 `.env.local`에 둡니다.
 
 ```bash
 # 보안등만 갱신
 node scripts/fetch-real-data.mjs --only=streetlights
+# CPTED만 갱신 (SAFEMAP_SERVICE_KEY + VWORLD_API_KEY 필요)
+node scripts/fetch-real-data.mjs --only=cpted
 # 전체 갱신 (CCTV 전국 스캔 포함, 약 15분)
 node scripts/fetch-real-data.mjs
 ```
 
 보안등은 API가 좌표를 공개하지 않아 동구청 제공 CSV를 사용합니다. `scripts/data/donggu-streetlights.csv`를 최신 자료로 교체한 뒤 위 명령으로 반영하세요. 자료가 매년 말 기준이라 매년 1월 15일에 GitHub Actions가 갱신 알림 이슈를 자동 생성합니다(`.github/workflows/streetlight-refresh-reminder.yml`).
 
-노후건물은 안전디딤돌 WMS 전용(좌표 미공개)이라 아직 미포함입니다. CPTED(IF_0023)와 도로시설(인도) IF_0095는 좌표가 없어 미사용이며, 인도는 대신 국토지리정보원 원본 도형을 사용합니다(아래 참고). 현재 상태는 `public/data/meta.json`에 기록됩니다.
+노후건물은 안전디딤돌 WMS 전용(좌표 미공개)이라 아직 미포함입니다. CPTED(IF_0023)는 VWORLD로 주소를 좌표화하며, 도로시설(인도) IF_0095는 좌표가 없어 대신 국토지리정보원 원본 도형을 사용합니다(아래 참고). 현재 상태는 `public/data/meta.json`에 기록됩니다.
+
+### CPTED 주소 연동
+
+- 생활안전지도 IF_0023의 광주광역시 사업 중 `imprvm_pro=완료`만 반영합니다. 계획·진행 중 사업은 기존 시설로 가점하지 않습니다.
+- `jibun_addr`를 VWORLD Geocoder API 2.0의 지번(`parcel`) 검색으로 WGS84(EPSG:4326) 좌표화합니다. 미검색 시 `roadnm_add`가 있으면 도로명(`road`) 검색을 시도합니다.
+- 동일 주소는 하나의 사업지로 집계하고 동구권 BBOX 밖 좌표는 제외합니다. **주소 대표점이며 개별 시설의 실측 위치나 사업구역의 경계가 아닙니다.** 지도와 거리 기반 CPTED 점수도 이 대표점을 사용합니다.
+- 수집·제외 건수, 미검색 주소는 `public/data/cpted-meta.json`에 기록합니다. 인증 실패·서비스 오류·0건 수집이면 저장 전에 실패해 기존 시설 데이터를 보존합니다. 정상 미검색(`NOT_FOUND`) 주소만 제외하고 기록합니다.
+- Actions의 **Run workflow → only: cpted**로 다른 시설을 유지하면서 CPTED와 도로 점수만 갱신할 수 있습니다. 키는 수집 단계에서만 사용하며 브라우저나 Vercel 환경에는 필요하지 않습니다.
 
 시설 수집 스크립트는 저장 후 `score-roads`를 자동 실행합니다(`npm ci` 필요). 월간 CI에서도 입력 해시와 도로 점수 정합성을 확인한 후 커밋합니다.
 
@@ -125,7 +135,7 @@ safetyScoreV2 = 조명·가시성×0.25 + 감시·긴급대응×0.20 + 야간활
 | 차원 | 하위 지표 | 현재 데이터 |
 | --- | --- | --- |
 | 조명·가시성 (25%) | 조명 커버리지 50% · 최대 암구간 30% · 조명 균일도 20% | 보안등 좌표 ✅ (lux 아님) |
-| 감시·긴급대응 (20%) | CCTV 50% · CPTED 25% · 비상벨 15% · 경찰시설 10% | CCTV·비상벨 ✅ 거리감쇠, CPTED·경찰시설 ❌ |
+| 감시·긴급대응 (20%) | CCTV 50% · CPTED 25% · 비상벨 15% · 경찰시설 10% | CCTV·비상벨·CPTED ✅ 거리감쇠(CPTED는 주소 대표점), 경찰시설 ❌ |
 | 야간활동·자연감시 (15%) | 야간 영업시설 40% · 대중교통 25% · 도로 활성도 proxy 20% · 편의점 15% | 폭원 proxy·편의점 ✅, 야간 POI·대중교통 ❌ |
 | 공간환경·방치도 (15%) | 빈집 45% · 건축물 노후/방치 20% · 보행환경 20% · 공간구조 15% | 인도 ✅, 빈집·노후건물 좌표·공간구조 ❌ |
 | 범죄 상대주의도 (25%) | 생활안전지도 WMS 샘플링(기존 로직 재사용) | 4,399/10,660 구간 ✅, 나머지 미수집 |

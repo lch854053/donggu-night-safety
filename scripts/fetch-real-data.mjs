@@ -58,7 +58,7 @@ async function getWithRetry(url, tries = 3) {
   for (let i = 0; i < tries; i++) {
     try {
       const res = await fetch(url, { headers: { "User-Agent": "donggu-night-safety/0.1" }, signal: AbortSignal.timeout(30000) });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) throw new Error(`${new URL(url).hostname}: HTTP ${res.status}`);
       return await res.text();
     } catch (e) {
       if (i === tries - 1) throw e;
@@ -281,9 +281,13 @@ async function main() {
       inBbox,
       geocode: async (address, type) => {
         await sleep(100);
-        return geocodeAddress(address, type, {
-          key: VWORLD_KEY, domain: process.env.VWORLD_DOMAIN, getText: getWithRetry,
-        });
+        try {
+          return await geocodeAddress(address, type, {
+            key: VWORLD_KEY, domain: process.env.VWORLD_DOMAIN, getText: getWithRetry,
+          });
+        } catch (error) {
+          throw new Error(`CPTED 지오코딩: ${error.message}`);
+        }
       },
     });
     collections.cpted = result.features;
