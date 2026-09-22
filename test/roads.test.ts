@@ -62,6 +62,29 @@ test("shipped crime risk matches the WMS sampling report", () => {
   assert.match(String(crimeFile.legendWarning), /경찰청/);
 });
 
+test("shipped CPTED sites match geocoding metadata and activate surveillance scoring", () => {
+  const meta = readJson("public/data/cpted-meta.json");
+  const cache = readJson("public/data/cpted-geocodes.json");
+  const sites = dataset.features.features.filter((f) => f.properties.type === "cpted");
+  assert.ok(sites.length > 0);
+  assert.equal(sites.length, meta.count);
+  assert.equal(new Set(sites.map((f) => f.properties.id)).size, sites.length);
+  for (const site of sites) {
+    const properties = site.properties as typeof site.properties & {
+      status: string; addressType: string; geocodedAddress: string; locationAccuracy: string;
+    };
+    assert.equal(properties.status, "완료");
+    assert.equal(properties.source, "safemap:IF_0023");
+    assert.equal(properties.locationAccuracy, "address");
+    const geocode = cache[`${properties.addressType}:${properties.geocodedAddress}`];
+    assert.equal(geocode.crs, "EPSG:4326");
+    assert.deepEqual(site.geometry.coordinates, geocode.coordinates.map((n: number) => +n.toFixed(6)));
+  }
+  assert.ok(roads.features.every((road) => road.properties.cptedScore !== null));
+  assert.ok(roads.features.some((road) => (road.properties.cptedScore ?? 0) > 0));
+  assert.equal(readJson("public/data/meta.json").pending.cpted, undefined);
+});
+
 test("indexed and shipped scores equal brute-force Turf on spatially distributed real roads", () => {
   const sample = { ...dataset, roadSegments: { ...dataset.roadSegments,
     features: dataset.roadSegments.features.filter((_, i) => i % 53 === 0) } };
