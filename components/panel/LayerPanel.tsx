@@ -157,47 +157,41 @@ export function LayerPanel({
               {roadSegments && !matchingRoads.length ? <p>검색 결과가 없습니다. 행정동이나 구간 ID를 확인해 주세요.</p> : null}
 
               {selectedRoad ? (
-                <div className="road-lookup-result" aria-live="polite">
-                  <p>{selectedRoad.properties.name} · {selectedRoad.properties.lengthMeters}m</p>
-                  <div>
-                    <strong>{selectedRoad.properties.safetyScore} / 100</strong>
-                    <span>{getSafetyBand(selectedRoad.properties.safetyScore).label}</span>
-                  </div>
-                  <dl>
-                    <div>
-                      <dt>조명 환경</dt>
-                      <dd>{selectedRoad.properties.lightingScore}점</dd>
+                (() => {
+                  const p = selectedRoad.properties;
+                  const v2 = p.safetyScoreV2;
+                  const dimension = (label: string, value: number | null, nullText = "데이터 없음") => (
+                    <div key={label}>
+                      <dt>{label}</dt>
+                      <dd>{value === null ? nullText : `${value}점`}</dd>
                     </div>
-                    <div>
-                      <dt>보안등</dt>
-                      <dd>{selectedRoad.properties.streetlightCount}개</dd>
+                  );
+                  return (
+                    <div className="road-lookup-result" aria-live="polite">
+                      <p>{p.name} · {p.lengthMeters}m</p>
+                      <div>
+                        <strong>{v2 === null ? "데이터 없음" : `${v2} / 100`}</strong>
+                        <span>{v2 === null ? "" : getSafetyBand(v2).label}</span>
+                      </div>
+                      <dl>
+                        {dimension("조명·가시성", p.lightingScore)}
+                        {dimension("감시·긴급대응", p.surveillanceScore)}
+                        {dimension("야간활동·자연감시", p.activityScore)}
+                        {dimension("공간환경·방치도", p.environmentScore)}
+                        {dimension("범죄 상대주의도", p.crimeScore, "미수집")}
+                        {dimension("기존 지수(v1)", p.safetyScore)}
+                        <div>
+                          <dt>보안등</dt>
+                          <dd>{p.streetlightCount}개 · 커버리지 {p.lightingCoverage}%</dd>
+                        </div>
+                        <div>
+                          <dt>최대 암구간</dt>
+                          <dd>{p.maxDarkGapMeters}m</dd>
+                        </div>
+                      </dl>
                     </div>
-                    <div>
-                      <dt>조명 커버리지</dt>
-                      <dd>{selectedRoad.properties.lightingCoverage}%</dd>
-                    </div>
-                    <div>
-                      <dt>최대 암구간</dt>
-                      <dd>{selectedRoad.properties.maxDarkGapMeters}m</dd>
-                    </div>
-                    <div>
-                      <dt>조명 균일도</dt>
-                      <dd>{selectedRoad.properties.lightingUniformityScore}</dd>
-                    </div>
-                    <div>
-                      <dt>CCTV·비상벨</dt>
-                      <dd>{selectedRoad.properties.surveillanceScore}점</dd>
-                    </div>
-                    <div>
-                      <dt>상대적 주의도</dt>
-                      <dd>{selectedRoad.properties.crimeScore === null ? "미수집" : `${selectedRoad.properties.crimeScore}점`}</dd>
-                    </div>
-                    <div>
-                      <dt>주변 환경</dt>
-                      <dd>{selectedRoad.properties.environmentScore}점</dd>
-                    </div>
-                  </dl>
-                </div>
+                  );
+                })()
               ) : null}
             </div>
 
@@ -207,7 +201,7 @@ export function LayerPanel({
                 이 지수는 안심 인프라와 주변 환경 데이터를 조합한 상대적 참고값이며, 특정 장소의
                 절대적인 안전을 보장하지 않습니다.
               </p>
-              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 조명 환경은 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 상대적 주의도는 생활안전지도에서 제공하는 경찰청 범죄 밀도분석 기반 구간 정보로, 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다. 주의구간 원본 좌표·노후건물·CPTED는 미수집입니다.</p>
+              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 조명 환경은 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 상대적 주의도는 생활안전지도에서 제공하는 경찰청 범죄 밀도분석 기반 구간 정보로, 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다. 시설 접근성은 좌표 거리 기반 참고값이며 경찰시설 거리가 실제 출동시간을 의미하지 않습니다. 야간활동·빈집 등 일부 지표는 좌표 데이터가 수집되지 않아 "데이터 없음"으로 표시됩니다. 주의구간 원본 좌표·노후건물·CPTED는 미수집입니다.</p>
               <p><a href="/data/roads-meta.json" target="_blank" rel="noreferrer">도로 출처·가공 정보</a> · <a href="/data/sidewalks-meta.json" target="_blank" rel="noreferrer">인도 출처·가공 정보</a> · 국토지리정보원<br />주의구간: <a href="https://www.safemap.go.kr" target="_blank" rel="noreferrer">행정안전부 생활안전지도</a> / 경찰청<br />경계: SGIS / vuski·admdongkor (CC BY 4.0)</p>
             </div>
           </>

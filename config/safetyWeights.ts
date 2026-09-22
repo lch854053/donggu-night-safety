@@ -113,6 +113,104 @@ export const SAFETY_WEIGHTS = {
   oldBuilding: ProximityWeight;
 };
 
+/** 거리(m)에 따른 점수. breakpoints는 [거리, 점수] 오름차순, 구간 사이 선형 보간. */
+export interface BandScoreConfig {
+  radiusMeters: number;
+  breakpoints: readonly (readonly [distanceMeters: number, score: number])[];
+}
+
+/** 개수에 따른 단계형 점수. countSteps는 [임계값, 점수] 오름차순, 첫 임계값 미만은 0. */
+export interface CountScoreConfig {
+  radiusMeters: number;
+  countSteps: readonly (readonly [count: number, score: number])[];
+}
+
+/** v2 감시·긴급대응 설정. CCTV는 예방, 비상벨·경찰시설은 긴급대응 성격을 반영해 가중치를 나눈다. */
+export interface SurveillanceConfig {
+  weights: { cctv: number; cpted: number; emergencyBell: number; police: number };
+  cctv: BandScoreConfig & { /** 포화형 보너스. 개수에 선형 비례하지 않는다. */ countBonus: { two: number; threePlus: number } };
+  cpted: BandScoreConfig;
+  emergencyBell: BandScoreConfig;
+  police: BandScoreConfig;
+}
+
+/** v2 야간활동·자연감시 설정. 실제 보행량 데이터가 없어 proxy 조합이다. */
+export interface ActivityConfig {
+  weights: { nightActivity: number; transit: number; roadActivity: number; convenienceStore: number };
+  nightActivity: CountScoreConfig;
+  transit: BandScoreConfig;
+  /** 폭원(m) 기준 약한 활성도 proxy. RDD 도로등급 코드는 원본 그대로라 미해석한다. */
+  roadActivityWidthSteps: readonly (readonly [widthMeters: number, score: number])[];
+  convenienceStore: CountScoreConfig;
+}
+
+/** v2 공간환경·방치도 설정. 100점에서 취약요인이 확인될수록 감점한다. */
+export interface EnvironmentConfig {
+  weights: { vacancy: number; deterioration: number; sidewalk: number; spatialStructure: number };
+  vacancy: CountScoreConfig;
+  /** 노후건축물은 약한 보조지표. 빈집(별도 강한 지표)과 동일 취급하지 않는다. */
+  deterioration: CountScoreConfig;
+  sidewalkScores: { yes: number; partial: number; no: number };
+}
+
+/** v2 밤길 안전 참고지수 설정. 모든 하위 점수는 0~100, 미수집은 null(재정규화 대상). */
+export const SAFETY_SCORES_V2 = {
+  dimensionWeights: { lighting: 0.25, surveillance: 0.2, activity: 0.15, environment: 0.15, crime: 0.25 },
+  surveillance: {
+    weights: { cctv: 0.5, cpted: 0.25, emergencyBell: 0.15, police: 0.1 },
+    cctv: {
+      radiusMeters: 200,
+      breakpoints: [[0, 100], [50, 80], [100, 50], [150, 20], [200, 0]],
+      countBonus: { two: 1.1, threePlus: 1.15 },
+    },
+    cpted: {
+      radiusMeters: 200,
+      breakpoints: [[0, 100], [50, 80], [100, 50], [150, 20], [200, 0]],
+    },
+    emergencyBell: {
+      radiusMeters: 150,
+      breakpoints: [[0, 100], [50, 70], [100, 40], [150, 0]],
+    },
+    police: {
+      radiusMeters: 1000,
+      breakpoints: [[0, 100], [300, 70], [600, 30], [1000, 0]],
+    },
+  },
+  activity: {
+    weights: { nightActivity: 0.4, transit: 0.25, roadActivity: 0.2, convenienceStore: 0.15 },
+    nightActivity: {
+      radiusMeters: 100,
+      countSteps: [[0, 0], [1, 30], [2, 60], [4, 80], [7, 100]],
+    },
+    transit: {
+      radiusMeters: 500,
+      breakpoints: [[0, 100], [100, 80], [300, 50], [500, 0]],
+    },
+    roadActivityWidthSteps: [[0, 20], [5.5, 40], [12, 70], [20, 100]],
+    convenienceStore: {
+      radiusMeters: 100,
+      countSteps: [[0, 0], [1, 40], [2, 70], [3, 100]],
+    },
+  },
+  environment: {
+    weights: { vacancy: 0.45, deterioration: 0.2, sidewalk: 0.2, spatialStructure: 0.15 },
+    vacancy: {
+      radiusMeters: 50,
+      countSteps: [[0, 100], [1, 70], [2, 50], [3, 30]],
+    },
+    deterioration: {
+      radiusMeters: 100,
+      countSteps: [[0, 100], [1, 80], [2, 60], [4, 40]],
+    },
+    sidewalkScores: { yes: 100, partial: 60, no: 20 },
+  },
+} as const satisfies {
+  dimensionWeights: { lighting: number; surveillance: number; activity: number; environment: number; crime: number };
+  surveillance: SurveillanceConfig;
+  activity: ActivityConfig;
+  environment: EnvironmentConfig;
+};
+
 export const SAFETY_SCORE_BANDS = [
   { min: 80, max: 100, label: "상대적 안심 높음", color: "#167663" },
   { min: 65, max: 79, label: "상대적 안심 양호", color: "#4e9862" },

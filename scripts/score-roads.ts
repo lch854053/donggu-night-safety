@@ -13,6 +13,8 @@ export async function scoreRoads() {
   const paths = ["scripts/data/road-segments.geojson", "public/data/safety-features.geojson",
     "public/data/risk-zones.geojson", "config/safetyWeights.ts", "lib/scoring/calculateRoadSafety.ts",
     "lib/scoring/roadPointIndex.ts", "lib/scoring/lighting.ts", "lib/scoring/crimeRisk.ts",
+    "lib/scoring/weightedAverage.ts", "lib/scoring/proximityScore.ts",
+    "lib/scoring/surveillance.ts", "lib/scoring/activity.ts", "lib/scoring/environment.ts",
     "scripts/score-roads.ts"];
   // WMS 샘플링 결과가 있을 때만 점수 입력에 포함한다. 없으면 crimeScore는 null(미수집).
   const crimeRiskPath = resolve(root, "public/data/crime-risk.json");

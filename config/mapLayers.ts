@@ -51,6 +51,13 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
     color: "#707b83",
     kind: "point",
   },
+  {
+    key: "police_station",
+    label: "경찰시설",
+    description: "경찰서·지구대·파출소",
+    color: "#1f4e79",
+    kind: "point",
+  },
 ] as const;
 
 export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
@@ -60,6 +67,12 @@ export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   convenience_store: true,
   cpted: true,
   old_building: false,
+  police_station: true,
+  // 좌표 데이터가 아직 수집되지 않은 타입. 데이터가 생기면 기본 표시로 바꾼다.
+  night_activity: false,
+  bus_stop: false,
+  subway_entrance: false,
+  vacant_house: false,
 };
 
 export const POINT_LAYER_KEYS = MAP_LAYER_DEFINITIONS.filter(

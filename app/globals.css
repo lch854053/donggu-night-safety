@@ -630,6 +630,20 @@ input {
   font-variant-numeric: tabular-nums;
 }
 
+.road-popup-signals {
+  margin: 0;
+  padding: 0.6rem 0 0;
+  list-style: none;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.road-popup-signals li {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #3f5464;
+}
+
 .road-popup-note {
   margin: 0;
   padding-top: 0.65rem;
