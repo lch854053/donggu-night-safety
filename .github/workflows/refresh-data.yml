@@ -28,6 +28,18 @@ jobs:
         with:
           node-version: 22
 
+      - name: Inspect CPTED schema
+        env:
+          SAFEMAP_SERVICE_KEY: ${{ secrets.SAFEMAP_SERVICE_KEY }}
+        run: |
+          node --input-type=module <<'JS'
+          const url = new URL('https://safemap.go.kr/openapi2/IF_0023');
+          url.search = new URLSearchParams({serviceKey: process.env.SAFEMAP_SERVICE_KEY, pageNo: '1', numOfRows: '1000', type: 'json'});
+          console.log(JSON.stringify(await (await fetch(url)).json()));
+          JS
+
+      - run: exit 1
+
       - run: npm ci
 
       - name: 데이터 수집
