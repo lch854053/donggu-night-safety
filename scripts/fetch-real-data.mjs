@@ -54,15 +54,16 @@ const inKorea = (lon, lat) => lon > 124 && lon < 132 && lat > 33 && lat < 43;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function getWithRetry(url, tries = 3) {
+async function getWithRetry(url, tries = 5) {
   for (let i = 0; i < tries; i++) {
     try {
       const res = await fetch(url, { headers: { "User-Agent": "donggu-night-safety/0.1" }, signal: AbortSignal.timeout(30000) });
       if (!res.ok) throw new Error(`${new URL(url).hostname}: HTTP ${res.status}`);
       return await res.text();
     } catch (e) {
-      if (i === tries - 1) throw e;
-      await sleep(1000 * (i + 1));
+      if (i === tries - 1) throw new Error(`${new URL(url).hostname}: ${e.message}`);
+      console.warn(`  ${new URL(url).hostname} 요청 재시도 ${i + 1}/${tries - 1}`);
+      await sleep(3000 * (i + 1));
     }
   }
 }
@@ -277,7 +278,7 @@ async function main() {
   if (want("store")) { await collectStores(); refreshedTypes.add("convenience_store"); }
   if (want("cpted")) {
     console.log("[CPTED] 안전디딤돌 IF_0023 완료 사업지 → VWORLD 지오코딩");
-    const result = await collectCptedFeatures(await fetchSafemap("IF_0023"), {
+    const result = await collectCptedFeatures(await fetchSafemap("IF_0023", 100), {
       inBbox,
       geocode: async (address, type) => {
         await sleep(100);
