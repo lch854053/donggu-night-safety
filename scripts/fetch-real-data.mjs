@@ -25,6 +25,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_DIR = path.join(ROOT, "public", "data");
 const FEATURES_PATH = path.join(DATA_DIR, "safety-features.geojson");
 const META_PATH = path.join(DATA_DIR, "meta.json");
+const CPTED_CACHE_PATH = path.join(DATA_DIR, "cpted-geocodes.json");
 const STREETLIGHT_CSV = path.join(ROOT, "scripts", "data", "donggu-streetlights.csv");
 
 // .env.local 파서 (dotenv 의존성 없이 최소 구현)
@@ -58,7 +59,7 @@ async function getWithRetry(url, tries = 5) {
   for (let i = 0; i < tries; i++) {
     try {
       const res = await fetch(url, { headers: { "User-Agent": "donggu-night-safety/0.1" }, signal: AbortSignal.timeout(30000) });
-      if (!res.ok) throw new Error(`${new URL(url).hostname}: HTTP ${res.status}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.text();
     } catch (e) {
       if (i === tries - 1) throw new Error(`${new URL(url).hostname}: ${e.message}${e.cause?.code ? ` (${e.cause.code})` : ""}`);
@@ -183,6 +184,7 @@ function collectStreetlights() {
 const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [] };
 const metaSources = {};
 let cptedMetadata;
+let cptedCache;
 
 async function collectCctv() {
   console.log("[CCTV] 행안부 cctv_info 전국 스캔");
@@ -278,13 +280,15 @@ async function main() {
   if (want("store")) { await collectStores(); refreshedTypes.add("convenience_store"); }
   if (want("cpted")) {
     console.log("[CPTED] 안전디딤돌 IF_0023 완료 사업지 → VWORLD 지오코딩");
+    cptedCache = !process.argv.includes("--refresh-geocodes") && existsSync(CPTED_CACHE_PATH)
+      ? JSON.parse(readFileSync(CPTED_CACHE_PATH, "utf8")) : {};
     const result = await collectCptedFeatures(await fetchSafemap("IF_0023", 100), {
       inBbox,
       geocode: async (address, type) => {
         await sleep(100);
         try {
           return await geocodeAddress(address, type, {
-            key: VWORLD_KEY, domain: process.env.VWORLD_DOMAIN, getText: getWithRetry,
+            key: VWORLD_KEY, domain: process.env.VWORLD_DOMAIN, getText: getWithRetry, cache: cptedCache,
           });
         } catch (error) {
           throw new Error(`CPTED 지오코딩: ${error.message}`);
@@ -331,6 +335,7 @@ async function main() {
   const fc = { type: "FeatureCollection", features };
   writeFileSync(FEATURES_PATH, JSON.stringify(fc), "utf8");
   if (cptedMetadata) writeFileSync(path.join(DATA_DIR, "cpted-meta.json"), JSON.stringify(cptedMetadata, null, 2), "utf8");
+  if (cptedCache) writeFileSync(CPTED_CACHE_PATH, JSON.stringify(cptedCache, null, 2), "utf8");
   writeFileSync(
     META_PATH,
     JSON.stringify(

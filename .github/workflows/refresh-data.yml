@@ -40,38 +40,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Check geocoder connectivity
-        run: |
-          node --input-type=module -e "try { const r=await fetch('https://api.vworld.kr/req/address');console.log('HTTP',r.status) } catch(e) { console.log(e.message,e.cause?.code,e.cause?.message) }"
-          curl --head --max-time 20 https://api.vworld.kr/req/address || true
-
-      - name: Save CPTED public source for verification
-        env:
-          SAFEMAP_SERVICE_KEY: ${{ secrets.SAFEMAP_SERVICE_KEY }}
-        run: |
-          node --input-type=module <<'JS'
-          import { writeFileSync } from 'node:fs';
-          const items = [];
-          for (let pageNo = 1; ; pageNo++) {
-            const u = new URL('https://www.safemap.go.kr/openapi2/IF_0023');
-            u.search = new URLSearchParams({serviceKey:process.env.SAFEMAP_SERVICE_KEY,pageNo:String(pageNo),numOfRows:'100',type:'json'});
-            let body;
-            for(let i=0;i<5;i++) { try { body=await (await fetch(u)).json(); break; } catch { if(i===4) throw new Error('Source unavailable'); } }
-            if(body.header?.resultCode!=='00') throw new Error('Source error');
-            const page=body.body?.items?.item ?? [];
-            items.push(...page.map(({jibun_addr,roadnm_add,imprvm_pro,dsign_prps,usr_cmnt})=>({jibun_addr,roadnm_add,imprvm_pro,dsign_prps,usr_cmnt})));
-            if(page.length<100) break;
-          }
-          writeFileSync('cpted-source.json',JSON.stringify(items));
-          console.log('Source rows',items.length);
-          JS
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: cpted-source
-          path: cpted-source.json
-          retention-days: 3
-
       - name: 데이터 수집
         env:
           SAFEMAP_SERVICE_KEY: ${{ secrets.SAFEMAP_SERVICE_KEY }}
@@ -88,6 +56,13 @@ jobs:
 
       - name: 도로 점수·입력 데이터 정합성 검증
         run: npm test
+
+      - name: Close integration probe alert
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh issue close 9 --comment "CPTED 연동 브랜치의 연결 확인 알림입니다. 실제 주소 좌표화 및 데이터 검증을 완료했습니다."
 
       - name: 변경분 커밋·푸시
         run: |

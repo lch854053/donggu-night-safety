@@ -2,10 +2,18 @@ import { createHash } from "node:crypto";
 
 const normalizeAddress = (value) => String(value ?? "").trim().replace(/\s+/g, " ");
 const isGwangju = (address) => /^(광주광역시|광주시|광주)\s+(동구|서구|남구|북구|광산구)\s/.test(address);
+const validCoordinates = (value) => Array.isArray(value) && value.length === 2 &&
+  value.every(Number.isFinite) && value[0] >= 124 && value[0] <= 132 && value[1] >= 33 && value[1] <= 43;
 
 /** VWORLD 오류/인증 실패를 주소 미검색과 구분한다. 요청 URL에는 키가 있어 로그에 남기지 않는다. */
-export async function geocodeAddress(address, type, { key, domain, getText }) {
+export async function geocodeAddress(address, type, { key, domain, getText, cache }) {
   if (!key) throw new Error("VWORLD_API_KEY가 필요합니다.");
+  const cacheKey = `${type}:${address}`;
+  const cached = cache?.[cacheKey];
+  if (cached?.crs === "EPSG:4326" && validCoordinates(cached.coordinates)) return [...cached.coordinates];
+  // 미검색도 일시 캐시하되 영구 누락으로 굳어지지 않도록 90일 뒤 재조회한다.
+  const age = Date.now() - Date.parse(cached?.geocodedAt);
+  if (cached?.status === "NOT_FOUND" && age >= 0 && age < 90 * 86400000) return null;
   const url = new URL("https://api.vworld.kr/req/address");
   url.search = new URLSearchParams({
     service: "address", request: "getCoord", version: "2.0", crs: "EPSG:4326",
@@ -13,16 +21,19 @@ export async function geocodeAddress(address, type, { key, domain, getText }) {
     ...(domain ? { domain } : {}),
   });
   const { response } = JSON.parse(await getText(url));
-  if (response?.status === "NOT_FOUND") return null;
+  if (response?.status === "NOT_FOUND") {
+    if (cache) cache[cacheKey] = { status: "NOT_FOUND", geocodedAt: new Date().toISOString().slice(0, 10) };
+    return null;
+  }
   if (response?.status !== "OK") {
     throw new Error(`VWORLD 지오코딩 실패 (${response?.error?.code ?? "INVALID_RESPONSE"})`);
   }
   const point = response.result?.point;
   const lon = Number(point?.x), lat = Number(point?.y);
-  if (!point?.x || !point?.y || !Number.isFinite(lon) || !Number.isFinite(lat) ||
-      lon < 124 || lon > 132 || lat < 33 || lat > 43) {
+  if (!point?.x || !point?.y || !validCoordinates([lon, lat])) {
     throw new Error("VWORLD 응답 좌표가 올바르지 않습니다.");
   }
+  if (cache) cache[cacheKey] = { coordinates: [lon, lat], crs: "EPSG:4326", geocodedAt: new Date().toISOString().slice(0, 10) };
   return [lon, lat];
 }
 

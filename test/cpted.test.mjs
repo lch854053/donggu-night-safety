@@ -32,6 +32,31 @@ test("NOT_FOUND is skippable but auth errors and malformed coordinates abort", a
   await assert.rejects(geocodeAddress(address, "parcel", { getText: async () => "" }), /VWORLD_API_KEY/);
 });
 
+test("address cache avoids repeated API calls; invalid coordinates and expired misses are refreshed", async () => {
+  const cache = { [`parcel:${address}`]: { crs: "EPSG:4326", coordinates: [35.15, 126.925] } };
+  let calls = 0;
+  const options = { key: "test-secret", cache, getText: async () => {
+    calls++;
+    return JSON.stringify({ response: { status: "OK", result: { point: { x: "126.925", y: "35.15" } } } });
+  } };
+  await geocodeAddress(address, "parcel", options);
+  assert.equal(calls, 1);
+  const result = await geocodeAddress(address, "parcel", options);
+  assert.equal(calls, 1);
+  assert.deepEqual(result, [126.925, 35.15]);
+  result[0] = 0;
+  assert.deepEqual(cache[`parcel:${address}`].coordinates, [126.925, 35.15]);
+  await geocodeAddress("missing", "parcel", { ...options,
+    getText: async () => JSON.stringify({ response: { status: "NOT_FOUND" } }),
+  });
+  assert.equal(cache["parcel:missing"].status, "NOT_FOUND");
+  assert.equal(await geocodeAddress("missing", "parcel", options), null);
+  assert.equal(calls, 1);
+  cache["parcel:missing"].geocodedAt = "2000-01-01";
+  assert.deepEqual(await geocodeAddress("missing", "parcel", options), [126.925, 35.15]);
+  assert.equal(calls, 2);
+});
+
 test("only completed Gwangju projects count; duplicates, plans, other regions and off-map points do not", async () => {
   let calls = 0;
   const result = await collectCptedFeatures([

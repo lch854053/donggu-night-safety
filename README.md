@@ -27,6 +27,7 @@ node scripts/fetch-real-data.mjs
 - `jibun_addr`를 VWORLD Geocoder API 2.0의 지번(`parcel`) 검색으로 WGS84(EPSG:4326) 좌표화합니다. 미검색 시 `roadnm_add`가 있으면 도로명(`road`) 검색을 시도합니다.
 - 동일 주소는 하나의 사업지로 집계하고 동구권 BBOX 밖 좌표는 제외합니다. **주소 대표점이며 개별 시설의 실측 위치나 사업구역의 경계가 아닙니다.** 지도와 거리 기반 CPTED 점수도 이 대표점을 사용합니다.
 - 수집·제외 건수, 미검색 주소는 `public/data/cpted-meta.json`에 기록합니다. 인증 실패·서비스 오류·0건 수집이면 저장 전에 실패해 기존 시설 데이터를 보존합니다. 정상 미검색(`NOT_FOUND`) 주소만 제외하고 기록합니다.
+- VWORLD 조회 결과는 `public/data/cpted-geocodes.json`에 주소별로 캐시합니다(키 미포함). 성공 좌표는 재사용하고 미검색은 90일 후 재조회합니다. 전체 재조회는 `node scripts/fetch-real-data.mjs --only=cpted --refresh-geocodes`로 실행합니다. GitHub 호스팅 러너에서 VWORLD 접속이 끊기는 경우가 있어, 새 주소·만료된 미검색 주소의 조회에는 VWORLD 접속이 가능한 실행 환경이 필요합니다. 접속 실패를 미검색으로 캐시하지 않습니다.
 - Actions의 **Run workflow → only: cpted**로 다른 시설을 유지하면서 CPTED와 도로 점수만 갱신할 수 있습니다. 키는 수집 단계에서만 사용하며 브라우저나 Vercel 환경에는 필요하지 않습니다.
 
 시설 수집 스크립트는 저장 후 `score-roads`를 자동 실행합니다(`npm ci` 필요). 월간 CI에서도 입력 해시와 도로 점수 정합성을 확인한 후 커밋합니다.
