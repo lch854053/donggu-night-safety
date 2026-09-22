@@ -48,7 +48,9 @@ jobs:
           VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN }}
           ONLY: ${{ inputs.only }}
         run: |
-          if [ "$ONLY" = "cpted" ] || [ "${{ github.event_name }}" = "push" ]; then
+          if [ "${{ github.event_name }}" = "push" ]; then
+            npm run score-roads
+          elif [ "$ONLY" = "cpted" ]; then
             node scripts/fetch-real-data.mjs --only=cpted
           else
             node scripts/fetch-real-data.mjs
