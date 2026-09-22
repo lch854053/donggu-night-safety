@@ -10,6 +10,8 @@
 name: 공공데이터 월간 자동 수집
 
 on:
+  push:
+    branches: [feat/cpted-vworld]
   schedule:
     - cron: "0 0 5 * *" # 매월 5일 09:00 KST
   workflow_dispatch: {}
