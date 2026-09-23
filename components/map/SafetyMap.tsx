@@ -86,7 +86,7 @@ function roadPopupContent(properties: Record<string, unknown>) {
       ["감시·긴급대응", "surveillanceScore", undefined],
       ["야간활동·자연감시", "activityScore", undefined],
       ["공간환경·방치도", "environmentScore", undefined],
-      ["범죄 상대주의도", "crimeScore", "미수집"],
+      ["여성밤길 치안안전", "crimeScore", "미수집"],
     ] as const
   ).forEach(([label, key, nullText]) => {
     const row = document.createElement("div");
@@ -157,7 +157,7 @@ function roadPopupContent(properties: Record<string, unknown>) {
     const crimeNote = document.createElement("p");
     crimeNote.className = "road-popup-note";
     crimeNote.textContent =
-      "※ 상대적 주의도는 생활안전지도에서 제공하는 경찰청 범죄 밀도분석 기반 구간 정보를 도로 주변에서 분석한 값이며, 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다.";
+      "※ 여성밤길 치안안전은 생활안전지도의 경찰청 범죄 밀도분석(밤 시간대 20~24시) 구간 정보를 우선하고, 여성밤길 데이터가 없는 구간은 범죄주의구간(전체 시간대) 밀도분석으로 보완해 도로 주변에서 분석한 값입니다. 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다.";
     content.append(crimeNote);
   }
   return content;
