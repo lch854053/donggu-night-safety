@@ -4,7 +4,7 @@ export interface ProximityWeight {
   maxOccurrences: number;
 }
 
-/** 범죄 상대적 주의도(WMS raster sampling) 설정. 실제 범죄 발생 확률이 아니다. */
+/** 여성밤길 치안안전(밤 시간대 범죄 밀도분석 WMS 샘플링) 설정. 실제 범죄 발생 확률이 아니다. */
 export interface CrimeRiskConfig {
   /** 도로 LineString 따라 샘플링할 간격(미터). 최소 1개 샘플 보장. */
   sampleIntervalMeters: number;
@@ -86,8 +86,8 @@ export const SAFETY_WEIGHTS = {
     4: -18,
     5: -25,
   },
-  // 상대적 주의도는 생활안전지도(경찰청 밀도분석 10등급) WMS를 도로 주변에서
-  // 샘플링해 산출한다. 실제 범죄 발생 가능성을 예측하는 수치가 아니다.
+  // 여성밤길 치안안전은 생활안전지도(경찰청 밀도분석 10등급, 밤 시간대 20~24시)
+  // WMS를 도로 주변에서 샘플링해 산출한다. 실제 범죄 발생 가능성을 예측하는 수치가 아니다.
   crime: {
     sampleIntervalMeters: 20,
     highRiskLevel: 6,

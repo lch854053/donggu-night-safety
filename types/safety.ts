@@ -115,6 +115,7 @@ export interface SafetyDataset {
   };
   /**
    * 생활안전지도(경찰청 밀도분석) WMS를 도로별로 샘플링한 상대적 주의도.
+   * 현재 원천은 여성밤길치안안전(전체, 밤 시간대 20~24시) 레이어다.
    * 이 파일 자체는 사전 처리 산출물이며, 구간에 없으면 해당 도로는
    * crimeScore가 null(미수집)이 된다 — 0(낮음)과 다른 의미다.
    */
@@ -137,6 +138,8 @@ export interface CrimeRiskSummary {
   sampleCount: number;
   /** noData(투명·미매칭) 샘플 비율. noData는 위험도 0이 아니다. */
   noDataRatio: number;
+  /** 이 구간 값의 원천. 여성밤길(IF_0080)을 우선하고 없는 구간은 범죄주의구간(IF_0087)으로 보완된다. */
+  source?: "IF_0080" | "IF_0087";
 }
 
 export type ScoredRoadSegments = FeatureCollection<LineString, RoadSegmentProperties>;
