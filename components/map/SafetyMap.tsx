@@ -3,7 +3,7 @@
 import * as maplibregl from "maplibre-gl";
 import { useEffect, useRef, useState } from "react";
 
-import { MAP_LAYER_DEFINITIONS, POINT_LAYER_KEYS } from "@/config/mapLayers";
+import { MAP_LAYER_DEFINITIONS, NIGHT_ACTIVITY_CATEGORY_LABELS, NIGHT_ACTIVITY_TIERS, POINT_LAYER_KEYS } from "@/config/mapLayers";
 import { getSafetyBand, SAFETY_SCORE_BANDS } from "@/config/safetyWeights";
 import type {
   LayerVisibility,
@@ -49,6 +49,66 @@ const SIGNAL_THRESHOLDS = {
   nightActivityLow: 40,
   vacancyPresent: 70,
 } as const;
+
+/** 야간 운영시설 점 색상: nightTier별 구분. 미확인은 영업 안 함이 아니라 회색으로 구분한다. */
+const NIGHT_TIER_COLOR = [
+  "match",
+  ["get", "nightTier"],
+  ...NIGHT_ACTIVITY_TIERS.flatMap(({ tier, color }) => [tier, color]),
+  "#94a3b8",
+] as unknown as maplibregl.ExpressionSpecification;
+
+const NIGHT_ACTIVITY_LAYER_FILTER: maplibregl.FilterSpecification = [
+  "all",
+  ["==", ["get", "type"], "night_activity"],
+  // 주간 전용 시설(nightScore 0)은 야간 지도에서 소음이라 표시하지 않는다(데이터 파일에는 유지).
+  ["!=", ["get", "nightScore"], 0],
+];
+
+const nightTierLabel = (tier: unknown) =>
+  NIGHT_ACTIVITY_TIERS.find(({ tier: t }) => t === tier)?.label ?? "영업시간 미확인";
+
+function facilityPopupContent(properties: Record<string, unknown>) {
+  const content = document.createElement("article");
+  content.className = "road-popup";
+
+  const name = document.createElement("p");
+  name.className = "road-popup-name";
+  name.textContent = String(properties.name ?? "시설");
+
+  const label = document.createElement("p");
+  label.className = "road-popup-label";
+  label.textContent = `야간 운영시설 · ${NIGHT_ACTIVITY_CATEGORY_LABELS[String(properties.category)] ?? String(properties.category ?? "시설")}`;
+
+  const tier = document.createElement("div");
+  tier.className = "road-popup-score";
+  const tierColor = NIGHT_ACTIVITY_TIERS.find(({ tier: t }) => t === properties.nightTier)?.color ?? "#94a3b8";
+  tier.innerHTML = `<span style="--band-color:${tierColor}" class="road-popup-band">●</span><strong>${nightTierLabel(properties.nightTier)}</strong>`;
+
+  const hours = document.createElement("dl");
+  hours.className = "road-popup-metrics";
+  (
+    [
+      ["영업시간", properties.openingHours ? String(properties.openingHours) : "미확인"],
+      ["신뢰도", properties.confidence != null ? `${Math.round(Number(properties.confidence) * 100)}%` : "-"],
+    ] as const
+  ).forEach(([term, detail]) => {
+    const row = document.createElement("div");
+    const dt = document.createElement("dt");
+    const dd = document.createElement("dd");
+    dt.textContent = term;
+    dd.textContent = detail;
+    row.append(dt, dd);
+    hours.append(row);
+  });
+
+  const note = document.createElement("p");
+  note.className = "road-popup-note";
+  note.textContent = `출처: OpenStreetMap · 영업시간은 공개데이터 기준이며 실제 영업 여부와 다를 수 있습니다.`;
+
+  content.append(name, label, tier, hours, note);
+  return content;
+}
 
 function roadPopupContent(properties: Record<string, unknown>) {
   const content = document.createElement("article");
@@ -253,15 +313,18 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     POINT_LAYER_KEYS.forEach((type) => {
       const definition = MAP_LAYER_DEFINITIONS.find((layer) => layer.key === type);
       if (!definition) return;
+      const isNightActivity = type === "night_activity";
 
       map.addLayer({
         id: pointLayerId(type),
         type: "circle",
         source: "safety-features",
-        filter: ["==", ["get", "type"], type],
+        filter: isNightActivity
+          ? NIGHT_ACTIVITY_LAYER_FILTER
+          : ["==", ["get", "type"], type],
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 12, 4, 16, 7],
-          "circle-color": definition.color,
+          "circle-color": isNightActivity ? NIGHT_TIER_COLOR : definition.color,
           "circle-stroke-color": "#fffdf8",
           "circle-stroke-width": 1.5,
           "circle-opacity": type === "old_building" ? 0.72 : 0.94,
@@ -269,13 +332,28 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       });
     });
 
+    // 시설 점이 도로 위에 겹치므로 시설 클릭이면 도로 팝업은 열지 않는다.
+    // (레이어가 숨겨져 있으면 queryRenderedFeatures가 비어 도로 팝업이 그대로 동작한다.)
     const showRoadDetails = (event: maplibregl.MapLayerMouseEvent) => {
       const feature = event.features?.[0];
       if (!feature?.properties) return;
+      if (map.getLayer(pointLayerId("night_activity")) &&
+          map.queryRenderedFeatures(event.point, { layers: [pointLayerId("night_activity")] }).length) {
+        return;
+      }
 
       new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
         .setLngLat(event.lngLat)
         .setDOMContent(roadPopupContent(feature.properties))
+        .addTo(map);
+    };
+
+    const showFacilityDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      const feature = event.features?.[0];
+      if (!feature?.properties) return;
+      new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
+        .setLngLat(event.lngLat)
+        .setDOMContent(facilityPopupContent(feature.properties))
         .addTo(map);
     };
     const showPointer = () => {
@@ -288,11 +366,17 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     map.on("click", "road-safety", showRoadDetails);
     map.on("mouseenter", "road-safety", showPointer);
     map.on("mouseleave", "road-safety", hidePointer);
+    map.on("click", pointLayerId("night_activity"), showFacilityDetails);
+    map.on("mouseenter", pointLayerId("night_activity"), showPointer);
+    map.on("mouseleave", pointLayerId("night_activity"), hidePointer);
 
     return () => {
       map.off("click", "road-safety", showRoadDetails);
       map.off("mouseenter", "road-safety", showPointer);
       map.off("mouseleave", "road-safety", hidePointer);
+      map.off("click", pointLayerId("night_activity"), showFacilityDetails);
+      map.off("mouseenter", pointLayerId("night_activity"), showPointer);
+      map.off("mouseleave", pointLayerId("night_activity"), hidePointer);
       POINT_LAYER_KEYS.forEach((type) => {
         const id = pointLayerId(type);
         if (map.getLayer(id)) map.removeLayer(id);

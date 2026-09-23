@@ -20,12 +20,23 @@ export async function scoreRoads() {
   const crimeRiskPath = resolve(root, "public/data/crime-risk.json");
   const hasCrimeRisk = existsSync(crimeRiskPath);
   if (hasCrimeRisk) paths.push("public/data/crime-risk.json");
+  // 야간 운영시설도 선택적 입력. 파일이 없으면 nightActivityScore는 null(미수집)로 남는다.
+  const nightFacilitiesPath = resolve(root, "public/data/night-facilities.geojson");
+  const hasNightFacilities = existsSync(nightFacilitiesPath);
+  if (hasNightFacilities) paths.push("public/data/night-facilities.geojson");
   const contents = await Promise.all(paths.map((path) => readFile(resolve(root, path), "utf8")));
+  const contentAt = (path: string) => JSON.parse(contents[paths.indexOf(path)]);
   const dataset: SafetyDataset = {
-    roadSegments: JSON.parse(contents[0]), features: JSON.parse(contents[1]), riskZones: JSON.parse(contents[2]),
+    roadSegments: contentAt("scripts/data/road-segments.geojson"),
+    features: contentAt("public/data/safety-features.geojson"),
+    riskZones: contentAt("public/data/risk-zones.geojson"),
     metadata: { sourceKind: "static", scoreKind: "client", updatedAt: "" },
-    ...(hasCrimeRisk ? { crimeRiskByRoad: JSON.parse(contents[contents.length - 1]).roads } : {}),
+    ...(hasCrimeRisk ? { crimeRiskByRoad: contentAt("public/data/crime-risk.json").roads } : {}),
   };
+  // 야간 운영시설은 features에 병합만 하면 night_activity 타입 경로로 자동 반영된다.
+  if (hasNightFacilities && contentAt("public/data/night-facilities.geojson").features?.length) {
+    dataset.features.features.push(...contentAt("public/data/night-facilities.geojson").features);
+  }
   if (!dataset.roadSegments.features.length || !dataset.features.features.length) {
     throw new Error("Cannot score empty roads or facilities");
   }

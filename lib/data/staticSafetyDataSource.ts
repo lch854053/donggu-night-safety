@@ -23,7 +23,7 @@ async function fetchJson<T>(url: string): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-// scripts/fetch-real-data.mjs가 생성한 정적 공공데이터 GeoJSON을 읽는 공급자.
+// scripts/fetch-real-data.mjs·fetch-night-facilities.mjs가 생성한 정적 공공데이터 GeoJSON을 읽는 공급자.
 export class StaticSafetyDataSource implements SafetyDataSource {
   async load(): Promise<SafetyDataset> {
     const [features, riskZones, roadSegments, meta] = await Promise.all([
@@ -38,6 +38,13 @@ export class StaticSafetyDataSource implements SafetyDataSource {
       ),
       fetchJson<DataMeta>("/data/meta.json").catch(() => ({}) as DataMeta),
     ]);
+    // 야간 운영시설은 선택적 데이터. 없으면 기존 데이터만으로 그대로 동작한다.
+    const nightFacilities = await fetchJson<FeatureCollection<Point, SafetyFeatureProperties>>(
+      "/data/night-facilities.geojson",
+    ).catch(() => null);
+    if (nightFacilities?.features.length) {
+      features.features.push(...nightFacilities.features);
+    }
 
     return {
       features,

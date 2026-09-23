@@ -1,0 +1,39 @@
+{
+  "generatedAt": "2026-09-22",
+  "source": "openstreetmap",
+  "via": "Overpass API",
+  "bbox": {
+    "minLon": 126.86,
+    "minLat": 35.08,
+    "maxLon": 127.03,
+    "maxLat": 35.22
+  },
+  "counts": {
+    "total": 1485,
+    "previous": 1485,
+    "withOpeningHours": 188,
+    "openingHoursRatio": 0.127,
+    "byTier": {
+      "22": 47,
+      "unknown": 1297,
+      "24h": 28,
+      "day": 90,
+      "00": 20,
+      "02": 3
+    },
+    "byCategory": {
+      "supermarket": 295,
+      "convenience_store": 195,
+      "hospital": 142,
+      "restaurant": 427,
+      "pharmacy": 42,
+      "cafe": 305,
+      "fast_food": 79
+    }
+  },
+  "thresholds": {
+    "minNightDaysPerWeek": 4,
+    "unknownNightScore": 0.15
+  },
+  "note": "영업시간은 OSM 기여자 데이터로 실제와 다를 수 있다. bar/pub/nightclub은 야간활동 지표에서 의도적으로 제외했다."
+}

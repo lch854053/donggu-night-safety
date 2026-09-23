@@ -3,7 +3,12 @@ import type { Feature, LineString, Point } from "geojson";
 import type { ActivityConfig } from "@/config/safetyWeights";
 import { SAFETY_SCORES_V2 } from "@/config/safetyWeights";
 import type { RoadSegmentInputProperties, SafetyFeatureProperties, SafetyFeatureType } from "@/types/safety";
-import { interpolatedBandScore, pointDistancesToRoad, stepScore } from "./proximityScore";
+import {
+  interpolatedBandScore,
+  pointDistancesToRoad,
+  pointsWithDistanceToRoad,
+  stepScore,
+} from "./proximityScore";
 import { weightedAverageAvailable } from "./weightedAverage";
 
 export interface ActivityResult {
@@ -15,10 +20,36 @@ export interface ActivityResult {
 }
 
 /**
- * 야간활동·자연감시 점수(0~100). 야간 영업시설 40% · 대중교통 25% ·
+ * 야간 운영시설(night_activity)의 기여도 합계 → 포화 점수(0~100).
+ * 개수 합산이 아니라 시설별 기여도(거리 감쇠 × 야간 운영 수준 × 유형 가중치)의
+ * 합에 로그 포화를 적용해 상가 밀집 지역이 무한히 유리해지지 않게 한다.
+ * 야간시설 많음 = 안전이 아니라 활동성·자연감시 가능성의 proxy다.
+ */
+export function computeNightActivityScore(
+  road: Feature<LineString>,
+  candidates: Feature<Point, SafetyFeatureProperties>[],
+  config: ActivityConfig,
+): number {
+  let weightedSum = 0;
+  for (const { feature, meters } of pointsWithDistanceToRoad(
+    road, candidates, "night_activity", config.nightActivity.radiusMeters,
+  )) {
+    const props = feature.properties;
+    const distanceWeight = interpolatedBandScore(meters, config.nightActivity.distanceBreakpoints);
+    // opening_hours 미확인은 unknownNightScore(약한 기여), 주간 전용은 기여 0.
+    const nightScore = props.nightScore ?? config.nightActivity.unknownNightScore;
+    const categoryWeight =
+      config.nightActivity.categoryWeights[props.category ?? ""] ??
+      config.nightActivity.defaultCategoryWeight;
+    weightedSum += distanceWeight * nightScore * categoryWeight;
+  }
+  return Math.min(100, config.nightActivity.saturationScale * Math.log2(1 + weightedSum));
+}
+
+/**
+ * 야간활동·자연감시 점수(0~100). 야간 운영시설 40% · 대중교통 25% ·
  * 도로 활성도 proxy 20% · 편의점/안심거점 15%.
- * 실제 보행량 데이터가 없는 초기 구조이며, 좌표 데이터가 수집된 항목만
- * 계산하고 나머지는 재정규화로 제외한다(가짜값 금지).
+ * 좌표 데이터가 수집된 항목만 계산하고 나머지는 재정규화로 제외한다(가짜값 금지).
  */
 export function computeActivityScore(
   road: Feature<LineString, RoadSegmentInputProperties>,
@@ -26,14 +57,8 @@ export function computeActivityScore(
   availableTypes: ReadonlySet<SafetyFeatureType>,
   config: ActivityConfig = SAFETY_SCORES_V2.activity,
 ): ActivityResult {
-  // TODO(night-activity): 음식점·카페·약국·PC방·숙박 등 야간 영업 POI를
-  // night_activity 타입으로 수집하면 자동 반영된다. 현재 데이터 없음 → 항상 null.
   const nightActivityScore = availableTypes.has("night_activity")
-    ? stepScore(
-        pointDistancesToRoad(road, candidates, "night_activity", config.nightActivity.radiusMeters)
-          .length,
-        config.nightActivity.countSteps,
-      )
+    ? Math.round(computeNightActivityScore(road, candidates, config))
     : null;
 
   // TODO(transit): bus_stop·subway_entrance 좌표 수집 후 자동 반영.

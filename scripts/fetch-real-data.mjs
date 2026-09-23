@@ -19,6 +19,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { inBbox } from "./lib/config.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_DIR = path.join(ROOT, "public", "data");
@@ -44,10 +45,7 @@ if (only.length && only.some((k) => !["cctv", "bell", "store", "streetlights"].i
   process.exit(1);
 }
 
-// 광주 동구 중심부 + 주변 완충 구간. 도로는 동구 안이지만 인접 구 시설도 점수에 유효하므로 넉넉하게 잡음.
-const BBOX = { minLon: 126.86, minLat: 35.08, maxLon: 127.03, maxLat: 35.22 };
-const inBbox = (lon, lat) =>
-  lon >= BBOX.minLon && lon <= BBOX.maxLon && lat >= BBOX.minLat && lat <= BBOX.maxLat;
+// 광주 동구 + 완충 BBOX는 scripts/lib/config.mjs에서 공통 관리한다.
 const inKorea = (lon, lat) => lon > 124 && lon < 132 && lat > 33 && lat < 43;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -306,6 +304,7 @@ async function main() {
       {
         generatedAt: started.toISOString().slice(0, 10),
         sources: { ...keptMetaSources, ...metaSources,
+          night_activity: { source: "openstreetmap (Overpass API)", metadata: "/data/night-facilities-meta.json" },
           road_segments: { source: "국토지리정보원 연속수치지형도", metadata: "/data/roads-meta.json" },
           sidewalks: { source: "국토지리정보원 연속수치지형도 보행로(인도)", metadata: "/data/sidewalks-meta.json" } },
         pending: {
@@ -313,7 +312,6 @@ async function main() {
           cpted: "IF_0023에 좌표 없음 — 지오코딩 연결 후 수집",
           risk_zones: "벡터 좌표 미공개 — 대신 public/data/crime-risk.json(safemap WMS 샘플링)으로 상대적 주의도 반영",
           police_station: "경찰서·지구대·파출소 좌표 API 확인 필요(안전디딤돌 경찰관서 계열 후보) — 수집 시 v2 policeScore 자동 반영",
-          night_activity: "야간 영업 POI(음식점·카페·약국·PC방·숙박 등) 좌표 수집 필요 — v2 activityScore 자동 반영",
           vacant_house: "빈집 좌표 데이터 확보 필요 — v2 environmentScore(감점) 자동 반영",
           transit: "버스정류장·지하철 출입구 좌표 수집 필요 — v2 activityScore(transit) 자동 반영",
         },

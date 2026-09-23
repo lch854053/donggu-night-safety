@@ -4,7 +4,26 @@ import type { Feature, LineString, Point } from "geojson";
 import type { SafetyFeatureProperties, SafetyFeatureType } from "@/types/safety";
 
 /**
- * 도로 주변 type 후보점들의 도로까지 거리(m) 목록. 반경 밖은 제외, 오름차순.
+ * 도로 주변 type 후보점과 도로까지 거리(m) 목록. 반경 밖 제외.
+ * 거리뿐 아니라 개별 속성(nightScore 등)이 필요한 계산용이다.
+ */
+export function pointsWithDistanceToRoad(
+  road: Feature<LineString>,
+  candidates: Feature<Point, SafetyFeatureProperties>[],
+  type: SafetyFeatureType,
+  radiusMeters: number,
+): { feature: Feature<Point, SafetyFeatureProperties>; meters: number }[] {
+  const result: { feature: Feature<Point, SafetyFeatureProperties>; meters: number }[] = [];
+  for (const candidate of candidates) {
+    if (candidate.properties.type !== type) continue;
+    const meters =
+      distance(candidate, nearestPointOnLine(road, candidate), { units: "kilometers" }) * 1000;
+    if (meters <= radiusMeters) result.push({ feature: candidate, meters });
+  }
+  return result;
+}
+
+/** 도로 주변 type 후보점들의 도로까지 거리(m) 목록. 반경 밖은 제외, 오름차순.
  * lighting.ts의 보안등 전용 감쇠와 달리 시설 점수용 공통 헬퍼다.
  */
 export function pointDistancesToRoad(
@@ -13,14 +32,9 @@ export function pointDistancesToRoad(
   type: SafetyFeatureType,
   radiusMeters: number,
 ): number[] {
-  const distances: number[] = [];
-  for (const candidate of candidates) {
-    if (candidate.properties.type !== type) continue;
-    const meters =
-      distance(candidate, nearestPointOnLine(road, candidate), { units: "kilometers" }) * 1000;
-    if (meters <= radiusMeters) distances.push(meters);
-  }
-  return distances.sort((a, b) => a - b);
+  return pointsWithDistanceToRoad(road, candidates, type, radiusMeters)
+    .map(({ meters }) => meters)
+    .sort((a, b) => a - b);
 }
 
 /** [기준값, 점수] 오름차순 구간 사이 선형 보간. 범위 밖은 끝값. */

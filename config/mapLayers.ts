@@ -58,7 +58,36 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
     color: "#1f4e79",
     kind: "point",
   },
+  {
+    key: "night_activity",
+    label: "야간 운영시설",
+    description: "OSM 영업시간 기반 심야 생활시설",
+    color: "#6d28d9",
+    kind: "point",
+  },
 ] as const;
+
+/**
+ * 야간 운영시설 점 색상 구분. nightTier 속성 기준.
+ * 미확인(영업시간 미기재)은 회색 — 영업 안 함과 다르게 취급한다.
+ */
+export const NIGHT_ACTIVITY_TIERS = [
+  { tier: "24h", label: "24시간 운영", color: "#6d28d9" },
+  { tier: "02", label: "02시 이후 운영", color: "#8b5cf6" },
+  { tier: "00", label: "00시 이후 운영", color: "#a78bfa" },
+  { tier: "22", label: "22시 이후 운영", color: "#c4b5fd" },
+  { tier: "unknown", label: "영업시간 미확인", color: "#94a3b8" },
+] as const satisfies readonly { tier: string; label: string; color: string }[];
+
+export const NIGHT_ACTIVITY_CATEGORY_LABELS: Record<string, string> = {
+  convenience_store: "편의점",
+  supermarket: "슈퍼마켓",
+  restaurant: "음식점",
+  cafe: "카페",
+  fast_food: "패스트푸드",
+  pharmacy: "약국",
+  hospital: "병원",
+};
 
 export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   streetlight: true,
@@ -68,7 +97,7 @@ export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   cpted: true,
   old_building: false,
   police_station: true,
-  // 좌표 데이터가 아직 수집되지 않은 타입. 데이터가 생기면 기본 표시로 바꾼다.
+  // 야간 운영시설은 점이 많아(음식점·카페 포함) 기본 표시는 끈다. 필요 시 켜서 확인.
   night_activity: false,
   bus_stop: false,
   subway_entrance: false,

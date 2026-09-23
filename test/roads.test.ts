@@ -13,6 +13,7 @@ import type { SafetyDataset, SafetyFeatureType, ScoredRoadFile } from "../types/
 const readJson = (path: string) => JSON.parse(readFileSync(path, "utf8"));
 const roads: ScoredRoadFile = readJson("public/data/road-segments.geojson");
 const crimeFile = existsSync("public/data/crime-risk.json") ? readJson("public/data/crime-risk.json") : null;
+const nightFile = existsSync("public/data/night-facilities.geojson") ? readJson("public/data/night-facilities.geojson") : null;
 const dataset: SafetyDataset = {
   roadSegments: readJson("scripts/data/road-segments.geojson"),
   features: readJson("public/data/safety-features.geojson"),
@@ -20,6 +21,8 @@ const dataset: SafetyDataset = {
   metadata: { sourceKind: "static", scoreKind: "client", updatedAt: "" },
   crimeRiskByRoad: crimeFile?.roads,
 };
+// score-roads와 같은 입력으로 재현 검증해야 하므로 야간 운영시설도 병합한다.
+if (nightFile?.features.length) dataset.features.features.push(...nightFile.features);
 
 test("shipped roads are current, unique, valid-length real segments with no sample risk penalties", () => {
   assert.equal(validateScoredRoads(roads), roads);

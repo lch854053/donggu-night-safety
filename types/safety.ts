@@ -27,6 +27,19 @@ export interface SafetyFeatureProperties {
   source: string;
   installedAt?: string;
   note?: string;
+  // ── night_activity 전용 속성(scripts/fetch-night-facilities.mjs가 생성).
+  // "많은 시설 = 안전"이 아니라 야간 활동성·자연감시 가능성의 proxy다.
+  /** OSM 분류(convenience_store·restaurant·cafe 등). */
+  category?: string;
+  openingHours?: string;
+  nightOpen22?: boolean;
+  nightOpen00?: boolean;
+  nightOpen02?: boolean;
+  /** 야간 운영 수준 0~1 (24시간 1.0, 02시 이후 0.9, 00시 이후 0.75, 22시 이후 0.5, 미확인 0.15, 주간 전용 0). */
+  nightScore?: number;
+  /** opening_hours 데이터 신뢰도 0~1 (24/7 명시 0.9, 판별 성공 0.8, 미확인 0.3). */
+  confidence?: number;
+  nightTier?: "24h" | "02" | "00" | "22" | "day" | "unknown";
 }
 
 export interface RiskZoneProperties {

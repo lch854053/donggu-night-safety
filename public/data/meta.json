@@ -8,6 +8,10 @@
     "streetlight": {
       "count": 4631,
       "dataAsOf": "2025-12-23"
+    },
+    "night_activity": {
+      "source": "openstreetmap (Overpass API)",
+      "metadata": "/data/night-facilities-meta.json"
     }
   },
   "pending": {

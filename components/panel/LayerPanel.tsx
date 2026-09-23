@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { MAP_LAYER_DEFINITIONS } from "@/config/mapLayers";
+import { MAP_LAYER_DEFINITIONS, NIGHT_ACTIVITY_TIERS } from "@/config/mapLayers";
 import { getSafetyBand, SAFETY_SCORE_BANDS } from "@/config/safetyWeights";
 import type {
   LayerKey,
@@ -117,6 +117,19 @@ export function LayerPanel({
               </ul>
             </div>
 
+            <div className="score-legend" aria-labelledby="night-tier-heading">
+              <h2 id="night-tier-heading">야간 운영 수준</h2>
+              <p>야간 운영시설 점 색상입니다. 영업시간 미확인은 영업 안 함과 다릅니다.</p>
+              <ul>
+                {NIGHT_ACTIVITY_TIERS.map((tier) => (
+                  <li key={tier.tier}>
+                    <span style={{ background: tier.color }} aria-hidden="true" />
+                    <strong>{tier.label}</strong>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <div className="road-lookup">
               <label htmlFor="road-query">도로 검색</label>
               <input
@@ -201,8 +214,8 @@ export function LayerPanel({
                 이 지수는 안심 인프라와 주변 환경 데이터를 조합한 상대적 참고값이며, 특정 장소의
                 절대적인 안전을 보장하지 않습니다.
               </p>
-              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 조명 환경은 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 상대적 주의도는 생활안전지도에서 제공하는 경찰청 범죄 밀도분석 기반 구간 정보로, 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다. 시설 접근성은 좌표 거리 기반 참고값이며 경찰시설 거리가 실제 출동시간을 의미하지 않습니다. 야간활동·빈집 등 일부 지표는 좌표 데이터가 수집되지 않아 "데이터 없음"으로 표시됩니다. 주의구간 원본 좌표·노후건물·CPTED는 미수집입니다.</p>
-              <p><a href="/data/roads-meta.json" target="_blank" rel="noreferrer">도로 출처·가공 정보</a> · <a href="/data/sidewalks-meta.json" target="_blank" rel="noreferrer">인도 출처·가공 정보</a> · 국토지리정보원<br />주의구간: <a href="https://www.safemap.go.kr" target="_blank" rel="noreferrer">행정안전부 생활안전지도</a> / 경찰청<br />경계: SGIS / vuski·admdongkor (CC BY 4.0)</p>
+              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 조명 환경은 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 상대적 주의도는 생활안전지도에서 제공하는 경찰청 범죄 밀도분석 기반 구간 정보로, 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다. 시설 접근성은 좌표 거리 기반 참고값이며 경찰시설 거리가 실제 출동시간을 의미하지 않습니다. 야간 운영시설은 OpenStreetMap 영업시간 기준의 활동성·자연감시 가능성 참고값으로, <strong>시설이 많다고 안전을 의미하지 않으며</strong> 영업시간은 공개데이터 기준이라 실제와 다를 수 있습니다. 빈집 등 일부 지표는 좌표 데이터가 수집되지 않아 "데이터 없음"으로 표시됩니다. 주의구간 원본 좌표·노후건물·CPTED는 미수집입니다.</p>
+              <p><a href="/data/roads-meta.json" target="_blank" rel="noreferrer">도로 출처·가공 정보</a> · <a href="/data/sidewalks-meta.json" target="_blank" rel="noreferrer">인도 출처·가공 정보</a> · <a href="/data/night-facilities-meta.json" target="_blank" rel="noreferrer">야간 운영시설 출처·집계</a> · 국토지리정보원<br />주의구간: <a href="https://www.safemap.go.kr" target="_blank" rel="noreferrer">행정안전부 생활안전지도</a> / 경찰청<br />야간 운영시설: <a href="https://www.openstreetmap.org" target="_blank" rel="noreferrer">OpenStreetMap</a> 기여자 (ODbL)<br />경계: SGIS / vuski·admdongkor (CC BY 4.0)</p>
             </div>
           </>
         )}

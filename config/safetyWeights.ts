@@ -134,10 +134,31 @@ export interface SurveillanceConfig {
   police: BandScoreConfig;
 }
 
+/** v2 야간활동 점수 설정. 야간 운영시설(OSM opening_hours 기반)의 활동성·자연감시 proxy. */
+export interface NightActivityConfig {
+  radiusMeters: number;
+  /**
+   * 거리 감쇠. [거리(m), 배수] 오름차순, 구간 사이 선형 보간.
+   * 0~20m ×1.0 · 20~50m ×0.7 · 50~100m ×0.3, 반경 밖은 0.
+   */
+  distanceBreakpoints: readonly (readonly [distanceMeters: number, factor: number])[];
+  /** 시설 유형별 가중치. 절대적 정답이 아니며 조정을 전제로 상수로 분리해 둔다. */
+  categoryWeights: Record<string, number>;
+  /** categoryWeights에 없는 유형의 중립 기본값(파이프라인 밖 데이터 대비). */
+  defaultCategoryWeight: number;
+  /** opening_hours 미확인 시설의 기본 기여도. 0이 아니면 미확인도 약간의 활동성으로 본다. */
+  unknownNightScore: number;
+  /**
+   * 포화 스케일: nightActivityScore = min(100, scale × log2(1 + weightedSum)).
+   * 시설 20개 도로가 2개 도로의 10배가 되지 않게 로그로 포화시킨다.
+   */
+  saturationScale: number;
+}
+
 /** v2 야간활동·자연감시 설정. 실제 보행량 데이터가 없어 proxy 조합이다. */
 export interface ActivityConfig {
   weights: { nightActivity: number; transit: number; roadActivity: number; convenienceStore: number };
-  nightActivity: CountScoreConfig;
+  nightActivity: NightActivityConfig;
   transit: BandScoreConfig;
   /** 폭원(m) 기준 약한 활성도 proxy. RDD 도로등급 코드는 원본 그대로라 미해석한다. */
   roadActivityWidthSteps: readonly (readonly [widthMeters: number, score: number])[];
@@ -180,7 +201,21 @@ export const SAFETY_SCORES_V2 = {
     weights: { nightActivity: 0.4, transit: 0.25, roadActivity: 0.2, convenienceStore: 0.15 },
     nightActivity: {
       radiusMeters: 100,
-      countSteps: [[0, 0], [1, 30], [2, 60], [4, 80], [7, 100]],
+      distanceBreakpoints: [[0, 1], [20, 1], [50, 0.7], [100, 0.3]],
+      // 야간에 특히 쓸모·활동성이 높은 유형을 높게. 유흥(bar·pub·nightclub)은 대상에서
+      // 아예 수집하지 않는다(scripts/fetch-night-facilities.mjs).
+      categoryWeights: {
+        convenience_store: 1.0,
+        pharmacy: 1.0,
+        hospital: 0.9,
+        supermarket: 0.8,
+        fast_food: 0.7,
+        cafe: 0.7,
+        restaurant: 0.6,
+      },
+      defaultCategoryWeight: 0.5,
+      unknownNightScore: 0.15,
+      saturationScale: 25,
     },
     transit: {
       radiusMeters: 500,
