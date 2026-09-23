@@ -12,6 +12,7 @@
 //
 // bar·pub·nightclub 등 유흥시설은 애초 수집 쿼리에서 제외한다
 // (밤 인파 ≠ 보행자 자연감시. scripts/fetch-night-facilities.mjs 참고).
+import "./tz-kst.mjs"; // opening_hours 평가 전에 KST로 고정 (import 선언 순서 보장)
 import opening_hours from "opening_hours";
 
 const KST_MS = 9 * 60 * 60 * 1000;
