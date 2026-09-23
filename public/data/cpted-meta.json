@@ -1,0 +1,20 @@
+{
+  "source": "safemap:IF_0023",
+  "geocoder": "VWORLD Geocoder API 2.0",
+  "crs": "EPSG:4326",
+  "fetchedAt": "2026-09-22",
+  "count": 41,
+  "sourceRows": 6764,
+  "regionalRows": 100,
+  "incomplete": 39,
+  "duplicates": 0,
+  "outsideBbox": 19,
+  "unresolvedCount": 1,
+  "unresolved": [
+    {
+      "address": "광주광역시 서구 화정동 132-4",
+      "reason": "NOT_FOUND"
+    }
+  ],
+  "note": "광주광역시 완료 사업을 지오코딩한 뒤 동구권 BBOX로 필터링. 주소 대표점이며 사업구역 경계나 개별 설치시설의 실측 좌표가 아님. 계획·진행 중 사업 제외."
+}

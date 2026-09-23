@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21",
+  "generatedAt": "2026-09-22",
   "sources": {
     "road_segments": {
       "source": "국토지리정보원 연속수치지형도",
@@ -12,11 +12,17 @@
     "night_activity": {
       "source": "openstreetmap (Overpass API)",
       "metadata": "/data/night-facilities-meta.json"
+    },
+    "cpted": {
+      "count": 41,
+      "fetchedAt": "2026-09-22",
+      "source": "safemap:IF_0023",
+      "geocoder": "vworld",
+      "metadata": "/data/cpted-meta.json"
     }
   },
   "pending": {
     "old_building": "안전디딤돌 IF_0002는 WMS 전용 — 건축물대장 API 연결 필요",
-    "cpted": "IF_0023에 좌표 없음 — 지오코딩 연결 후 수집",
     "risk_zones": "좌표 공개 소스 없음 — 미수집, 점수 감점 미적용"
   }
 }

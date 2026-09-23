@@ -25,8 +25,8 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
   },
   {
     key: "cpted",
-    label: "CPTED 시설",
-    description: "범죄예방 환경설계 적용 시설",
+    label: "CPTED 사업지",
+    description: "환경개선 완료 사업지(주소 대표점)",
     color: "#087f8c",
     kind: "point",
   },

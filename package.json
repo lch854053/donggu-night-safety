@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "score-roads": "tsx scripts/score-roads.ts",
-    "test": "tsx --test test/*.test.ts",
+    "test": "tsx --test test/*.test.ts test/*.test.mjs",
     "postinstall": "node scripts/copy-maplibre-worker.mjs",
     "fetch:safemap-crime": "tsx scripts/fetch-safemap-crime.mts",
     "fetch:night-facilities": "node scripts/fetch-night-facilities.mjs"

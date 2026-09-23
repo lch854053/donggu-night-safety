@@ -3,14 +3,14 @@
 // 사용:
 //   node scripts/fetch-real-data.mjs                      전체 갱신
 //   node scripts/fetch-real-data.mjs --only=streetlights  보안등만 갱신 (기존 데이터 유지)
-// 키는 .env.local (SAFEMAP_SERVICE_KEY, MOIS_SERVICE_KEY) 또는 환경변수로 전달합니다.
+// 키는 .env.local (SAFEMAP_SERVICE_KEY, MOIS_SERVICE_KEY, VWORLD_API_KEY) 또는 환경변수로 전달합니다.
 //
 // 소스별 상태
 //   보안등      동구청 제공 CSV (scripts/data/donggu-streetlights.csv)  연 1회 갱신(매년 말 기준) ✅
 //   CCTV        행안부 cctv_info                WGS84 좌표 ✅
 //   비상벨      행안부 emergency_call_box_info   WGS84 좌표 ✅
 //   편의점      안전디딤돌 IF_0039               Web Mercator(3857) 좌표 ✅
-//   CPTED      안전디딤돌 IF_0023               좌표 없음(지번주소만) → 지오코딩 전까지 수집 제외
+//   CPTED      안전디딤돌 IF_0023               완료 사업지 주소 → VWORLD 지오코딩 대표점
 //   노후건물/범죄주의구간  안전디딤돌 WMS 전용(좌표 미공개) → 좌표 API 확보 후 추가
 //   인도        국토지리정보원 보행로(N3L_A0033320 계열) → import-sidewalks.py, 연 1회 수동 ✅
 //              (안전디딤돌 IF_0095는 같은 데이터의 무좌표 속성 API라 미사용)
@@ -20,11 +20,13 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { inBbox } from "./lib/config.mjs";
+import { collectCptedFeatures, geocodeAddress } from "./cpted.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_DIR = path.join(ROOT, "public", "data");
 const FEATURES_PATH = path.join(DATA_DIR, "safety-features.geojson");
 const META_PATH = path.join(DATA_DIR, "meta.json");
+const CPTED_CACHE_PATH = path.join(DATA_DIR, "cpted-geocodes.json");
 const STREETLIGHT_CSV = path.join(ROOT, "scripts", "data", "donggu-streetlights.csv");
 
 // .env.local 파서 (dotenv 의존성 없이 최소 구현)
@@ -36,12 +38,13 @@ if (existsSync(path.join(ROOT, ".env.local"))) {
 }
 const SAFEMAP_KEY = process.env.SAFEMAP_SERVICE_KEY;
 const MOIS_KEY = process.env.MOIS_SERVICE_KEY;
+const VWORLD_KEY = process.env.VWORLD_API_KEY;
 
 const onlyArg = process.argv.find((a) => a.startsWith("--only="));
 const only = onlyArg ? onlyArg.slice(7).split(",") : [];
 const want = (source) => only.length === 0 || only.includes(source);
-if (only.length && only.some((k) => !["cctv", "bell", "store", "streetlights"].includes(k))) {
-  console.error("--only 값은 cctv, bell, store, streetlights 중에서 선택합니다.");
+if (only.length && only.some((k) => !["cctv", "bell", "store", "streetlights", "cpted"].includes(k))) {
+  console.error("--only 값은 cctv, bell, store, streetlights, cpted 중에서 선택합니다.");
   process.exit(1);
 }
 
@@ -50,15 +53,16 @@ const inKorea = (lon, lat) => lon > 124 && lon < 132 && lat > 33 && lat < 43;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function getWithRetry(url, tries = 3) {
+async function getWithRetry(url, tries = 5) {
   for (let i = 0; i < tries; i++) {
     try {
-      const res = await fetch(url, { headers: { "User-Agent": "donggu-night-safety/0.1" } });
+      const res = await fetch(url, { headers: { "User-Agent": "donggu-night-safety/0.1" }, signal: AbortSignal.timeout(30000) });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.text();
     } catch (e) {
-      if (i === tries - 1) throw e;
-      await sleep(1000 * (i + 1));
+      if (i === tries - 1) throw new Error(`${new URL(url).hostname}: ${e.message}${e.cause?.code ? ` (${e.cause.code})` : ""}`);
+      console.warn(`  ${new URL(url).hostname} 요청 재시도 ${i + 1}/${tries - 1}`);
+      await sleep(3000 * (i + 1));
     }
   }
 }
@@ -108,7 +112,7 @@ async function fetchSafemap(ifId, pageSize = 1000) {
   for (let pageNo = 1; ; pageNo++) {
     const body = JSON.parse(
       await getWithRetry(
-        `https://safemap.go.kr/openapi2/${ifId}?serviceKey=${SAFEMAP_KEY}&pageNo=${pageNo}&numOfRows=${pageSize}&type=json`,
+        `https://www.safemap.go.kr/openapi2/${ifId}?serviceKey=${SAFEMAP_KEY}&pageNo=${pageNo}&numOfRows=${pageSize}&type=json`,
       ),
     );
     if (body.header?.resultCode !== "00") throw new Error(`safemap ${ifId}: ${body.header?.resultMsg}`);
@@ -175,8 +179,10 @@ function collectStreetlights() {
   return { features: items, dataAsOf };
 }
 
-const collections = { cctv: [], emergency_bell: [], convenience_store: [] };
+const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [] };
 const metaSources = {};
+let cptedMetadata;
+let cptedCache;
 
 async function collectCctv() {
   console.log("[CCTV] 행안부 cctv_info 전국 스캔");
@@ -251,6 +257,9 @@ async function collectStores() {
 
 async function main() {
   const started = new Date();
+  if (want("cpted") && (!SAFEMAP_KEY || !VWORLD_KEY)) {
+    throw new Error("CPTED 수집에는 SAFEMAP_SERVICE_KEY와 VWORLD_API_KEY가 필요합니다.");
+  }
 
   // 부분 갱신: 기존 파일에서 유지할 타입을 보존
   const refreshedTypes = new Set();
@@ -267,6 +276,30 @@ async function main() {
   if (want("cctv")) { await collectCctv(); refreshedTypes.add("cctv"); }
   if (want("bell")) { await collectBells(); refreshedTypes.add("emergency_bell"); }
   if (want("store")) { await collectStores(); refreshedTypes.add("convenience_store"); }
+  if (want("cpted")) {
+    console.log("[CPTED] 안전디딤돌 IF_0023 완료 사업지 → VWORLD 지오코딩");
+    cptedCache = !process.argv.includes("--refresh-geocodes") && existsSync(CPTED_CACHE_PATH)
+      ? JSON.parse(readFileSync(CPTED_CACHE_PATH, "utf8")) : {};
+    const result = await collectCptedFeatures(await fetchSafemap("IF_0023", 100), {
+      inBbox,
+      geocode: async (address, type) => {
+        await sleep(100);
+        try {
+          return await geocodeAddress(address, type, {
+            key: VWORLD_KEY, domain: process.env.VWORLD_DOMAIN, getText: getWithRetry, cache: cptedCache,
+          });
+        } catch (error) {
+          throw new Error(`CPTED 지오코딩: ${error.message}`);
+        }
+      },
+    });
+    collections.cpted = result.features;
+    cptedMetadata = result.metadata;
+    metaSources.cpted = { count: result.features.length, fetchedAt: result.metadata.fetchedAt,
+      source: "safemap:IF_0023", geocoder: "vworld", metadata: "/data/cpted-meta.json" };
+    console.log(`  ${result.features.length}건, 미검색 ${result.metadata.unresolvedCount}건, 미완료 제외 ${result.metadata.incomplete}건`);
+    refreshedTypes.add("cpted");
+  }
   if (want("streetlights")) {
     const { features, dataAsOf } = collectStreetlights();
     collections.streetlight = features;
@@ -278,6 +311,7 @@ async function main() {
     ...collections.cctv,
     ...collections.emergency_bell,
     ...collections.convenience_store,
+    ...collections.cpted,
     ...(collections.streetlight ?? []),
   ];
   const features = [...keptFeatures.filter((f) => !refreshedTypes.has(f.properties.type)), ...newFeatures];
@@ -289,7 +323,7 @@ async function main() {
     }
   }
   const offMap = features
-    .filter((f) => ["cctv", "emergency_bell", "convenience_store"].includes(f.properties.type))
+    .filter((f) => ["cctv", "emergency_bell", "convenience_store", "cpted"].includes(f.properties.type))
     .filter((f) => !inBbox(f.geometry.coordinates[0], f.geometry.coordinates[1]));
   if (offMap.length) throw new Error(`BBOX 밖 좌표 ${offMap.length}건 — 좌표 변환 오류 의심`);
   const offKorea = features.filter((f) => !inKorea(...f.geometry.coordinates));
@@ -298,6 +332,8 @@ async function main() {
   mkdirSync(DATA_DIR, { recursive: true });
   const fc = { type: "FeatureCollection", features };
   writeFileSync(FEATURES_PATH, JSON.stringify(fc), "utf8");
+  if (cptedMetadata) writeFileSync(path.join(DATA_DIR, "cpted-meta.json"), JSON.stringify(cptedMetadata, null, 2), "utf8");
+  if (cptedCache) writeFileSync(CPTED_CACHE_PATH, JSON.stringify(cptedCache, null, 2), "utf8");
   writeFileSync(
     META_PATH,
     JSON.stringify(
@@ -309,7 +345,8 @@ async function main() {
           sidewalks: { source: "국토지리정보원 연속수치지형도 보행로(인도)", metadata: "/data/sidewalks-meta.json" } },
         pending: {
           old_building: "안전디딤돌 IF_0002는 WMS 전용 — 건축물대장 API 연결 필요",
-          cpted: "IF_0023에 좌표 없음 — 지오코딩 연결 후 수집",
+          ...(!features.some((f) => f.properties.type === "cpted")
+            ? { cpted: "IF_0023 완료 사업지 — VWORLD_API_KEY 설정 후 --only=cpted 실행 필요" } : {}),
           risk_zones: "벡터 좌표 미공개 — 대신 public/data/crime-risk.json(safemap WMS 샘플링)으로 상대적 주의도 반영",
           police_station: "경찰서·지구대·파출소 좌표 API 확인 필요(안전디딤돌 경찰관서 계열 후보) — 수집 시 v2 policeScore 자동 반영",
           vacant_house: "빈집 좌표 데이터 확보 필요 — v2 environmentScore(감점) 자동 반영",

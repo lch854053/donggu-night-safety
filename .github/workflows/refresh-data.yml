@@ -1,9 +1,11 @@
-# 매월 공공데이터(CCTV·비상벨·편의점)를 자동 수집해 커밋합니다.
+# 매월 공공데이터(CCTV·비상벨·편의점·CPTED)를 자동 수집해 커밋합니다.
 # 커밋이 푸시되면 Vercel이 자동으로 재배포합니다.
 #
 # 사전 준비(한 번만): 저장소 Settings → Secrets and variables → Actions에 등록
 #   - SAFEMAP_SERVICE_KEY  (안전디딤돌 오픈API 인증키)
 #   - MOIS_SERVICE_KEY     (공공데이터포털 행정안전부 인증키)
+#   - VWORLD_API_KEY       (VWORLD Geocoder API 인증키)
+# 선택: Variables → VWORLD_DOMAIN (VWORLD에 등록한 서비스 URL)
 #
 # 보안등은 공개 API가 없어(동구청 CSV 수동 교체) 자동 수집 대상이 아닙니다.
 # 보안등 갱신 알림은 streetlight-refresh-reminder.yml을 참고하세요.
@@ -12,7 +14,13 @@ name: 공공데이터 월간 자동 수집
 on:
   schedule:
     - cron: "0 0 5 * *" # 매월 5일 09:00 KST
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "수집 대상 (all: 전체, cpted: CPTED만)"
+        type: choice
+        default: all
+        options: [all, cpted]
 
 permissions:
   contents: write
@@ -34,7 +42,15 @@ jobs:
         env:
           SAFEMAP_SERVICE_KEY: ${{ secrets.SAFEMAP_SERVICE_KEY }}
           MOIS_SERVICE_KEY: ${{ secrets.MOIS_SERVICE_KEY }}
-        run: node scripts/fetch-real-data.mjs
+          VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
+          VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN }}
+          ONLY: ${{ inputs.only }}
+        run: |
+          if [ "$ONLY" = "cpted" ]; then
+            node scripts/fetch-real-data.mjs --only=cpted
+          else
+            node scripts/fetch-real-data.mjs
+          fi
 
       - name: 도로 점수·입력 데이터 정합성 검증
         run: npm test
@@ -52,7 +68,7 @@ jobs:
           fi
 
       - name: 실패 시 알림 이슈 생성
-        if: failure()
+        if: failure() && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
