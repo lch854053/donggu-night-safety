@@ -53,16 +53,9 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
   },
   {
     key: "police_station",
-    label: "지구대·파출소",
-    description: "경찰청 관서 주소 (2025.12 기준)",
+    label: "지구대·파출소·치안센터",
+    description: "경찰청 치안시설 주소 (2025.12 기준)",
     color: "#1f4e79",
-    kind: "point",
-  },
-  {
-    key: "police_center",
-    label: "치안센터",
-    description: "경찰청 치안센터 주소 (2025.12 기준)",
-    color: "#7654a3",
     kind: "point",
   },
 ] as const;
@@ -75,7 +68,6 @@ export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   cpted: true,
   old_building: false,
   police_station: true,
-  police_center: true,
   // 좌표 데이터가 아직 수집되지 않은 타입. 데이터가 생기면 기본 표시로 바꾼다.
   night_activity: false,
   bus_stop: false,

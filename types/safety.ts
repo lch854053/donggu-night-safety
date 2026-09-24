@@ -19,7 +19,7 @@ export type SafetyFeatureType =
   /** 빈집. 데이터 연결은 TODO. */
   | "vacant_house";
 
-export type LayerKey = SafetyFeatureType;
+export type LayerKey = Exclude<SafetyFeatureType, "police_center">;
 
 export interface SafetyFeatureProperties {
   id: string;
