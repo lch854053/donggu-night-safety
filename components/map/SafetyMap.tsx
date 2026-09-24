@@ -85,7 +85,6 @@ function roadPopupContent(properties: Record<string, unknown>) {
       ["조명·가시성", "lightingScore", undefined],
       ["감시·긴급대응", "surveillanceScore", undefined],
       ["야간활동·자연감시", "activityScore", undefined],
-      ["폭원·도로 종류 proxy", "roadActivityScore", undefined],
       ["공간환경·방치도", "environmentScore", undefined],
       ["여성밤길 치안안전", "crimeScore", "미수집"],
     ] as const
@@ -157,7 +156,7 @@ function roadPopupContent(properties: Record<string, unknown>) {
   const grade = document.createElement("p");
   grade.className = "road-popup-note";
   grade.textContent = properties.planningRoadGrade
-    ? `계획상 도로 종류: ${String(properties.planningRoadName ?? properties.planningRoadGrade)} · ${String(properties.planningRoadStatus ?? "미확인")}${properties.planningRoadStatus === "집행완료" ? " (폭원·종류 proxy에 반영)" : " (점수 미반영)"}`
+    ? `계획상 도로 종류: ${String(properties.planningRoadName ?? properties.planningRoadGrade)} · ${String(properties.planningRoadStatus ?? "미확인")}${properties.planningRoadStatus === "집행완료" ? " (야간활동·자연감시의 도로 proxy에 반영)" : " (종류 점수 미반영)"}`
     : "계획상 도로 종류: 확인 불가 (폭원만 반영)";
   content.append(grade);
   if (properties.roadNameSource === "LT_L_SPRD") {

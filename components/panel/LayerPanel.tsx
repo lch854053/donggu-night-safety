@@ -179,14 +179,13 @@ export function LayerPanel({
                         {dimension("조명·가시성", p.lightingScore)}
                         {dimension("감시·긴급대응", p.surveillanceScore)}
                         {dimension("야간활동·자연감시", p.activityScore)}
-                        {dimension("폭원·도로 종류 proxy", p.roadActivityScore ?? null)}
                         {dimension("공간환경·방치도", p.environmentScore)}
                         {dimension("여성밤길 치안안전", p.crimeScore, "미수집")}
                         {dimension("기존 지수(v1)", p.safetyScore)}
                         <div>
                           <dt>계획상 도로 종류</dt>
                           <dd>{p.planningRoadGrade
-                            ? `${p.planningRoadName ?? p.planningRoadGrade} · ${p.planningRoadStatus ?? "미확인"}${p.planningRoadStatus === "집행완료" ? " (proxy 반영)" : " (점수 미반영)"}`
+                            ? `${p.planningRoadName ?? p.planningRoadGrade} · ${p.planningRoadStatus ?? "미확인"}${p.planningRoadStatus === "집행완료" ? " (야간활동·자연감시의 도로 proxy에 반영)" : " (종류 점수 미반영)"}`
                             : "확인 불가"}</dd>
                         </div>
                         <div>
