@@ -1,4 +1,4 @@
-import type { FeatureCollection, LineString, Point, Polygon } from "geojson";
+import type { FeatureCollection, LineString, MultiPolygon, Point, Polygon } from "geojson";
 import type { CctvPurpose } from "@/config/cctvPurpose.mjs";
 
 export type SafetyFeatureType =
@@ -20,7 +20,18 @@ export type SafetyFeatureType =
   /** 빈집. 데이터 연결은 TODO. */
   | "vacant_house";
 
-export type LayerKey = Exclude<SafetyFeatureType, "police_center">;
+export type LayerKey = Exclude<SafetyFeatureType, "police_center"> | "planning_road";
+
+/** 도시계획상 지정·집행 상태 참고용 면형. 보행·안전 점수 입력이 아니다. */
+export interface PlanningRoadProperties {
+  name: string;
+  status: string;
+  role: string;
+  grade: string;
+  source: string;
+}
+
+export type PlanningRoads = FeatureCollection<Polygon | MultiPolygon, PlanningRoadProperties>;
 
 export interface SafetyFeatureProperties {
   id: string;
@@ -54,6 +65,9 @@ export interface RoadSegmentInputProperties {
   id: string;
   name: string;
   source: string;
+  /** VWorld 도로명주소 도로가 기존의 임시 표시명을 대체한 경우에만 설정한다. */
+  roadNameSource?: "LT_L_SPRD";
+  fallbackName?: string;
   sourceIds?: string[];
   adminDong?: string;
   roadClass?: string;

@@ -7,6 +7,7 @@ import { MAP_LAYER_DEFINITIONS, POINT_LAYER_KEYS } from "@/config/mapLayers";
 import { getSafetyBand, SAFETY_SCORE_BANDS } from "@/config/safetyWeights";
 import type {
   LayerVisibility,
+  PlanningRoads,
   RoadSegmentProperties,
   SafetyDataset,
   SafetyFeatureType,
@@ -25,6 +26,7 @@ interface SafetyMapProps {
   data: SafetyDataset | null;
   roadSegments: ScoredRoadSegments | null;
   visibility: LayerVisibility;
+  planningRoads: PlanningRoads | null;
 }
 
 function pointLayerId(type: SafetyFeatureType) {
@@ -153,6 +155,12 @@ function roadPopupContent(properties: Record<string, unknown>) {
   lightingNote.textContent =
     "※ 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다.";
   content.append(name, label, scoreRow, metrics, note, lightingNote);
+  if (properties.roadNameSource === "LT_L_SPRD") {
+    const nameSource = document.createElement("p");
+    nameSource.className = "road-popup-note";
+    nameSource.textContent = "도로명주소 도로와 위치가 일치해 보강한 도로명입니다.";
+    content.append(nameSource);
+  }
   if (nullableScore(properties, "crimeScore") !== null) {
     const crimeNote = document.createElement("p");
     crimeNote.className = "road-popup-note";
@@ -230,7 +238,29 @@ function cctvPopupContent(properties: Record<string, unknown>) {
   return content;
 }
 
-export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
+function planningRoadPopupContent(properties: Record<string, unknown>) {
+  const content = document.createElement("article");
+  content.className = "road-popup";
+  const heading = document.createElement("p");
+  heading.className = "road-popup-name";
+  heading.textContent = String(properties.name ?? "도시계획 도로");
+  content.append(heading);
+  for (const [label, value] of [
+    ["집행 상태", properties.status], ["도로 기능", properties.role], ["규모", properties.grade],
+  ]) {
+    const detail = document.createElement("p");
+    detail.className = "road-popup-note";
+    detail.textContent = `${label}: ${String(value ?? "미확인")}`;
+    content.append(detail);
+  }
+  const note = document.createElement("p");
+  note.className = "road-popup-note";
+  note.textContent = "도시계획 지정 정보이며 현재 통행·인도·야간활동을 확인하는 자료가 아닙니다. 밤길 안전 참고지수에는 반영하지 않습니다.";
+  content.append(note);
+  return content;
+}
+
+export function SafetyMap({ data, roadSegments, visibility, planningRoads }: SafetyMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [styleReady, setStyleReady] = useState(false);
@@ -407,6 +437,48 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
 
   useEffect(() => {
     const map = mapRef.current;
+    if (!map || !styleReady || !data || !roadSegments || !planningRoads) return;
+    map.addSource("planning-roads", {
+      type: "geojson", data: planningRoads,
+      attribution: '도시계획 도로: <a href="https://www.vworld.kr/">VWorld</a> · 국토교통부',
+    });
+    map.addLayer({
+      id: "planning-road-fill", type: "fill", source: "planning-roads",
+      layout: { visibility: visibility.planning_road ? "visible" : "none" },
+      paint: { "fill-color": "#79568f", "fill-opacity": 0.12 },
+    }, "road-safety-casing");
+    map.addLayer({
+      id: "planning-road-outline", type: "line", source: "planning-roads",
+      layout: { visibility: visibility.planning_road ? "visible" : "none" },
+      paint: { "line-color": "#79568f", "line-opacity": 0.75, "line-width": 1.3, "line-dasharray": [2, 2] },
+    }, "road-safety-casing");
+    const showPlanningDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      if (map.queryRenderedFeatures(event.point, { layers: ["road-safety"] }).length) return;
+      const properties = event.features?.[0]?.properties;
+      if (!properties) return;
+      new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
+        .setLngLat(event.lngLat)
+        .setDOMContent(planningRoadPopupContent(properties))
+        .addTo(map);
+    };
+    const showPlanningPointer = () => { map.getCanvas().style.cursor = "pointer"; };
+    const hidePlanningPointer = () => { map.getCanvas().style.cursor = ""; };
+    map.on("click", "planning-road-fill", showPlanningDetails);
+    map.on("mouseenter", "planning-road-fill", showPlanningPointer);
+    map.on("mouseleave", "planning-road-fill", hidePlanningPointer);
+    return () => {
+      map.off("click", "planning-road-fill", showPlanningDetails);
+      map.off("mouseenter", "planning-road-fill", showPlanningPointer);
+      map.off("mouseleave", "planning-road-fill", hidePlanningPointer);
+      for (const id of ["planning-road-outline", "planning-road-fill"]) {
+        if (map.getLayer(id)) map.removeLayer(id);
+      }
+      if (map.getSource("planning-roads")) map.removeSource("planning-roads");
+    };
+  }, [data, roadSegments, planningRoads, styleReady]);
+
+  useEffect(() => {
+    const map = mapRef.current;
     if (!map || !styleReady || !data) return;
 
     POINT_LAYER_KEYS.forEach((type) => {
@@ -415,6 +487,9 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
         map.setLayoutProperty(id, "visibility", visibility[type] ? "visible" : "none");
       }
     });
+    for (const id of ["planning-road-fill", "planning-road-outline"]) {
+      if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", visibility.planning_road ? "visible" : "none");
+    }
   }, [data, styleReady, visibility]);
 
   return (

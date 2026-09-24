@@ -199,6 +199,17 @@ input {
   border-top: 1px solid var(--line);
 }
 
+.layer-loading {
+  margin: 0.7rem 0 0;
+  color: #5c6d7d;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.layer-list + .data-error {
+  margin-top: 0.7rem;
+}
+
 .layer-row {
   display: grid;
   grid-template-columns: auto auto minmax(0, 1fr) auto;
