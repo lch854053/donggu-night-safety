@@ -45,7 +45,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 도로명·도시계획 도로 참고자료 갱신
+      - name: 도로명·도시계획상 종류 보강
         if: ${{ inputs.only == 'all' || inputs.only == '' }}
         env:
           VWORLD_DATA_API_KEY: ${{ secrets.VWORLD_DATA_API_KEY }}

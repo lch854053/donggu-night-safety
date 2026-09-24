@@ -1,7 +1,8 @@
-"""Supplement NGII road labels and export VWorld planning roads as a separate reference layer.
+"""Supplement NGII road labels and planning road grades without replacing their geometry.
 
 After import-roads.py and import-sidewalks.py, run with VWORLD_DATA_API_KEY set, then
-run npm run score-roads. Neither VWorld dataset changes a road's geometry or score.
+run npm run score-roads. Only unambiguous, executed planning grades affect the
+road-activity proxy; unexecuted designations are display-only.
 """
 import argparse
 from collections import Counter, defaultdict
@@ -15,13 +16,12 @@ from urllib.parse import urlencode
 from urllib.request import urlopen
 
 from pyproj import Transformer
-from shapely.geometry import mapping, shape
+from shapely.geometry import shape
 from shapely.ops import transform, unary_union
 from shapely.strtree import STRtree
 
 ROOT = Path(__file__).resolve().parent.parent
 ROAD_PATH = ROOT / "scripts/data/road-segments.geojson"
-PLANNING_PATH = ROOT / "public/data/planning-roads.geojson"
 META_PATH = ROOT / "public/data/vworld-roads-meta.json"
 BOUNDARY_PATH = ROOT / "scripts/data/donggu-admin-boundaries.geojson"
 ROAD_NAMES = "LT_L_SPRD"
@@ -29,6 +29,7 @@ PLANNING_ROADS = "LT_C_UPISUQ151"
 GENERATED_NAME = re.compile(r" 도로 [0-9a-f]{6}-\d+$")
 NAME_MATCH_METERS = 5
 NAME_COVERAGE = 0.8
+ROAD_GRADES = frozenset(("소로", "중로", "대로", "광로"))
 
 
 def fetch_layer(layer, bbox, key, domain, get_json=None):
@@ -122,19 +123,48 @@ def enrich_names(roads, named_lines, to_meters):
     return counts
 
 
-def planning_collection(planning, to_wgs84):
-    output = []
-    for feature, geometry in planning:
-        status = feature["properties"]
-        geometry = transform(to_wgs84, geometry)
-        geometry = transform(lambda x, y, z=None: (round(x, 6), round(y, 6)), geometry)
-        output.append({"type": "Feature", "id": feature["id"], "geometry": mapping(geometry),
-                       "properties": {"name": status.get("dgm_nm") or "도시계획 도로",
-                                      "status": status.get("exc_nam") or "미확인",
-                                      "role": status.get("pmi_nam") or "미확인",
-                                      "grade": status.get("grad_se") or "미확인",
-                                      "source": "VWorld:LT_C_UPISUQ151"}})
-    return {"type": "FeatureCollection", "features": output}
+def enrich_grades(roads, planning, to_meters):
+    """Match a single planning designation covering >=80% of each centerline.
+
+    A designation is only score-eligible if its grade is recognized and its
+    execution status is complete. Matched unexecuted designations remain
+    explicitly marked as unscored in the UI.
+    """
+    geometries = [geometry for _, geometry in planning]
+    tree = STRtree(geometries)
+    counts = Counter()
+    grade_status = Counter()
+    for road in roads["features"]:
+        properties = road["properties"]
+        for key in ("planningRoadName", "planningRoadGrade", "planningRoadStatus"):
+            properties.pop(key, None)
+        line = transform(to_meters, shape(road["geometry"]))
+        groups = defaultdict(list)
+        for index in tree.query(line):
+            geometry = geometries[index]
+            if geometry.intersects(line):
+                item = planning[index][0]["properties"]
+                groups[(item.get("dgm_nm") or "", item.get("grad_se") or "",
+                        item.get("exc_nam") or "미확인")].append(geometry)
+        matches = [designation for designation, parts in groups.items()
+                   if line.intersection(unary_union(parts)).length / line.length >= NAME_COVERAGE]
+        if len(matches) == 1:
+            name, grade, status = matches[0]
+            if grade in ROAD_GRADES:
+                properties["planningRoadName"] = name or grade
+                properties["planningRoadGrade"] = grade
+                properties["planningRoadStatus"] = status
+                counts["matched"] += 1
+                grade_status[(grade, status)] += 1
+                if status == "집행완료":
+                    counts["scored"] += 1
+            else:
+                counts["unclassified"] += 1
+        elif len(matches) > 1:
+            counts["ambiguous"] += 1
+        else:
+            counts["unmatched"] += 1
+    return counts, grade_status
 
 
 def write_json(path, value):
@@ -154,7 +184,6 @@ def main():
     boundary_data = json.loads(BOUNDARY_PATH.read_text())
     boundary_wgs84 = unary_union([shape(f["geometry"]) for f in boundary_data["features"]])
     to_meters = Transformer.from_crs(4326, 5179, always_xy=True).transform
-    to_wgs84 = Transformer.from_crs(5179, 4326, always_xy=True).transform
     boundary = transform(to_meters, boundary_wgs84)
     if not 40e6 < boundary.area < 60e6:
         raise ValueError("동구 경계 범위가 예상과 다릅니다")
@@ -171,7 +200,7 @@ def main():
     if len(roads["features"]) < 1000:
         raise ValueError("도로구간 입력이 비정상적으로 적습니다 — 기존 데이터 보존")
     matches = enrich_names(roads, names_inside, to_meters)
-    planning_geojson = planning_collection(planning_inside, to_wgs84)
+    grade_matches, grade_status = enrich_grades(roads, planning_inside, to_meters)
     metadata = {
         "source": "VWorld 2D 데이터 API 2.0", "fetchedAt": datetime.now(timezone.utc).date().isoformat(),
         "requestBBox": bbox, "roadNamesLayer": ROAD_NAMES, "planningLayer": PLANNING_ROADS,
@@ -180,13 +209,18 @@ def main():
         "nameMatchMeters": NAME_MATCH_METERS, "nameCoverageThreshold": NAME_COVERAGE,
         "renamedRoadSegments": matches["renamed"], "ambiguousRoadSegments": matches["ambiguous"],
         "unmatchedGeneratedNames": matches["unmatched"],
-        "planningStatusCounts": dict(Counter(f["properties"]["status"] for f in planning_geojson["features"])),
-        "notes": ["도로명만 보강하며 NGII 도로 형상·폭원·인도 속성·점수 설정은 유지",
-                  "도시계획 도로는 집행 상태 참고자료이며 실제 보행량·실제 인도 존재 여부가 아님",
-                  "계획도로 도형과 도로명주소 선형은 안전지수 계산에 반영하지 않음"],
+        "planningGradeMatchedRoadSegments": grade_matches["matched"],
+        "planningGradeScoredRoadSegments": grade_matches["scored"],
+        "planningGradeAmbiguousRoadSegments": grade_matches["ambiguous"],
+        "planningGradeUnclassifiedRoadSegments": grade_matches["unclassified"],
+        "planningGradeStatusCounts": {f"{grade}/{status}": count for (grade, status), count in grade_status.items()},
+        "planningStatusCounts": dict(Counter(feature["properties"].get("exc_nam") or "미확인"
+                                             for feature, _ in planning_inside)),
+        "notes": ["NGII 도로의 형상·폭원·인도 속성은 유지하며, 도로명·검증된 계획상 규모만 보강",
+                  "계획상 규모는 단일 지정이 도로 길이 80% 이상 겹치고 집행완료일 때만 폭원 proxy와 혼합",
+                  "미집행·부분집행·미확인 규모는 위치 참고용이며 실제 통행량·인도 유무를 뜻하지 않음"],
     }
     write_json(ROAD_PATH, roads)
-    write_json(PLANNING_PATH, planning_geojson)
     write_json(META_PATH, metadata)
     print(json.dumps(metadata, ensure_ascii=False, indent=2))
 

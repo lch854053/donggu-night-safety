@@ -4,7 +4,6 @@ import { getSafetyBand, SAFETY_SCORE_BANDS } from "@/config/safetyWeights";
 import type {
   LayerKey,
   LayerVisibility,
-  PlanningRoads,
   SafetyDataset,
   ScoredRoadSegments,
 } from "@/types/safety";
@@ -17,8 +16,6 @@ interface LayerPanelProps {
   selectedRoadId: string;
   onRoadSelect: (id: string) => void;
   onToggle: (key: LayerKey) => void;
-  planningRoads: PlanningRoads | null;
-  planningError: string | null;
 }
 
 export function LayerPanel({
@@ -29,8 +26,6 @@ export function LayerPanel({
   selectedRoadId,
   onRoadSelect,
   onToggle,
-  planningRoads,
-  planningError,
 }: LayerPanelProps) {
   const [roadQuery, setRoadQuery] = useState("");
   const [roadPage, setRoadPage] = useState(0);
@@ -101,20 +96,11 @@ export function LayerPanel({
                     <small>{layer.description}</small>
                   </span>
                   <span className="layer-count">
-                    {layer.key === "planning_road"
-                      ? planningRoads?.features.length ?? "-"
-                      : data ? featureCounts.get(layer.key) ?? 0 : "-"}
+                    {data ? featureCounts.get(layer.key) ?? 0 : "-"}
                   </span>
                 </label>
               ))}
             </div>
-            {visibility.planning_road && !planningRoads ? (
-              <p className={planningError ? "data-error" : "layer-loading"} role={planningError ? "alert" : "status"}>
-                {planningError
-                  ? `${planningError} 레이어를 껐다가 다시 켜면 재시도합니다.`
-                  : "도시계획 도로 참고 레이어를 불러오는 중입니다."}
-              </p>
-            ) : null}
 
             <div className="score-legend" aria-labelledby="legend-heading">
               <h2 id="legend-heading">밤길 안전 참고지수</h2>
@@ -193,9 +179,16 @@ export function LayerPanel({
                         {dimension("조명·가시성", p.lightingScore)}
                         {dimension("감시·긴급대응", p.surveillanceScore)}
                         {dimension("야간활동·자연감시", p.activityScore)}
+                        {dimension("폭원·도로 종류 proxy", p.roadActivityScore ?? null)}
                         {dimension("공간환경·방치도", p.environmentScore)}
                         {dimension("여성밤길 치안안전", p.crimeScore, "미수집")}
                         {dimension("기존 지수(v1)", p.safetyScore)}
+                        <div>
+                          <dt>계획상 도로 종류</dt>
+                          <dd>{p.planningRoadGrade
+                            ? `${p.planningRoadName ?? p.planningRoadGrade} · ${p.planningRoadStatus ?? "미확인"}${p.planningRoadStatus === "집행완료" ? " (proxy 반영)" : " (점수 미반영)"}`
+                            : "확인 불가"}</dd>
+                        </div>
                         <div>
                           <dt>보안등</dt>
                           <dd>{p.streetlightCount}개 · 커버리지 {p.lightingCoverage}%</dd>
@@ -217,7 +210,7 @@ export function LayerPanel({
                 이 지수는 안심 인프라와 주변 환경 데이터를 조합한 상대적 참고값이며, 특정 장소의
                 절대적인 안전을 보장하지 않습니다.
               </p>
-              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 조명 환경은 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 여성밤길 치안안전은 생활안전지도의 경찰청 범죄 밀도분석(밤 시간대 20~24시) 구간 정보를 우선하고, 여성밤길 데이터가 없는 구간은 범죄주의구간(전체 시간대) 밀도분석으로 보완했습니다. 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다. 시설 접근성은 좌표 거리 기반 참고값이며 경찰시설 거리가 실제 출동시간을 의미하지 않습니다. CPTED는 완료된 환경개선 사업지의 주소를 VWORLD로 좌표화한 대표점이며, 개별 시설 위치나 사업구역 경계가 아닙니다. 야간활동·빈집 등 일부 지표는 좌표 데이터가 수집되지 않아 "데이터 없음"으로 표시됩니다. 주의구간 원본 좌표·노후건물은 미수집입니다.</p>
+              <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 계획상 도로 종류는 실제 통행량이 아니며, 단일 지정·집행완료가 확인된 구간에서만 폭원 proxy에 일부 반영합니다. 조명 환경은 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 여성밤길 치안안전은 생활안전지도의 경찰청 범죄 밀도분석(밤 시간대 20~24시) 구간 정보를 우선하고, 여성밤길 데이터가 없는 구간은 범죄주의구간(전체 시간대) 밀도분석으로 보완했습니다. 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다. 시설 접근성은 좌표 거리 기반 참고값이며 경찰시설 거리가 실제 출동시간을 의미하지 않습니다. CPTED는 완료된 환경개선 사업지의 주소를 VWORLD로 좌표화한 대표점이며, 개별 시설 위치나 사업구역 경계가 아닙니다. 야간활동·빈집 등 일부 지표는 좌표 데이터가 수집되지 않아 "데이터 없음"으로 표시됩니다. 주의구간 원본 좌표·노후건물은 미수집입니다.</p>
               <p><a href="/data/roads-meta.json" target="_blank" rel="noreferrer">도로 출처·가공 정보</a> · <a href="/data/sidewalks-meta.json" target="_blank" rel="noreferrer">인도 출처·가공 정보</a> · 국토지리정보원<br />도로명·도시계획 도로: VWorld / <a href="/data/vworld-roads-meta.json" target="_blank" rel="noreferrer">매칭·수집 정보</a><br />주의구간: <a href="https://www.safemap.go.kr" target="_blank" rel="noreferrer">행정안전부 생활안전지도</a> / 경찰청<br />CPTED: 생활안전지도 · VWORLD / <a href="/data/cpted-meta.json" target="_blank" rel="noreferrer">수집·지오코딩 정보</a><br />경계: SGIS / vuski·admdongkor (CC BY 4.0)</p>
             </div>
           </>

@@ -58,13 +58,6 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
     color: "#1f4e79",
     kind: "point",
   },
-  {
-    key: "planning_road",
-    label: "도시계획 도로",
-    description: "집행 상태 참고 · 안전지수 미반영",
-    color: "#79568f",
-    kind: "area",
-  },
 ] as const;
 
 export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
@@ -75,7 +68,6 @@ export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   cpted: true,
   old_building: false,
   police_station: true,
-  planning_road: false,
   // 좌표 데이터가 아직 수집되지 않은 타입. 데이터가 생기면 기본 표시로 바꾼다.
   night_activity: false,
   bus_stop: false,

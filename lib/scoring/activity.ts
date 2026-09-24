@@ -54,13 +54,17 @@ export function computeActivityScore(
       )
     : null;
 
-  // 도로가 크다는 이유만으로 안전 가점을 주지 않는다. 폭원 기반의 약한 proxy로
-  // activityScore의 20%에만 반영한다. 폭원 속성이 없으면 임의 추정하지 않고 null.
+  // 계획상 규모는 실제 보행량이 아니다. 집행완료·단일 지정 구간에서만 폭원 점수와
+  // 약하게 혼합한다. 별도 가점으로 중복 합산하지 않는다.
   const widthMeters = road.properties.widthMeters;
-  const roadActivityScore =
-    widthMeters != null && widthMeters > 0
-      ? stepScore(widthMeters, config.roadActivityWidthSteps)
-      : null;
+  const widthScore = widthMeters != null && widthMeters > 0
+    ? stepScore(widthMeters, config.roadActivityWidthSteps) : null;
+  const planningGrade = road.properties.planningRoadGrade;
+  const roadActivityScore = widthScore === null ? null
+    : planningGrade && road.properties.planningRoadStatus === "집행완료"
+      ? Math.round(widthScore * (1 - config.roadActivityGradeShare)
+        + config.roadActivityGradeScores[planningGrade] * config.roadActivityGradeShare)
+      : widthScore;
 
   // 기존 +5 직접 가점을 폐기하고 안심거점 proxy로 이동. 단독 최종점수 가점 없음.
   const convenienceStoreScore = availableTypes.has("convenience_store")

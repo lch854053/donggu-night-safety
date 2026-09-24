@@ -2,10 +2,8 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
-from collections import Counter
 
-from shapely.geometry import LineString, Polygon, shape
-from shapely.ops import unary_union
+from shapely.geometry import LineString, Polygon
 
 spec = importlib.util.spec_from_file_location("enrich_vworld_roads", Path(__file__).with_name("enrich_vworld_roads.py"))
 module = importlib.util.module_from_spec(spec)
@@ -22,18 +20,19 @@ def street(name, y=0):
 
 
 class VWorldRoadTests(unittest.TestCase):
-    def test_shipped_labels_and_planning_roads_match_the_refresh_report(self):
+    def test_shipped_labels_and_road_grades_match_the_refresh_report(self):
         metadata = json.loads(module.META_PATH.read_text())
         roads = json.loads(module.ROAD_PATH.read_text())["features"]
-        planning = json.loads(module.PLANNING_PATH.read_text())["features"]
         self.assertEqual(sum(r["properties"].get("roadNameSource") == module.ROAD_NAMES for r in roads),
                          metadata["renamedRoadSegments"])
         self.assertTrue(all(r["properties"].get("fallbackName") for r in roads
                             if r["properties"].get("roadNameSource") == module.ROAD_NAMES))
-        self.assertEqual(len(planning), metadata["insideBoundary"][module.PLANNING_ROADS])
-        self.assertEqual(dict(Counter(f["properties"]["status"] for f in planning)), metadata["planningStatusCounts"])
-        boundary = unary_union([shape(f["geometry"]) for f in json.loads(module.BOUNDARY_PATH.read_text())["features"]])
-        self.assertTrue(all(boundary.buffer(.000002).covers(shape(f["geometry"])) for f in planning))
+        self.assertEqual(sum(bool(r["properties"].get("planningRoadGrade")) for r in roads),
+                         metadata["planningGradeMatchedRoadSegments"])
+        self.assertEqual(sum(r["properties"].get("planningRoadStatus") == "집행완료" for r in roads),
+                         metadata["planningGradeScoredRoadSegments"])
+        self.assertTrue(all(r["properties"].get("planningRoadName") for r in roads
+                            if r["properties"].get("planningRoadGrade")))
 
     def test_only_unambiguous_full_length_generated_labels_are_enriched(self):
         roads = {"features": [road("학운동 도로 abc123-1"), road("기존 도로명", 20),
@@ -85,19 +84,34 @@ class VWorldRoadTests(unittest.TestCase):
                                      [{"id": str(i)} for i in range(1000)] if first else [{"id": "1000"}]}}}}
         self.assertEqual(len(module.fetch_layer("LT_L_SPRD", [0, 0, 1, 1], "key", "registered.example", reply)), 1001)
 
-    def test_planning_road_is_clipped_and_keeps_status_as_reference_only(self):
-        square = Polygon([(0, 0), (4, 0), (4, 4), (0, 4)])
-        features = [{"id": "inside", "geometry": square.__geo_interface__,
-                     "properties": {"exc_nam": "미집행", "dgm_nm": "소로3류", "pmi_nam": "국지도로"}},
-                    {"id": "outside", "geometry": Polygon([(5, 5), (6, 5), (6, 6), (5, 6)]).__geo_interface__,
-                     "properties": {}}]
-        selected = module.within_boundary(features, Polygon([(2, 2), (3, 2), (3, 3), (2, 3)]),
-                                          lambda x, y: (x, y))
-        collection = module.planning_collection(selected, lambda x, y: (x, y))
-        self.assertEqual(len(collection["features"]), 1)
-        self.assertEqual(collection["features"][0]["properties"]["status"], "미집행")
-        self.assertEqual(collection["features"][0]["properties"]["role"], "국지도로")
-        self.assertNotIn("safetyScore", collection["features"][0]["properties"])
+    def test_only_single_completed_planning_grade_is_eligible_for_scoring(self):
+        polygon = Polygon([(0, -2), (40, -2), (40, 2), (0, 2)])
+        def planning(name, grade, status, geometry=polygon):
+            return ({"properties": {"dgm_nm": name, "grad_se": grade, "exc_nam": status}}, geometry)
+        roads = {"features": [road("동명로")]}
+        matches, _ = module.enrich_grades(roads, [planning("소로3류", "소로", "미집행")], lambda x, y: (x, y))
+        self.assertEqual(matches["matched"], 1)
+        self.assertEqual(matches["scored"], 0)
+        self.assertEqual(roads["features"][0]["properties"]["planningRoadStatus"], "미집행")
+        matches, _ = module.enrich_grades(roads, [planning("중로2류", "중로", "집행완료")], lambda x, y: (x, y))
+        self.assertEqual(matches["scored"], 1)
+        self.assertEqual(roads["features"][0]["properties"]["planningRoadGrade"], "중로")
+        matches, _ = module.enrich_grades(roads, [planning("중로2류", "중로", "집행완료"),
+                                                 planning("소로3류", "소로", "집행완료")], lambda x, y: (x, y))
+        self.assertEqual(matches["ambiguous"], 1)
+        self.assertNotIn("planningRoadGrade", roads["features"][0]["properties"])
+
+    def test_short_crossing_and_unknown_scale_do_not_claim_road_kind(self):
+        crossing = Polygon([(18, -2), (22, -2), (22, 2), (18, 2)])
+        roads = {"features": [road("동명로")]}
+        matches, _ = module.enrich_grades(roads, [({"properties": {"dgm_nm": "대로1류",
+                            "grad_se": "대로", "exc_nam": "집행완료"}}, crossing)], lambda x, y: (x, y))
+        self.assertEqual(matches["unmatched"], 1)
+        self.assertNotIn("planningRoadGrade", roads["features"][0]["properties"])
+        wide = Polygon([(0, -2), (40, -2), (40, 2), (0, 2)])
+        matches, _ = module.enrich_grades(roads, [({"properties": {"dgm_nm": "기타도로시설",
+                            "grad_se": "", "exc_nam": "집행완료"}}, wide)], lambda x, y: (x, y))
+        self.assertEqual(matches["unclassified"], 1)
 
 
 if __name__ == "__main__":

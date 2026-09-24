@@ -143,6 +143,9 @@ export interface ActivityConfig {
   transit: BandScoreConfig;
   /** 폭원(m) 기준 약한 활성도 proxy. RDD 도로등급 코드는 원본 그대로라 미해석한다. */
   roadActivityWidthSteps: readonly (readonly [widthMeters: number, score: number])[];
+  /** 집행완료·단일 지정 구간만 폭원 proxy와 약하게 혼합한다. 실제 보행량이 아니다. */
+  roadActivityGradeShare: number;
+  roadActivityGradeScores: Readonly<Record<"소로" | "중로" | "대로" | "광로", number>>;
   convenienceStore: CountScoreConfig;
 }
 
@@ -190,6 +193,8 @@ export const SAFETY_SCORES_V2 = {
       breakpoints: [[0, 100], [100, 80], [300, 50], [500, 0]],
     },
     roadActivityWidthSteps: [[0, 20], [5.5, 40], [12, 70], [20, 100]],
+    roadActivityGradeShare: 0.2,
+    roadActivityGradeScores: { 소로: 25, 중로: 55, 대로: 80, 광로: 90 },
     convenienceStore: {
       radiusMeters: 100,
       countSteps: [[0, 0], [1, 40], [2, 70], [3, 100]],

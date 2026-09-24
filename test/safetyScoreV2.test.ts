@@ -153,6 +153,26 @@ test("all-null sub-indicators make the whole dimension null", () => {
   assert.ok(result.environmentScore !== null);
 });
 
+test("only a confirmed executed road grade modifies the existing width proxy", () => {
+  const base = dataset([]);
+  const evaluate = (grade?: RoadSegmentProperties["planningRoadGrade"], status?: string) => {
+    const input = { ...base, roadSegments: featureCollection([lineString(road.geometry.coordinates, {
+      ...road.properties, ...(grade ? { planningRoadGrade: grade, planningRoadStatus: status } : {}),
+    }) as Feature<LineString, RoadSegmentProperties>]) };
+    return calculateRoadSafety(input).features[0].properties;
+  };
+  const original = evaluate();
+  assert.equal(original.roadActivityScore, 40);
+  assert.equal(evaluate("대로", "미집행").roadActivityScore, 40);
+  assert.equal(evaluate("중로", "부분집행").roadActivityScore, 40);
+  assert.equal(evaluate("소로", "집행완료").roadActivityScore, 37);
+  assert.equal(evaluate("중로", "집행완료").roadActivityScore, 43);
+  assert.equal(evaluate("대로", "집행완료").roadActivityScore, 48);
+  assert.equal(evaluate("광로", "집행완료").roadActivityScore, 50);
+  assert.equal(evaluate("대로", "집행완료").safetyScore, original.safetyScore,
+    "legacy v1 score stays unchanged");
+});
+
 test("crimeScore null and crimeScore 0 are treated differently", () => {
   const noData = scored([], undefined);
   const worst = scored([], {
