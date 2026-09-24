@@ -18,8 +18,8 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
   },
   {
     key: "cctv",
-    label: "방범 CCTV",
-    description: "생활방범 목적의 영상정보처리기기",
+    label: "CCTV",
+    description: "설치 목적에 따라 감시 기여도 보정",
     color: "#255c99",
     kind: "point",
   },

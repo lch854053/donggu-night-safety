@@ -1,4 +1,5 @@
 import type { FeatureCollection, LineString, Point, Polygon } from "geojson";
+import type { CctvPurpose } from "@/config/cctvPurpose.mjs";
 
 export type SafetyFeatureType =
   | "streetlight"
@@ -29,6 +30,13 @@ export interface SafetyFeatureProperties {
   installedAt?: string;
   note?: string;
   address?: string;
+  purpose?: CctvPurpose;
+  purposeLabel?: string;
+  confidence?: number;
+  cameraCount?: number;
+  sourceYear?: number;
+  sourceDataset?: string;
+  purposeSource?: "historical" | "current";
 }
 
 export interface RiskZoneProperties {

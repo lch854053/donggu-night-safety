@@ -179,6 +179,57 @@ function policePopupContent(properties: Record<string, unknown>) {
   return content;
 }
 
+function cctvPopupContent(properties: Record<string, unknown>) {
+  const content = document.createElement("article");
+  content.className = "road-popup";
+  const name = document.createElement("p");
+  name.className = "road-popup-name";
+  name.textContent = String(properties.name ?? "CCTV");
+  const purpose = document.createElement("p");
+  purpose.className = "road-popup-note";
+  purpose.textContent = `설치목적: ${String(properties.purposeLabel ?? "확인되지 않음")}`;
+  const confidence = Number(properties.confidence);
+  const contribution = document.createElement("p");
+  contribution.className = "road-popup-note";
+  contribution.textContent = `상대적 감시 기여도: ${confidence >= 0.9 ? "높음" : confidence >= 0.5 ? "보통" : "제한적"}`;
+  content.append(name, purpose, contribution);
+  if (properties.address) {
+    const address = document.createElement("p");
+    address.className = "road-popup-note";
+    address.textContent = String(properties.address);
+    content.append(address);
+  }
+  if (Number(properties.cameraCount) > 0) {
+    const count = document.createElement("p");
+    count.className = "road-popup-note";
+    count.textContent = `카메라 수: ${properties.cameraCount}`;
+    content.append(count);
+  }
+  const note = document.createElement("p");
+  note.className = "road-popup-note";
+  note.textContent = properties.purpose === "unknown"
+    ? "최신 위치 자료에는 설치목적이 없어 안전지수에 제한적으로 반영됩니다."
+    : properties.purpose === "waste"
+      ? "방범 전용 CCTV는 아니므로 감시·긴급대응 점수에 제한적으로 반영됩니다."
+      : properties.purposeSource === "historical"
+        ? "설치목적은 과거 동일 주소 자료를 참고했으며 현재 운영 목적은 확인되지 않았습니다."
+        : "설치목적별 기여도는 지수 산정용 보정값입니다.";
+  content.append(note);
+  if (properties.purposeSource === "historical" && properties.purpose === "waste") {
+    const source = document.createElement("p");
+    source.className = "road-popup-note";
+    source.textContent = "설치목적은 과거 동일 주소 자료를 참고했으며 현재 운영 목적은 확인되지 않았습니다.";
+    content.append(source);
+  }
+  if (properties.sourceYear) {
+    const date = document.createElement("p");
+    date.className = "road-popup-note";
+    date.textContent = `자료기준: ${properties.sourceYear}.06.30`;
+    content.append(date);
+  }
+  return content;
+}
+
 export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -319,6 +370,18 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     map.on("click", policeLayer, showPoliceDetails);
     map.on("mouseenter", policeLayer, showPointer);
     map.on("mouseleave", policeLayer, hidePointer);
+    const cctvLayer = pointLayerId("cctv");
+    const showCctvDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      const feature = event.features?.[0];
+      if (!feature?.properties) return;
+      new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
+        .setLngLat(event.lngLat)
+        .setDOMContent(cctvPopupContent(feature.properties))
+        .addTo(map);
+    };
+    map.on("click", cctvLayer, showCctvDetails);
+    map.on("mouseenter", cctvLayer, showPointer);
+    map.on("mouseleave", cctvLayer, hidePointer);
 
     return () => {
       map.off("click", "road-safety", showRoadDetails);
@@ -327,6 +390,9 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       map.off("click", policeLayer, showPoliceDetails);
       map.off("mouseenter", policeLayer, showPointer);
       map.off("mouseleave", policeLayer, hidePointer);
+      map.off("click", cctvLayer, showCctvDetails);
+      map.off("mouseenter", cctvLayer, showPointer);
+      map.off("mouseleave", cctvLayer, hidePointer);
       POINT_LAYER_KEYS.forEach((type) => {
         const id = pointLayerId(type);
         if (map.getLayer(id)) map.removeLayer(id);

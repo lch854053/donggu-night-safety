@@ -1,3 +1,5 @@
+export { CCTV_PURPOSE_CONFIDENCE } from "./cctvPurpose.mjs";
+
 export interface ProximityWeight {
   radiusMeters: number;
   points: number;
@@ -128,7 +130,7 @@ export interface CountScoreConfig {
 /** v2 감시·긴급대응 설정. CCTV는 예방, 비상벨·경찰시설은 긴급대응 성격을 반영해 가중치를 나눈다. */
 export interface SurveillanceConfig {
   weights: { cctv: number; cpted: number; emergencyBell: number; police: number };
-  cctv: BandScoreConfig & { /** 포화형 보너스. 개수에 선형 비례하지 않는다. */ countBonus: { two: number; threePlus: number } };
+  cctv: BandScoreConfig & { /** 포화형 보너스. 개수에 선형 비례하지 않는다. */ countBonus: { two: number; threePlus: number }; minBonusConfidence: number };
   cpted: BandScoreConfig;
   emergencyBell: BandScoreConfig;
   police: BandScoreConfig;
@@ -162,6 +164,7 @@ export const SAFETY_SCORES_V2 = {
       radiusMeters: 200,
       breakpoints: [[0, 100], [50, 80], [100, 50], [150, 20], [200, 0]],
       countBonus: { two: 1.1, threePlus: 1.15 },
+      minBonusConfidence: 0.3,
     },
     cpted: {
       radiusMeters: 200,

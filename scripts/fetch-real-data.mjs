@@ -21,6 +21,8 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { collectCptedFeatures, geocodeAddress } from "./cpted.mjs";
 import { fetchPoliceRows, geocodePolice, normalizeAddress, policeName } from "./police-facilities.mjs";
+import { buildMunicipalCctv, CCTV_APIS, fetchCctvSnapshot } from "./cctv.mjs";
+import { CCTV_PURPOSE_CONFIDENCE, CCTV_PURPOSE_LABELS, classifyCctvPurpose } from "../config/cctvPurpose.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_DIR = path.join(ROOT, "public", "data");
@@ -207,20 +209,39 @@ async function collectCctv() {
     });
   }
   const failed = await runPool(jobs, 6);
-  if (failed > pages * 0.05) throw new Error(`CCTV 실패율 과다: ${failed}/${pages}`);
+  if (failed) throw new Error(`CCTV 일부 페이지 수집 실패: ${failed}/${pages} — 기존 데이터 보존`);
   for (const it of items) {
     const lon = Number(it.WGS84_LOT), lat = Number(it.WGS84_LAT);
     if (!lon || !lat || !inBbox(lon, lat)) continue;
+    const purpose = classifyCctvPurpose(it.INSTL_PRPS_SE_NM);
     collections.cctv.push(
       feat(`cctv-${it.MNG_NO}`, "cctv", lon, lat, {
         name: `${it.MNG_INST_NM} CCTV`,
         installedAt: it.INSTL_YM || undefined,
         note: [it.INSTL_PRPS_SE_NM, it.LCTN_LOTNO_ADDR].filter(Boolean).join(" · "),
+        address: it.LCTN_LOTNO_ADDR || undefined,
+        purpose,
+        purposeLabel: CCTV_PURPOSE_LABELS[purpose],
+        confidence: CCTV_PURPOSE_CONFIDENCE[purpose],
+        purposeSource: "current",
         source: "mois:cctv_info",
       }),
     );
   }
-  metaSources.cctv = { count: collections.cctv.length, fetchedAt: new Date().toISOString().slice(0, 10) };
+  console.log("[CCTV] 전남광주통합특별시 2026-06 위치 + 2021-08 목적 교차 확인");
+  const [recent, historical] = await Promise.all([
+    fetchCctvSnapshot(CCTV_APIS.current, MOIS_KEY),
+    fetchCctvSnapshot(CCTV_APIS.historical, MOIS_KEY),
+  ]);
+  const boundaries = JSON.parse(readFileSync(path.join(ROOT, "scripts/data/donggu-admin-boundaries.geojson"), "utf8")).features;
+  const merged = buildMunicipalCctv(recent, historical, boundaries, collections.cctv);
+  collections.cctv = merged.features;
+  metaSources.cctv = { count: collections.cctv.length, fetchedAt: new Date().toISOString().slice(0, 10),
+    ...merged.stats,
+    notes: ["설치목적 미기재 최신 행은 확인 가능한 2021년 동일 주소 목적만 참조; 과거 목적은 현재 운영 상태를 보증하지 않음",
+      "쓰레기·교통 단속 및 목적 미확인 CCTV도 모델 내부 상대적 감시 신뢰계수로 제한적 반영",
+      "촬영 방향·화각·모니터링 여부를 확인할 수 없어 점수에 반영하지 않음"] };
+  console.log(`  동구 ${merged.stats.includedLocations}개 설치지점, 목적 미확인 ${merged.stats.purposeCounts.unknown}개`);
 }
 
 async function collectBells() {
