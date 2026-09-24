@@ -4,7 +4,7 @@
 
 ## 데이터 갱신
 
-**자동(기본)**: CCTV·비상벨·편의점·CPTED는 GitHub Actions가 **매월 5일 09:00 KST**에 전국 데이터를 받아 동구권으로 걸러 커밋하고, 푸시된 내용은 Vercel이 자동 배포합니다(`.github/workflows/refresh-data.yml`). 최초 1회 저장소 Settings → Secrets and variables → Actions에 `SAFEMAP_SERVICE_KEY`, `MOIS_SERVICE_KEY`, `VWORLD_API_KEY`를 등록하면 됩니다(커밋 금지, Actions Secret만). VWORLD 키에 서비스 URL 설정이 필요한 경우 Actions Variable `VWORLD_DOMAIN`도 등록합니다. 수집이 실패하면 알림 이슈가 자동 생성됩니다.
+**자동(기본)**: CCTV·비상벨·편의점·CPTED·경찰시설은 GitHub Actions가 **매월 5일 09:00 KST**에 전국 데이터를 받아 동구권으로 걸러 커밋하고, 푸시된 내용은 Vercel이 자동 배포합니다(`.github/workflows/refresh-data.yml`). 저장소 Settings → Secrets and variables → Actions에 `SAFEMAP_SERVICE_KEY`, `MOIS_SERVICE_KEY`, `VWORLD_API_KEY`, `KAKAO_REST_API_KEY`를 등록합니다(커밋 금지, Actions Secret만). VWORLD 키에 서비스 URL 설정이 필요한 경우 Actions Variable `VWORLD_DOMAIN`도 등록합니다. 수집이 실패하면 알림 이슈가 자동 생성됩니다.
 
 **수동**: 로컬에서 즉시 갱신할 수도 있습니다. 인증키는 `.env.local`에 둡니다.
 
@@ -13,9 +13,13 @@
 node scripts/fetch-real-data.mjs --only=streetlights
 # CPTED만 갱신 (SAFEMAP_SERVICE_KEY + VWORLD_API_KEY 필요)
 node scripts/fetch-real-data.mjs --only=cpted
+# 경찰시설만 갱신 (MOIS_SERVICE_KEY + KAKAO_REST_API_KEY)
+node scripts/fetch-real-data.mjs --only=police
 # 전체 갱신 (CCTV 전국 스캔 포함, 약 15분)
 node scripts/fetch-real-data.mjs
 ```
+
+경찰청 두 API의 광주 동구 지구대·파출소 및 치안센터 주소를 `MOIS_SERVICE_KEY`로 수집합니다. 원본에는 좌표가 없어 카카오 로컬 API로 도로명·건물번호가 일치하는 주소만 지도에 표시합니다. 카카오 키가 없으면 OpenStreetMap의 시설명·번지가 모두 일치하는 POI만 사용합니다. 지구대·파출소는 v2 경찰시설 접근성 점수에 반영하며 치안센터는 위치 레이어로 표시합니다. Actions의 **Run workflow → only: police**에서 다른 시설을 유지한 채 갱신할 수 있습니다.
 
 보안등은 API가 좌표를 공개하지 않아 동구청 제공 CSV를 사용합니다. `scripts/data/donggu-streetlights.csv`를 최신 자료로 교체한 뒤 위 명령으로 반영하세요. 자료가 매년 말 기준이라 매년 1월 15일에 GitHub Actions가 갱신 알림 이슈를 자동 생성합니다(`.github/workflows/streetlight-refresh-reminder.yml`).
 
