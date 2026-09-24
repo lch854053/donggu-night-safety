@@ -4,7 +4,7 @@
 # 사전 준비(한 번만): 저장소 Settings → Secrets and variables → Actions에 등록
 #   - SAFEMAP_SERVICE_KEY  (안전디딤돌 오픈API 인증키)
 #   - MOIS_SERVICE_KEY     (행안부 및 경찰청 odcloud API 공용 인증키)
-#   - VWORLD_API_KEY       (VWORLD Geocoder API 인증키)
+#   - VWORLD_API_KEY       (VWORLD Geocoder·2D 데이터 API 인증키)
 #   - KAKAO_REST_API_KEY   (경찰청 관서 주소 좌표 변환)
 # 선택: Variables → VWORLD_DOMAIN (VWORLD에 등록한 서비스 URL)
 #
@@ -39,6 +39,20 @@ jobs:
 
       - run: npm ci
 
+      - uses: actions/setup-python@v5
+        if: ${{ inputs.only == 'all' || inputs.only == '' }}
+        with:
+          python-version: '3.11'
+
+      - name: 도로명·도시계획 도로 참고자료 갱신
+        if: ${{ inputs.only == 'all' || inputs.only == '' }}
+        env:
+          VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
+          VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN }}
+        run: |
+          pip install -r scripts/requirements-roads.txt
+          python scripts/enrich_vworld_roads.py
+
       - name: 데이터 수집
         env:
           SAFEMAP_SERVICE_KEY: ${{ secrets.SAFEMAP_SERVICE_KEY }}
@@ -59,10 +73,10 @@ jobs:
 
       - name: 변경분 커밋·푸시
         run: |
-          if git status --porcelain public/data | grep -q .; then
+          if git status --porcelain public/data scripts/data/road-segments.geojson | grep -q .; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add public/data
+            git add public/data scripts/data/road-segments.geojson
             git commit -m "chore: 공공데이터 월간 갱신 ($(date +%F))"
             git push
           else

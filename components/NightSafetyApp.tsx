@@ -10,6 +10,7 @@ import { calculateRoadSafety } from "@/lib/scoring/calculateRoadSafety";
 import type {
   LayerKey,
   LayerVisibility,
+  PlanningRoads,
   SafetyDataset,
   ScoredRoadSegments,
 } from "@/types/safety";
@@ -20,6 +21,8 @@ export function NightSafetyApp() {
   const [error, setError] = useState<string | null>(null);
   const [visibility, setVisibility] = useState<LayerVisibility>(INITIAL_LAYER_VISIBILITY);
   const [selectedRoadId, setSelectedRoadId] = useState("");
+  const [planningRoads, setPlanningRoads] = useState<PlanningRoads | null>(null);
+  const [planningError, setPlanningError] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -51,6 +54,30 @@ export function NightSafetyApp() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!visibility.planning_road || planningRoads) return;
+    const controller = new AbortController();
+    setPlanningError(null);
+    fetch("/data/planning-roads.geojson", { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("도시계획 도로 자료를 불러오지 못했습니다.");
+        return response.json() as Promise<PlanningRoads>;
+      })
+      .then((collection) => {
+        if (collection.type !== "FeatureCollection" || !collection.features.length) {
+          throw new Error("도시계획 도로 자료가 비어 있습니다.");
+        }
+        setPlanningRoads(collection);
+        setPlanningError(null);
+      })
+      .catch((reason: unknown) => {
+        if (!controller.signal.aborted) {
+          setPlanningError(reason instanceof Error ? reason.message : "도시계획 도로 자료를 불러오지 못했습니다.");
+        }
+      });
+    return () => controller.abort();
+  }, [visibility.planning_road, planningRoads]);
+
   const toggleLayer = (key: LayerKey) => {
     setVisibility((current) => ({ ...current, [key]: !current[key] }));
   };
@@ -65,11 +92,14 @@ export function NightSafetyApp() {
         selectedRoadId={selectedRoadId}
         onRoadSelect={setSelectedRoadId}
         onToggle={toggleLayer}
+        planningRoads={planningRoads}
+        planningError={planningError}
       />
       <SafetyMap
         data={data}
         roadSegments={roadSegments}
         visibility={visibility}
+        planningRoads={planningRoads}
       />
     </main>
   );
