@@ -45,7 +45,8 @@ export function LayerPanel({
   );
 
   data?.features.features.forEach((feature) => {
-    const type = feature.properties.type;
+    const type = feature.properties.type === "police_center"
+      ? "police_station" : feature.properties.type;
     featureCounts.set(type, (featureCounts.get(type) ?? 0) + 1);
   });
 

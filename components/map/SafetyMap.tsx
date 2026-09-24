@@ -274,7 +274,9 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
         id: pointLayerId(type),
         type: "circle",
         source: "safety-features",
-        filter: ["==", ["get", "type"], type],
+        filter: type === "police_station"
+          ? ["in", ["get", "type"], ["literal", ["police_station", "police_center"]]]
+          : ["==", ["get", "type"], type],
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 12, 4, 16, 7],
           "circle-color": definition.color,
@@ -305,7 +307,7 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     map.on("mouseenter", "road-safety", showPointer);
     map.on("mouseleave", "road-safety", hidePointer);
 
-    const policeLayers = [pointLayerId("police_station"), pointLayerId("police_center")];
+    const policeLayer = pointLayerId("police_station");
     const showPoliceDetails = (event: maplibregl.MapLayerMouseEvent) => {
       const feature = event.features?.[0];
       if (!feature?.properties) return;
@@ -314,21 +316,17 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
         .setDOMContent(policePopupContent(feature.properties))
         .addTo(map);
     };
-    policeLayers.forEach((id) => {
-      map.on("click", id, showPoliceDetails);
-      map.on("mouseenter", id, showPointer);
-      map.on("mouseleave", id, hidePointer);
-    });
+    map.on("click", policeLayer, showPoliceDetails);
+    map.on("mouseenter", policeLayer, showPointer);
+    map.on("mouseleave", policeLayer, hidePointer);
 
     return () => {
       map.off("click", "road-safety", showRoadDetails);
       map.off("mouseenter", "road-safety", showPointer);
       map.off("mouseleave", "road-safety", hidePointer);
-      policeLayers.forEach((id) => {
-        map.off("click", id, showPoliceDetails);
-        map.off("mouseenter", id, showPointer);
-        map.off("mouseleave", id, hidePointer);
-      });
+      map.off("click", policeLayer, showPoliceDetails);
+      map.off("mouseenter", policeLayer, showPointer);
+      map.off("mouseleave", policeLayer, hidePointer);
       POINT_LAYER_KEYS.forEach((type) => {
         const id = pointLayerId(type);
         if (map.getLayer(id)) map.removeLayer(id);
