@@ -8,7 +8,9 @@ export function buildMunicipalCctv(
   rows: Record<string, unknown>[], historicalRows: Record<string, unknown>[],
   boundaries: object[], legacyFeatures?: Feature<Point, SafetyFeatureProperties>[],
 ): { features: Feature<Point, SafetyFeatureProperties>[]; stats: {
-  sourceRows: number; validCoordinateRows: number; uniqueLocations: number; includedLocations: number;
+  sourceDataset: string; sourceRows: number; validCoordinateRows: number; addressDongguRows: number;
+  uniqueLocations: number; includedLocations: number;
   excludedInvalidCoordinate: number; excludedOutsideBoundary: number; excludedAddressCoordinateMismatch: number;
-  excludedDuplicateRows: number; purposeCounts: Record<string, number>; historicalPurposeMatches: number;
+  excludedDuplicateRows: number; excludedLegacyOverlaps: number;
+  purposeCounts: Record<string, number>; historicalPurposeMatches: number;
 } };
