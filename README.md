@@ -4,7 +4,7 @@
 
 ## 데이터 갱신
 
-**자동(기본)**: CCTV·비상벨·편의점·CPTED·경찰시설과 VWorld 도로명·도시계획 참고자료는 GitHub Actions가 **매월 5일 09:00 KST**에 동구권 데이터를 받아 커밋하고, 푸시된 내용은 Vercel이 자동 배포합니다(`.github/workflows/refresh-data.yml`). 저장소 Settings → Secrets and variables → Actions에 `SAFEMAP_SERVICE_KEY`, `MOIS_SERVICE_KEY`, `VWORLD_API_KEY`, `KAKAO_REST_API_KEY`를 등록합니다(커밋 금지, Actions Secret만). VWORLD 키에 서비스 URL 설정이 필요한 경우 Actions Variable `VWORLD_DOMAIN`도 등록합니다. 수집이 실패하면 알림 이슈가 자동 생성됩니다.
+**자동(기본)**: CCTV·비상벨·편의점·CPTED·경찰시설과 VWorld 도로명·도시계획 참고자료는 GitHub Actions가 **매월 5일 09:00 KST**에 동구권 데이터를 받아 커밋하고, 푸시된 내용은 Vercel이 자동 배포합니다(`.github/workflows/refresh-data.yml`). 저장소 Settings → Secrets and variables → Actions에 `SAFEMAP_SERVICE_KEY`, `MOIS_SERVICE_KEY`, `VWORLD_API_KEY`, `VWORLD_DATA_API_KEY`, `KAKAO_REST_API_KEY`를 등록합니다(커밋 금지, Actions Secret만). VWORLD 키에 서비스 URL 설정이 필요한 경우 Actions Variable `VWORLD_DOMAIN`도 등록합니다. 수집이 실패하면 알림 이슈가 자동 생성됩니다.
 
 **수동**: 로컬에서 즉시 갱신할 수도 있습니다. 인증키는 `.env.local`에 둡니다.
 
@@ -82,7 +82,7 @@ python3 -m venv .venv
 .venv/bin/pip install -r scripts/requirements-roads.txt
 .venv/bin/python scripts/import-roads.py --shp "/다운로드/도로중심선_광주/N3L_A0020000_29.shp"
 .venv/bin/python scripts/import-sidewalks.py --shp "/다운로드/N3L_A0033320.shp"
-VWORLD_API_KEY=... .venv/bin/python scripts/enrich_vworld_roads.py
+VWORLD_DATA_API_KEY=... .venv/bin/python scripts/enrich_vworld_roads.py
 
 # 시설·가중치·도로가 바뀌었을 때 점수 재계산
 npm run score-roads
@@ -99,7 +99,7 @@ npm test
 
 ### VWorld 도로명·도시계획 도로 참고자료
 
-`scripts/enrich_vworld_roads.py`는 서버 측 수집 단계에서만 `VWORLD_API_KEY`를 사용합니다. 등록 도메인이 다르면 `VWORLD_DOMAIN` 또는 `--domain`을 설정하세요. 두 레이어를 동구 경계로 잘라 저장하며, API 오류·누락 페이지·0건에는 기존 데이터를 덮어쓰지 않습니다. 도로 원본을 다시 가져오면 인도 판정과 도로명 보강을 차례로 재실행해야 합니다. 갱신 결과는 `public/data/vworld-roads-meta.json`에 기록합니다.
+`scripts/enrich_vworld_roads.py`는 서버 측 수집 단계에서만 `VWORLD_DATA_API_KEY`를 사용합니다(`VWORLD_API_KEY`도 폴백 허용). 등록 도메인이 다르면 `VWORLD_DOMAIN` 또는 `--domain`을 설정하세요. 두 레이어를 동구 경계로 잘라 저장하며, API 오류·누락 페이지·0건에는 기존 데이터를 덮어쓰지 않습니다. 도로 원본을 다시 가져오면 인도 판정과 도로명 보강을 차례로 재실행해야 합니다. 갱신 결과는 `public/data/vworld-roads-meta.json`에 기록합니다.
 
 - **도로명주소 도로(`LT_L_SPRD`)**: 기존 NGII 도로의 형상·ID·폭원은 유지하고 검증된 임시 표시명만 변경합니다. 원래 표시명과 도로명 출처도 구간 속성에 보존합니다.
 - **도시계획 도로(`LT_C_UPISUQ151`)**: 집행 상태·도로 기능을 `public/data/planning-roads.geojson`에 저장하고, 지도에서 기본 꺼짐 상태의 별도 참고 레이어로 표시합니다. ‘미집행’은 실제 도로·인도가 없다는 뜻이 아닙니다. 도시계획 도형이나 도로명 선형은 보행량을 나타내지 않으므로 안전지수·인도 판정에 넣지 않습니다.

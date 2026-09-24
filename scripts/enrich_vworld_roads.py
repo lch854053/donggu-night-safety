@@ -1,6 +1,6 @@
 """Supplement NGII road labels and export VWorld planning roads as a separate reference layer.
 
-After import-roads.py and import-sidewalks.py, run with VWORLD_API_KEY set, then
+After import-roads.py and import-sidewalks.py, run with VWORLD_DATA_API_KEY set, then
 run npm run score-roads. Neither VWorld dataset changes a road's geometry or score.
 """
 import argparse
@@ -148,9 +148,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--domain", default=os.environ.get("VWORLD_DOMAIN") or "donggu-night-safety.vercel.app")
     args = parser.parse_args()
-    key = os.environ.get("VWORLD_API_KEY", "").strip()
+    key = (os.environ.get("VWORLD_DATA_API_KEY") or os.environ.get("VWORLD_API_KEY") or "").strip()
     if not key:
-        parser.error("VWORLD_API_KEY 환경변수가 필요합니다")
+        parser.error("VWORLD_DATA_API_KEY 또는 VWORLD_API_KEY 환경변수가 필요합니다")
     boundary_data = json.loads(BOUNDARY_PATH.read_text())
     boundary_wgs84 = unary_union([shape(f["geometry"]) for f in boundary_data["features"]])
     to_meters = Transformer.from_crs(4326, 5179, always_xy=True).transform
