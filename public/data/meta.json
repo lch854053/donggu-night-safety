@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22",
+  "generatedAt": "2026-09-24",
   "sources": {
     "road_segments": {
       "source": "국토지리정보원 연속수치지형도",
@@ -15,10 +15,29 @@
       "source": "safemap:IF_0023",
       "geocoder": "vworld",
       "metadata": "/data/cpted-meta.json"
+    },
+    "police_station": {
+      "count": 5,
+      "addressCount": 5,
+      "dataAsOf": "2025-12-31",
+      "fetchedAt": "2026-09-24"
+    },
+    "police_center": {
+      "count": 1,
+      "addressCount": 1,
+      "dataAsOf": "2025-12-31",
+      "fetchedAt": "2026-09-24"
+    },
+    "sidewalks": {
+      "source": "국토지리정보원 연속수치지형도 보행로(인도)",
+      "metadata": "/data/sidewalks-meta.json"
     }
   },
   "pending": {
     "old_building": "안전디딤돌 IF_0002는 WMS 전용 — 건축물대장 API 연결 필요",
-    "risk_zones": "좌표 공개 소스 없음 — 미수집, 점수 감점 미적용"
+    "risk_zones": "벡터 좌표 미공개 — 대신 public/data/crime-risk.json(safemap WMS 샘플링)으로 상대적 주의도 반영",
+    "night_activity": "야간 영업 POI(음식점·카페·약국·PC방·숙박 등) 좌표 수집 필요 — v2 activityScore 자동 반영",
+    "vacant_house": "빈집 좌표 데이터 확보 필요 — v2 environmentScore(감점) 자동 반영",
+    "transit": "버스정류장·지하철 출입구 좌표 수집 필요 — v2 activityScore(transit) 자동 반영"
   }
 }
