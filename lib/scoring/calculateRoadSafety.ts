@@ -10,7 +10,7 @@ import { SAFETY_WEIGHTS, type ProximityWeight } from "@/config/safetyWeights";
 import { computeLightingMetrics } from "@/lib/scoring/lighting";
 import { computeActivityScore } from "@/lib/scoring/activity";
 import { computeEnvironmentScore } from "@/lib/scoring/environment";
-import { computeSurveillanceScore } from "@/lib/scoring/surveillance";
+import { computeSurveillanceScore, nearbyCctvSites } from "@/lib/scoring/surveillance";
 import { combineDimensionScores } from "@/lib/scoring/weightedAverage";
 import type {
   RoadSegmentProperties,
@@ -68,12 +68,8 @@ export function calculateRoadSafety(
         (candidate) => candidate.properties.type === "streetlight",
       );
       const lighting = computeLightingMetrics(road, streetlightFeatures, SAFETY_WEIGHTS.lighting);
-      const cctvCount = pointsNearRoad(
-        road,
-        candidates,
-        "cctv",
-        SAFETY_WEIGHTS.cctv.radiusMeters,
-      );
+      const nearbyCctv = nearbyCctvSites(road, candidates, SAFETY_WEIGHTS.cctv.radiusMeters);
+      const cctvCount = nearbyCctv.length;
       const emergencyBellCount = pointsNearRoad(
         road,
         candidates,
@@ -108,7 +104,9 @@ export function calculateRoadSafety(
       // WMS 항목이 없는 구간은 미수집(null)이며 위험도 0과 다르게 취급한다.
       const crimeEntry = dataset.crimeRiskByRoad?.[road.properties.id];
 
-      const cctvContribution = weightedContribution(cctvCount, SAFETY_WEIGHTS.cctv);
+      const cctvContribution = cctvCount
+        ? SAFETY_WEIGHTS.cctv.points * Math.max(...nearbyCctv.map((site) => site.confidence))
+        : 0;
       const bellContribution = weightedContribution(emergencyBellCount, SAFETY_WEIGHTS.emergencyBell);
       const storeContribution = weightedContribution(
         convenienceStoreCount,

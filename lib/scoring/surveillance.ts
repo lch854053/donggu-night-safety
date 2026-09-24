@@ -1,10 +1,35 @@
 import type { Feature, LineString, Point } from "geojson";
+import { distance, nearestPointOnLine } from "@turf/turf";
 
 import type { BandScoreConfig, SurveillanceConfig } from "@/config/safetyWeights";
-import { SAFETY_SCORES_V2 } from "@/config/safetyWeights";
+import { CCTV_PURPOSE_CONFIDENCE, SAFETY_SCORES_V2 } from "@/config/safetyWeights";
 import type { SafetyFeatureProperties, SafetyFeatureType } from "@/types/safety";
 import { countBonusFactor, interpolatedBandScore, pointDistancesToRoad } from "./proximityScore";
 import { weightedAverageAvailable } from "./weightedAverage";
+
+export function cctvConfidence(properties: SafetyFeatureProperties): number {
+  if (properties.confidence !== undefined && Number.isFinite(properties.confidence)) {
+    return Math.min(1, Math.max(0, properties.confidence));
+  }
+  // 구형 GeoJSON·테스트 픽스처에는 목적 정보가 없었다. 기존 점수와 호환한다.
+  return properties.purpose ? CCTV_PURPOSE_CONFIDENCE[properties.purpose] : 1;
+}
+
+export function nearbyCctvSites(
+  road: Feature<LineString>, candidates: Feature<Point, SafetyFeatureProperties>[], radiusMeters: number,
+) {
+  const sites = new Map<string, { meters: number; confidence: number }>();
+  for (const candidate of candidates) {
+    if (candidate.properties.type !== "cctv") continue;
+    const meters = distance(candidate, nearestPointOnLine(road, candidate), { units: "kilometers" }) * 1000;
+    if (meters > radiusMeters) continue;
+    const key = candidate.geometry.coordinates.map((value) => value.toFixed(6)).join(",");
+    const current = sites.get(key);
+    const confidence = cctvConfidence(candidate.properties);
+    if (!current || confidence > current.confidence) sites.set(key, { meters, confidence });
+  }
+  return [...sites.values()];
+}
 
 export interface SurveillanceResult {
   score: number | null;
@@ -34,20 +59,18 @@ export function computeSurveillanceScore(
     return Math.round(interpolatedBandScore(distance, band.breakpoints));
   };
 
-  const cctvDistances = availableTypes.has("cctv")
-    ? pointDistancesToRoad(road, candidates, "cctv", config.cctv.radiusMeters)
+  const cctvSites = availableTypes.has("cctv")
+    ? nearbyCctvSites(road, candidates, config.cctv.radiusMeters)
     : null;
-  const cctvBase = cctvDistances
-    ? interpolatedBandScore(
-        cctvDistances.length ? cctvDistances[0] : config.cctv.radiusMeters,
-        config.cctv.breakpoints,
-      )
-    : null;
-  // CCTV 여러 대는 포화형 보너스만 받는다(개수에 선형 비례하지 않음).
+  const cctvBase = cctvSites === null ? null : Math.max(0, ...cctvSites.map((site) =>
+    interpolatedBandScore(site.meters, config.cctv.breakpoints) * site.confidence));
+  // 서로 다른 CCTV 설치지점만 포화형 보너스에 반영한다(카메라 대수에는 비례하지 않음).
   const cctvScore =
     cctvBase === null
       ? null
-      : Math.round(Math.min(100, cctvBase * countBonusFactor(cctvDistances!.length, config.cctv.countBonus)));
+      : Math.round(Math.min(100, cctvBase * countBonusFactor(
+        cctvSites!.filter((site) => site.confidence >= config.cctv.minBonusConfidence).length,
+        config.cctv.countBonus)));
 
   const cptedScore = bandScore("cpted", config.cpted);
   const emergencyBellScore = bandScore("emergency_bell", config.emergencyBell);

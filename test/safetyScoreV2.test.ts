@@ -96,10 +96,15 @@ test("closer CCTV scores higher and CCTV beyond 200m has no influence", () => {
   assert.ok(near.surveillanceScore! > mid.surveillanceScore!);
 });
 
-test("CCTV count saturates: 10 cameras never beat 3", () => {
+test("서로 다른 CCTV 설치지점 개수 보너스는 3곳 이상 포화된다", () => {
   const one = scored([facility("cctv", 60)]);
-  const three = scored([0, 1, 2].map((i) => facility("cctv", 60, 0, i)));
-  const ten = scored(Array.from({ length: 10 }, (_, i) => facility("cctv", 60, 0, i)));
+  const separateSites = Array.from({ length: 10 }, (_, i) => {
+    const site = facility("cctv", 60, 0, i);
+    return { ...site, geometry: { ...site.geometry, coordinates:
+      destination(site.geometry.coordinates, i / 1000, 90).geometry.coordinates } };
+  });
+  const three = scored(separateSites.slice(0, 3));
+  const ten = scored(separateSites);
   assert.ok(three.cctvScore! > one.cctvScore!, "보너스는 존재한다");
   assert.equal(ten.cctvScore, three.cctvScore, "3대 이상 보너스는 포화된다");
   assert.ok(ten.cctvScore! <= 100);

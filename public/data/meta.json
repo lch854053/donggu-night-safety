@@ -31,6 +31,35 @@
     "sidewalks": {
       "source": "국토지리정보원 연속수치지형도 보행로(인도)",
       "metadata": "/data/sidewalks-meta.json"
+    },
+    "cctv": {
+      "count": 1151,
+      "fetchedAt": "2026-09-24",
+      "sourceDataset": "전남광주통합특별시_CCTV_20260630",
+      "sourceRows": 6805,
+      "validCoordinateRows": 6805,
+      "addressDongguRows": 831,
+      "uniqueLocations": 494,
+      "includedLocations": 494,
+      "excludedInvalidCoordinate": 0,
+      "excludedOutsideBoundary": 5962,
+      "excludedAddressCoordinateMismatch": 20,
+      "excludedDuplicateRows": 329,
+      "excludedLegacyOverlaps": 0,
+      "historicalPurposeMatches": 287,
+      "purposeCounts": {
+        "crime_prevention": 194,
+        "child_safety": 92,
+        "waste": 0,
+        "traffic": 0,
+        "unknown": 207,
+        "other": 1
+      },
+      "notes": [
+        "설치목적 미기재 최신 행은 확인 가능한 2021년 동일 주소 목적만 참조; 과거 목적은 현재 운영 상태를 보증하지 않음",
+        "쓰레기·교통 단속 및 목적 미확인 CCTV도 모델 내부 상대적 감시 신뢰계수로 제한적 반영",
+        "촬영 방향·화각·모니터링 여부를 확인할 수 없어 점수에 반영하지 않음"
+      ]
     }
   },
   "pending": {
