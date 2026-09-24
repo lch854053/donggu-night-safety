@@ -7,8 +7,9 @@ export type SafetyFeatureType =
   | "convenience_store"
   | "cpted"
   | "old_building"
-  /** 경찰서·지구대·파출소. 좌표 API 확보 전까지 데이터 없음(policeScore null). */
+  /** 지구대·파출소. 주소를 건물 좌표로 변환한 시설만 포함한다. */
   | "police_station"
+  | "police_center"
   /** 야간 영업 POI(음식점·카페·약국·PC방 등). 데이터 연결은 TODO. */
   | "night_activity"
   /** 버스정류장. 데이터 연결은 TODO. */
@@ -27,6 +28,7 @@ export interface SafetyFeatureProperties {
   source: string;
   installedAt?: string;
   note?: string;
+  address?: string;
 }
 
 export interface RiskZoneProperties {

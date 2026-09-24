@@ -3,8 +3,9 @@
 #
 # 사전 준비(한 번만): 저장소 Settings → Secrets and variables → Actions에 등록
 #   - SAFEMAP_SERVICE_KEY  (안전디딤돌 오픈API 인증키)
-#   - MOIS_SERVICE_KEY     (공공데이터포털 행정안전부 인증키)
+#   - MOIS_SERVICE_KEY     (행안부 및 경찰청 odcloud API 공용 인증키)
 #   - VWORLD_API_KEY       (VWORLD Geocoder API 인증키)
+#   - KAKAO_REST_API_KEY   (경찰청 관서 주소 좌표 변환)
 # 선택: Variables → VWORLD_DOMAIN (VWORLD에 등록한 서비스 URL)
 #
 # 보안등은 공개 API가 없어(동구청 CSV 수동 교체) 자동 수집 대상이 아닙니다.
@@ -17,10 +18,10 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: "수집 대상 (all: 전체, cpted: CPTED만)"
+        description: "수집 대상 (all: 전체, cpted: CPTED만, police: 경찰시설만)"
         type: choice
         default: all
-        options: [all, cpted]
+        options: [all, cpted, police]
 
 permissions:
   contents: write
@@ -42,12 +43,13 @@ jobs:
         env:
           SAFEMAP_SERVICE_KEY: ${{ secrets.SAFEMAP_SERVICE_KEY }}
           MOIS_SERVICE_KEY: ${{ secrets.MOIS_SERVICE_KEY }}
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
           VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN }}
           ONLY: ${{ inputs.only }}
         run: |
-          if [ "$ONLY" = "cpted" ]; then
-            node scripts/fetch-real-data.mjs --only=cpted
+          if [ "$ONLY" = "cpted" ] || [ "$ONLY" = "police" ]; then
+            node scripts/fetch-real-data.mjs --only="$ONLY"
           else
             node scripts/fetch-real-data.mjs
           fi

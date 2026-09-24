@@ -20,6 +20,7 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { collectCptedFeatures, geocodeAddress } from "./cpted.mjs";
+import { fetchPoliceRows, geocodePolice, normalizeAddress, policeName } from "./police-facilities.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_DIR = path.join(ROOT, "public", "data");
@@ -38,12 +39,13 @@ if (existsSync(path.join(ROOT, ".env.local"))) {
 const SAFEMAP_KEY = process.env.SAFEMAP_SERVICE_KEY;
 const MOIS_KEY = process.env.MOIS_SERVICE_KEY;
 const VWORLD_KEY = process.env.VWORLD_API_KEY;
+const KAKAO_KEY = process.env.KAKAO_REST_API_KEY;
 
 const onlyArg = process.argv.find((a) => a.startsWith("--only="));
 const only = onlyArg ? onlyArg.slice(7).split(",") : [];
 const want = (source) => only.length === 0 || only.includes(source);
-if (only.length && only.some((k) => !["cctv", "bell", "store", "streetlights", "cpted"].includes(k))) {
-  console.error("--only 값은 cctv, bell, store, streetlights, cpted 중에서 선택합니다.");
+if (only.length && only.some((k) => !["cctv", "bell", "store", "streetlights", "cpted", "police"].includes(k))) {
+  console.error("--only 값은 cctv, bell, store, streetlights, cpted, police 중에서 선택합니다.");
   process.exit(1);
 }
 
@@ -181,7 +183,7 @@ function collectStreetlights() {
   return { features: items, dataAsOf };
 }
 
-const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [] };
+const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [], police_station: [], police_center: [] };
 const metaSources = {};
 let cptedMetadata;
 let cptedCache;
@@ -257,6 +259,34 @@ async function collectStores() {
   metaSources.convenience_store = { count: collections.convenience_store.length, fetchedAt: new Date().toISOString().slice(0, 10) };
 }
 
+async function collectPolice(previousFeatures) {
+  console.log("[경찰시설] 경찰청 지구대·파출소 / 치안센터 주소 수집");
+  const rows = await fetchPoliceRows(MOIS_KEY);
+  if (!rows.length) throw new Error("광주 동구 경찰시설이 0건입니다 — 주소 필터를 확인하세요.");
+  const previous = new Map(previousFeatures
+    .filter((f) => ["police_station", "police_center"].includes(f.properties.type))
+    .map((f) => [f.properties.address, f.geometry.coordinates]));
+  for (const { row, kind, source } of rows) {
+    const address = normalizeAddress(row.주소);
+    const type = kind === "center" ? "police_center" : "police_station";
+    const geocoded = await geocodePolice(row, kind, KAKAO_KEY);
+    if (!KAKAO_KEY) await sleep(1100);
+    const coordinates = geocoded ?? previous.get(address);
+    if (!coordinates || !inBbox(...coordinates)) {
+      console.warn(`  위치 미확인 (지도 제외): ${policeName(row, kind)} / ${address}`);
+      continue;
+    }
+    collections[type].push(feat(`police-${kind}-${row.연번}`, type, ...coordinates, {
+      name: policeName(row, kind), address, note: address, source,
+    }));
+  }
+  for (const type of ["police_station", "police_center"]) {
+    metaSources[type] = { count: collections[type].length, addressCount: rows.filter(({ kind }) =>
+      (kind === "center" ? "police_center" : "police_station") === type).length,
+      dataAsOf: "2025-12-31", fetchedAt: new Date().toISOString().slice(0, 10) };
+  }
+}
+
 async function main() {
   const started = new Date();
   if (want("cpted") && (!SAFEMAP_KEY || !VWORLD_KEY)) {
@@ -267,7 +297,7 @@ async function main() {
   const refreshedTypes = new Set();
   let keptFeatures = [];
   let keptMetaSources = {};
-  if (only.length && existsSync(FEATURES_PATH)) {
+  if (existsSync(FEATURES_PATH)) {
     const prev = JSON.parse(readFileSync(FEATURES_PATH, "utf8"));
     keptFeatures = prev.features;
   }
@@ -278,6 +308,11 @@ async function main() {
   if (want("cctv")) { await collectCctv(); refreshedTypes.add("cctv"); }
   if (want("bell")) { await collectBells(); refreshedTypes.add("emergency_bell"); }
   if (want("store")) { await collectStores(); refreshedTypes.add("convenience_store"); }
+  if (want("police")) {
+    await collectPolice(keptFeatures);
+    refreshedTypes.add("police_station");
+    refreshedTypes.add("police_center");
+  }
   if (want("cpted")) {
     console.log("[CPTED] 안전디딤돌 IF_0023 완료 사업지 → VWORLD 지오코딩");
     cptedCache = !process.argv.includes("--refresh-geocodes") && existsSync(CPTED_CACHE_PATH)
@@ -313,6 +348,8 @@ async function main() {
     ...collections.cctv,
     ...collections.emergency_bell,
     ...collections.convenience_store,
+    ...collections.police_station,
+    ...collections.police_center,
     ...collections.cpted,
     ...(collections.streetlight ?? []),
   ];
@@ -325,7 +362,7 @@ async function main() {
     }
   }
   const offMap = features
-    .filter((f) => ["cctv", "emergency_bell", "convenience_store", "cpted"].includes(f.properties.type))
+    .filter((f) => ["cctv", "emergency_bell", "convenience_store", "cpted", "police_station", "police_center"].includes(f.properties.type))
     .filter((f) => !inBbox(f.geometry.coordinates[0], f.geometry.coordinates[1]));
   if (offMap.length) throw new Error(`BBOX 밖 좌표 ${offMap.length}건 — 좌표 변환 오류 의심`);
   const offKorea = features.filter((f) => !inKorea(...f.geometry.coordinates));
@@ -349,7 +386,8 @@ async function main() {
           ...(!features.some((f) => f.properties.type === "cpted")
             ? { cpted: "IF_0023 완료 사업지 — VWORLD_API_KEY 설정 후 --only=cpted 실행 필요" } : {}),
           risk_zones: "벡터 좌표 미공개 — 대신 public/data/crime-risk.json(safemap WMS 샘플링)으로 상대적 주의도 반영",
-          police_station: "경찰서·지구대·파출소 좌표 API 확인 필요(안전디딤돌 경찰관서 계열 후보) — 수집 시 v2 policeScore 자동 반영",
+           ...(!features.some((f) => f.properties.type === "police_station")
+             ? { police_station: "경찰청 주소 원본 수집 — 건물 단위 좌표 확인 필요" } : {}),
           night_activity: "야간 영업 POI(음식점·카페·약국·PC방·숙박 등) 좌표 수집 필요 — v2 activityScore 자동 반영",
           vacant_house: "빈집 좌표 데이터 확보 필요 — v2 environmentScore(감점) 자동 반영",
           transit: "버스정류장·지하철 출입구 좌표 수집 필요 — v2 activityScore(transit) 자동 반영",

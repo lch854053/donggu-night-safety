@@ -163,6 +163,22 @@ function roadPopupContent(properties: Record<string, unknown>) {
   return content;
 }
 
+function policePopupContent(properties: Record<string, unknown>) {
+  const content = document.createElement("article");
+  content.className = "road-popup";
+  const name = document.createElement("p");
+  name.className = "road-popup-name";
+  name.textContent = String(properties.name ?? "경찰시설");
+  const address = document.createElement("p");
+  address.className = "road-popup-note";
+  address.textContent = String(properties.address ?? "");
+  const source = document.createElement("p");
+  source.className = "road-popup-note";
+  source.textContent = "출처: 경찰청 · 주소 기준 2025.12.31";
+  content.append(name, address, source);
+  return content;
+}
+
 export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -289,10 +305,30 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     map.on("mouseenter", "road-safety", showPointer);
     map.on("mouseleave", "road-safety", hidePointer);
 
+    const policeLayers = [pointLayerId("police_station"), pointLayerId("police_center")];
+    const showPoliceDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      const feature = event.features?.[0];
+      if (!feature?.properties) return;
+      new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
+        .setLngLat(event.lngLat)
+        .setDOMContent(policePopupContent(feature.properties))
+        .addTo(map);
+    };
+    policeLayers.forEach((id) => {
+      map.on("click", id, showPoliceDetails);
+      map.on("mouseenter", id, showPointer);
+      map.on("mouseleave", id, hidePointer);
+    });
+
     return () => {
       map.off("click", "road-safety", showRoadDetails);
       map.off("mouseenter", "road-safety", showPointer);
       map.off("mouseleave", "road-safety", hidePointer);
+      policeLayers.forEach((id) => {
+        map.off("click", id, showPoliceDetails);
+        map.off("mouseenter", id, showPointer);
+        map.off("mouseleave", id, hidePointer);
+      });
       POINT_LAYER_KEYS.forEach((type) => {
         const id = pointLayerId(type);
         if (map.getLayer(id)) map.removeLayer(id);
