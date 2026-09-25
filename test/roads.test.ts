@@ -46,6 +46,23 @@ test("shipped roads are current, unique, valid-length real segments with no samp
   }
 });
 
+test("demolished Gyerim roads stay out of the input, shipped scores, and crime data", () => {
+  const retired: { segmentIds: string[] } = readJson("config/retiredRoadSegments.json");
+  const ids = new Set(retired.segmentIds);
+  assert.equal(ids.size, 9);
+  assert.ok(ids.has("ngii-56ba9e6d73460148-2"), "same demolished alignment's middle section");
+  for (const collection of [dataset.roadSegments, roads]) {
+    assert.ok(collection.features.every((f) => !ids.has(f.properties.id)));
+  }
+  assert.equal(readJson("public/data/roads-meta.json").excluded.demolished_segments, ids.size);
+  if (crimeFile) {
+    assert.ok(retired.segmentIds.every((id) => !(id in crimeFile.roads)));
+    assert.equal(crimeFile.summary.roads, roads.features.length);
+    assert.equal(crimeFile.roadSegmentsSha256, createHash("sha256")
+      .update(readFileSync("scripts/data/road-segments.geojson")).digest("hex").slice(0, 16));
+  }
+});
+
 test("shipped crime risk matches the WMS sampling report", () => {
   if (!crimeFile) return; // WMS 데이터 없이 배포하는 경우: crimeScore 전체 null은 위 테스트가 검증
   const byId = new Map(roads.features.map((f) => [f.properties.id, f]));

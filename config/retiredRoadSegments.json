@@ -1,0 +1,14 @@
+{
+  "reason": "계림2동 재개발로 폐지된 옛 도로 (2026-09 현장 제보; 56ba9e-2는 동일 폐지 노선의 누락된 중간 구간)",
+  "segmentIds": [
+    "ngii-56ba9e6d73460148-1",
+    "ngii-56ba9e6d73460148-2",
+    "ngii-56ba9e6d73460148-3",
+    "ngii-726afeae412d0969-1",
+    "ngii-726afeae412d0969-2",
+    "ngii-98dafe02f325f5f2-1",
+    "ngii-98dafe02f325f5f2-2",
+    "ngii-98dafe02f325f5f2-3",
+    "ngii-dc89e9091df893d9-1"
+  ]
+}
