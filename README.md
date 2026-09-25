@@ -120,14 +120,13 @@ npm run build
 
 Node.js 20 이상이 필요합니다. 현재 GitHub 저장소를 직접 가져오는 경우 Vercel Root Directory는 기본값인 `./`을 사용합니다.
 
-지도는 MapTiler Cloud의 `streets-v2` 스타일을 사용합니다. 로컬 `.env.local`과 Vercel Production 환경에 다음 값을 설정해야 합니다.
+지도는 VersaTiles의 OSM 벡터 타일 `gray` 스타일을 안전지도용으로 단순화해 사용합니다. 별도의 베이스맵 API 키는 필요하지 않습니다. `config/baseMap.ts`에서 POI 레이어 전체를 제외하고 지명·도로·건물·공원·수계 등 분석에 필요한 배경만 남깁니다. 안전시설 레이어와 도로 점수 데이터는 이 스타일과 분리되어 있습니다.
 
 ```dotenv
 NEXT_PUBLIC_SPATIAL_DATA_SOURCE=static
-NEXT_PUBLIC_MAPTILER_KEY=MapTiler에서_발급한_공개키
 ```
 
-MapTiler 키는 브라우저에서 사용되는 공개 키이므로 MapTiler 관리 화면에서 운영 도메인 `donggu-night-safety.vercel.app`과 사용자 도메인만 허용하도록 제한합니다. Vercel 환경변수를 변경한 뒤에는 새 배포가 필요합니다.
+베이스맵 출처는 지도 하단에 VersaTiles·OpenStreetMap·ESA WorldCover로 표기합니다. 타일은 OSM 원본의 실시간 뷰가 아니라 공급자의 갱신 주기에 따라 반영되므로 특정 재개발 구역의 최신 여부는 OSM 및 배포 타일 양쪽에서 확인해야 합니다.
 
 ## 구조
 
