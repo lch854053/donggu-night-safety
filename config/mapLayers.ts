@@ -58,6 +58,13 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
     color: "#1f4e79",
     kind: "point",
   },
+  {
+    key: "bus_stop",
+    label: "버스정류장",
+    description: "TAGO 정류장 위치 · 2026년 4–6월 야간 승하차",
+    color: "#6258a5",
+    kind: "point",
+  },
 ] as const;
 
 export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
@@ -70,7 +77,7 @@ export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   police_station: true,
   // 좌표 데이터가 아직 수집되지 않은 타입. 데이터가 생기면 기본 표시로 바꾼다.
   night_activity: false,
-  bus_stop: false,
+  bus_stop: true,
   subway_entrance: false,
   vacant_house: false,
 };

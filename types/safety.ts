@@ -39,6 +39,14 @@ export interface SafetyFeatureProperties {
   sourceYear?: number;
   sourceDataset?: string;
   purposeSource?: "historical" | "current";
+  nodeId?: string;
+  arsNumber?: string;
+  inDonggu?: boolean;
+  nightRidershipPeriod?: string;
+  nightWeekdayBoarding?: number;
+  nightWeekdayAlighting?: number;
+  nightWeekendBoarding?: number;
+  nightWeekendAlighting?: number;
 }
 
 export interface RiskZoneProperties {
