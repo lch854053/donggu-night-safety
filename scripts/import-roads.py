@@ -126,7 +126,6 @@ def main():
     edges = []
     excluded = Counter()
     classes = Counter()
-    matched = set()
     # Keep every meaningful classification change as a chain break.
     fields = ("RDDV", "SCLS", "RDLN", "RVWD", "ONSD", "PVQT", "DVYN", "NAME", "RDNM", "REST")
     for item in reader.iterShapeRecords(bbox=boundary.bounds):
@@ -141,7 +140,6 @@ def main():
         if record["RDDV"] == "RDD001":
             excluded["expressway"] += 1
             continue
-        matched.add(record["UFID"])
         classes[record["RDDV"]] += 1
         for line in line_parts(geometry.intersection(boundary)):
             edges.append({"line": line, "ufid": record["UFID"],
@@ -150,18 +148,26 @@ def main():
         raise ValueError("No roads in boundary")
     edges.sort(key=lambda e: (e["ufid"], e["line"].wkb_hex))
     chains = merge_chains(edges)
+    # Preserve local demolition corrections when the older NGII shapefile is re-imported.
+    retired = set(json.loads((ROOT / "config/retiredRoadSegments.json").read_text())["segmentIds"])
     features = []
+    retired_length = 0
     for chain in chains:
         attrs = dict(zip(fields, chain["attrs"]))
         token = hashlib.sha256(("|".join(chain["ids"]) + chain["line"].wkb_hex).encode()).hexdigest()[:16]
         for index, segment in enumerate(split_evenly(chain["line"], args.max_length)):
+            segment_id = f"ngii-{token}-{index + 1}"
+            if segment_id in retired:
+                retired_length += segment.length
+                excluded["demolished_segments"] += 1
+                continue
             midpoint = segment.interpolate(0.5, normalized=True)
             dong = next((name for name, polygon in dongs if polygon.covers(midpoint)), "동구")
             road_name = attrs["RDNM"] or attrs["NAME"]
             coordinates = [[round(x, 8), round(y, 8)]
                            for x, y in transform(to_wgs84, segment).coords]
             features.append({"type": "Feature", "geometry": {"type": "LineString", "coordinates": coordinates},
-                             "properties": {"id": f"ngii-{token}-{index + 1}",
+                             "properties": {"id": segment_id,
                                             "name": road_name or f"{dong} 도로 {token[:6]}-{index + 1}",
                                             "source": SOURCE, "sourceIds": chain["ids"],
                                             "adminDong": dong, "roadClass": attrs["RDDV"],
@@ -185,9 +191,10 @@ def main():
         "sourceMetadataCreated": metadata_date, "sourceSurveyDate": None,
         "boundarySource": boundary_data["source"], "boundaryAsOf": "2026-07-01",
         "boundaryAreaKm2": round(boundary.area / 1e6, 3),
-        "sourceRecords": len(reader), "matchedRecords": len(matched),
+        "sourceRecords": len(reader),
+        "matchedRecords": len({ufid for feature in features for ufid in feature["properties"]["sourceIds"]}),
         "clippedParts": len(edges), "mergedChains": len(chains), "segments": len(features),
-        "totalLengthKm": round(original_length / 1000, 3), "maxSegmentMeters": args.max_length,
+        "totalLengthKm": round((original_length - retired_length) / 1000, 3), "maxSegmentMeters": args.max_length,
         "excluded": dict(excluded), "roadClasses": dict(classes),
         "routingReady": False,
         "notes": ["원본 XML 생성일은 도로 측량·갱신 기준일이 아님",
