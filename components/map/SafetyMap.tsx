@@ -3,6 +3,7 @@
 import * as maplibregl from "maplibre-gl";
 import { useEffect, useRef, useState } from "react";
 
+import { loadBaseMapStyle } from "@/config/baseMap";
 import { MAP_LAYER_DEFINITIONS, POINT_LAYER_KEYS } from "@/config/mapLayers";
 import { getSafetyBand, SAFETY_SCORE_BANDS } from "@/config/safetyWeights";
 import type {
@@ -14,10 +15,6 @@ import type {
 } from "@/types/safety";
 
 const DONGGU_CENTER: [number, number] = [126.9232, 35.1461];
-const MAPTILER_KEY = process.env.NEXT_PUBLIC_MAPTILER_KEY?.trim();
-const MAPTILER_STYLE_URL = MAPTILER_KEY
-  ? `https://api.maptiler.com/maps/streets-v2/style.json?key=${encodeURIComponent(MAPTILER_KEY)}`
-  : null;
 const [verySafeBand, safeBand, averageBand, cautionBand, highCautionBand] =
   SAFETY_SCORE_BANDS;
 
@@ -292,41 +289,46 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [styleReady, setStyleReady] = useState(false);
-  const [mapError, setMapError] = useState<string | null>(
-    MAPTILER_STYLE_URL ? null : "Vercel 환경변수 NEXT_PUBLIC_MAPTILER_KEY를 설정해 주세요.",
-  );
+  const [mapError, setMapError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!containerRef.current || mapRef.current || !MAPTILER_STYLE_URL) return;
+    if (!containerRef.current) return;
+    let cancelled = false;
 
-    maplibregl.setWorkerUrl("/vendor/maplibre-gl-worker.mjs");
-    const map = new maplibregl.Map({
-      container: containerRef.current,
-      style: MAPTILER_STYLE_URL,
-      center: DONGGU_CENTER,
-      zoom: 14,
-      minZoom: 11,
-      maxZoom: 19,
-      attributionControl: false,
-    });
+    void loadBaseMapStyle().then((style) => {
+      if (cancelled || !containerRef.current) return;
+      maplibregl.setWorkerUrl("/vendor/maplibre-gl-worker.mjs");
+      const map = new maplibregl.Map({
+        container: containerRef.current,
+        style,
+        center: DONGGU_CENTER,
+        zoom: 14,
+        minZoom: 11,
+        maxZoom: 19,
+        attributionControl: false,
+      });
 
-    mapRef.current = map;
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
-    map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
-    const handleInitialError = () => {
-      setMapError("MapTiler 지도를 불러오지 못했습니다. API 키와 허용 도메인을 확인해 주세요.");
-    };
-    map.once("error", handleInitialError);
-    map.once("load", () => {
-      if (mapRef.current === map) {
-        map.off("error", handleInitialError);
-        setMapError(null);
-        setStyleReady(true);
-      }
+      mapRef.current = map;
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+      map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
+      const handleInitialError = () => {
+        setMapError("OSM 베이스맵을 불러오지 못했습니다. 네트워크 연결을 확인해 주세요.");
+      };
+      map.once("error", handleInitialError);
+      map.once("load", () => {
+        if (mapRef.current === map) {
+          map.off("error", handleInitialError);
+          setMapError(null);
+          setStyleReady(true);
+        }
+      });
+    }).catch(() => {
+      if (!cancelled) setMapError("OSM 베이스맵 스타일을 불러오지 못했습니다. 네트워크 연결을 확인해 주세요.");
     });
 
     return () => {
-      map.remove();
+      cancelled = true;
+      mapRef.current?.remove();
       mapRef.current = null;
     };
   }, []);
