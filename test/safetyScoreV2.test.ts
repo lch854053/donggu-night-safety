@@ -96,6 +96,16 @@ test("closer CCTV scores higher and CCTV beyond 200m has no influence", () => {
   assert.ok(near.surveillanceScore! > mid.surveillanceScore!);
 });
 
+test("버스정류장 거리는 접근성 점수에 반영하고 승하차 수치는 안전 점수에 직접 반영하지 않는다", () => {
+  const close = facility("bus_stop", 30);
+  const near = scored([close]);
+  const far = scored([facility("bus_stop", 600)]);
+  assert.ok(near.transitScore! > far.transitScore!);
+  assert.deepEqual(scored([{ ...close, properties: { ...close.properties,
+    nightWeekdayBoarding: 1000, nightWeekdayAlighting: 400 } }]).safetyScoreV2,
+  near.safetyScoreV2);
+});
+
 test("서로 다른 CCTV 설치지점 개수 보너스는 3곳 이상 포화된다", () => {
   const one = scored([facility("cctv", 60)]);
   const separateSites = Array.from({ length: 10 }, (_, i) => {

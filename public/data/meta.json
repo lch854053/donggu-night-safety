@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24",
+  "generatedAt": "2026-09-25",
   "sources": {
     "road_segments": {
       "source": "국토지리정보원 연속수치지형도",
@@ -60,6 +60,24 @@
         "쓰레기·교통 단속 및 목적 미확인 CCTV도 모델 내부 상대적 감시 신뢰계수로 제한적 반영",
         "촬영 방향·화각·모니터링 여부를 확인할 수 없어 점수에 반영하지 않음"
       ]
+    },
+    "bus_stop": {
+      "count": 271,
+      "insideDonggu": 198,
+      "cityTotal": 4317,
+      "fetchedAt": "2026-09-25",
+      "source": "TAGO 버스정류소정보",
+      "nearbyMeters": 500
+    },
+    "bus_ridership": {
+      "source": "전남광주통합특별시_시내버스 노선별 승하차 인원_20260630",
+      "period": "2026-04-01~2026-06-30",
+      "hours": "20:00–23:59",
+      "weekdayDays": 65,
+      "weekendDays": 26,
+      "matchedStops": 262,
+      "excludedTransfers": true,
+      "metric": "정류장별 1일 평균 거래건수(승차·하차 분리)"
     }
   },
   "pending": {
@@ -67,6 +85,6 @@
     "risk_zones": "벡터 좌표 미공개 — 대신 public/data/crime-risk.json(safemap WMS 샘플링)으로 상대적 주의도 반영",
     "night_activity": "야간 영업 POI(음식점·카페·약국·PC방·숙박 등) 좌표 수집 필요 — v2 activityScore 자동 반영",
     "vacant_house": "빈집 좌표 데이터 확보 필요 — v2 environmentScore(감점) 자동 반영",
-    "transit": "버스정류장·지하철 출입구 좌표 수집 필요 — v2 activityScore(transit) 자동 반영"
+    "subway_entrance": "지하철 출입구 좌표 수집 필요 — 현재 대중교통 접근성은 버스정류장만 반영"
   }
 }

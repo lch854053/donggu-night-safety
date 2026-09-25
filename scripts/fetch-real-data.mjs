@@ -23,6 +23,7 @@ import { collectCptedFeatures, geocodeAddress } from "./cpted.mjs";
 import { fetchPoliceRows, geocodePolice, normalizeAddress, policeName } from "./police-facilities.mjs";
 import { buildMunicipalCctv, CCTV_APIS, fetchCctvSnapshot } from "./cctv.mjs";
 import { CCTV_PURPOSE_CONFIDENCE, CCTV_PURPOSE_LABELS, classifyCctvPurpose } from "../config/cctvPurpose.mjs";
+import { fetchBusStops } from "./bus-stops.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_DIR = path.join(ROOT, "public", "data");
@@ -42,12 +43,13 @@ const SAFEMAP_KEY = process.env.SAFEMAP_SERVICE_KEY;
 const MOIS_KEY = process.env.MOIS_SERVICE_KEY;
 const VWORLD_KEY = process.env.VWORLD_API_KEY;
 const KAKAO_KEY = process.env.KAKAO_REST_API_KEY;
+const TAGO_KEY = process.env.TAGO_SERVICE_KEY;
 
 const onlyArg = process.argv.find((a) => a.startsWith("--only="));
 const only = onlyArg ? onlyArg.slice(7).split(",") : [];
 const want = (source) => only.length === 0 || only.includes(source);
-if (only.length && only.some((k) => !["cctv", "bell", "store", "streetlights", "cpted", "police"].includes(k))) {
-  console.error("--only 값은 cctv, bell, store, streetlights, cpted, police 중에서 선택합니다.");
+if (only.length && only.some((k) => !["cctv", "bell", "store", "streetlights", "cpted", "police", "bus"].includes(k))) {
+  console.error("--only 값은 cctv, bell, store, streetlights, cpted, police, bus 중에서 선택합니다.");
   process.exit(1);
 }
 
@@ -185,7 +187,7 @@ function collectStreetlights() {
   return { features: items, dataAsOf };
 }
 
-const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [], police_station: [], police_center: [] };
+const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [], police_station: [], police_center: [], bus_stop: [] };
 const metaSources = {};
 let cptedMetadata;
 let cptedCache;
@@ -364,6 +366,17 @@ async function main() {
     metaSources.streetlight = { count: features.length, dataAsOf };
     refreshedTypes.add("streetlight");
   }
+  if (want("bus")) {
+    console.log("[버스정류장] TAGO 광주 정류장 → 동구 및 주변 500m");
+    const boundaries = JSON.parse(readFileSync(path.join(ROOT, "scripts/data/donggu-admin-boundaries.geojson"), "utf8")).features;
+    const result = await fetchBusStops(TAGO_KEY, boundaries, keptFeatures, getWithRetry);
+    collections.bus_stop = result.features;
+    metaSources.bus_stop = { count: result.features.length, insideDonggu: result.insideCount,
+      cityTotal: result.totalCount, fetchedAt: new Date().toISOString().slice(0, 10),
+      source: "TAGO 버스정류소정보", nearbyMeters: 500 };
+    refreshedTypes.add("bus_stop");
+    console.log(`  동구 ${result.insideCount}개, 주변 포함 ${result.features.length}개`);
+  }
 
   const newFeatures = [
     ...collections.cctv,
@@ -371,6 +384,7 @@ async function main() {
     ...collections.convenience_store,
     ...collections.police_station,
     ...collections.police_center,
+    ...collections.bus_stop,
     ...collections.cpted,
     ...(collections.streetlight ?? []),
   ];
@@ -411,7 +425,9 @@ async function main() {
              ? { police_station: "경찰청 주소 원본 수집 — 건물 단위 좌표 확인 필요" } : {}),
           night_activity: "야간 영업 POI(음식점·카페·약국·PC방·숙박 등) 좌표 수집 필요 — v2 activityScore 자동 반영",
           vacant_house: "빈집 좌표 데이터 확보 필요 — v2 environmentScore(감점) 자동 반영",
-          transit: "버스정류장·지하철 출입구 좌표 수집 필요 — v2 activityScore(transit) 자동 반영",
+          ...(!features.some((f) => f.properties.type === "bus_stop")
+            ? { transit: "버스정류장·지하철 출입구 좌표 수집 필요 — v2 activityScore(transit) 자동 반영" }
+            : { subway_entrance: "지하철 출입구 좌표 수집 필요 — 현재 대중교통 접근성은 버스정류장만 반영" }),
         },
       },
       null,

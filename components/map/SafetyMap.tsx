@@ -191,6 +191,52 @@ function policePopupContent(properties: Record<string, unknown>) {
   return content;
 }
 
+function busStopPopupContent(properties: Record<string, unknown>) {
+  const content = document.createElement("article");
+  content.className = "road-popup";
+  const name = document.createElement("p");
+  name.className = "road-popup-name";
+  name.textContent = String(properties.name ?? "버스정류장");
+  const stop = document.createElement("p");
+  stop.className = "road-popup-note";
+  stop.textContent = `정류장 ${String(properties.arsNumber ?? properties.nodeId ?? "번호 미확인")}${properties.inDonggu === false ? " · 동구 인접" : ""}`;
+  content.append(name, stop);
+
+  if (properties.nightRidershipPeriod) {
+    const title = document.createElement("p");
+    title.className = "road-popup-label";
+    title.textContent = "20–23시 승하차 · 하루 평균 거래건수";
+    const list = document.createElement("dl");
+    list.className = "road-popup-metrics";
+    for (const [label, boardingKey, alightingKey] of [
+      ["평일", "nightWeekdayBoarding", "nightWeekdayAlighting"],
+      ["주말", "nightWeekendBoarding", "nightWeekendAlighting"],
+    ]) {
+      const row = document.createElement("div");
+      const term = document.createElement("dt");
+      term.textContent = label;
+      const value = document.createElement("dd");
+      value.textContent = `승차 ${Number(properties[boardingKey]).toLocaleString("ko-KR")} · 하차 ${Number(properties[alightingKey]).toLocaleString("ko-KR")}`;
+      row.append(term, value);
+      list.append(row);
+    }
+    const note = document.createElement("p");
+    note.className = "road-popup-note";
+    note.textContent = `자료: ${String(properties.nightRidershipPeriod)} · 환승 제외. 주변 보행량이나 안전도를 뜻하지 않습니다.`;
+    content.append(title, list, note);
+  } else {
+    const note = document.createElement("p");
+    note.className = "road-popup-note";
+    note.textContent = "해당 정류장과 일치하는 승하차 자료가 없습니다.";
+    content.append(note);
+  }
+  const source = document.createElement("p");
+  source.className = "road-popup-note";
+  source.textContent = "정류장 위치: 국토교통부 TAGO";
+  content.append(source);
+  return content;
+}
+
 function cctvPopupContent(properties: Record<string, unknown>) {
   const content = document.createElement("article");
   content.className = "road-popup";
@@ -394,6 +440,18 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     map.on("click", cctvLayer, showCctvDetails);
     map.on("mouseenter", cctvLayer, showPointer);
     map.on("mouseleave", cctvLayer, hidePointer);
+    const busLayer = pointLayerId("bus_stop");
+    const showBusDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      const feature = event.features?.[0];
+      if (!feature?.properties) return;
+      new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
+        .setLngLat(event.lngLat)
+        .setDOMContent(busStopPopupContent(feature.properties))
+        .addTo(map);
+    };
+    map.on("click", busLayer, showBusDetails);
+    map.on("mouseenter", busLayer, showPointer);
+    map.on("mouseleave", busLayer, hidePointer);
 
     return () => {
       map.off("click", "road-safety", showRoadDetails);
@@ -405,6 +463,9 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       map.off("click", cctvLayer, showCctvDetails);
       map.off("mouseenter", cctvLayer, showPointer);
       map.off("mouseleave", cctvLayer, hidePointer);
+      map.off("click", busLayer, showBusDetails);
+      map.off("mouseenter", busLayer, showPointer);
+      map.off("mouseleave", busLayer, hidePointer);
       POINT_LAYER_KEYS.forEach((type) => {
         const id = pointLayerId(type);
         if (map.getLayer(id)) map.removeLayer(id);
