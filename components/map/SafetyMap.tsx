@@ -99,12 +99,12 @@ function roadPopupContent(properties: Record<string, unknown>) {
   });
   const lighting = document.createElement("p");
   lighting.className = "road-popup-note";
-  lighting.textContent = `보안등 실제 위치 ${numericProperty(properties, "securityLightCount")}개 · 조명 커버리지 ${numericProperty(properties, "lightingCoverage")}% · 최대 암구간 ${numericProperty(properties, "maxDarkGapMeters")}m · 조명환경 ${numericProperty(properties, "lightingScore")}/100`;
+  lighting.textContent = `보안등 기반 조명 ${numericProperty(properties, "securityLightingScore")}점 · 가로등 추정 조명 ${numericProperty(properties, "roadLightingScore")}점 · 최종 조명 ${numericProperty(properties, "lightingScore")}점`;
 
   // 관찰 메시지는 실제 수집된 데이터에서만 만든다. 없는 요소를 임의로 표시하지 않는다.
   const signals: string[] = [];
   if (numericProperty(properties, "lightingCoverage") >= SIGNAL_THRESHOLDS.lightingCoverageGood) {
-    signals.push("✓ 조명 커버리지 양호");
+    signals.push("✓ 보안등 커버리지 양호");
   }
   const cctvScore = nullableScore(properties, "cctvScore");
   if (cctvScore !== null && cctvScore >= SIGNAL_THRESHOLDS.cctvClose) {
@@ -151,13 +151,13 @@ function roadPopupContent(properties: Record<string, unknown>) {
   const lightingNote = document.createElement("p");
   lightingNote.className = "road-popup-note";
   lightingNote.textContent =
-    "※ 커버리지·암구간은 실제 보안등 위치 기반 추정치이며 실제 조도(lux)가 아닙니다.";
+    `보안등 실제 위치 ${numericProperty(properties, "securityLightCount")}개 · 보안등 커버리지 ${numericProperty(properties, "lightingCoverage")}% · 보안등 최대 암구간 ${numericProperty(properties, "maxDarkGapMeters")}m`;
   content.append(name, label, scoreRow, metrics, lighting, note, lightingNote);
   if (properties.roadLightingEstimated === true) {
     const estimate = document.createElement("p");
     estimate.className = "road-popup-note";
     const method = String(properties.roadLightingMatchMethod ?? "");
-    estimate.textContent = `가로등 공공 관리자료상 설치 근거 있음 · 신뢰도 ${method === "road_name_and_coordinate" ? "높음" : method === "road_name" ? "보통" : "낮음"} · 관리대상 ${numericProperty(properties, "roadLightingManagedUnitCount")}건 · 대표좌표 기반 도로구간 추정. 관리번호별 실제 등주 위치·조도·간격은 제공되지 않습니다.`;
+    estimate.textContent = `가로등 공공 관리자료상 설치 근거 있음 · 신뢰도 ${method === "road_name_and_coordinate" ? "높음" : method === "road_name" ? "보통" : "낮음"} · 관리대상 ${numericProperty(properties, "roadLightingManagedUnitCount")}건 · 연속 추정구간 ${numericProperty(properties, "roadLightingRunMeters")}m. 대표좌표·도로 연결 기반 추정이며 개별 등주 위치·조도(lux)는 제공되지 않습니다.`;
     content.append(estimate);
   }
   const grade = document.createElement("p");
@@ -179,6 +179,44 @@ function roadPopupContent(properties: Record<string, unknown>) {
       "※ 여성밤길 치안안전은 생활안전지도의 경찰청 범죄 밀도분석(밤 시간대 20~24시) 구간 정보를 우선하고, 여성밤길 데이터가 없는 구간은 범죄주의구간(전체 시간대) 밀도분석으로 보완해 도로 주변에서 분석한 값입니다. 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다.";
     content.append(crimeNote);
   }
+  return content;
+}
+
+function corridorPopupContent(properties: Record<string, unknown>) {
+  const content = document.createElement("article");
+  content.className = "road-popup";
+  const name = document.createElement("p");
+  name.className = "road-popup-name";
+  name.textContent = "가로등 설치 추정구간";
+  const roadName = document.createElement("p");
+  roadName.className = "road-popup-label";
+  roadName.textContent = String(properties.roadName ?? "도로명 미확인");
+  const note = document.createElement("p");
+  note.className = "road-popup-note";
+  note.textContent = "공공 관리자료상 가로등 설치 근거 있음";
+  const metrics = document.createElement("dl");
+  metrics.className = "road-popup-metrics";
+  const method = String(properties.matchMethod ?? "");
+  const rows = [
+    ["관리대상", `${Number(properties.managedUnitCount).toLocaleString("ko-KR")}건`],
+    ["매칭 신뢰도", method === "road_name_and_coordinate" ? "높음" : method === "road_name" ? "보통" : "낮음"],
+    ["매칭 방식", method === "road_name_and_coordinate" ? "도로명 + 대표좌표" : method === "road_name" ? "도로명" : "지번 + 인접 도로"],
+    ["가로등 추정 조명", `${Number(properties.roadLightingScore)} / 100`],
+    ["추정구간 길이", `약 ${Number(properties.corridorLengthMeters)}m`],
+  ];
+  for (const [label, value] of rows) {
+    const row = document.createElement("div");
+    const dt = document.createElement("dt"); dt.textContent = label;
+    const dd = document.createElement("dd"); dd.textContent = value;
+    row.append(dt, dd); metrics.append(row);
+  }
+  const source = document.createElement("p");
+  source.className = "road-popup-note";
+  source.textContent = `자료: 동구 가로등현황 · 기준일 ${String(properties.dataAsOf ?? "미확인")}`;
+  const warning = document.createElement("p");
+  warning.className = "road-popup-note";
+  warning.textContent = "※ 관리번호별 실제 등주 위치는 공개되지 않아 대표좌표·도로명·지번주소와 도로 연결관계로 추정한 구간입니다. 실제 조도(lux)가 아닙니다.";
+  content.append(name, roadName, note, metrics, source, warning);
   return content;
 }
 
@@ -352,6 +390,10 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       type: "geojson", data: roadSegments,
       attribution: '도로: 국토지리정보원 · 경계: <a href="https://sgis.kostat.go.kr">SGIS</a> / <a href="https://github.com/vuski/admdongkor">vuski/admdongkor</a> (CC BY 4.0)',
     });
+    if (data.roadLightCorridors?.features.length) {
+      map.addSource("road-light-corridors", { type: "geojson", data: data.roadLightCorridors,
+        attribution: "가로등 관리자료: 동구 가로등현황(2024-04-15) · 도로: 국토지리정보원" });
+    }
 
     map.addLayer({
       id: "road-safety-casing",
@@ -387,6 +429,26 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       },
     });
 
+    if (map.getSource("road-light-corridors")) {
+      const styles = [
+        { id: "high", method: "road_name_and_coordinate", dash: null, opacity: 0.92 },
+        { id: "medium", method: "road_name", dash: [4, 2], opacity: 0.75 },
+        { id: "low", method: "parcel_and_coordinate", dash: [1, 2], opacity: 0.62 },
+      ];
+      for (const style of styles) {
+        map.addLayer({
+          id: `road-light-${style.id}`, type: "line", source: "road-light-corridors",
+          filter: ["==", ["get", "matchMethod"], style.method],
+          layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+          paint: { "line-color": "#0b7285", "line-width": ["interpolate", ["linear"], ["get", "roadLightingEvidence"], 0, 2, 1, 4.5],
+            "line-opacity": style.opacity, ...(style.dash ? { "line-dasharray": style.dash } : {}) },
+        });
+      }
+      map.addLayer({ id: "road-light-hit", type: "line", source: "road-light-corridors",
+        layout: { visibility: "none" },
+        paint: { "line-color": "#0b7285", "line-opacity": 0.01, "line-width": 14 } });
+    }
+
     POINT_LAYER_KEYS.forEach((type) => {
       const definition = MAP_LAYER_DEFINITIONS.find((layer) => layer.key === type);
       if (!definition) return;
@@ -409,6 +471,8 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     });
 
     const showRoadDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      if (map.getLayer("road-light-hit") && map.queryRenderedFeatures(event.point,
+        { layers: ["road-light-hit"] }).length) return;
       const feature = event.features?.[0];
       if (!feature?.properties) return;
 
@@ -427,6 +491,18 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     map.on("click", "road-safety", showRoadDetails);
     map.on("mouseenter", "road-safety", showPointer);
     map.on("mouseleave", "road-safety", hidePointer);
+
+    const showCorridorDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      const properties = event.features?.[0]?.properties;
+      if (!properties) return;
+      new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
+        .setLngLat(event.lngLat).setDOMContent(corridorPopupContent(properties)).addTo(map);
+    };
+    if (map.getLayer("road-light-hit")) {
+      map.on("click", "road-light-hit", showCorridorDetails);
+      map.on("mouseenter", "road-light-hit", showPointer);
+      map.on("mouseleave", "road-light-hit", hidePointer);
+    }
 
     const policeLayer = pointLayerId("police_station");
     const showPoliceDetails = (event: maplibregl.MapLayerMouseEvent) => {
@@ -488,6 +564,11 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       map.off("click", "road-safety", showRoadDetails);
       map.off("mouseenter", "road-safety", showPointer);
       map.off("mouseleave", "road-safety", hidePointer);
+      if (map.getLayer("road-light-hit")) {
+        map.off("click", "road-light-hit", showCorridorDetails);
+        map.off("mouseenter", "road-light-hit", showPointer);
+        map.off("mouseleave", "road-light-hit", hidePointer);
+      }
       map.off("click", policeLayer, showPoliceDetails);
       map.off("mouseenter", policeLayer, showPointer);
       map.off("mouseleave", policeLayer, hidePointer);
@@ -504,9 +585,10 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
         const id = pointLayerId(type);
         if (map.getLayer(id)) map.removeLayer(id);
       });
-      ["road-safety", "road-safety-casing"].forEach((id) => {
+      ["road-light-hit", "road-light-low", "road-light-medium", "road-light-high", "road-safety", "road-safety-casing"].forEach((id) => {
         if (map.getLayer(id)) map.removeLayer(id);
       });
+      if (map.getSource("road-light-corridors")) map.removeSource("road-light-corridors");
       if (map.getSource("road-segments")) map.removeSource("road-segments");
       if (map.getSource("safety-features")) map.removeSource("safety-features");
     };
@@ -522,6 +604,9 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
         map.setLayoutProperty(id, "visibility", visibility[type] ? "visible" : "none");
       }
     });
+    for (const id of ["road-light-high", "road-light-medium", "road-light-low", "road-light-hit"]) {
+      if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", visibility.road_light_corridor ? "visible" : "none");
+    }
   }, [data, styleReady, visibility]);
 
   return (

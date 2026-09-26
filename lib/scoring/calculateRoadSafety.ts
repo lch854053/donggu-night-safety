@@ -8,7 +8,7 @@ import type { Feature, LineString, Point } from "geojson";
 
 import { SAFETY_WEIGHTS, type ProximityWeight } from "@/config/safetyWeights";
 import { computeLightingMetrics } from "@/lib/scoring/lighting";
-import { estimatedRoadLightingModels } from "@/lib/scoring/estimatedRoadLighting";
+import { compareLightingModels } from "@/lib/scoring/lightingCombination";
 import { computeActivityScore } from "@/lib/scoring/activity";
 import { computeEnvironmentScore } from "@/lib/scoring/environment";
 import { computeSurveillanceScore, nearbyCctvSites } from "@/lib/scoring/surveillance";
@@ -71,9 +71,9 @@ export function calculateRoadSafety(
       );
       const lighting = computeLightingMetrics(road, lightFeatures, SAFETY_WEIGHTS.lighting);
       const roadLight = dataset.roadLightingEvidenceByRoad?.[road.properties.id];
-      const estimatedModels = estimatedRoadLightingModels(lighting.lightingScore, roadLight, securityLightCount > 0);
-      const lightingScore = SAFETY_WEIGHTS.lighting.estimatedRoadLightModel === "actual"
-        ? lighting.lightingScore : estimatedModels[SAFETY_WEIGHTS.lighting.estimatedRoadLightModel];
+      const models = compareLightingModels(lighting.lightingScore, roadLight, securityLightCount > 0);
+      const lightingScore = SAFETY_WEIGHTS.lighting.lightingCombinationModel === "actual"
+        ? lighting.lightingScore : models[SAFETY_WEIGHTS.lighting.lightingCombinationModel];
       const nearbyCctv = nearbyCctvSites(road, candidates, SAFETY_WEIGHTS.cctv.radiusMeters);
       const cctvCount = nearbyCctv.length;
       const emergencyBellCount = pointsNearRoad(
@@ -186,6 +186,8 @@ export function calculateRoadSafety(
         ...road.properties,
         lengthMeters: Math.round(length(road, { units: "kilometers" }) * 1000),
         lightingScore,
+        securityLightingScore: lighting.lightingScore,
+        roadLightingScore: roadLight?.roadLightingScore ?? 0,
         actualLightingScore: lighting.lightingScore,
         lightingCoverage: Math.round(lighting.coverageScore),
         maxDarkGapMeters: Math.round(lighting.maxDarkGapMeters),
@@ -208,6 +210,10 @@ export function calculateRoadSafety(
           roadLightingRecordCount: roadLight.matchedRecordCount,
           roadLightingManagedUnitCount: roadLight.managedUnitCount ?? roadLight.matchedRecordCount,
           roadLightingRepresentativePointCount: roadLight.uniqueRepresentativePointCount,
+          roadLightingCoverageEstimated: roadLight.roadLightingCoverageEstimated,
+          roadLightingContinuity: roadLight.roadLightingContinuity,
+          roadLightingRunMeters: roadLight.roadLightingRunMeters,
+          roadLightingClusterCount: roadLight.roadLightingClusterCount,
         } : {}),
         cctvCount,
         emergencyBellCount,

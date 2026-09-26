@@ -239,6 +239,46 @@ input {
   box-shadow: none;
 }
 
+.layer-swatch.is-line {
+  width: 0.9rem;
+  height: 0;
+  border: 0;
+  border-top: 3px dashed var(--layer-color);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.corridor-legend {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.75rem 0.1rem 0.1rem;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+}
+
+.corridor-legend > span {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.corridor-legend > small {
+  color: #526679;
+  line-height: 1.45;
+}
+
+.corridor-key {
+  display: inline-block;
+  width: 1.15rem;
+  border-top: 3px solid #0b7285;
+}
+
+.corridor-key:not(:first-child) { margin-left: 0.45rem; }
+.corridor-key.is-medium { border-top-style: dashed; opacity: 0.78; }
+.corridor-key.is-low { border-top-style: dotted; opacity: 0.65; }
+
 .layer-copy {
   display: flex;
   min-width: 0;
