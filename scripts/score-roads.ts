@@ -5,6 +5,8 @@ import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
 import { calculateRoadSafety } from "../lib/scoring/calculateRoadSafety";
 import { createRoadPointIndex } from "../lib/scoring/roadPointIndex";
+import { computeEnvironmentScore } from "../lib/scoring/environment";
+import { combineDimensionScores } from "../lib/scoring/weightedAverage";
 import type { SafetyDataset, ScoredRoadFile } from "../types/safety";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -33,7 +35,42 @@ export async function scoreRoads() {
     throw new Error("Sample risk zones cannot be used with real roads");
   }
   const start = performance.now();
-  const scored = calculateRoadSafety(dataset, createRoadPointIndex(dataset));
+  let scored: ScoredRoadFile | ReturnType<typeof calculateRoadSafety>;
+  if (process.argv.includes("--only=vacant")) {
+    const previous: ScoredRoadFile = JSON.parse(await readFile(resolve(root, "public/data/road-segments.geojson"), "utf8"));
+    const previousHashes = previous.scoreMetadata?.inputHashes;
+    if (!previousHashes || paths.some((path, index) =>
+      path !== "public/data/safety-features.geojson" && path !== "scripts/score-roads.ts" &&
+      previousHashes[path] !== createHash("sha256").update(contents[index]).digest("hex"))) {
+      throw new Error("기존 도로 점수의 입력 파일이 변경되었습니다. 전체 점수 재계산이 필요합니다.");
+    }
+    const byId = new Map(previous.features.map((road) => [road.properties.id, road]));
+    const candidatesForRoad = createRoadPointIndex(dataset);
+    const availableTypes = new Set(dataset.features.features.map((feature) => feature.properties.type));
+    scored = {
+      type: "FeatureCollection",
+      features: dataset.roadSegments.features.map((road) => {
+        const old = byId.get(road.properties.id);
+        if (!old) throw new Error(`기존 도로 점수 누락: ${road.properties.id}`);
+        const environment = computeEnvironmentScore(road, candidatesForRoad(road), availableTypes);
+        const properties = {
+          ...old.properties,
+          environmentScore: environment.score,
+          vacancyScore: environment.vacancyScore ?? undefined,
+          safetyScoreV2: combineDimensionScores({
+            lighting: old.properties.lightingScore,
+            surveillance: old.properties.surveillanceScore,
+            activity: old.properties.activityScore,
+            environment: environment.score,
+            crime: old.properties.crimeScore,
+          }),
+        };
+        return { ...old, properties };
+      }),
+    };
+  } else {
+    scored = calculateRoadSafety(dataset, createRoadPointIndex(dataset));
+  }
   const output: ScoredRoadFile = {
     ...scored,
     scoreMetadata: {

@@ -172,7 +172,7 @@ safetyScoreV2 = 조명·가시성×0.25 + 감시·긴급대응×0.20 + 야간활
 - **빈집·노후건축물**: 빈집(`vacant_house`)은 강한 감점 지표, 노후건축물은 약한 보조 지표(deterioration, 차원 내 20%)로 분리한다. v1의 노후건물 최대 −8 직접 감점·인도 없음 −3은 폐기하고 환경 차원 내부로 흡수했다.
 - 점수 등급은 v2 기준 5단계(80~100 상대적 안심 높음 ~ 0~34 높은 주의 참고)다. 최종 점수는 **절대적인 안전을 보장하는 수치가 아니라 공공데이터 기반의 상대적 밤길 환경 참고지수**다.
 
-빈집 재수집은 `.env.local`에 `ODCLOUD_SERVICE_KEY`를 설정한 뒤 `node scripts/fetch-real-data.mjs --only=vacant`으로 실행합니다. 키는 빌드 산출물이나 저장소에 포함하지 않습니다. 나머지 실데이터 연결 우선순위는 `public/data/meta.json`의 `pending`과 `scripts/fetch-real-data.mjs`에 기록됩니다.
+빈집 재수집은 `.env.local`에 `ODCLOUD_SERVICE_KEY`를 설정한 뒤 `node scripts/fetch-real-data.mjs --only=vacant`으로 실행합니다. 월간 갱신을 위해 GitHub Actions Secret에도 같은 이름으로 등록합니다. 키가 없을 때 전체 갱신은 이전 빈집 자료를 보존하며, 빈집만 갱신하면 오류를 알립니다. 키는 빌드 산출물이나 저장소에 포함하지 않습니다. 나머지 실데이터 연결 우선순위는 `public/data/meta.json`의 `pending`과 `scripts/fetch-real-data.mjs`에 기록됩니다.
 
 ### 버스정류장과 야간 승하차
 

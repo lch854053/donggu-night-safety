@@ -379,12 +379,14 @@ async function main() {
     refreshedTypes.add("bus_stop");
     console.log(`  동구 ${result.insideCount}개, 주변 포함 ${result.features.length}개`);
   }
-  if (want("vacant")) {
+  if (want("vacant") && (ODCLOUD_KEY || only.includes("vacant"))) {
     console.log("[빈집] 공공데이터포털 광주 동구 빈집 현황");
     const { features, dataAsOf, total } = await collectVacantHouses(ODCLOUD_KEY, getWithRetry);
     collections.vacant_house = features;
     metaSources.vacant_house = { count: total, dataAsOf, fetchedAt: new Date().toISOString().slice(0, 10), source: "odcloud:15144631", crs: "EPSG:5181" };
     refreshedTypes.add("vacant_house");
+  } else if (want("vacant") && !ODCLOUD_KEY) {
+    console.warn("[빈집] ODCLOUD_SERVICE_KEY 미설정 — 기존 빈집 자료 유지");
   }
 
   const newFeatures = [
@@ -447,7 +449,7 @@ async function main() {
     "utf8",
   );
 
-  execFileSync(process.execPath, ["--import", "tsx", "scripts/score-roads.ts"], {
+  execFileSync(process.execPath, ["--import", "tsx", "scripts/score-roads.ts", ...(only.length === 1 && only[0] === "vacant" ? ["--only=vacant"] : [])], {
     cwd: ROOT, stdio: "inherit",
   });
 
