@@ -23,7 +23,7 @@ export function vacantHouseFeature(row, index) {
 }
 
 export async function collectVacantHouses(key, getText) {
-  if (!key) throw new Error("빈집 수집에는 ODCLOUD_SERVICE_KEY가 필요합니다.");
+  if (!key) throw new Error("빈집 수집에는 MOIS_SERVICE_KEY가 필요합니다.");
   const features = [];
   let total = null;
   let dataAsOf = "";
