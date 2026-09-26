@@ -45,10 +45,10 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
     kind: "point",
   },
   {
-    key: "old_building",
-    label: "노후건축물",
-    description: "사용승인 후 30년 이상 경과한 건축물 표본",
-    color: "#707b83",
+    key: "vacant_house",
+    label: "빈집",
+    description: "동구 빈집 현황 (2025년 기준)",
+    color: "#9b4c8b",
     kind: "point",
   },
   {
@@ -79,7 +79,7 @@ export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   night_activity: false,
   bus_stop: true,
   subway_entrance: false,
-  vacant_house: false,
+  vacant_house: true,
 };
 
 export const POINT_LAYER_KEYS = MAP_LAYER_DEFINITIONS.filter(

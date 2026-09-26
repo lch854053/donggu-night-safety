@@ -393,7 +393,7 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
           "circle-color": definition.color,
           "circle-stroke-color": "#fffdf8",
           "circle-stroke-width": 1.5,
-          "circle-opacity": type === "old_building" ? 0.72 : 0.94,
+          "circle-opacity": 0.94,
         },
       });
     });
@@ -454,6 +454,25 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     map.on("click", busLayer, showBusDetails);
     map.on("mouseenter", busLayer, showPointer);
     map.on("mouseleave", busLayer, hidePointer);
+    const vacantLayer = pointLayerId("vacant_house");
+    const showVacantDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      const feature = event.features?.[0];
+      if (!feature?.properties) return;
+      const content = document.createElement("article");
+      content.className = "road-popup";
+      const name = document.createElement("p");
+      name.className = "road-popup-name";
+      name.textContent = String(feature.properties.name ?? "빈집");
+      const note = document.createElement("p");
+      note.className = "road-popup-note";
+      note.textContent = `${String(feature.properties.note ?? "")} · 자료기준 2025-07-16`;
+      content.append(name, note);
+      new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
+        .setLngLat(event.lngLat).setDOMContent(content).addTo(map);
+    };
+    map.on("click", vacantLayer, showVacantDetails);
+    map.on("mouseenter", vacantLayer, showPointer);
+    map.on("mouseleave", vacantLayer, hidePointer);
 
     return () => {
       map.off("click", "road-safety", showRoadDetails);
@@ -468,6 +487,9 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       map.off("click", busLayer, showBusDetails);
       map.off("mouseenter", busLayer, showPointer);
       map.off("mouseleave", busLayer, hidePointer);
+      map.off("click", vacantLayer, showVacantDetails);
+      map.off("mouseenter", vacantLayer, showPointer);
+      map.off("mouseleave", vacantLayer, hidePointer);
       POINT_LAYER_KEYS.forEach((type) => {
         const id = pointLayerId(type);
         if (map.getLayer(id)) map.removeLayer(id);

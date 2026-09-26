@@ -1,4 +1,4 @@
-# 매월 공공데이터(CCTV·비상벨·편의점·CPTED·버스정류장)를 자동 수집해 커밋합니다.
+# 매월 공공데이터(CCTV·비상벨·편의점·CPTED·버스정류장·빈집)를 자동 수집해 커밋합니다.
 # 커밋이 푸시되면 Vercel이 자동으로 재배포합니다.
 #
 # 사전 준비(한 번만): 저장소 Settings → Secrets and variables → Actions에 등록
@@ -8,6 +8,7 @@
 #   - VWORLD_DATA_API_KEY  (VWorld 2D 데이터 API 인증키, Geocoder 키와 별도 관리 가능)
 #   - KAKAO_REST_API_KEY   (경찰청 관서 주소 좌표 변환)
 #   - TAGO_SERVICE_KEY    (버스정류소정보; 승하차 ZIP은 분기별 수동 반영)
+#   - ODCLOUD_SERVICE_KEY (동구 빈집 현황)
 # 선택: Variables → VWORLD_DOMAIN (VWORLD에 등록한 서비스 URL)
 #
 # 보안등은 공개 API가 없어(동구청 CSV 수동 교체) 자동 수집 대상이 아닙니다.
@@ -20,10 +21,10 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: "수집 대상 (all: 전체, cpted: CPTED만, police: 경찰시설만, bus: 정류장만)"
+        description: "수집 대상 (all: 전체, cpted: CPTED만, police: 경찰시설만, bus: 정류장만, vacant: 빈집만)"
         type: choice
         default: all
-        options: [all, cpted, police, bus]
+        options: [all, cpted, police, bus, vacant]
 
 permissions:
   contents: write
@@ -63,10 +64,11 @@ jobs:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
           TAGO_SERVICE_KEY: ${{ secrets.TAGO_SERVICE_KEY }}
+          ODCLOUD_SERVICE_KEY: ${{ secrets.ODCLOUD_SERVICE_KEY }}
           VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN }}
           ONLY: ${{ inputs.only }}
         run: |
-          if [ "$ONLY" = "cpted" ] || [ "$ONLY" = "police" ] || [ "$ONLY" = "bus" ]; then
+          if [ "$ONLY" = "cpted" ] || [ "$ONLY" = "police" ] || [ "$ONLY" = "bus" ] || [ "$ONLY" = "vacant" ]; then
             node scripts/fetch-real-data.mjs --only="$ONLY"
           else
             node scripts/fetch-real-data.mjs

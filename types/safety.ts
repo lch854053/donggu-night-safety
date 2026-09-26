@@ -17,7 +17,7 @@ export type SafetyFeatureType =
   | "bus_stop"
   /** 지하철 출입구. 데이터 연결은 TODO. */
   | "subway_entrance"
-  /** 빈집. 데이터 연결은 TODO. */
+  /** 공공데이터포털 동구 빈집 현황. */
   | "vacant_house";
 
 export type LayerKey = Exclude<SafetyFeatureType, "police_center">;
