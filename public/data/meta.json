@@ -80,11 +80,13 @@
       "metric": "정류장별 1일 평균 거래건수(승차·하차 분리)"
     },
     "vacant_house": {
-      "count": 648,
+      "count": 643,
       "dataAsOf": "2025-07-16",
       "fetchedAt": "2026-09-26",
       "source": "odcloud:15144631",
-      "crs": "EPSG:5181"
+      "crs": "EPSG:5174",
+      "sourceCount": 648,
+      "excluded": 5
     }
   },
   "pending": {
