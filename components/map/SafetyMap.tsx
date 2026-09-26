@@ -393,7 +393,7 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
           "circle-color": definition.color,
           "circle-stroke-color": "#fffdf8",
           "circle-stroke-width": 1.5,
-          "circle-opacity": type === "old_building" ? 0.72 : 0.94,
+          "circle-opacity": 0.94,
         },
       });
     });
