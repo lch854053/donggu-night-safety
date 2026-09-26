@@ -8,7 +8,6 @@
 #   - VWORLD_DATA_API_KEY  (VWorld 2D 데이터 API 인증키, Geocoder 키와 별도 관리 가능)
 #   - KAKAO_REST_API_KEY   (경찰청 관서 주소 좌표 변환)
 #   - TAGO_SERVICE_KEY    (버스정류소정보; 승하차 ZIP은 분기별 수동 반영)
-#   - ODCLOUD_SERVICE_KEY (동구 빈집 현황)
 # 선택: Variables → VWORLD_DOMAIN (VWORLD에 등록한 서비스 URL)
 #
 # 보안등은 공개 API가 없어(동구청 CSV 수동 교체) 자동 수집 대상이 아닙니다.
@@ -64,7 +63,6 @@ jobs:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
           TAGO_SERVICE_KEY: ${{ secrets.TAGO_SERVICE_KEY }}
-          ODCLOUD_SERVICE_KEY: ${{ secrets.ODCLOUD_SERVICE_KEY }}
           VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN }}
           ONLY: ${{ inputs.only }}
         run: |

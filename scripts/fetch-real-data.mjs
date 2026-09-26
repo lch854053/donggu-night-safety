@@ -45,7 +45,6 @@ const MOIS_KEY = process.env.MOIS_SERVICE_KEY;
 const VWORLD_KEY = process.env.VWORLD_API_KEY;
 const KAKAO_KEY = process.env.KAKAO_REST_API_KEY;
 const TAGO_KEY = process.env.TAGO_SERVICE_KEY;
-const ODCLOUD_KEY = process.env.ODCLOUD_SERVICE_KEY;
 
 const onlyArg = process.argv.find((a) => a.startsWith("--only="));
 const only = onlyArg ? onlyArg.slice(7).split(",") : [];
@@ -379,14 +378,14 @@ async function main() {
     refreshedTypes.add("bus_stop");
     console.log(`  동구 ${result.insideCount}개, 주변 포함 ${result.features.length}개`);
   }
-  if (want("vacant") && (ODCLOUD_KEY || only.includes("vacant"))) {
+  if (want("vacant") && (MOIS_KEY || only.includes("vacant"))) {
     console.log("[빈집] 공공데이터포털 광주 동구 빈집 현황");
-    const { features, dataAsOf, total } = await collectVacantHouses(ODCLOUD_KEY, getWithRetry);
+    const { features, dataAsOf, total } = await collectVacantHouses(MOIS_KEY, getWithRetry);
     collections.vacant_house = features;
     metaSources.vacant_house = { count: total, dataAsOf, fetchedAt: new Date().toISOString().slice(0, 10), source: "odcloud:15144631", crs: "EPSG:5181" };
     refreshedTypes.add("vacant_house");
-  } else if (want("vacant") && !ODCLOUD_KEY) {
-    console.warn("[빈집] ODCLOUD_SERVICE_KEY 미설정 — 기존 빈집 자료 유지");
+  } else if (want("vacant") && !MOIS_KEY) {
+    console.warn("[빈집] MOIS_SERVICE_KEY 미설정 — 기존 빈집 자료 유지");
   }
 
   const newFeatures = [
@@ -437,7 +436,7 @@ async function main() {
              ? { police_station: "경찰청 주소 원본 수집 — 건물 단위 좌표 확인 필요" } : {}),
           night_activity: "야간 영업 POI(음식점·카페·약국·PC방·숙박 등) 좌표 수집 필요 — v2 activityScore 자동 반영",
           ...(!features.some((f) => f.properties.type === "vacant_house")
-            ? { vacant_house: "ODCLOUD_SERVICE_KEY 설정 후 --only=vacant 실행 필요" } : {}),
+            ? { vacant_house: "MOIS_SERVICE_KEY 설정 후 --only=vacant 실행 필요" } : {}),
           ...(!features.some((f) => f.properties.type === "bus_stop")
             ? { transit: "버스정류장·지하철 출입구 좌표 수집 필요 — v2 activityScore(transit) 자동 반영" }
             : { subway_entrance: "지하철 출입구 좌표 수집 필요 — 현재 대중교통 접근성은 버스정류장만 반영" }),
