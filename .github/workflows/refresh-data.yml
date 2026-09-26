@@ -8,10 +8,11 @@
 #   - VWORLD_DATA_API_KEY  (VWorld 2D 데이터 API 인증키, Geocoder 키와 별도 관리 가능)
 #   - KAKAO_REST_API_KEY   (경찰청 관서 주소 좌표 변환)
 #   - TAGO_SERVICE_KEY    (버스정류소정보; 승하차 ZIP은 분기별 수동 반영)
+#   - ROAD_LIGHT_SERVICE_KEY (동구 가로등현황 odcloud 일반 인증키)
 # 선택: Variables → VWORLD_DOMAIN (VWORLD에 등록한 서비스 URL)
 #
 # 보안등은 공개 API가 없어(동구청 CSV 수동 교체) 자동 수집 대상이 아닙니다.
-# 보안등 갱신 알림은 streetlight-refresh-reminder.yml을 참고하세요.
+# 보안등 갱신 알림은 security-light-refresh-reminder.yml을 참고하세요.
 name: 공공데이터 월간 자동 수집
 
 on:
@@ -20,10 +21,10 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: "수집 대상 (all: 전체, cpted: CPTED만, police: 경찰시설만, bus: 정류장만, vacant: 빈집만)"
+        description: "수집 대상 (all: 전체, road-lights: 가로등, cpted: CPTED, police: 경찰시설, bus: 정류장, vacant: 빈집)"
         type: choice
         default: all
-        options: [all, cpted, police, bus, vacant]
+        options: [all, road-lights, cpted, police, bus, vacant]
 
 permissions:
   contents: write
@@ -63,10 +64,11 @@ jobs:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
           TAGO_SERVICE_KEY: ${{ secrets.TAGO_SERVICE_KEY }}
+          ROAD_LIGHT_SERVICE_KEY: ${{ secrets.ROAD_LIGHT_SERVICE_KEY }}
           VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN }}
           ONLY: ${{ inputs.only }}
         run: |
-          if [ "$ONLY" = "cpted" ] || [ "$ONLY" = "police" ] || [ "$ONLY" = "bus" ] || [ "$ONLY" = "vacant" ]; then
+          if [ "$ONLY" = "cpted" ] || [ "$ONLY" = "police" ] || [ "$ONLY" = "bus" ] || [ "$ONLY" = "vacant" ] || [ "$ONLY" = "road-lights" ]; then
             node scripts/fetch-real-data.mjs --only="$ONLY"
           else
             node scripts/fetch-real-data.mjs

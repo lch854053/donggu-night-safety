@@ -3,7 +3,7 @@ import type { ScoredRoadFile } from "@/types/safety";
 /** Fail visibly instead of accidentally doing millions of distance checks on the client. */
 export function validateScoredRoads(value: ScoredRoadFile): ScoredRoadFile {
   const numericFields = ["lengthMeters", "lightingScore", "lightingCoverage", "maxDarkGapMeters",
-    "lightingUniformityScore", "safetyScore", "streetlightCount", "cctvCount", "emergencyBellCount",
+    "lightingUniformityScore", "safetyScore", "streetlightCount", "securityLightCount", "roadLightCount", "cctvCount", "emergencyBellCount",
     "convenienceStoreCount", "cptedCount", "oldBuildingCount", "riskLevel",
     "sidewalkContribution"] as const;
   // v2 차원·세부 점수는 미수집(null)이 허용된다. 숫자인데 유한하지 않으면 오류.

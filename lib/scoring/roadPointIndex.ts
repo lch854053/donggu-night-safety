@@ -24,7 +24,8 @@ export function createRoadPointIndex(dataset: SafetyDataset) {
     SAFETY_SCORES_V2.environment.deterioration.radiusMeters,
   ];
   const radius = Math.max(
-    SAFETY_WEIGHTS.lighting.influenceCutoffMeters, SAFETY_WEIGHTS.lighting.countRadiusMeters,
+    ...Object.values(SAFETY_WEIGHTS.lighting.lightTypes).map((light) => light.cutoffMeters),
+    SAFETY_WEIGHTS.lighting.countRadiusMeters,
     ...proximityWeights.map((weight) => weight.radiusMeters),
     ...v2Radii,
   );

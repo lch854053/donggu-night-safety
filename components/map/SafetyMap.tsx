@@ -97,6 +97,9 @@ function roadPopupContent(properties: Record<string, unknown>) {
     row.append(term, detail);
     metrics.append(row);
   });
+  const lighting = document.createElement("p");
+  lighting.className = "road-popup-note";
+  lighting.textContent = `보안등 ${numericProperty(properties, "securityLightCount")}개 · 가로등 대표 위치 ${numericProperty(properties, "roadLightCount")}곳 · 조명 커버리지 ${numericProperty(properties, "lightingCoverage")}% · 최대 암구간 ${numericProperty(properties, "maxDarkGapMeters")}m · 조명환경 ${numericProperty(properties, "lightingScore")}/100`;
 
   // 관찰 메시지는 실제 수집된 데이터에서만 만든다. 없는 요소를 임의로 표시하지 않는다.
   const signals: string[] = [];
@@ -148,8 +151,8 @@ function roadPopupContent(properties: Record<string, unknown>) {
   const lightingNote = document.createElement("p");
   lightingNote.className = "road-popup-note";
   lightingNote.textContent =
-    "※ 실제 조도(lux)가 아니라 보안등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다.";
-  content.append(name, label, scoreRow, metrics, note, lightingNote);
+    "※ 실제 조도(lux)가 아니라 보안등·가로등 대표 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다.";
+  content.append(name, label, scoreRow, metrics, lighting, note, lightingNote);
   const grade = document.createElement("p");
   grade.className = "road-popup-note";
   grade.textContent = properties.planningRoadGrade
@@ -385,11 +388,11 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
         id: pointLayerId(type),
         type: "circle",
         source: "safety-features",
-        filter: type === "police_station"
-          ? ["in", ["get", "type"], ["literal", ["police_station", "police_center"]]]
+        filter: type === "police_station" || type === "security_light"
+          ? ["in", ["get", "type"], ["literal", type === "police_station" ? ["police_station", "police_center"] : ["security_light", "streetlight"]]]
           : ["==", ["get", "type"], type],
         paint: {
-          "circle-radius": ["interpolate", ["linear"], ["zoom"], 12, 4, 16, 7],
+          "circle-radius": ["interpolate", ["linear"], ["zoom"], 12, 3, 16, 6],
           "circle-color": definition.color,
           "circle-stroke-color": "#fffdf8",
           "circle-stroke-width": 1.5,

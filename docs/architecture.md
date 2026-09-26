@@ -15,7 +15,7 @@ create extension if not exists pgcrypto;
 create table public.safety_features (
   id uuid primary key default gen_random_uuid(),
   type text not null check (type in (
-    'streetlight', 'cctv', 'emergency_bell', 'convenience_store',
+    'security_light', 'road_light', 'cctv', 'emergency_bell', 'convenience_store',
     'cpted', 'old_building', 'police_facility', 'bus_stop'
   )),
   name text,
@@ -65,7 +65,7 @@ create index road_segments_safety_score_idx on public.road_segments (safety_scor
 select
   r.id,
   count(*) filter (
-    where f.type = 'streetlight'
+     where f.type = 'security_light'
       and ST_DWithin(r.geom::geography, f.geom::geography, 50)
   ) as streetlight_count,
   count(*) filter (

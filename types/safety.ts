@@ -2,6 +2,9 @@ import type { FeatureCollection, LineString, Point, Polygon } from "geojson";
 import type { CctvPurpose } from "@/config/cctvPurpose.mjs";
 
 export type SafetyFeatureType =
+  | "security_light"
+  | "road_light"
+  /** 이전 정적 데이터와 호환되는 보안등 별칭. 새 자료에는 사용하지 않는다. */
   | "streetlight"
   | "cctv"
   | "emergency_bell"
@@ -47,6 +50,8 @@ export interface SafetyFeatureProperties {
   nightWeekdayAlighting?: number;
   nightWeekendBoarding?: number;
   nightWeekendAlighting?: number;
+  roadName?: string;
+  dataAsOf?: string;
 }
 
 export interface RiskZoneProperties {
@@ -92,7 +97,7 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
    * 미수집 차원은 재정규화해 제외한다. 차원이 전혀 없으면 null(0과 다른 의미).
    */
   safetyScoreV2: number | null;
-  /** 보안등 위치·거리 분포 기반 상대적 조명 환경(0~100). 실제 조도(lux)가 아니다. v2 조명·가시성 차원. */
+  /** 보안등·가로등 위치·거리 분포 기반 상대적 조명 환경(0~100). 실제 조도(lux)가 아니다. */
   lightingScore: number;
   lightingCoverage: number;
   maxDarkGapMeters: number;
@@ -108,7 +113,10 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
   crimeSampleCount: number | null;
   /** v1(legacy) 인도 없음 감점 기록. v2에서는 sidewalkScore로 흡수됐다. */
   sidewalkContribution: number;
+  /** 과거 자료 호환: 보안등 위치 수. */
   streetlightCount: number;
+  securityLightCount: number;
+  roadLightCount: number;
   cctvCount: number;
   emergencyBellCount: number;
   convenienceStoreCount: number;
