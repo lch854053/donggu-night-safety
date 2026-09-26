@@ -10,10 +10,17 @@ export interface MapLayerDefinition {
 
 export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
   {
-    key: "streetlight",
+    key: "security_light",
     label: "보안등",
     description: "야간 보행로 조명 시설",
     color: "#e5a617",
+    kind: "point",
+  },
+  {
+    key: "road_light",
+    label: "가로등",
+    description: "동구 가로등 자료의 중복 제거된 대표 위치",
+    color: "#a58a49",
     kind: "point",
   },
   {
@@ -68,7 +75,9 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
 ] as const;
 
 export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
-  streetlight: true,
+  security_light: true,
+  road_light: true,
+  streetlight: false,
   cctv: true,
   emergency_bell: true,
   convenience_store: true,

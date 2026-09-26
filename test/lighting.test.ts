@@ -24,9 +24,9 @@ function testRoad(lengthMeters: number) {
   return lineString([CENTER, end], { id: "test-road", name: "test", source: "test" });
 }
 
-function streetlight(metersAlong: number, id: string) {
+function streetlight(metersAlong: number, id: string, type: SafetyFeatureType = "security_light") {
   return point(destination(CENTER, metersAlong / 1000, 90).geometry.coordinates, {
-    id, type: "streetlight" as SafetyFeatureType, name: "test light", source: "test",
+    id, type, name: "test light", source: "test",
   });
 }
 
@@ -101,6 +101,26 @@ test("case E: long dark gap lowers the score even with decent coverage", () => {
   assert.ok(longRoad.lightingScore <= 40, `case E score=${longRoad.lightingScore}`);
 });
 
+test("가로등은 보안등보다 넓게 작동하지만 같은 위치 광원은 포화 결합된다", () => {
+  const road = testRoad(80);
+  const security = computeLightingMetrics(road, [streetlight(0, "s")], config);
+  const roadOnly = computeLightingMetrics(road, [streetlight(0, "r", "road_light")], config);
+  const both = computeLightingMetrics(road, [streetlight(0, "s"), streetlight(0, "r", "road_light")], config);
+  assert.ok(roadOnly.coverageScore > security.coverageScore);
+  assert.ok(both.coverageScore >= roadOnly.coverageScore);
+  assert.ok(both.lightingScore <= 100);
+  assert.equal(computeLightingMetrics(road, Array.from({ length: 30 }, (_, i) => streetlight(0, `r${i}`, "road_light")), config).lightingScore <= 100, true);
+  assert.ok(computeLightingMetrics(road, [streetlight(0, "r", "road_light"), streetlight(80, "r2", "road_light")], config).maxDarkGapMeters > 0);
+});
+
+test("가로등 대표 위치가 양 끝에 많이 몰려도 긴 중간 암구간은 감점된다", () => {
+  const clustered = Array.from({ length: 20 }, (_, i) => streetlight(i % 2 ? 0 : 250, `road-${i}`, "road_light"));
+  const metrics = computeLightingMetrics(testRoad(250), clustered, config);
+  assert.ok(metrics.maxDarkGapMeters >= 100);
+  assert.equal(metrics.darkGapScore, 0);
+  assert.ok(metrics.lightingScore < 80);
+});
+
 test("calculateRoadSafety exposes lighting metrics while keeping streetlightCount", () => {
   const roadA = testRoad(50);
   const scored = calculateRoadSafety({ ...dataset,
@@ -109,6 +129,8 @@ test("calculateRoadSafety exposes lighting metrics while keeping streetlightCoun
   const properties = scored.features[0].properties;
   const metrics = computeLightingMetrics(roadA, [streetlight(0, "a1"), streetlight(50, "a2")], config);
   assert.equal(properties.streetlightCount, 2);
+  assert.equal(properties.securityLightCount, 2);
+  assert.equal(properties.roadLightCount, 0);
   assert.equal(properties.lightingScore, metrics.lightingScore);
   assert.equal(properties.lightingCoverage, Math.round(metrics.coverageScore));
   assert.equal(properties.maxDarkGapMeters, Math.round(metrics.maxDarkGapMeters));

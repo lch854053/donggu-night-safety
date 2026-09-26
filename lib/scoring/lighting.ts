@@ -8,13 +8,13 @@ function clamp0to100(value: number) {
   return Math.min(100, Math.max(0, value));
 }
 
-/** 한 개 보안등이 거리 d(미터)에 남기는 상대 영향(0~1]. 가우시안 거리 감쇠. */
+/** 한 개 조명 위치가 거리 d(미터)에 남기는 상대 영향(0~1]. 가우시안 거리 감쇠. */
 export function lightInfluence(distanceMeters: number, sigmaMeters: number) {
   return Math.exp(-((distanceMeters / sigmaMeters) ** 2));
 }
 
 /**
- * 여러 보안등의 결합 영향. 합산 후 clamp하는 대신 곱 포화 1-∏(1-x)를 쓴다.
+ * 여러 조명 위치의 결합 영향. 합산 후 clamp하는 대신 곱 포화 1-∏(1-x)를 쓴다.
  * 각 등의 기여를 0~1의 독립 커버처럼 다루기 때문에 등이 몰려도 1을 넘지 않고,
  * clamp의 자르기 왜곡 없이 부드럽게 포화하며, 영향 순서와 무관하게 같은 값을 낸다.
  */
@@ -71,16 +71,16 @@ export interface LightingMetrics {
 
 /**
  * 도로를 sampleIntervalMeters 간격으로 샘플링해 조명 환경 지표를 계산한다.
- * 실제 조도(lux)가 아닌 보안등 위치·거리 분포 기반의 상대적 추정값이다.
+ * 실제 조도(lux)가 아닌 보안등·가로등 위치·거리 분포 기반의 상대적 추정값이다.
  *
- * 샘플×보안등 거리는 Turf distance(haversine) 대신 도로 시작점 기준
+ * 샘플×조명 위치 거리는 Turf distance(haversine) 대신 도로 시작점 기준
  * 등장투영 평면 미터로 계산한다. 전 구간에서 수십만 회 호출되는 전처리
  * 경로라서이고, 110m 이내 스케일에서 오차는 mm 수준이다. 샘플링과 후보
  * 탐색(roadPointIndex)은 여전히 Turf를 사용한다.
  */
 export function computeLightingMetrics(
   road: Feature<LineString>,
-  streetlights: Feature<Point, SafetyFeatureProperties>[],
+  lightFeatures: Feature<Point, SafetyFeatureProperties>[],
   config: LightingConfig,
 ): LightingMetrics {
   const lengthMeters = length(road, { units: "kilometers" }) * 1000;
@@ -97,18 +97,24 @@ export function computeLightingMetrics(
       .coordinates as [number, number];
     samples.push(toLocalMeters(point));
   }
-  const lights = streetlights.map((light) => toLocalMeters(light.geometry.coordinates));
-  const cutoffSquared = config.influenceCutoffMeters ** 2;
+  const lights = lightFeatures.map((light) => {
+    const [x, y] = toLocalMeters(light.geometry.coordinates);
+    const kind = light.properties.type === "road_light" ? "road_light" : "security_light";
+    const { sigmaMeters, cutoffMeters } = config.lightTypes[kind];
+    return { x, y, sigmaMeters, cutoffSquared: cutoffMeters ** 2 };
+  });
 
   const influences = samples.map(([x, y]) => {
-    const distances: number[] = [];
-    for (const [lx, ly] of lights) {
-      const dx = x - lx;
-      const dy = y - ly;
+    let darkness = 1;
+    for (const light of lights) {
+      const dx = x - light.x;
+      const dy = y - light.y;
       const squared = dx * dx + dy * dy;
-      if (squared <= cutoffSquared) distances.push(Math.sqrt(squared));
+      if (squared <= light.cutoffSquared) {
+        darkness *= 1 - lightInfluence(Math.sqrt(squared), light.sigmaMeters);
+      }
     }
-    return combinedInfluence(distances, config.influenceSigmaMeters);
+    return 1 - darkness;
   });
 
   let covered = 0;

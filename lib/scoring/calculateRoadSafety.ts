@@ -60,14 +60,16 @@ export function calculateRoadSafety(
       const streetlightCount = pointsNearRoad(
         road,
         candidates,
-        "streetlight",
+        "security_light",
         SAFETY_WEIGHTS.lighting.countRadiusMeters,
-      );
+      ) + pointsNearRoad(road, candidates, "streetlight", SAFETY_WEIGHTS.lighting.countRadiusMeters);
+      const securityLightCount = streetlightCount;
+      const roadLightCount = pointsNearRoad(road, candidates, "road_light", SAFETY_WEIGHTS.lighting.countRadiusMeters);
       // 조명 환경은 개수가 아니라 구간 샘플별 감쇠 영향(위치·거리 분포)으로 산출한다.
-      const streetlightFeatures = candidates.filter(
-        (candidate) => candidate.properties.type === "streetlight",
+      const lightFeatures = candidates.filter(
+        (candidate) => ["security_light", "streetlight", "road_light"].includes(candidate.properties.type),
       );
-      const lighting = computeLightingMetrics(road, streetlightFeatures, SAFETY_WEIGHTS.lighting);
+      const lighting = computeLightingMetrics(road, lightFeatures, SAFETY_WEIGHTS.lighting);
       const nearbyCctv = nearbyCctvSites(road, candidates, SAFETY_WEIGHTS.cctv.radiusMeters);
       const cctvCount = nearbyCctv.length;
       const emergencyBellCount = pointsNearRoad(
@@ -192,6 +194,8 @@ export function calculateRoadSafety(
         safetyScoreV2,
         safetyScore,
         streetlightCount,
+        securityLightCount,
+        roadLightCount,
         cctvCount,
         emergencyBellCount,
         convenienceStoreCount,

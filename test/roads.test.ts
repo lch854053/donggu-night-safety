@@ -115,8 +115,8 @@ test("candidate index preserves both sides, endpoints, curves, and exact distanc
   const center = [126.9232, 35.1461];
   const end = destination(center, 0.05, 90).geometry.coordinates;
   const midpoint = destination(center, 0.025, 90).geometry.coordinates;
-  const types: SafetyFeatureType[] = ["streetlight", "cctv", "emergency_bell", "convenience_store", "cpted", "old_building"];
-  const features = types.flatMap((type) => [49.9, 50, 50.1, 99.9, 100, 100.1, 200].flatMap((meters) =>
+  const types: SafetyFeatureType[] = ["security_light", "road_light", "cctv", "emergency_bell", "convenience_store", "cpted", "old_building"];
+  const features = types.flatMap((type) => [49.9, 50, 50.1, 84.9, 85, 85.1, 99.9, 100, 100.1, 200].flatMap((meters) =>
     [0, 90, 180, 270].flatMap((bearing) => [center, end, midpoint].map((origin, i) =>
       point(destination(origin, meters / 1000, bearing).geometry.coordinates, {
         id: `${type}-${meters}-${bearing}-${i}`, type, name: "threshold fixture", source: "test",

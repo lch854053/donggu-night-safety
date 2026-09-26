@@ -1,16 +1,18 @@
 # 광주 동구 밤길 안심지도
 
-광주 동구의 안심 인프라와 주변 환경을 조합해 도로별 상대적 밤길 안전 참고지수를 보여주는 MVP입니다. 보안등·CCTV·비상벨·편의점은 공공데이터 실측 자료, CPTED는 완료 사업지의 주소 대표점(VWORLD 지오코딩), 여성밤길 치안안전(범죄 밀도분석)은 생활안전지도 WMS 사전 샘플링 결과(여성밤길 우선, 미커버 구간은 범죄주의구간으로 보완)이고, 도로와 인도는 국토지리정보원 연속수치지형도에서 동구 경계로 추출한 **10,660개 구간(약 356km)** 기준입니다. 가상의 샘플을 운영 점수에 반영하지 않습니다.
+광주 동구의 안심 인프라와 주변 환경을 조합해 도로별 상대적 밤길 안전 참고지수를 보여주는 MVP입니다. 보안등·가로등·CCTV·비상벨·편의점은 공공데이터 기반이며, CPTED는 완료 사업지의 주소 대표점(VWORLD 지오코딩), 여성밤길 치안안전(범죄 밀도분석)은 생활안전지도 WMS 사전 샘플링 결과(여성밤길 우선, 미커버 구간은 범죄주의구간으로 보완)이고, 도로와 인도는 국토지리정보원 연속수치지형도에서 동구 경계로 추출한 **10,660개 구간(약 356km)** 기준입니다. 가상의 샘플을 운영 점수에 반영하지 않습니다.
 
 ## 데이터 갱신
 
-**자동(기본)**: CCTV·비상벨·편의점·CPTED·경찰시설과 VWorld 도로명·도시계획 참고자료는 GitHub Actions가 **매월 5일 09:00 KST**에 동구권 데이터를 받아 커밋하고, 푸시된 내용은 Vercel이 자동 배포합니다(`.github/workflows/refresh-data.yml`). 저장소 Settings → Secrets and variables → Actions에 `SAFEMAP_SERVICE_KEY`, `MOIS_SERVICE_KEY`, `VWORLD_API_KEY`, `VWORLD_DATA_API_KEY`, `KAKAO_REST_API_KEY`를 등록합니다(커밋 금지, Actions Secret만). VWORLD 키에 서비스 URL 설정이 필요한 경우 Actions Variable `VWORLD_DOMAIN`도 등록합니다. 수집이 실패하면 알림 이슈가 자동 생성됩니다.
+**자동(기본)**: 가로등·CCTV·비상벨·편의점·CPTED·경찰시설과 VWorld 도로명·도시계획 참고자료는 GitHub Actions가 **매월 5일 09:00 KST**에 동구권 데이터를 받아 커밋하고, 푸시된 내용은 Vercel이 자동 배포합니다(`.github/workflows/refresh-data.yml`). 저장소 Settings → Secrets and variables → Actions에 `ROAD_LIGHT_SERVICE_KEY`, `SAFEMAP_SERVICE_KEY`, `MOIS_SERVICE_KEY`, `VWORLD_API_KEY`, `VWORLD_DATA_API_KEY`, `KAKAO_REST_API_KEY`를 등록합니다(커밋 금지, Actions Secret만). VWORLD 키에 서비스 URL 설정이 필요한 경우 Actions Variable `VWORLD_DOMAIN`도 등록합니다. 수집이 실패하면 알림 이슈가 자동 생성됩니다.
 
 **수동**: 로컬에서 즉시 갱신할 수도 있습니다. 인증키는 `.env.local`에 둡니다.
 
 ```bash
 # 보안등만 갱신
-node scripts/fetch-real-data.mjs --only=streetlights
+node scripts/fetch-real-data.mjs --only=security-lights
+# 가로등만 갱신 (ROAD_LIGHT_SERVICE_KEY 필요)
+node scripts/fetch-real-data.mjs --only=road-lights
 # CPTED만 갱신 (SAFEMAP_SERVICE_KEY + VWORLD_API_KEY 필요)
 node scripts/fetch-real-data.mjs --only=cpted
 # 경찰시설만 갱신 (MOIS_SERVICE_KEY + KAKAO_REST_API_KEY)
@@ -27,7 +29,7 @@ node scripts/fetch-real-data.mjs
 
 CCTV 점수는 가장 가까운 카메라만 보지 않고 **거리 점수 × 목적별 상대적 감시 신뢰계수**의 최고값으로 계산합니다. 생활방범 1.0, 어린이보호 0.9, 목적 미상 0.5, 쓰레기단속 0.4, 교통·기타 0.3을 사용합니다. 쓰레기·교통 단속 CCTV도 감시 기여를 0으로 간주하지 않지만 방범 전용과 동일시하지 않습니다. 이 계수는 실제 범죄 감소율이 아니라 **지수 산정용 보정계수**이며 `config/cctvPurpose.mjs` 한 곳에서 변경합니다. 서로 다른 설치지점의 포화형 개수 보너스만 적용하고 같은 위치의 카메라 수는 보너스에 중복 반영하지 않습니다. 촬영 방향·화각·실제 모니터링 여부는 확인할 수 없어 점수에 넣지 않으며, 최종 점수는 절대적인 안전도를 의미하지 않는 공공데이터 기반 상대적 참고지수입니다.
 
-보안등은 API가 좌표를 공개하지 않아 동구청 제공 CSV를 사용합니다. `scripts/data/donggu-streetlights.csv`를 최신 자료로 교체한 뒤 위 명령으로 반영하세요. 자료가 매년 말 기준이라 매년 1월 15일에 GitHub Actions가 갱신 알림 이슈를 자동 생성합니다(`.github/workflows/streetlight-refresh-reminder.yml`).
+보안등은 API가 좌표를 공개하지 않아 동구청 제공 CSV를 사용합니다. `scripts/data/donggu-security-lights.csv`를 최신 자료로 교체한 뒤 위 명령으로 반영하세요. 자료가 매년 말 기준이라 매년 1월 15일에 GitHub Actions가 갱신 알림 이슈를 자동 생성합니다(`.github/workflows/security-light-refresh-reminder.yml`). 가로등은 공공데이터포털 동구 가로등현황(2024-04-15) API를 서버 측에서 수집합니다. 원본 3,805개 관리번호가 단 264개 좌표를 공유하므로 같은 좌표는 하나의 **대표 위치**로만 표시하고 조명 영향에도 한 번만 반영합니다. 이는 개별 등주의 측정 위치가 아닙니다. 키가 없으면 월간 전체 갱신 시 기존 가로등을 유지하며, 가로등만 갱신할 때는 실패합니다.
 
 빈집은 공공데이터포털 동구 빈집 현황(2025-07-16)의 EPSG:5174 투영좌표를 WGS84로 변환해 레이어와 공간환경 점수에 반영합니다. 주소 기반 필지와 대조해 원본 좌표가 어긋난 8건은 지번 일치 필지 대표점으로 보정하고, 주소·좌표 일치를 확인할 수 없는 5건은 표시와 점수에서 제외합니다(`scripts/data/vacant-coordinate-review.json`). 신규 좌표가 추가되면 주소·필지를 재확인해야 합니다. 노후건물은 안전디딤돌 WMS 전용(좌표 미공개)이라 레이어에 표시하지 않습니다. CPTED(IF_0023)는 VWORLD로 주소를 좌표화하며, 도로시설(인도) IF_0095는 좌표가 없어 대신 국토지리정보원 원본 도형을 사용합니다(아래 참고). 현재 상태는 `public/data/meta.json`에 기록됩니다.
 
@@ -165,7 +167,7 @@ safetyScoreV2 = 조명·가시성×0.25 + 감시·긴급대응×0.20 + 야간활
 | 여성밤길 치안안전 (25%) | 생활안전지도 여성밤길치안안전(전체, 밤 20~24시) 우선 + 범죄주의구간(전체) 보완 WMS 샘플링 | 실측값은 `public/data/crime-risk.json` summary 참조 |
 
 - **결측값**: 데이터가 없는 항목은 0점이 아니라 미수집(null)으로 기록되고 재정규화로 제외된다. 예를 들어 CPTED·경찰시설이 없으면 CCTV·비상벨 비율(0.50:0.15)을 다시 100%로 정규화한다. 모든 하위지표가 null인 차원은 차원 자체가 null이고, 미수집 차원이 많아도 최종 점수가 부당하게 깎이지 않는다. 범죄 WMS가 닿지 않는 구간의 `crimeScore: null`은 위험구간이 아니라 미수집이며, 이 경우 나머지 4개 차원(0.75)으로 재정규화한다.
-- **조명**: 보안등 좌표·거리 분포 기반의 상대적 조명환경 추정값이다. 실제 조도(lux)를 측정하지 않는다. 보안등 개수(`streetlightCount`)는 표시용이며 점수에 이중 반영하지 않는다.
+- **조명**: 보안등과 가로등 대표 위치를 따라 도로를 5m 간격으로 샘플링해 조명 커버리지(50%), 최대 연속 암구간(30%), 어두운 구간의 상대적 품질(20%)을 평가한다. 실제 조도(lux)를 측정한 값이 아닌 **위치 기반 상대적 조명환경 추정치**다. 서로 다른 설치 목적과 조사 범위를 고려해 보안등 σ=20m·cutoff=60m, 가로등 σ=28m·cutoff=85m의 초기 휴리스틱을 적용하고 영향은 `1 − ∏(1 − 개별 영향)`으로 포화 결합한다. 개수(`securityLightCount`, `roadLightCount`; `streetlightCount`는 보안등 호환 필드)는 표시용이며 점수에 직접 가산하지 않는다.
 - **CCTV·비상벨**: 존재 여부가 아니라 거리감쇠(가까울수록 높음)로 평가한다. CCTV가 여러 대여도 포화형 보너스(×1.10/×1.15)만 적용해 개수에 선형 비례하지 않는다.
 - **경찰시설**: 경찰서·지구대·파출소까지의 좌표 거리 접근성이며 실제 출동시간을 의미하지 않는다. 좌표 API 확보 전까지 미수집(`policeScore` null)이다.
 - **야간활동**: 야간 영업 POI·대중교통은 실제 보행량이 아니라 proxy다. TAGO 정류장 좌표는 `bus_stop`으로 수집해 접근성에 반영한다. `night_activity`·`subway_entrance`는 미수집이며 가짜값을 채우지 않는다. 폭원·검증된 집행완료 도로 종류를 혼합한 도로 활성도 proxy의 설정 가중치는 차원 내 20%다. "큰 도로 = 안전"의 직접 가점이 아니다. 대규모 공동주택 역시 직접 가점하지 않는다(CCTV·조명 등 실제 요소를 각각 측정한다).

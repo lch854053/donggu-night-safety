@@ -2,11 +2,12 @@
 // 광주 동구 밤길 안전 지도 실데이터 수집 스크립트
 // 사용:
 //   node scripts/fetch-real-data.mjs                      전체 갱신
-//   node scripts/fetch-real-data.mjs --only=streetlights  보안등만 갱신 (기존 데이터 유지)
+//   node scripts/fetch-real-data.mjs --only=security-lights,road-lights  조명만 갱신
 // 키는 .env.local (SAFEMAP_SERVICE_KEY, MOIS_SERVICE_KEY, VWORLD_API_KEY) 또는 환경변수로 전달합니다.
 //
 // 소스별 상태
-//   보안등      동구청 제공 CSV (scripts/data/donggu-streetlights.csv)  연 1회 갱신(매년 말 기준) ✅
+//   보안등      동구청 제공 CSV (scripts/data/donggu-security-lights.csv) 연 1회 갱신 ✅
+//   가로등      동구 가로등현황 odcloud (2024년 기준) 좌표 대표 위치 ✅
 //   CCTV        행안부 cctv_info                WGS84 좌표 ✅
 //   비상벨      행안부 emergency_call_box_info   WGS84 좌표 ✅
 //   편의점      안전디딤돌 IF_0039               Web Mercator(3857) 좌표 ✅
@@ -25,13 +26,14 @@ import { buildMunicipalCctv, CCTV_APIS, fetchCctvSnapshot } from "./cctv.mjs";
 import { CCTV_PURPOSE_CONFIDENCE, CCTV_PURPOSE_LABELS, classifyCctvPurpose } from "../config/cctvPurpose.mjs";
 import { fetchBusStops } from "./bus-stops.mjs";
 import { collectVacantHouses } from "./vacant-houses.mjs";
+import { collectRoadLights } from "./road-lights.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_DIR = path.join(ROOT, "public", "data");
 const FEATURES_PATH = path.join(DATA_DIR, "safety-features.geojson");
 const META_PATH = path.join(DATA_DIR, "meta.json");
 const CPTED_CACHE_PATH = path.join(DATA_DIR, "cpted-geocodes.json");
-const STREETLIGHT_CSV = path.join(ROOT, "scripts", "data", "donggu-streetlights.csv");
+const SECURITY_LIGHT_CSV = path.join(ROOT, "scripts", "data", "donggu-security-lights.csv");
 
 // .env.local 파서 (dotenv 의존성 없이 최소 구현)
 if (existsSync(path.join(ROOT, ".env.local"))) {
@@ -45,12 +47,13 @@ const MOIS_KEY = process.env.MOIS_SERVICE_KEY;
 const VWORLD_KEY = process.env.VWORLD_API_KEY;
 const KAKAO_KEY = process.env.KAKAO_REST_API_KEY;
 const TAGO_KEY = process.env.TAGO_SERVICE_KEY;
+const ROAD_LIGHT_KEY = process.env.ROAD_LIGHT_SERVICE_KEY;
 
 const onlyArg = process.argv.find((a) => a.startsWith("--only="));
 const only = onlyArg ? onlyArg.slice(7).split(",") : [];
 const want = (source) => only.length === 0 || only.includes(source);
-if (only.length && only.some((k) => !["cctv", "bell", "store", "streetlights", "cpted", "police", "bus", "vacant"].includes(k))) {
-  console.error("--only 값은 cctv, bell, store, streetlights, cpted, police, bus, vacant 중에서 선택합니다.");
+if (only.length && only.some((k) => !["cctv", "bell", "store", "streetlights", "security-lights", "road-lights", "cpted", "police", "bus", "vacant"].includes(k))) {
+  console.error("--only 값은 cctv, bell, store, security-lights, road-lights, cpted, police, bus, vacant 중에서 선택합니다.");
   process.exit(1);
 }
 
@@ -163,9 +166,9 @@ function parseCsvLine(line) {
   return out;
 }
 
-function collectStreetlights() {
-  console.log("[보안등] 동구청 CSV 읽기 (scripts/data/donggu-streetlights.csv)");
-  const lines = readFileSync(STREETLIGHT_CSV, "utf8").replace(/^\ufeff/, "").trim().split(/\r?\n/);
+function collectSecurityLights() {
+  console.log("[보안등] 동구청 CSV 읽기 (scripts/data/donggu-security-lights.csv)");
+  const lines = readFileSync(SECURITY_LIGHT_CSV, "utf8").replace(/^\ufeff/, "").trim().split(/\r?\n/);
   const header = parseCsvLine(lines[0]);
   const col = (name) => header.indexOf(name);
   const items = [];
@@ -176,7 +179,7 @@ function collectStreetlights() {
     if (!lat || !lon) throw new Error(`좌표 누락 행: ${line}`);
     dataAsOf = dataAsOf > c[col("데이터기준일자")] ? dataAsOf : c[col("데이터기준일자")];
     items.push(
-      feat(`light-${c[col("보안등위치명")]}`, "streetlight", lon, lat, {
+      feat(`light-${c[col("보안등위치명")]}`, "security_light", lon, lat, {
         name: c[col("보안등위치명")],
         installedAt: c[col("설치연도")] || undefined,
         note: [c[col("설치형태")], c[col("소재지지번주소")]].filter(Boolean).join(" · "),
@@ -188,7 +191,7 @@ function collectStreetlights() {
   return { features: items, dataAsOf };
 }
 
-const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [], police_station: [], police_center: [], bus_stop: [], vacant_house: [] };
+const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [], police_station: [], police_center: [], bus_stop: [], vacant_house: [], security_light: [], road_light: [] };
 const metaSources = {};
 let cptedMetadata;
 let cptedCache;
@@ -361,11 +364,24 @@ async function main() {
     console.log(`  ${result.features.length}건, 미검색 ${result.metadata.unresolvedCount}건, 미완료 제외 ${result.metadata.incomplete}건`);
     refreshedTypes.add("cpted");
   }
-  if (want("streetlights")) {
-    const { features, dataAsOf } = collectStreetlights();
-    collections.streetlight = features;
-    metaSources.streetlight = { count: features.length, dataAsOf };
-    refreshedTypes.add("streetlight");
+  if (want("security-lights") || want("streetlights")) {
+    const { features, dataAsOf } = collectSecurityLights();
+    collections.security_light = features;
+    metaSources.security_light = { status: "ok", count: features.length, dataAsOf, source: "동구청 보안등 CSV" };
+    delete keptMetaSources.streetlight;
+    refreshedTypes.add("streetlight"); // 구 정적 데이터의 별칭도 함께 교체
+    refreshedTypes.add("security_light");
+  }
+  if (want("road-lights") && (ROAD_LIGHT_KEY || only.includes("road-lights"))) {
+    console.log("[가로등] odcloud 동구 가로등현황 수집");
+    const result = await collectRoadLights(ROAD_LIGHT_KEY, getWithRetry);
+    collections.road_light = result.features;
+    metaSources.road_light = { status: "ok", count: result.features.length, sourceCount: result.total,
+      invalid: result.invalid, dataAsOf: result.dataAsOf, fetchedAt: new Date().toISOString().slice(0, 10),
+      source: "odcloud:15113447" };
+    refreshedTypes.add("road_light");
+  } else if (want("road-lights") && !ROAD_LIGHT_KEY) {
+    console.warn("[가로등] ROAD_LIGHT_SERVICE_KEY 미설정 — 기존 가로등 자료 유지");
   }
   if (want("bus")) {
     console.log("[버스정류장] TAGO 광주 정류장 → 동구 및 주변 500m");
@@ -398,7 +414,8 @@ async function main() {
     ...collections.bus_stop,
     ...collections.cpted,
     ...collections.vacant_house,
-    ...(collections.streetlight ?? []),
+    ...collections.security_light,
+    ...collections.road_light,
   ];
   const features = [...keptFeatures.filter((f) => !refreshedTypes.has(f.properties.type)), ...newFeatures];
 
