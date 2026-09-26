@@ -380,9 +380,10 @@ async function main() {
   }
   if (want("vacant") && (MOIS_KEY || only.includes("vacant"))) {
     console.log("[빈집] 공공데이터포털 광주 동구 빈집 현황");
-    const { features, dataAsOf, total } = await collectVacantHouses(MOIS_KEY, getWithRetry);
+    const { features, dataAsOf, total, excluded } = await collectVacantHouses(MOIS_KEY, getWithRetry);
     collections.vacant_house = features;
-    metaSources.vacant_house = { count: total, dataAsOf, fetchedAt: new Date().toISOString().slice(0, 10), source: "odcloud:15144631", crs: "EPSG:5181" };
+    metaSources.vacant_house = { count: features.length, sourceCount: total, excluded, dataAsOf,
+      fetchedAt: new Date().toISOString().slice(0, 10), source: "odcloud:15144631", crs: "EPSG:5174" };
     refreshedTypes.add("vacant_house");
   } else if (want("vacant") && !MOIS_KEY) {
     console.warn("[빈집] MOIS_SERVICE_KEY 미설정 — 기존 빈집 자료 유지");
