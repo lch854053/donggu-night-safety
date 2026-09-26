@@ -27,12 +27,14 @@ import { CCTV_PURPOSE_CONFIDENCE, CCTV_PURPOSE_LABELS, classifyCctvPurpose } fro
 import { fetchBusStops } from "./bus-stops.mjs";
 import { collectVacantHouses } from "./vacant-houses.mjs";
 import { collectRoadLights } from "./road-lights.mjs";
+import { buildRoadLightingEvidence } from "./road-light-evidence.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_DIR = path.join(ROOT, "public", "data");
 const FEATURES_PATH = path.join(DATA_DIR, "safety-features.geojson");
 const META_PATH = path.join(DATA_DIR, "meta.json");
 const CPTED_CACHE_PATH = path.join(DATA_DIR, "cpted-geocodes.json");
+const ROAD_EVIDENCE_PATH = path.join(DATA_DIR, "road-light-evidence.json");
 const SECURITY_LIGHT_CSV = path.join(ROOT, "scripts", "data", "donggu-security-lights.csv");
 
 // .env.local 파서 (dotenv 의존성 없이 최소 구현)
@@ -191,10 +193,11 @@ function collectSecurityLights() {
   return { features: items, dataAsOf };
 }
 
-const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [], police_station: [], police_center: [], bus_stop: [], vacant_house: [], security_light: [], road_light: [] };
+const collections = { cctv: [], emergency_bell: [], convenience_store: [], cpted: [], police_station: [], police_center: [], bus_stop: [], vacant_house: [], security_light: [] };
 const metaSources = {};
 let cptedMetadata;
 let cptedCache;
+let roadEvidence;
 
 async function collectCctv() {
   console.log("[CCTV] 행안부 cctv_info 전국 스캔");
@@ -375,14 +378,23 @@ async function main() {
   if (want("road-lights") && (ROAD_LIGHT_KEY || only.includes("road-lights"))) {
     console.log("[가로등] odcloud 동구 가로등현황 수집");
     const result = await collectRoadLights(ROAD_LIGHT_KEY, getWithRetry);
-    collections.road_light = result.features;
-    metaSources.road_light = { status: "ok", count: result.features.length, sourceCount: result.total,
-      invalid: result.invalid, dataAsOf: result.dataAsOf, fetchedAt: new Date().toISOString().slice(0, 10),
-      source: "odcloud:15113447" };
-    refreshedTypes.add("road_light");
+    const roads = JSON.parse(readFileSync(path.join(ROOT, "scripts/data/road-segments.geojson"), "utf8"));
+    const boundaries = JSON.parse(readFileSync(path.join(ROOT, "scripts/data/donggu-admin-boundaries.geojson"), "utf8"));
+    roadEvidence = buildRoadLightingEvidence(result.groups, roads, boundaries);
+    if (!Object.keys(roadEvidence.roads).length) throw new Error("가로등 도로구간 매칭 0건 — 기존 자료 유지");
+    metaSources.road_light = { status: "estimated", recordCount: result.total,
+      uniqueRepresentativePoints: result.groups.length, invalid: result.invalid,
+      dataAsOf: result.dataAsOf, fetchedAt: new Date().toISOString().slice(0, 10),
+      source: "odcloud:15113447", geometryMeaning: "representative_or_management_location",
+      method: "road-name and coordinate based road-segment inference",
+      warning: "개별 등주 좌표가 아니며 실제 위치·조도·간격으로 사용하지 않음",
+      linkedRoadCount: roadEvidence.diagnostics.linkedRoadCount, matchedRows: roadEvidence.diagnostics.matchedRows,
+      metadata: "/data/road-light-evidence.json" };
   } else if (want("road-lights") && !ROAD_LIGHT_KEY) {
     console.warn("[가로등] ROAD_LIGHT_SERVICE_KEY 미설정 — 기존 가로등 자료 유지");
   }
+  // 이전 배포의 대표좌표 Point는 인증키 유무와 무관하게 실제 광원으로 사용하지 않는다.
+  refreshedTypes.add("road_light");
   if (want("bus")) {
     console.log("[버스정류장] TAGO 광주 정류장 → 동구 및 주변 500m");
     const boundaries = JSON.parse(readFileSync(path.join(ROOT, "scripts/data/donggu-admin-boundaries.geojson"), "utf8")).features;
@@ -415,7 +427,6 @@ async function main() {
     ...collections.cpted,
     ...collections.vacant_house,
     ...collections.security_light,
-    ...collections.road_light,
   ];
   const features = [...keptFeatures.filter((f) => !refreshedTypes.has(f.properties.type)), ...newFeatures];
 
@@ -435,6 +446,7 @@ async function main() {
   mkdirSync(DATA_DIR, { recursive: true });
   const fc = { type: "FeatureCollection", features };
   writeFileSync(FEATURES_PATH, JSON.stringify(fc), "utf8");
+  if (roadEvidence) writeFileSync(ROAD_EVIDENCE_PATH, JSON.stringify(roadEvidence, null, 2) + "\n", "utf8");
   if (cptedMetadata) writeFileSync(path.join(DATA_DIR, "cpted-meta.json"), JSON.stringify(cptedMetadata, null, 2), "utf8");
   if (cptedCache) writeFileSync(CPTED_CACHE_PATH, JSON.stringify(cptedCache, null, 2), "utf8");
   writeFileSync(
@@ -469,6 +481,11 @@ async function main() {
   execFileSync(process.execPath, ["--import", "tsx", "scripts/score-roads.ts", ...(only.length === 1 && only[0] === "vacant" ? ["--only=vacant"] : [])], {
     cwd: ROOT, stdio: "inherit",
   });
+  if (existsSync(ROAD_EVIDENCE_PATH)) {
+    execFileSync(process.execPath, ["--import", "tsx", "scripts/analyze-road-lights.ts"], {
+      cwd: ROOT, stdio: "inherit",
+    });
+  }
 
   const byType = {};
   for (const f of features) byType[f.properties.type] = (byType[f.properties.type] ?? 0) + 1;

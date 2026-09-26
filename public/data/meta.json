@@ -91,13 +91,19 @@
       "source": "동구청 보안등 CSV"
     },
     "road_light": {
-      "status": "ok",
-      "count": 264,
-      "sourceCount": 3805,
+      "status": "estimated",
+      "recordCount": 3805,
+      "uniqueRepresentativePoints": 264,
       "invalid": 0,
       "dataAsOf": "2024-04-15",
       "fetchedAt": "2026-09-26",
-      "source": "odcloud:15113447"
+      "source": "odcloud:15113447",
+      "geometryMeaning": "representative_or_management_location",
+      "method": "road-name and coordinate based road-segment inference",
+      "warning": "개별 등주 좌표가 아니며 실제 위치·조도·간격으로 사용하지 않음",
+      "linkedRoadCount": 2047,
+      "matchedRows": 2786,
+      "metadata": "/data/road-light-evidence.json"
     }
   },
   "pending": {

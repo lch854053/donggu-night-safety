@@ -97,8 +97,9 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
    * 미수집 차원은 재정규화해 제외한다. 차원이 전혀 없으면 null(0과 다른 의미).
    */
   safetyScoreV2: number | null;
-  /** 보안등·가로등 위치·거리 분포 기반 상대적 조명 환경(0~100). 실제 조도(lux)가 아니다. */
+  /** 실제 보안등 위치 기반 점수 + 선택된 도로 가로등 추정 보정. 실제 조도(lux)가 아니다. */
   lightingScore: number;
+  actualLightingScore: number;
   lightingCoverage: number;
   maxDarkGapMeters: number;
   lightingUniformityScore: number;
@@ -116,7 +117,12 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
   /** 과거 자료 호환: 보안등 위치 수. */
   streetlightCount: number;
   securityLightCount: number;
-  roadLightCount: number;
+  roadLightingEstimated?: true;
+  roadLightingEvidence?: number;
+  roadLightingConfidence?: number;
+  roadLightingMatchMethod?: "road_name_and_coordinate" | "road_name" | "parcel_and_coordinate";
+  roadLightingRecordCount?: number;
+  roadLightingRepresentativePointCount?: number;
   cctvCount: number;
   emergencyBellCount: number;
   convenienceStoreCount: number;
@@ -148,6 +154,15 @@ export interface SafetyDataset {
     scoreKind: "client" | "precomputed";
     updatedAt: string;
   };
+  roadLightingEvidenceByRoad?: Record<string, {
+    source: "road_light_api";
+    estimated: true;
+    matchedRecordCount: number;
+    uniqueRepresentativePointCount: number;
+    matchConfidence: number;
+    matchMethod: "road_name_and_coordinate" | "road_name" | "parcel_and_coordinate";
+    roadLightingEvidence: number;
+  }>;
   /**
    * 생활안전지도(경찰청 밀도분석) WMS를 도로별로 샘플링한 상대적 주의도.
    * 현재 원천은 여성밤길치안안전(전체, 밤 시간대 20~24시) 레이어다.

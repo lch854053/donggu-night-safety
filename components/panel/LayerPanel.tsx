@@ -193,8 +193,10 @@ export function LayerPanel({
                            <dd>{p.securityLightCount}개</dd>
                          </div>
                          <div>
-                           <dt>가로등 대표 위치</dt>
-                           <dd>{p.roadLightCount}곳</dd>
+                           <dt>가로등 도로구간 추정</dt>
+                           <dd>{p.roadLightingEstimated
+                             ? `공공 관리자료상 설치 추정 · 신뢰도 ${p.roadLightingMatchMethod === "road_name_and_coordinate" ? "높음" : p.roadLightingMatchMethod === "road_name" ? "보통" : "낮음"} · 관리행 ${p.roadLightingRecordCount}건 (등주 수 아님)`
+                             : "매칭 근거 없음"}</dd>
                          </div>
                          <div>
                            <dt>조명 커버리지</dt>
@@ -217,7 +219,7 @@ export function LayerPanel({
                 이 지수는 안심 인프라와 주변 환경 데이터를 조합한 상대적 참고값이며, 특정 장소의
                 절대적인 안전을 보장하지 않습니다.
               </p>
-               <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 계획상 도로 종류는 실제 통행량이 아니며, 단일 지정·집행완료가 확인된 구간에서만 폭원 proxy에 일부 반영합니다. 조명 환경은 실제 조도(lux)가 아니라 보안등·가로등 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다. 가로등 좌표는 여러 관리번호가 공유하는 대표 위치일 수 있습니다. 여성밤길 치안안전은 생활안전지도의 경찰청 범죄 밀도분석(밤 시간대 20~24시) 구간 정보를 우선하고, 여성밤길 데이터가 없는 구간은 범죄주의구간(전체 시간대) 밀도분석으로 보완했습니다. 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다. 시설 접근성은 좌표 거리 기반 참고값이며 경찰시설 거리가 실제 출동시간을 의미하지 않습니다. CPTED는 완료된 환경개선 사업지의 주소를 VWORLD로 좌표화한 대표점이며, 개별 시설 위치나 사업구역 경계가 아닙니다. 빈집 위치는 공공데이터포털 동구 현황의 투영좌표를 변환한 참고점입니다. 야간활동 등 일부 지표는 좌표 데이터가 수집되지 않아 "데이터 없음"으로 표시됩니다. 주의구간 원본 좌표·노후건물은 미수집입니다.</p>
+               <p>도로 중심선 기반이며 인도 인접 여부는 도형 기반 참고값으로 보행 가능 여부를 판정하지 않습니다. 계획상 도로 종류는 실제 통행량이 아니며, 단일 지정·집행완료가 확인된 구간에서만 폭원 proxy에 일부 반영합니다. 조명 커버리지·암구간은 보안등 실제 좌표로 계산합니다. 가로등은 여러 관리번호가 동일 좌표를 공유해 실제 등주 위치가 아닌 도로구간 설치 추정 근거로만 사용합니다. 실제 조도(lux)를 측정한 값이 아닙니다. 여성밤길 치안안전은 생활안전지도의 경찰청 범죄 밀도분석(밤 시간대 20~24시) 구간 정보를 우선하고, 여성밤길 데이터가 없는 구간은 범죄주의구간(전체 시간대) 밀도분석으로 보완했습니다. 실제 범죄 발생 가능성을 예측하는 수치가 아닙니다. 시설 접근성은 좌표 거리 기반 참고값이며 경찰시설 거리가 실제 출동시간을 의미하지 않습니다. CPTED는 완료된 환경개선 사업지의 주소를 VWORLD로 좌표화한 대표점이며, 개별 시설 위치나 사업구역 경계가 아닙니다. 빈집 위치는 공공데이터포털 동구 현황의 투영좌표를 변환한 참고점입니다. 야간활동 등 일부 지표는 좌표 데이터가 수집되지 않아 "데이터 없음"으로 표시됩니다. 주의구간 원본 좌표·노후건물은 미수집입니다.</p>
               <p><a href="/data/roads-meta.json" target="_blank" rel="noreferrer">도로 출처·가공 정보</a> · <a href="/data/sidewalks-meta.json" target="_blank" rel="noreferrer">인도 출처·가공 정보</a> · 국토지리정보원<br />도로명·도시계획 도로: VWorld / <a href="/data/vworld-roads-meta.json" target="_blank" rel="noreferrer">매칭·수집 정보</a><br />주의구간: <a href="https://www.safemap.go.kr" target="_blank" rel="noreferrer">행정안전부 생활안전지도</a> / 경찰청<br />CPTED: 생활안전지도 · VWORLD / <a href="/data/cpted-meta.json" target="_blank" rel="noreferrer">수집·지오코딩 정보</a><br />빈집: <a href="https://www.data.go.kr/data/15144631/fileData.do" target="_blank" rel="noreferrer">공공데이터포털 동구 빈집 현황</a><br />경계: SGIS / vuski·admdongkor (CC BY 4.0)</p>
             </div>
           </>

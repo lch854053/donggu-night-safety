@@ -6,6 +6,7 @@ import { calculateRoadSafety } from "../lib/scoring/calculateRoadSafety";
 import { combinedInfluence, computeLightingMetrics, darkGapScore, darkSpanQuality,
   lightInfluence } from "../lib/scoring/lighting";
 import { SAFETY_WEIGHTS } from "../config/safetyWeights";
+import { estimatedRoadLightingModels } from "../lib/scoring/estimatedRoadLighting";
 import type { SafetyDataset, SafetyFeatureType } from "../types/safety";
 
 const readJson = (path: string) => JSON.parse(readFileSync(path, "utf8"));
@@ -101,24 +102,34 @@ test("case E: long dark gap lowers the score even with decent coverage", () => {
   assert.ok(longRoad.lightingScore <= 40, `case E score=${longRoad.lightingScore}`);
 });
 
-test("가로등은 보안등보다 넓게 작동하지만 같은 위치 광원은 포화 결합된다", () => {
+test("가로등 대표좌표 Point는 보안등 커버리지와 암구간에 영향을 주지 않는다", () => {
   const road = testRoad(80);
   const security = computeLightingMetrics(road, [streetlight(0, "s")], config);
-  const roadOnly = computeLightingMetrics(road, [streetlight(0, "r", "road_light")], config);
   const both = computeLightingMetrics(road, [streetlight(0, "s"), streetlight(0, "r", "road_light")], config);
-  assert.ok(roadOnly.coverageScore > security.coverageScore);
-  assert.ok(both.coverageScore >= roadOnly.coverageScore);
-  assert.ok(both.lightingScore <= 100);
-  assert.equal(computeLightingMetrics(road, Array.from({ length: 30 }, (_, i) => streetlight(0, `r${i}`, "road_light")), config).lightingScore <= 100, true);
-  assert.ok(computeLightingMetrics(road, [streetlight(0, "r", "road_light"), streetlight(80, "r2", "road_light")], config).maxDarkGapMeters > 0);
+  const scored = calculateRoadSafety({ ...dataset, roadSegments: featureCollection([road]),
+    features: featureCollection([streetlight(0, "s"), streetlight(0, "r", "road_light")]) }).features[0].properties;
+  assert.equal(scored.lightingScore, security.lightingScore);
+  assert.equal(scored.maxDarkGapMeters, Math.round(security.maxDarkGapMeters));
+  assert.deepEqual(both, security, "직접 호출에도 가로등 대표 Point는 무시한다");
 });
 
-test("가로등 대표 위치가 양 끝에 많이 몰려도 긴 중간 암구간은 감점된다", () => {
-  const clustered = Array.from({ length: 20 }, (_, i) => streetlight(i % 2 ? 0 : 250, `road-${i}`, "road_light"));
-  const metrics = computeLightingMetrics(testRoad(250), clustered, config);
+test("관리행 20건의 추정치로도 긴 보안등 암구간은 사라지지 않는다", () => {
+  const road = testRoad(250);
+  const metrics = computeLightingMetrics(road, [streetlight(0, "s")], config);
+  const estimate = { source: "road_light_api" as const, estimated: true as const, matchedRecordCount: 20,
+    uniqueRepresentativePointCount: 1, matchConfidence: 1, matchMethod: "road_name_and_coordinate" as const,
+    roadLightingEvidence: 0.7 };
+  const scored = calculateRoadSafety({ ...dataset, roadSegments: featureCollection([road]),
+    features: featureCollection([streetlight(0, "s")]),
+    roadLightingEvidenceByRoad: { "test-road": estimate } }).features[0].properties;
   assert.ok(metrics.maxDarkGapMeters >= 100);
   assert.equal(metrics.darkGapScore, 0);
-  assert.ok(metrics.lightingScore < 80);
+  assert.equal(scored.maxDarkGapMeters, Math.round(metrics.maxDarkGapMeters));
+  const models = estimatedRoadLightingModels(metrics.lightingScore, estimate, false);
+  assert.ok(models.A <= 60 && models.B <= 60);
+  assert.ok(models.A < 100 && models.B < 100);
+  assert.equal(scored.lightingScore, models.B);
+  assert.equal(scored.roadLightingRecordCount, 20);
 });
 
 test("calculateRoadSafety exposes lighting metrics while keeping streetlightCount", () => {
@@ -130,7 +141,7 @@ test("calculateRoadSafety exposes lighting metrics while keeping streetlightCoun
   const metrics = computeLightingMetrics(roadA, [streetlight(0, "a1"), streetlight(50, "a2")], config);
   assert.equal(properties.streetlightCount, 2);
   assert.equal(properties.securityLightCount, 2);
-  assert.equal(properties.roadLightCount, 0);
+  assert.equal(properties.actualLightingScore, metrics.lightingScore);
   assert.equal(properties.lightingScore, metrics.lightingScore);
   assert.equal(properties.lightingCoverage, Math.round(metrics.coverageScore));
   assert.equal(properties.maxDarkGapMeters, Math.round(metrics.maxDarkGapMeters));
