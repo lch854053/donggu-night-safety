@@ -24,6 +24,9 @@ export function buildRoadLightingEvidence(
     representativePointCount: number; matchedRecordCount: number; uniqueRepresentativePointCount: number;
     matchConfidence: number; matchMethod: "road_name_and_coordinate" | "road_name" | "parcel_and_coordinate";
     distanceFromAnchorMeters: number; corridorDistanceMeters: number; roadLightingEvidence: number;
+    roadLightingMatchedMeters: number;
+    roadLightingCoverageEstimated: number; roadLightingContinuity: number;
+    roadLightingRunMeters: number; roadLightingClusterCount: number; roadLightingScore: number;
   }>;
   diagnostics: {
     clusterLinks: { clusterId: string; managedUnitCount: number; anchorRoadId: string; anchorMeters: number;

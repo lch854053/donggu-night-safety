@@ -1,4 +1,5 @@
 import { booleanPointInPolygon, geojsonRbush, nearestPointOnLine, point, distance, length } from "@turf/turf";
+import { addRoadLightingScores } from "./road-light-continuity.mjs";
 
 const HIGH_RADIUS = 150;
 const NAME_RADIUS = 300;
@@ -65,14 +66,32 @@ function traceCorridor(graph, anchor, locationMeters, totalMeters) {
       offer(segment.keys[0] === key ? segment.keys[1] : segment.keys[0], meters + segment.meters);
     }
   }
-  const segments = [{ segment: anchor, corridorDistanceMeters: 0 }];
+  const segments = [{ segment: anchor, corridorDistanceMeters: 0,
+    startMeters: Math.max(0, locationMeters - limit),
+    endMeters: Math.min(anchor.meters, locationMeters + limit) }];
   for (const segment of graph.segments) {
     if (segment === anchor) continue;
-    const along = Math.min(ends.get(segment.keys[0]) ?? Infinity, ends.get(segment.keys[1]) ?? Infinity);
+    const startDistance = ends.get(segment.keys[0]) ?? Infinity;
+    const endDistance = ends.get(segment.keys[1]) ?? Infinity;
+    const along = Math.min(startDistance, endDistance);
     const midpoint = along + segment.meters / 2;
-    if (midpoint <= limit) segments.push({ segment, corridorDistanceMeters: midpoint });
+    if (midpoint <= limit) {
+      const available = Math.min(segment.meters, limit - along);
+      segments.push({ segment, corridorDistanceMeters: midpoint,
+        startMeters: startDistance <= endDistance ? 0 : segment.meters - available,
+        endMeters: startDistance <= endDistance ? available : segment.meters });
+    }
   }
-  return segments;
+  // 갈림길에서 각 가지를 모두 확장하면 총 길이가 모델 상한을 넘는다.
+  // anchor와 가장 가까운 구간부터 공유 길이 예산을 소비하며 마지막 구간만 자른다.
+  let remaining = totalMeters;
+  return segments.sort((a, b) => a.corridorDistanceMeters - b.corridorDistanceMeters)
+    .flatMap((item) => {
+      const meters = Math.min(remaining, item.endMeters - item.startMeters);
+      if (meters <= 0.01) return [];
+      remaining -= meters;
+      return [{ ...item, endMeters: item.startMeters + meters }];
+    });
 }
 
 function connectedComponent(graph, anchor) {
@@ -184,7 +203,10 @@ export function buildRoadLightingEvidence(clusters, roads, boundaries, options =
     else diagnostics.lowRows += count;
     diagnostics.clusterLinks.push({ clusterId, managedUnitCount: count, anchorRoadId: nearest.segment.road.properties.id,
       anchorMeters: Math.round(nearest.meters), corridorLengthMeters: Math.round(totalMeters),
-      linkedRoadCount: segments.length, method });
+      linkedRoadCount: segments.length, method,
+      // 같은 길이 제한을 지도 Line 도형에도 적용한다. 원본 segment 내부에서만 잘라 표시.
+      corridorParts: segments.map(({ segment, startMeters, endMeters }) => ({
+        roadId: segment.road.properties.id, startMeters: +startMeters.toFixed(2), endMeters: +endMeters.toFixed(2) })) });
     const linked = new Set(segments.map((item) => item.segment.road.properties.id));
     const nearbySameName = graph.segments.filter((segment) =>
       !linked.has(segment.road.properties.id) && closest(representative, segment).meters <= NAME_RADIUS);
@@ -193,13 +215,13 @@ export function buildRoadLightingEvidence(clusters, roads, boundaries, options =
       nearbyButExcluded: disconnected.length, sampleRoadIds: disconnected.slice(0, 5).map((s) => s.road.properties.id) });
     const outside = nearbySameName.length - disconnected.length;
     if (outside) diagnostics.outsideCorridorNearby.push({ clusterId, nearbyButExcluded: outside });
-    for (const { segment, corridorDistanceMeters } of segments) {
+    for (const { segment, corridorDistanceMeters, startMeters, endMeters } of segments) {
       const roadId = segment.road.properties.id;
       const entries = perRoad.get(roadId) || new Map();
       if (entries.has(clusterId)) diagnostics.duplicateClusterOnRoad.push({ clusterId, roadId });
       entries.set(clusterId, { clusterId, managedUnitCount: count, representativeCoordinate: coordinates,
         matchConfidence: confidence, matchMethod: method, anchorMeters: nearest.meters,
-        corridorDistanceMeters, corridorLengthMeters: totalMeters });
+        corridorDistanceMeters, corridorLengthMeters: totalMeters, matchedMeters: endMeters - startMeters });
       perRoad.set(roadId, entries);
       if (!component.has(segment)) diagnostics.disconnectedPropagation.push({ clusterId, roadId });
       const metersFromRepresentative = closest(representative, segment).meters;
@@ -245,12 +267,13 @@ export function buildRoadLightingEvidence(clusters, roads, boundaries, options =
       matchedRecordCount: managedUnitCount, uniqueRepresentativePointCount: representatives.size,
       matchConfidence: best.matchConfidence, matchMethod: best.matchMethod,
       distanceFromAnchorMeters: +Math.min(...matches.map((m) => m.anchorMeters)).toFixed(1),
-      corridorDistanceMeters: +Math.min(...matches.map((m) => m.corridorDistanceMeters)).toFixed(1),
+       corridorDistanceMeters: +Math.min(...matches.map((m) => m.corridorDistanceMeters)).toFixed(1),
+       roadLightingMatchedMeters: +Math.max(...matches.map((m) => m.matchedMeters)).toFixed(1),
       roadLightingEvidence: +Math.min(1, 1 - remaining).toFixed(4) };
   }
   diagnostics.byParcelDong = Object.fromEntries([...byParcelDong].sort((a, b) => b[1].records - a[1].records));
   diagnostics.matchedClusterCount = diagnostics.matchedGroups;
   diagnostics.unmatchedClusterCount = clusters.length - diagnostics.matchedGroups;
   diagnostics.linkedRoadCount = Object.keys(roadsById).length;
-  return { roads: roadsById, diagnostics };
+  return addRoadLightingScores({ roads: roadsById, diagnostics }, roads);
 }

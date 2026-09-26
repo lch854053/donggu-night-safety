@@ -5,7 +5,7 @@ export interface MapLayerDefinition {
   label: string;
   description: string;
   color: string;
-  kind: "point" | "area";
+  kind: "point" | "area" | "line";
 }
 
 export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
@@ -15,6 +15,13 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
     description: "야간 보행로 조명 시설",
     color: "#e5a617",
     kind: "point",
+  },
+  {
+    key: "road_light_corridor",
+    label: "가로등 추정구간",
+    description: "관리그룹 대표좌표·도로 연결 기반 · 개별 설치위치 아님",
+    color: "#0b7285",
+    kind: "line",
   },
   {
     key: "cctv",
@@ -69,6 +76,7 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
 
 export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   security_light: true,
+  road_light_corridor: false,
   road_light: false, // 레거시 Point 레이어는 노출하지 않는다. 도로 속성의 추정 근거만 표시.
   streetlight: false,
   cctv: true,

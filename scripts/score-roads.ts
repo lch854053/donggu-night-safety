@@ -17,7 +17,7 @@ export async function scoreRoads() {
     "lib/scoring/roadPointIndex.ts", "lib/scoring/lighting.ts", "lib/scoring/crimeRisk.ts",
     "lib/scoring/weightedAverage.ts", "lib/scoring/proximityScore.ts",
     "lib/scoring/surveillance.ts", "lib/scoring/activity.ts", "lib/scoring/environment.ts",
-    "config/cctvPurpose.mjs", "lib/scoring/estimatedRoadLighting.ts", "scripts/score-roads.ts"];
+    "config/cctvPurpose.mjs", "lib/scoring/estimatedRoadLighting.ts", "lib/scoring/lightingCombination.ts", "scripts/score-roads.ts"];
   const roadLightEvidencePath = resolve(root, "public/data/road-light-evidence.json");
   const hasRoadLightEvidence = existsSync(roadLightEvidencePath);
   if (hasRoadLightEvidence) paths.push("public/data/road-light-evidence.json");

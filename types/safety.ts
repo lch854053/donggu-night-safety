@@ -23,7 +23,7 @@ export type SafetyFeatureType =
   /** 공공데이터포털 동구 빈집 현황. */
   | "vacant_house";
 
-export type LayerKey = Exclude<SafetyFeatureType, "police_center">;
+export type LayerKey = Exclude<SafetyFeatureType, "police_center"> | "road_light_corridor";
 
 export type RoadPlanningGrade = "소로" | "중로" | "대로" | "광로";
 
@@ -97,8 +97,15 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
    * 미수집 차원은 재정규화해 제외한다. 차원이 전혀 없으면 null(0과 다른 의미).
    */
   safetyScoreV2: number | null;
-  /** 실제 보안등 위치 기반 점수 + 선택된 도로 가로등 추정 보정. 실제 조도(lux)가 아니다. */
+  /** 보안등 실좌표 근거와 가로등 corridor 추정 근거의 결합. 실제 조도(lux)가 아니다. */
   lightingScore: number;
+  securityLightingScore: number;
+  roadLightingScore: number;
+  roadLightingCoverageEstimated?: number;
+  roadLightingContinuity?: number;
+  roadLightingRunMeters?: number;
+  roadLightingClusterCount?: number;
+  /** 구버전 호환: securityLightingScore와 동일한 값. */
   actualLightingScore: number;
   lightingCoverage: number;
   maxDarkGapMeters: number;
@@ -150,6 +157,12 @@ export interface SafetyDataset {
   features: FeatureCollection<Point, SafetyFeatureProperties>;
   riskZones: FeatureCollection<Polygon | LineString, RiskZoneProperties>;
   roadSegments: FeatureCollection<LineString, RoadSegmentInputProperties>;
+  roadLightCorridors?: FeatureCollection<LineString | import("geojson").MultiLineString, {
+    clusterId: string; roadName: string; managedUnitCount: number;
+    matchConfidence: number; matchMethod: string; estimated: true;
+    roadLightingEvidence: number; roadLightingScore: number; corridorLengthMeters: number;
+    linkedRoadCount: number; dataAsOf: string; source: string;
+  }>;
   metadata: {
     sourceKind: "mock" | "static" | "supabase";
     scoreKind: "client" | "precomputed";
@@ -168,6 +181,11 @@ export interface SafetyDataset {
     matchConfidence: number;
     matchMethod: "road_name_and_coordinate" | "road_name" | "parcel_and_coordinate";
     roadLightingEvidence: number;
+    roadLightingScore?: number;
+    roadLightingCoverageEstimated?: number;
+    roadLightingContinuity?: number;
+    roadLightingRunMeters?: number;
+    roadLightingClusterCount?: number;
   }>;
   /**
    * 생활안전지도(경찰청 밀도분석) WMS를 도로별로 샘플링한 상대적 주의도.

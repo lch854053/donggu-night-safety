@@ -26,8 +26,8 @@ export interface CrimeRiskConfig {
 export interface LightingConfig {
   sampleIntervalMeters: number;
   lightTypes: Record<"security_light", { sigmaMeters: number; cutoffMeters: number }>;
-  /** 도로 관리자료 추정치 결합. A/B 비교 후 실제 보안등 점수를 낮추지 않는 B를 채택. */
-  estimatedRoadLightModel: "actual" | "A" | "B";
+  /** 독립된 보안등 실좌표·가로등 corridor 추정 점수의 결합. */
+  lightingCombinationModel: "actual" | "OLD" | "MAX" | "UNION";
   /** 표시·디버깅용 위치 집계 반경. 기존 50m 기준을 유지한다. */
   countRadiusMeters: number;
   coverageThreshold: number;
@@ -48,7 +48,7 @@ export const SAFETY_WEIGHTS = {
     lightTypes: {
       security_light: { sigmaMeters: 20, cutoffMeters: 60 },
     },
-    estimatedRoadLightModel: "B" as LightingConfig["estimatedRoadLightModel"],
+    lightingCombinationModel: "UNION" as LightingConfig["lightingCombinationModel"],
     countRadiusMeters: 50,
     coverageThreshold: 0.25,
     contributionPoints: 16,

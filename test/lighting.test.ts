@@ -7,6 +7,7 @@ import { combinedInfluence, computeLightingMetrics, darkGapScore, darkSpanQualit
   lightInfluence } from "../lib/scoring/lighting";
 import { SAFETY_WEIGHTS } from "../config/safetyWeights";
 import { estimatedRoadLightingModels } from "../lib/scoring/estimatedRoadLighting";
+import { compareLightingModels, saturatingLightingUnion } from "../lib/scoring/lightingCombination";
 import type { SafetyDataset, SafetyFeatureType } from "../types/safety";
 
 const readJson = (path: string) => JSON.parse(readFileSync(path, "utf8"));
@@ -118,7 +119,8 @@ test("관리행 20건의 추정치로도 긴 보안등 암구간은 사라지지
   const metrics = computeLightingMetrics(road, [streetlight(0, "s")], config);
   const estimate = { source: "road_light_api" as const, estimated: true as const, matchedRecordCount: 20,
     uniqueRepresentativePointCount: 1, matchConfidence: 1, matchMethod: "road_name_and_coordinate" as const,
-    roadLightingEvidence: 0.7 };
+    roadLightingEvidence: 0.7, roadLightingScore: 55, roadLightingContinuity: 0.4,
+    roadLightingCoverageEstimated: 0.25, roadLightingRunMeters: 120, roadLightingClusterCount: 1 };
   const scored = calculateRoadSafety({ ...dataset, roadSegments: featureCollection([road]),
     features: featureCollection([streetlight(0, "s")]),
     roadLightingEvidenceByRoad: { "test-road": estimate } }).features[0].properties;
@@ -127,15 +129,46 @@ test("관리행 20건의 추정치로도 긴 보안등 암구간은 사라지지
   assert.ok(metrics.maxDarkGapMeters >= 100);
   assert.equal(metrics.darkGapScore, 0);
   assert.equal(scored.maxDarkGapMeters, Math.round(metrics.maxDarkGapMeters));
-  for (const key of ["lightingCoverage", "maxDarkGapMeters", "lightingUniformityScore", "actualLightingScore"] as const) {
+  for (const key of ["lightingCoverage", "maxDarkGapMeters", "lightingUniformityScore", "securityLightingScore", "actualLightingScore"] as const) {
     assert.equal(scored[key], withoutEstimate[key], `${key}는 실제 보안등 좌표만 사용`);
   }
   assert.ok(scored.lightingScore > withoutEstimate.lightingScore);
   const models = estimatedRoadLightingModels(metrics.lightingScore, estimate, false);
   assert.ok(models.A <= 60 && models.B <= 60);
   assert.ok(models.A < 100 && models.B < 100);
-  assert.equal(scored.lightingScore, models.B);
+  assert.equal(scored.roadLightingScore, 55);
+  assert.equal(scored.lightingScore, saturatingLightingUnion(metrics.lightingScore, 55));
   assert.equal(scored.roadLightingRecordCount, 20);
+});
+
+test("UNION은 두 독립 점수의 최댓값 이상, 100 이하이며 0과 100 경계값을 보존한다", () => {
+  assert.equal(saturatingLightingUnion(0, 0), 0);
+  assert.equal(saturatingLightingUnion(100, 35), 100);
+  assert.equal(saturatingLightingUnion(35, 100), 100);
+  for (const security of [0, 10, 45, 90, 100]) for (const road of [0, 20, 55, 85, 100]) {
+    const union = saturatingLightingUnion(security, road);
+    assert.ok(union >= Math.max(security, road) && union <= 100);
+  }
+  const low = { source: "road_light_api" as const, estimated: true as const, matchedRecordCount: 1,
+    uniqueRepresentativePointCount: 1, matchConfidence: 0.6, matchMethod: "parcel_and_coordinate" as const,
+    roadLightingEvidence: 0.4, roadLightingScore: 40 };
+  assert.ok(compareLightingModels(0, low, false).UNION <= 55);
+});
+
+test("실제 필문대로의 낮은 보안등 점수·높은 신뢰도 corridor에서는 OLD보다 UNION이 높다", () => {
+  const roads = JSON.parse(readFileSync("public/data/road-segments.geojson", "utf8"));
+  const matching = roads.features.filter((road: { properties: { name: string; securityLightingScore: number;
+    roadLightingMatchMethod?: string } }) => road.properties.name === "필문대로" &&
+    road.properties.securityLightingScore <= 20 &&
+    road.properties.roadLightingMatchMethod === "road_name_and_coordinate");
+  assert.ok(matching.length > 0, "실제 고신뢰 추정구간이 필요하다");
+  for (const { properties: road } of matching) {
+    const old = Math.round(road.securityLightingScore +
+      (100 - road.securityLightingScore) * road.roadLightingEvidence * 0.25);
+    assert.ok(road.lightingScore > old);
+    assert.equal(road.actualLightingScore, road.securityLightingScore);
+    assert.ok(road.roadLightingScore <= 85);
+  }
 });
 
 test("calculateRoadSafety exposes lighting metrics while keeping streetlightCount", () => {
@@ -148,6 +181,8 @@ test("calculateRoadSafety exposes lighting metrics while keeping streetlightCoun
   assert.equal(properties.streetlightCount, 2);
   assert.equal(properties.securityLightCount, 2);
   assert.equal(properties.actualLightingScore, metrics.lightingScore);
+  assert.equal(properties.securityLightingScore, metrics.lightingScore);
+  assert.equal(properties.roadLightingScore, 0);
   assert.equal(properties.lightingScore, metrics.lightingScore);
   assert.equal(properties.lightingCoverage, Math.round(metrics.coverageScore));
   assert.equal(properties.maxDarkGapMeters, Math.round(metrics.maxDarkGapMeters));

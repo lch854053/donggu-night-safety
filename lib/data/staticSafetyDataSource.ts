@@ -26,7 +26,7 @@ async function fetchJson<T>(url: string): Promise<T> {
 // scripts/fetch-real-data.mjs가 생성한 정적 공공데이터 GeoJSON을 읽는 공급자.
 export class StaticSafetyDataSource implements SafetyDataSource {
   async load(): Promise<SafetyDataset> {
-    const [features, riskZones, roadSegments, meta] = await Promise.all([
+    const [features, riskZones, roadSegments, meta, roadLightCorridors] = await Promise.all([
       fetchJson<FeatureCollection<Point, SafetyFeatureProperties>>(
         "/data/safety-features.geojson",
       ),
@@ -37,12 +37,16 @@ export class StaticSafetyDataSource implements SafetyDataSource {
         "/data/road-segments.geojson",
       ),
       fetchJson<DataMeta>("/data/meta.json").catch(() => ({}) as DataMeta),
+      fetchJson<NonNullable<SafetyDataset["roadLightCorridors"]>>(
+        "/data/road-light-corridors.geojson",
+      ),
     ]);
 
     return {
       features,
       riskZones,
       roadSegments: validateScoredRoads(roadSegments),
+      roadLightCorridors,
       metadata: {
         sourceKind: "static",
         scoreKind: "precomputed",
