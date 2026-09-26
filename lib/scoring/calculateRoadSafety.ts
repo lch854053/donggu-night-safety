@@ -206,6 +206,7 @@ export function calculateRoadSafety(
           roadLightingConfidence: roadLight.matchConfidence,
           roadLightingMatchMethod: roadLight.matchMethod,
           roadLightingRecordCount: roadLight.matchedRecordCount,
+          roadLightingManagedUnitCount: roadLight.managedUnitCount ?? roadLight.matchedRecordCount,
           roadLightingRepresentativePointCount: roadLight.uniqueRepresentativePointCount,
         } : {}),
         cctvCount,

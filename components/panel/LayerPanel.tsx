@@ -195,7 +195,7 @@ export function LayerPanel({
                          <div>
                            <dt>가로등 도로구간 추정</dt>
                            <dd>{p.roadLightingEstimated
-                             ? `공공 관리자료상 설치 추정 · 신뢰도 ${p.roadLightingMatchMethod === "road_name_and_coordinate" ? "높음" : p.roadLightingMatchMethod === "road_name" ? "보통" : "낮음"} · 관리행 ${p.roadLightingRecordCount}건 (등주 수 아님)`
+                             ? `공공 관리자료상 설치 근거 있음 · 신뢰도 ${p.roadLightingMatchMethod === "road_name_and_coordinate" ? "높음" : p.roadLightingMatchMethod === "road_name" ? "보통" : "낮음"} · 관리대상 ${p.roadLightingManagedUnitCount}건 · 대표좌표 기반 도로구간 추정 (개별 등주 위치 미제공)`
                              : "매칭 근거 없음"}</dd>
                          </div>
                          <div>
