@@ -157,7 +157,7 @@ function roadPopupContent(properties: Record<string, unknown>) {
     const estimate = document.createElement("p");
     estimate.className = "road-popup-note";
     const method = String(properties.roadLightingMatchMethod ?? "");
-    estimate.textContent = `가로등: 공공 관리자료상 도로구간 설치 추정 · 근거 신뢰도 ${method === "road_name_and_coordinate" ? "높음" : method === "road_name" ? "보통" : "낮음"} · 관리행 ${numericProperty(properties, "roadLightingRecordCount")}건 (등주 수 아님). 개별 설치위치·실제 조도·등주 간격은 확인되지 않습니다.`;
+    estimate.textContent = `가로등 공공 관리자료상 설치 근거 있음 · 신뢰도 ${method === "road_name_and_coordinate" ? "높음" : method === "road_name" ? "보통" : "낮음"} · 관리대상 ${numericProperty(properties, "roadLightingManagedUnitCount")}건 · 대표좌표 기반 도로구간 추정. 관리번호별 실제 등주 위치·조도·간격은 제공되지 않습니다.`;
     content.append(estimate);
   }
   const grade = document.createElement("p");

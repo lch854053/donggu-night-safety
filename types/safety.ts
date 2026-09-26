@@ -122,6 +122,7 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
   roadLightingConfidence?: number;
   roadLightingMatchMethod?: "road_name_and_coordinate" | "road_name" | "parcel_and_coordinate";
   roadLightingRecordCount?: number;
+  roadLightingManagedUnitCount?: number;
   roadLightingRepresentativePointCount?: number;
   cctvCount: number;
   emergencyBellCount: number;
@@ -159,6 +160,11 @@ export interface SafetyDataset {
     estimated: true;
     matchedRecordCount: number;
     uniqueRepresentativePointCount: number;
+    clusterIds?: string[];
+    managedUnitCount?: number;
+    representativePointCount?: number;
+    distanceFromAnchorMeters?: number;
+    corridorDistanceMeters?: number;
     matchConfidence: number;
     matchMethod: "road_name_and_coordinate" | "road_name" | "parcel_and_coordinate";
     roadLightingEvidence: number;

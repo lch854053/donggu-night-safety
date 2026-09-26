@@ -99,11 +99,14 @@
       "fetchedAt": "2026-09-26",
       "source": "odcloud:15113447",
       "geometryMeaning": "representative_or_management_location",
-      "method": "road-name and coordinate based road-segment inference",
-      "warning": "개별 등주 좌표가 아니며 실제 위치·조도·간격으로 사용하지 않음",
-      "linkedRoadCount": 2047,
+      "method": "road-name anchor and topology-connected 200m road corridor; parcel-only 150m cap",
+      "warning": "관리번호별 개별 관리대상은 존재하나 개별 등주 좌표가 아니며 실제 위치·조도·간격으로 사용하지 않음",
+      "linkedRoadCount": 937,
       "matchedRows": 2786,
-      "metadata": "/data/road-light-evidence.json"
+      "metadata": "/data/road-light-evidence.json",
+      "clusterCount": 264,
+      "uniqueManagedUnitCount": 3805,
+      "clusters": "/data/road-light-clusters.json"
     }
   },
   "pending": {

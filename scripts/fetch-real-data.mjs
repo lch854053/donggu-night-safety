@@ -35,6 +35,7 @@ const FEATURES_PATH = path.join(DATA_DIR, "safety-features.geojson");
 const META_PATH = path.join(DATA_DIR, "meta.json");
 const CPTED_CACHE_PATH = path.join(DATA_DIR, "cpted-geocodes.json");
 const ROAD_EVIDENCE_PATH = path.join(DATA_DIR, "road-light-evidence.json");
+const ROAD_CLUSTERS_PATH = path.join(DATA_DIR, "road-light-clusters.json");
 const SECURITY_LIGHT_CSV = path.join(ROOT, "scripts", "data", "donggu-security-lights.csv");
 
 // .env.local 파서 (dotenv 의존성 없이 최소 구현)
@@ -198,6 +199,7 @@ const metaSources = {};
 let cptedMetadata;
 let cptedCache;
 let roadEvidence;
+let roadClusters;
 
 async function collectCctv() {
   console.log("[CCTV] 행안부 cctv_info 전국 스캔");
@@ -378,18 +380,21 @@ async function main() {
   if (want("road-lights") && (ROAD_LIGHT_KEY || only.includes("road-lights"))) {
     console.log("[가로등] odcloud 동구 가로등현황 수집");
     const result = await collectRoadLights(ROAD_LIGHT_KEY, getWithRetry);
+    roadClusters = result.clusters;
     const roads = JSON.parse(readFileSync(path.join(ROOT, "scripts/data/road-segments.geojson"), "utf8"));
     const boundaries = JSON.parse(readFileSync(path.join(ROOT, "scripts/data/donggu-admin-boundaries.geojson"), "utf8"));
-    roadEvidence = buildRoadLightingEvidence(result.groups, roads, boundaries);
+    roadEvidence = buildRoadLightingEvidence(result.clusters, roads, boundaries);
     if (!Object.keys(roadEvidence.roads).length) throw new Error("가로등 도로구간 매칭 0건 — 기존 자료 유지");
     metaSources.road_light = { status: "estimated", recordCount: result.total,
-      uniqueRepresentativePoints: result.groups.length, invalid: result.invalid,
+      clusterCount: result.clusters.length, uniqueManagedUnitCount: result.uniqueManagedUnitCount,
+      uniqueRepresentativePoints: new Set(result.clusters.map((c) => c.representativeCoordinate.join(","))).size,
+      invalid: result.invalid,
       dataAsOf: result.dataAsOf, fetchedAt: new Date().toISOString().slice(0, 10),
       source: "odcloud:15113447", geometryMeaning: "representative_or_management_location",
       method: "road-name and coordinate based road-segment inference",
-      warning: "개별 등주 좌표가 아니며 실제 위치·조도·간격으로 사용하지 않음",
+      warning: "관리번호별 개별 관리대상은 존재하나 개별 등주 좌표가 아니며 실제 위치·조도·간격으로 사용하지 않음",
       linkedRoadCount: roadEvidence.diagnostics.linkedRoadCount, matchedRows: roadEvidence.diagnostics.matchedRows,
-      metadata: "/data/road-light-evidence.json" };
+      metadata: "/data/road-light-evidence.json", clusters: "/data/road-light-clusters.json" };
   } else if (want("road-lights") && !ROAD_LIGHT_KEY) {
     console.warn("[가로등] ROAD_LIGHT_SERVICE_KEY 미설정 — 기존 가로등 자료 유지");
   }
@@ -447,6 +452,9 @@ async function main() {
   const fc = { type: "FeatureCollection", features };
   writeFileSync(FEATURES_PATH, JSON.stringify(fc), "utf8");
   if (roadEvidence) writeFileSync(ROAD_EVIDENCE_PATH, JSON.stringify(roadEvidence, null, 2) + "\n", "utf8");
+  if (roadClusters) writeFileSync(ROAD_CLUSTERS_PATH, JSON.stringify({
+    source: "odcloud:15113447", estimated: true, clusters: roadClusters,
+  }, null, 2) + "\n", "utf8");
   if (cptedMetadata) writeFileSync(path.join(DATA_DIR, "cpted-meta.json"), JSON.stringify(cptedMetadata, null, 2), "utf8");
   if (cptedCache) writeFileSync(CPTED_CACHE_PATH, JSON.stringify(cptedCache, null, 2), "utf8");
   writeFileSync(

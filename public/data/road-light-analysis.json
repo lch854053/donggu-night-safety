@@ -1,1299 +1,801 @@
 {
   "source": "odcloud:15113447",
-  "model": "comparison-only",
+  "model": "C1-200m + evidence-C + lighting-B",
+  "raw": {
+    "recordCount": 3805,
+    "clusterCount": 264,
+    "uniqueManagedUnitCount": 3805,
+    "managedUnitCount": {
+      "mean": 14.41,
+      "median": 12,
+      "p90": 24,
+      "max": 41
+    },
+    "roadAddressRows": 1987,
+    "roadAddressPercent": 52.22,
+    "parcelAddressRows": 3805,
+    "parcelAddressPercent": 100
+  },
   "matching": {
     "recordCount": 3805,
+    "clusterCount": 264,
     "representativePointCount": 264,
-    "roadNameRows": 1973,
+    "roadAddressRows": 1987,
+    "parcelAddressRows": 3805,
+    "roadNameRows": 1967,
     "matchedRows": 2786,
     "highRows": 1938,
     "mediumRows": 31,
     "lowRows": 817,
     "unmatchedRows": 1019,
     "matchedGroups": 192,
+    "matchedClusterCount": 192,
+    "unmatchedClusterCount": 72,
     "unmatchedGroups": [
       {
+        "clusterId": "동구-02",
         "coordinate": [
           126.936912,
           35.11206
         ],
         "roadAddress": "",
         "parcelAddress": "소태동 176",
-        "recordCount": 24
+        "managedUnitCount": 24
       },
       {
+        "clusterId": "동구-12",
         "coordinate": [
           126.95176,
           35.08114
         ],
         "roadAddress": "",
         "parcelAddress": "선교동 482",
-        "recordCount": 17
+        "managedUnitCount": 17
       },
       {
+        "clusterId": "동구-21",
         "coordinate": [
           126.937906,
           35.104776
         ],
         "roadAddress": "",
         "parcelAddress": "월남동 157",
-        "recordCount": 24
+        "managedUnitCount": 24
       },
       {
+        "clusterId": "동구-22",
         "coordinate": [
           126.939482,
           35.09922
         ],
         "roadAddress": "",
         "parcelAddress": "월남동 159-21",
-        "recordCount": 25
+        "managedUnitCount": 25
       },
       {
+        "clusterId": "동구-33",
         "coordinate": [
           126.941427,
           35.1321
         ],
         "roadAddress": "",
         "parcelAddress": "운림동 640-3",
-        "recordCount": 18
+        "managedUnitCount": 18
       },
       {
+        "clusterId": "동구-35",
         "coordinate": [
           126.939969,
           35.099239
         ],
         "roadAddress": "",
         "parcelAddress": "내남동 17",
-        "recordCount": 25
+        "managedUnitCount": 25
       },
       {
+        "clusterId": "동구-36",
         "coordinate": [
           126.925258,
           35.11743
         ],
         "roadAddress": "",
         "parcelAddress": "용산동 733",
-        "recordCount": 16
+        "managedUnitCount": 16
       },
       {
+        "clusterId": "동구-59",
         "coordinate": [
           126.92237,
           35.135963
         ],
         "roadAddress": "",
         "parcelAddress": "학동 904-139",
-        "recordCount": 10
+        "managedUnitCount": 10
       },
       {
+        "clusterId": "동구-63",
         "coordinate": [
           126.936241,
           35.147786
         ],
         "roadAddress": "",
         "parcelAddress": "지산동 691-58",
-        "recordCount": 12
+        "managedUnitCount": 12
       },
       {
+        "clusterId": "동구-72",
         "coordinate": [
           126.916631,
           35.151409
         ],
         "roadAddress": "",
         "parcelAddress": "대인동 136-1",
-        "recordCount": 10
+        "managedUnitCount": 10
       },
       {
+        "clusterId": "동구-82",
         "coordinate": [
           126.927291,
           35.153287
         ],
         "roadAddress": "",
         "parcelAddress": "산수동 358-21",
-        "recordCount": 3
+        "managedUnitCount": 3
       },
       {
+        "clusterId": "동구-84",
         "coordinate": [
           126.925743,
           35.153914
         ],
         "roadAddress": "",
         "parcelAddress": "산수동 724",
-        "recordCount": 9
+        "managedUnitCount": 9
       },
       {
+        "clusterId": "동구-88",
         "coordinate": [
           126.922568,
           35.135902
         ],
         "roadAddress": "",
         "parcelAddress": "학동 1026",
-        "recordCount": 9
+        "managedUnitCount": 9
       },
       {
+        "clusterId": "동구-97",
         "coordinate": [
           126.914442,
           35.156339
         ],
         "roadAddress": "",
         "parcelAddress": "대인동 331",
-        "recordCount": 14
+        "managedUnitCount": 14
       },
       {
+        "clusterId": "동구-108",
         "coordinate": [
           126.925793,
           35.153775
         ],
         "roadAddress": "",
         "parcelAddress": "산수동 365-12",
-        "recordCount": 15
+        "managedUnitCount": 15
       },
       {
+        "clusterId": "동구-117",
         "coordinate": [
           126.935424,
           35.11508
         ],
         "roadAddress": "",
         "parcelAddress": "소태동 181",
-        "recordCount": 17
+        "managedUnitCount": 17
       },
       {
+        "clusterId": "동구-126",
         "coordinate": [
           126.939141,
           35.132965
         ],
         "roadAddress": "",
         "parcelAddress": "운림동 603-8",
-        "recordCount": 10
+        "managedUnitCount": 10
       },
       {
+        "clusterId": "동구-127",
         "coordinate": [
           126.939723,
           35.132159
         ],
         "roadAddress": "",
         "parcelAddress": "소태동 762",
-        "recordCount": 18
+        "managedUnitCount": 18
       },
       {
+        "clusterId": "동구-128",
         "coordinate": [
           126.931336,
           35.128687
         ],
         "roadAddress": "",
         "parcelAddress": "소태동 532-1",
-        "recordCount": 10
+        "managedUnitCount": 10
       },
       {
+        "clusterId": "동구-130",
         "coordinate": [
           126.94431,
           35.13217
         ],
         "roadAddress": "",
         "parcelAddress": "운림동 661-15",
-        "recordCount": 9
+        "managedUnitCount": 9
       },
       {
+        "clusterId": "동구-134",
         "coordinate": [
           126.923988,
           35.156408
         ],
         "roadAddress": "",
         "parcelAddress": "산수동 724",
-        "recordCount": 6
+        "managedUnitCount": 6
       },
       {
+        "clusterId": "동구-136",
         "coordinate": [
           126.923519,
           35.151189
         ],
         "roadAddress": "",
         "parcelAddress": "동명동 200-166",
-        "recordCount": 9
+        "managedUnitCount": 9
       },
       {
+        "clusterId": "동구-148",
         "coordinate": [
           126.90968,
           35.149718
         ],
         "roadAddress": "",
         "parcelAddress": "수기동 138",
-        "recordCount": 22
+        "managedUnitCount": 22
       },
       {
+        "clusterId": "동구-152",
         "coordinate": [
           126.924239,
           35.158325
         ],
         "roadAddress": "계림30번길 15",
         "parcelAddress": "계림동 1815",
-        "recordCount": 4
+        "managedUnitCount": 4
       },
       {
+        "clusterId": "동구-160",
         "coordinate": [
           126.912986,
           35.150545
         ],
         "roadAddress": "",
         "parcelAddress": "충장로5가 49",
-        "recordCount": 24
+        "managedUnitCount": 24
       },
       {
+        "clusterId": "동구-162",
         "coordinate": [
           126.921274,
           35.138297
         ],
         "roadAddress": "",
         "parcelAddress": "학동 942-9",
-        "recordCount": 28
+        "managedUnitCount": 28
       },
       {
+        "clusterId": "동구-163",
         "coordinate": [
           126.921471,
           35.138398
         ],
         "roadAddress": "",
         "parcelAddress": "학동 942-9",
-        "recordCount": 11
+        "managedUnitCount": 11
       },
       {
+        "clusterId": "동구-165",
         "coordinate": [
           126.924027,
           35.141747
         ],
         "roadAddress": "",
         "parcelAddress": "학동 475-2",
-        "recordCount": 23
+        "managedUnitCount": 23
       },
       {
+        "clusterId": "동구-177",
         "coordinate": [
           126.921753,
           35.147314
         ],
         "roadAddress": "",
         "parcelAddress": "광산동 115",
-        "recordCount": 12
+        "managedUnitCount": 12
       },
       {
+        "clusterId": "동구-179",
         "coordinate": [
           126.919252,
           35.145904
         ],
         "roadAddress": "",
         "parcelAddress": "광산동 113",
-        "recordCount": 14
+        "managedUnitCount": 14
       },
       {
+        "clusterId": "동구-194",
         "coordinate": [
           126.920286,
           35.158822
         ],
         "roadAddress": "",
         "parcelAddress": "계림동 290-3",
-        "recordCount": 10
+        "managedUnitCount": 10
       },
       {
+        "clusterId": "동구-197",
         "coordinate": [
           126.938394,
           35.104886
         ],
         "roadAddress": "",
         "parcelAddress": "월남동 157",
-        "recordCount": 24
+        "managedUnitCount": 24
       },
       {
+        "clusterId": "동구-198",
         "coordinate": [
           126.937444,
           35.11075
         ],
         "roadAddress": "",
         "parcelAddress": "소태동 산 250-3",
-        "recordCount": 22
+        "managedUnitCount": 22
       },
       {
+        "clusterId": "동구-200",
         "coordinate": [
           126.925941,
           35.152691
         ],
         "roadAddress": "",
         "parcelAddress": "동명동 181-1",
-        "recordCount": 19
+        "managedUnitCount": 19
       },
       {
+        "clusterId": "동구-202",
         "coordinate": [
           126.94135,
           35.093992
         ],
         "roadAddress": "",
         "parcelAddress": "내남동 산 15",
-        "recordCount": 27
+        "managedUnitCount": 27
       },
       {
+        "clusterId": "동구-203",
         "coordinate": [
           126.950041,
           35.087481
         ],
         "roadAddress": "",
         "parcelAddress": "선교동 산 151",
-        "recordCount": 6
+        "managedUnitCount": 6
       },
       {
+        "clusterId": "동구-205",
         "coordinate": [
           126.938534,
           35.103464
         ],
         "roadAddress": "",
         "parcelAddress": "월남동 619",
-        "recordCount": 10
+        "managedUnitCount": 10
       },
       {
+        "clusterId": "동구-207",
         "coordinate": [
           126.930904,
           35.119301
         ],
         "roadAddress": "",
         "parcelAddress": "용산동 218-7",
-        "recordCount": 17
+        "managedUnitCount": 17
       },
       {
+        "clusterId": "동구-209",
         "coordinate": [
           126.925875,
           35.157312
         ],
         "roadAddress": "",
         "parcelAddress": "산수동 454-1",
-        "recordCount": 5
+        "managedUnitCount": 5
       },
       {
+        "clusterId": "동구-210",
         "coordinate": [
           126.936667,
           35.121586
         ],
         "roadAddress": "",
         "parcelAddress": "소태동 223-7",
-        "recordCount": 6
+        "managedUnitCount": 6
       },
       {
+        "clusterId": "동구-211",
         "coordinate": [
           126.935423,
           35.121201
         ],
         "roadAddress": "",
         "parcelAddress": "소태동 229",
-        "recordCount": 6
+        "managedUnitCount": 6
       },
       {
+        "clusterId": "동구-218",
         "coordinate": [
           126.924077,
           35.156586
         ],
         "roadAddress": "",
         "parcelAddress": "계림동 1821",
-        "recordCount": 11
+        "managedUnitCount": 11
       },
       {
+        "clusterId": "동구-220",
         "coordinate": [
           126.947549,
           35.087706
         ],
         "roadAddress": "",
         "parcelAddress": "선교동 산 222-1",
-        "recordCount": 23
+        "managedUnitCount": 23
       },
       {
+        "clusterId": "동구-221",
         "coordinate": [
           126.952521,
           35.087198
         ],
         "roadAddress": "",
         "parcelAddress": "선교동 산 151",
-        "recordCount": 23
+        "managedUnitCount": 23
       },
       {
+        "clusterId": "동구-223",
         "coordinate": [
           126.960212,
           35.079912
         ],
         "roadAddress": "",
         "parcelAddress": "선교동 산 165-1",
-        "recordCount": 20
+        "managedUnitCount": 20
       },
       {
+        "clusterId": "동구-224",
         "coordinate": [
           126.952623,
           35.13329
         ],
         "roadAddress": "",
         "parcelAddress": "운림동 산 185-2",
-        "recordCount": 35
+        "managedUnitCount": 35
       },
       {
+        "clusterId": "동구-225",
         "coordinate": [
           126.938408,
           35.098674
         ],
         "roadAddress": "",
         "parcelAddress": "월남동 637",
-        "recordCount": 9
+        "managedUnitCount": 9
       },
       {
+        "clusterId": "동구-227",
         "coordinate": [
           126.937397,
           35.130835
         ],
         "roadAddress": "",
         "parcelAddress": "소태동 726-15",
-        "recordCount": 21
+        "managedUnitCount": 21
       },
       {
+        "clusterId": "동구-228",
         "coordinate": [
           126.934849,
           35.129841
         ],
         "roadAddress": "",
         "parcelAddress": "소태동 711-20",
-        "recordCount": 9
+        "managedUnitCount": 9
       },
       {
+        "clusterId": "동구-231",
         "coordinate": [
           126.921507,
           35.117068
         ],
         "roadAddress": "",
         "parcelAddress": "용산동 445",
-        "recordCount": 5
+        "managedUnitCount": 5
       },
       {
+        "clusterId": "동구-232",
         "coordinate": [
           126.924177,
           35.118304
         ],
         "roadAddress": "용산1로 12",
         "parcelAddress": "용산동 727",
-        "recordCount": 20
+        "managedUnitCount": 20
       },
       {
+        "clusterId": "동구-233",
         "coordinate": [
           126.92314,
           35.117514
         ],
         "roadAddress": "",
         "parcelAddress": "용산동 733",
-        "recordCount": 17
+        "managedUnitCount": 17
       },
       {
+        "clusterId": "동구-235",
         "coordinate": [
           126.927303,
           35.117706
         ],
         "roadAddress": "",
         "parcelAddress": "용산동 699",
-        "recordCount": 24
+        "managedUnitCount": 24
       },
       {
+        "clusterId": "동구-236",
         "coordinate": [
           126.917146,
           35.155955
         ],
         "roadAddress": "",
         "parcelAddress": "계림동 478-2",
-        "recordCount": 9
+        "managedUnitCount": 9
       },
       {
+        "clusterId": "동구-237",
         "coordinate": [
           126.915947,
           35.158112
         ],
         "roadAddress": "",
         "parcelAddress": "계림동 483-2",
-        "recordCount": 18
+        "managedUnitCount": 18
       },
       {
+        "clusterId": "동구-238",
         "coordinate": [
           126.930919,
           35.11932
         ],
         "roadAddress": "",
         "parcelAddress": "용산동 227-3",
-        "recordCount": 6
+        "managedUnitCount": 6
       },
       {
+        "clusterId": "동구-239",
         "coordinate": [
           126.932684,
           35.133946
         ],
         "roadAddress": "",
         "parcelAddress": "학동 706-1",
-        "recordCount": 10
+        "managedUnitCount": 10
       },
       {
+        "clusterId": "동구-243",
         "coordinate": [
           126.921376,
           35.155321
         ],
         "roadAddress": "",
         "parcelAddress": "계림동 233-18",
-        "recordCount": 18
+        "managedUnitCount": 18
       },
       {
+        "clusterId": "동구-244",
         "coordinate": [
           126.937849,
           35.155537
         ],
         "roadAddress": "",
         "parcelAddress": "산수동 86-10",
-        "recordCount": 14
+        "managedUnitCount": 14
       },
       {
+        "clusterId": "동구-245",
         "coordinate": [
           126.921198,
           35.154569
         ],
         "roadAddress": "",
         "parcelAddress": "동명동267-3",
-        "recordCount": 4
+        "managedUnitCount": 4
       },
       {
+        "clusterId": "동구-246",
         "coordinate": [
           126.924416,
           35.153912
         ],
         "roadAddress": "",
         "parcelAddress": "산수동370-2",
-        "recordCount": 11
+        "managedUnitCount": 11
       },
       {
+        "clusterId": "동구-248",
         "coordinate": [
           126.931692,
           35.122473
         ],
         "roadAddress": "",
         "parcelAddress": "용산동636-287",
-        "recordCount": 8
+        "managedUnitCount": 8
       },
       {
+        "clusterId": "동구-252",
         "coordinate": [
           126.936734,
           35.149241
         ],
         "roadAddress": "",
         "parcelAddress": "지산동724-1",
-        "recordCount": 7
+        "managedUnitCount": 7
       },
       {
+        "clusterId": "동구-253",
         "coordinate": [
           126.926383,
           35.16021
         ],
         "roadAddress": "",
         "parcelAddress": "계림동1619",
-        "recordCount": 9
+        "managedUnitCount": 9
       },
       {
+        "clusterId": "동구-254",
         "coordinate": [
           126.927761,
           35.161117
         ],
         "roadAddress": "",
         "parcelAddress": "계림동1730",
-        "recordCount": 7
+        "managedUnitCount": 7
       },
       {
+        "clusterId": "동구-256",
         "coordinate": [
           126.923081,
           35.148874
         ],
         "roadAddress": "",
         "parcelAddress": "장동87-12",
-        "recordCount": 9
+        "managedUnitCount": 9
       },
       {
+        "clusterId": "동구-257",
         "coordinate": [
           126.923401,
           35.148849
         ],
         "roadAddress": "",
         "parcelAddress": "장동87-12",
-        "recordCount": 10
+        "managedUnitCount": 10
       },
       {
+        "clusterId": "동구-259",
         "coordinate": [
           126.934749,
           35.123056
         ],
         "roadAddress": "",
         "parcelAddress": "소태동638-14",
-        "recordCount": 13
+        "managedUnitCount": 13
       },
       {
+        "clusterId": "동구-260",
         "coordinate": [
           126.909064,
           35.151782
         ],
         "roadAddress": "",
         "parcelAddress": "충장로5가96-4",
-        "recordCount": 6
+        "managedUnitCount": 6
       },
       {
+        "clusterId": "동구-265",
         "coordinate": [
           126.950089,
           35.089222
         ],
         "roadAddress": "",
         "parcelAddress": "선교동472-34",
-        "recordCount": 17
+        "managedUnitCount": 17
       },
       {
+        "clusterId": "동구-266",
         "coordinate": [
           126.950436,
           35.088913
         ],
         "roadAddress": "",
         "parcelAddress": "선교동270",
-        "recordCount": 11
+        "managedUnitCount": 11
       },
       {
+        "clusterId": "동구-267",
         "coordinate": [
           126.953171,
           35.090298
         ],
         "roadAddress": "",
         "parcelAddress": "선교동339-1",
-        "recordCount": 15
+        "managedUnitCount": 15
       }
     ],
     "distantSameName": [],
     "addressConflicts": [],
     "groupsOver50": [],
-    "sameAddressDistantRoads": [
-      {
-        "address": "학동 1003-1",
-        "coordinates": [
-          [
-            126.933875,
-            35.130334
-          ],
-          [
-            126.936769,
-            35.133155
-          ]
-        ],
-        "meters": 409
-      },
-      {
-        "address": "학동 1003-1",
-        "coordinates": [
-          [
-            126.933875,
-            35.130334
-          ],
-          [
-            126.922976,
-            35.134887
-          ]
-        ],
-        "meters": 1113
-      },
-      {
-        "address": "학동 1003-1",
-        "coordinates": [
-          [
-            126.936769,
-            35.133155
-          ],
-          [
-            126.922976,
-            35.134887
-          ]
-        ],
-        "meters": 1269
-      },
-      {
-        "address": "지산동 724-1",
-        "coordinates": [
-          [
-            126.936887,
-            35.149468
-          ],
-          [
-            126.92833,
-            35.151165
-          ]
-        ],
-        "meters": 801
-      },
-      {
-        "address": "산수동 561-1",
-        "coordinates": [
-          [
-            126.930936,
-            35.153012
-          ],
-          [
-            126.931096,
-            35.157751
-          ]
-        ],
-        "meters": 527
-      },
-      {
-        "address": "산수동 561-1",
-        "coordinates": [
-          [
-            126.930936,
-            35.153012
-          ],
-          [
-            126.927612,
-            35.158673
-          ]
-        ],
-        "meters": 698
-      },
-      {
-        "address": "산수동 561-1",
-        "coordinates": [
-          [
-            126.931096,
-            35.157751
-          ],
-          [
-            126.927612,
-            35.158673
-          ]
-        ],
-        "meters": 333
-      }
-    ],
     "matchedRoadOver50": [
       {
-        "roadId": "ngii-67cc6724369be926-1",
-        "recordCount": 57,
+        "roadId": "ngii-e44a0ae257ba8592-2",
+        "managedUnitCount": 57,
         "representativePoints": 2
       },
       {
-        "roadId": "ngii-e44a0ae257ba8592-2",
-        "recordCount": 57,
+        "roadId": "ngii-1431ffc0a2c8a90e-1",
+        "managedUnitCount": 57,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-67cc6724369be926-1",
+        "managedUnitCount": 57,
         "representativePoints": 2
       },
       {
         "roadId": "ngii-e44a0ae257ba8592-1",
-        "recordCount": 57,
+        "managedUnitCount": 57,
         "representativePoints": 2
       },
       {
-        "roadId": "ngii-258a623876af9ef8-2",
-        "recordCount": 52,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-258a623876af9ef8-3",
-        "recordCount": 52,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-7ed0b5795a3ec541-2",
-        "recordCount": 62,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-a5e0d60a7ed6f8b0-1",
-        "recordCount": 62,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-b8327ced24d366e6-1",
-        "recordCount": 62,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-278103d662a2b3b6-1",
-        "recordCount": 75,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-2f3e42277f239f84-1",
-        "recordCount": 61,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-2f3e42277f239f84-2",
-        "recordCount": 61,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-621b21fa5f3f2be9-1",
-        "recordCount": 61,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-621b21fa5f3f2be9-2",
-        "recordCount": 61,
+        "roadId": "ngii-f1c28bb215377d4b-1",
+        "managedUnitCount": 57,
         "representativePoints": 2
       },
       {
         "roadId": "ngii-84eeb98747fd0846-1",
-        "recordCount": 75,
-        "representativePoints": 3
+        "managedUnitCount": 61,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-278103d662a2b3b6-1",
+        "managedUnitCount": 61,
+        "representativePoints": 2
       },
       {
         "roadId": "ngii-84eeb98747fd0846-2",
-        "recordCount": 75,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-beee359adbc66245-1",
-        "recordCount": 61,
+        "managedUnitCount": 61,
         "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-00bc6d6f5f8d8ec9-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-01a1d6c432ec1e67-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-10ed15dc24963894-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-30c792fa874d7081-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-44b3b868dbfda5cb-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-44b3b868dbfda5cb-2",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-5985b05903e47775-1",
-        "recordCount": 69,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-5ec6df9da33e0479-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-66f5dd6667018394-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-75adac66e10c9ec0-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-75adac66e10c9ec0-2",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-7647b34ac0e251f0-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-861beba704a4bbba-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-8e1aba7c1eacbae2-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-b868caff87a406e3-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-ceedb05f85c0a558-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-f0a3ee219f6aff0c-1",
-        "recordCount": 69,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-fe20eec18050a6a3-1",
-        "recordCount": 78,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-03012f8f4d8df558-1",
-        "recordCount": 55,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-19418d29aee7c586-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-291d2ee38c5a68dd-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-291d2ee38c5a68dd-2",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-30b046e2160dad6a-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-44e5c9fb83e0476e-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-4515cf2567616436-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-518b23e1666b193a-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-64c268b0134fbd92-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-736e5a81fb8e7756-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-8360c5c3f645595a-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-92acce41d9b0c30a-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-940c00f0ed41d3b9-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-b4e16a2907054ebb-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-be907b5c95c382d1-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-e46b9b0b2591f98a-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-ec6a5f0b9b540647-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-fcfd812940bfc7aa-1",
-        "recordCount": 66,
-        "representativePoints": 5
-      },
-      {
-        "roadId": "ngii-5f57ccd0c80c327d-1",
-        "recordCount": 54,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-5f57ccd0c80c327d-2",
-        "recordCount": 54,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-888ad8ce15e4e24e-1",
-        "recordCount": 54,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-286ff45c09cfb6eb-1",
-        "recordCount": 52,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-49778866afe42f7d-1",
-        "recordCount": 52,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-4d1fac0b8bd31c20-1",
-        "recordCount": 52,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-4d1fac0b8bd31c20-2",
-        "recordCount": 52,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-7057b6f3c4e43331-1",
-        "recordCount": 52,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-a348c0dd80a9c5cd-1",
-        "recordCount": 52,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-af62db773094e5cb-1",
-        "recordCount": 52,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-dec93ab30fbabb12-1",
-        "recordCount": 52,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-f37ea3740dab00eb-1",
-        "recordCount": 52,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-48c69e2689bdbc7b-1",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-48c69e2689bdbc7b-2",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-b64d1627444e7551-1",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-b64d1627444e7551-2",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-b64d1627444e7551-3",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-53ff48840103c74e-1",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-53ff48840103c74e-2",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-53ff48840103c74e-3",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-53ff48840103c74e-4",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-630b0f914168dd8c-1",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-630b0f914168dd8c-2",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-666a48a11244af82-1",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-666a48a11244af82-2",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-6c3fce9c715cb7dd-1",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-9fc1bb97a8b526a1-4",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-c2a270724316ab6f-1",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-c62729568dfd44ea-1",
-        "recordCount": 62,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-c62729568dfd44ea-2",
-        "recordCount": 50,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-c62729568dfd44ea-3",
-        "recordCount": 50,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-024d251da701e029-1",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-2aa8111c62872806-1",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-2aaa5a7d7c4fe54e-1",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-88f34958ac065189-1",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-88f34958ac065189-2",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-9af38a788049b75e-1",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-a59d0221c427a36a-1",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-a59d0221c427a36a-2",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-e002ad9ef5806a5f-1",
-        "recordCount": 68,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-a54c7d1aa23f925f-3",
-        "recordCount": 53,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-a54c7d1aa23f925f-2",
-        "recordCount": 53,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-bd0071dbd49b7d5f-1",
-        "recordCount": 55,
-        "representativePoints": 4
-      },
-      {
-        "roadId": "ngii-31a57897ae3310e8-1",
-        "recordCount": 71,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-13225063683b843e-1",
-        "recordCount": 52,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-872fa1f3e5a3b7e4-1",
-        "recordCount": 52,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-96728780d172036e-1",
-        "recordCount": 52,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-96728780d172036e-2",
-        "recordCount": 52,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-96728780d172036e-3",
-        "recordCount": 52,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-d6affeaf552321aa-1",
-        "recordCount": 52,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-dda2ca9435f47b17-1",
-        "recordCount": 52,
-        "representativePoints": 2
-      },
-      {
-        "roadId": "ngii-4e385b56939922c0-1",
-        "recordCount": 56,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-4e385b56939922c0-2",
-        "recordCount": 56,
-        "representativePoints": 3
-      },
-      {
-        "roadId": "ngii-7d7f10b783dd79a6-1",
-        "recordCount": 56,
-        "representativePoints": 3
       }
     ],
     "byParcelDong": {
@@ -1426,7 +928,3545 @@
       "1 road / 1 parcel / 1 prefix": 144,
       "0 road / 1 parcel / 1 prefix": 120
     },
+    "clusterLinks": [
+      {
+        "clusterId": "동구-01",
+        "managedUnitCount": 33,
+        "anchorRoadId": "ngii-8ecb8e5524339b0d-2",
+        "anchorMeters": 15,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-03",
+        "managedUnitCount": 25,
+        "anchorRoadId": "ngii-e44a0ae257ba8592-2",
+        "anchorMeters": 6,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 5,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-04",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-48d8105d91e9d9f7-1",
+        "anchorMeters": 5,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 3,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-05",
+        "managedUnitCount": 32,
+        "anchorRoadId": "ngii-e44a0ae257ba8592-2",
+        "anchorMeters": 19,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-06",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-77a257ad6d9c7cb9-1",
+        "anchorMeters": 1,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-07",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-687b53c87968377a-1",
+        "anchorMeters": 20,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-08",
+        "managedUnitCount": 28,
+        "anchorRoadId": "ngii-84eeb98747fd0846-1",
+        "anchorMeters": 111,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-09",
+        "managedUnitCount": 6,
+        "anchorRoadId": "ngii-b685bc222b67f97b-1",
+        "anchorMeters": 175,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name"
+      },
+      {
+        "clusterId": "동구-10",
+        "managedUnitCount": 35,
+        "anchorRoadId": "ngii-66f5dd6667018394-1",
+        "anchorMeters": 62,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-11",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-c3ab84d31aaeb65b-1",
+        "anchorMeters": 21,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-13",
+        "managedUnitCount": 19,
+        "anchorRoadId": "ngii-738f8703f68017c2-5",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-14",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-e6541e0d305b4364-1",
+        "anchorMeters": 7,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 5,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-15",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-3c3e91be5a063845-1",
+        "anchorMeters": 103,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-16",
+        "managedUnitCount": 39,
+        "anchorRoadId": "ngii-ea65ca804ec9c4b7-1",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 6,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-17",
+        "managedUnitCount": 5,
+        "anchorRoadId": "ngii-3eb9f360b107987e-1",
+        "anchorMeters": 107,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-18",
+        "managedUnitCount": 3,
+        "anchorRoadId": "ngii-9d299ec31f1b6e16-1",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-19",
+        "managedUnitCount": 28,
+        "anchorRoadId": "ngii-07e02391bb194e2b-1",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 9,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-20",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-aeecd74af32e93d3-1",
+        "anchorMeters": 8,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 7,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-23",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-b685bc222b67f97b-1",
+        "anchorMeters": 216,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name"
+      },
+      {
+        "clusterId": "동구-24",
+        "managedUnitCount": 34,
+        "anchorRoadId": "ngii-ceedb05f85c0a558-1",
+        "anchorMeters": 13,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-25",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-75adac66e10c9ec0-2",
+        "anchorMeters": 13,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 2,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-26",
+        "managedUnitCount": 17,
+        "anchorRoadId": "ngii-874cbd1a920f7af0-1",
+        "anchorMeters": 7,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-27",
+        "managedUnitCount": 15,
+        "anchorRoadId": "ngii-c3ab84d31aaeb65b-1",
+        "anchorMeters": 33,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-28",
+        "managedUnitCount": 19,
+        "anchorRoadId": "ngii-c1b25d778d52099e-1",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 9,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-29",
+        "managedUnitCount": 21,
+        "anchorRoadId": "ngii-4644dd206ed36443-1",
+        "anchorMeters": 5,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-30",
+        "managedUnitCount": 20,
+        "anchorRoadId": "ngii-4644dd206ed36443-2",
+        "anchorMeters": 22,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-31",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-75fea7046a56ca80-1",
+        "anchorMeters": 17,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-32",
+        "managedUnitCount": 6,
+        "anchorRoadId": "ngii-60d2dbfb643bafc2-1",
+        "anchorMeters": 216,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name"
+      },
+      {
+        "clusterId": "동구-34",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-28c6a7074c14ac1a-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 9,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-38",
+        "managedUnitCount": 5,
+        "anchorRoadId": "ngii-075111cd7205d76e-1",
+        "anchorMeters": 0,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 6,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-39",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-21a8f54b2520b801-1",
+        "anchorMeters": 15,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 10,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-40",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-b5f58ac64d987b68-2",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 9,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-41",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-a0702a6270b37f72-1",
+        "anchorMeters": 6,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 10,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-42",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-8ebf87d4b4e434b3-2",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-43",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-a1847a79b2d6a388-1",
+        "anchorMeters": 10,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-44",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-000eab58abc2e726-1",
+        "anchorMeters": 38,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 3,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-45",
+        "managedUnitCount": 24,
+        "anchorRoadId": "ngii-000eab58abc2e726-1",
+        "anchorMeters": 17,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-46",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-a3a43d7d36a40748-1",
+        "anchorMeters": 1,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 14,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-47",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-5c2142cfe5dc949d-1",
+        "anchorMeters": 67,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-48",
+        "managedUnitCount": 21,
+        "anchorRoadId": "ngii-afd5dd5968e21ea5-3",
+        "anchorMeters": 1,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-49",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-21453ff5b4fbcbc6-1",
+        "anchorMeters": 18,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-51",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-10bab76aa168b992-2",
+        "anchorMeters": 1,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 5,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-52",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-96ab4d77274ec933-3",
+        "anchorMeters": 20,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-53",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-c931291f4f990109-1",
+        "anchorMeters": 14,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-54",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-35ee724c2e8cc3d3-1",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-55",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-b2b6511d2053a4e5-1",
+        "anchorMeters": 4,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-56",
+        "managedUnitCount": 7,
+        "anchorRoadId": "ngii-6868e3b3ca1d69ba-2",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-57",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-df8cc98d826e9fa6-2",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-58",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-f9545ab36ee6123d-1",
+        "anchorMeters": 8,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 20,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-60",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-0977dae73c17ba3a-2",
+        "anchorMeters": 42,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 2,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-61",
+        "managedUnitCount": 17,
+        "anchorRoadId": "ngii-4a55e051454473c9-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-62",
+        "managedUnitCount": 7,
+        "anchorRoadId": "ngii-38d1be434cce2dd9-1",
+        "anchorMeters": 14,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 10,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-64",
+        "managedUnitCount": 24,
+        "anchorRoadId": "ngii-768d009e7c3ae0c8-1",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-65",
+        "managedUnitCount": 16,
+        "anchorRoadId": "ngii-b35e79901ff37dad-2",
+        "anchorMeters": 16,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-66",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-de24b4afc91ac254-1",
+        "anchorMeters": 17,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 6,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-67",
+        "managedUnitCount": 29,
+        "anchorRoadId": "ngii-1099eec60d205100-8",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 3,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-68",
+        "managedUnitCount": 18,
+        "anchorRoadId": "ngii-117e432269fb73f7-1",
+        "anchorMeters": 20,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-69",
+        "managedUnitCount": 17,
+        "anchorRoadId": "ngii-eb7cf6d386815201-2",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-70",
+        "managedUnitCount": 15,
+        "anchorRoadId": "ngii-614f6da31a39acdb-2",
+        "anchorMeters": 6,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 15,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-71",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-92acce41d9b0c30a-1",
+        "anchorMeters": 24,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-73",
+        "managedUnitCount": 15,
+        "anchorRoadId": "ngii-e5a61c3ce8bb7b42-4",
+        "anchorMeters": 8,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-74",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-8706bd46915ae92c-1",
+        "anchorMeters": 14,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-75",
+        "managedUnitCount": 26,
+        "anchorRoadId": "ngii-1f7e7bbf4b259e1e-2",
+        "anchorMeters": 23,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-76",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-7b6a42a1434e9490-1",
+        "anchorMeters": 5,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-77",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-dc037033c5d09714-1",
+        "anchorMeters": 14,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 12,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-78",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-b685bc222b67f97b-1",
+        "anchorMeters": 175,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name"
+      },
+      {
+        "clusterId": "동구-79",
+        "managedUnitCount": 20,
+        "anchorRoadId": "ngii-5f57ccd0c80c327d-2",
+        "anchorMeters": 18,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-80",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-9e6ddb5f55432943-1",
+        "anchorMeters": 16,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-81",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-5ed096e2cd20a2c2-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-83",
+        "managedUnitCount": 37,
+        "anchorRoadId": "ngii-95fe7e524e4030aa-2",
+        "anchorMeters": 36,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-85",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-eb85595e121e8831-2",
+        "anchorMeters": 22,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 11,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-86",
+        "managedUnitCount": 16,
+        "anchorRoadId": "ngii-4155b10f0cdc2f52-1",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 15,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-87",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-96ab4d77274ec933-2",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-89",
+        "managedUnitCount": 30,
+        "anchorRoadId": "ngii-c34cbf9ce1112f45-1",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 6,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-90",
+        "managedUnitCount": 33,
+        "anchorRoadId": "ngii-84eeb98747fd0846-1",
+        "anchorMeters": 14,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-91",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-6443ca75730bbf96-1",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-92",
+        "managedUnitCount": 5,
+        "anchorRoadId": "ngii-d3d8a63c8e1cd215-4",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-93",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-a0702a6270b37f72-1",
+        "anchorMeters": 20,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 10,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-94",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-06e0320f4cd411c9-3",
+        "anchorMeters": 6,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-95",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-c87e85586e3cc1c0-1",
+        "anchorMeters": 7,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-96",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-b2b6511d2053a4e5-1",
+        "anchorMeters": 19,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-98",
+        "managedUnitCount": 15,
+        "anchorRoadId": "ngii-6c41fc69130877a8-2",
+        "anchorMeters": 16,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-99",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-ecf5f758e81e8464-2",
+        "anchorMeters": 26,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-100",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-ecf5f758e81e8464-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-101",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-c676c2e389aee4d6-1",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 11,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-102",
+        "managedUnitCount": 18,
+        "anchorRoadId": "ngii-c2e95c451059951c-1",
+        "anchorMeters": 13,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-103",
+        "managedUnitCount": 15,
+        "anchorRoadId": "ngii-75f9d6fbc53f3237-2",
+        "anchorMeters": 21,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-104",
+        "managedUnitCount": 24,
+        "anchorRoadId": "ngii-c62729568dfd44ea-3",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-105",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-c62729568dfd44ea-4",
+        "anchorMeters": 24,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-106",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-71bd201e01bf3c91-1",
+        "anchorMeters": 5,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 2,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-107",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-69b27de191a416ef-2",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-109",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-b93fbc13560176f6-1",
+        "anchorMeters": 16,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-110",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-c833284cfe2cbf61-2",
+        "anchorMeters": 1,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-111",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-7bfc798d61cd094e-1",
+        "anchorMeters": 10,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-112",
+        "managedUnitCount": 26,
+        "anchorRoadId": "ngii-9e0990d2c06ad7d4-4",
+        "anchorMeters": 7,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-113",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-5ed096e2cd20a2c2-1",
+        "anchorMeters": 20,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-114",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-d39262573688181d-2",
+        "anchorMeters": 17,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 10,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-115",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-4d7a3350816f7d6b-2",
+        "anchorMeters": 14,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-116",
+        "managedUnitCount": 24,
+        "anchorRoadId": "ngii-a54c7d1aa23f925f-2",
+        "anchorMeters": 8,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 2,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-118",
+        "managedUnitCount": 29,
+        "anchorRoadId": "ngii-d653f29fdb40c106-1",
+        "anchorMeters": 21,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-119",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-85264d2feaac961b-2",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-120",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-ff68ed556bc007c6-1",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-121",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-dcad625f6be61f35-1",
+        "anchorMeters": 4,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 15,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-122",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-a776e47e167b3db8-2",
+        "anchorMeters": 128,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-123",
+        "managedUnitCount": 5,
+        "anchorRoadId": "ngii-9c59b3c38d1ee086-2",
+        "anchorMeters": 14,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-124",
+        "managedUnitCount": 20,
+        "anchorRoadId": "ngii-970f9a77dc74719f-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-125",
+        "managedUnitCount": 16,
+        "anchorRoadId": "ngii-c6eaf08b4150e835-2",
+        "anchorMeters": 32,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-129",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-c09c39817b031776-1",
+        "anchorMeters": 21,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-131",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-aee31fc94ae4ada7-1",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-132",
+        "managedUnitCount": 7,
+        "anchorRoadId": "ngii-2db81c5299e76ed0-1",
+        "anchorMeters": 4,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-133",
+        "managedUnitCount": 4,
+        "anchorRoadId": "ngii-5b3fbef2bcbdab1f-1",
+        "anchorMeters": 12,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 9,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-135",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-9441a97531c95e77-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 14,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-137",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-cf99365aae72c7c2-1",
+        "anchorMeters": 8,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 6,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-138",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-c4aef08e40bd01be-1",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 13,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-139",
+        "managedUnitCount": 6,
+        "anchorRoadId": "ngii-91de711fbfb3af33-1",
+        "anchorMeters": 1,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 19,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-140",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-9d23d060dbc05aee-1",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-141",
+        "managedUnitCount": 4,
+        "anchorRoadId": "ngii-84a896f77425a3e6-1",
+        "anchorMeters": 13,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 5,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-142",
+        "managedUnitCount": 4,
+        "anchorRoadId": "ngii-c87f69c2d81b5f7b-1",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-143",
+        "managedUnitCount": 19,
+        "anchorRoadId": "ngii-1709171318cf2524-1",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-144",
+        "managedUnitCount": 18,
+        "anchorRoadId": "ngii-1709171318cf2524-3",
+        "anchorMeters": 17,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 5,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-147",
+        "managedUnitCount": 4,
+        "anchorRoadId": "ngii-4e2bab6c8291ad23-1",
+        "anchorMeters": 8,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-149",
+        "managedUnitCount": 5,
+        "anchorRoadId": "ngii-3d63d468cf450697-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-150",
+        "managedUnitCount": 41,
+        "anchorRoadId": "ngii-685d4577fcea8d68-1",
+        "anchorMeters": 5,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 3,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-151",
+        "managedUnitCount": 27,
+        "anchorRoadId": "ngii-7f8cc1e01441a9d2-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 7,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-153",
+        "managedUnitCount": 4,
+        "anchorRoadId": "ngii-daf8fc28113dc383-1",
+        "anchorMeters": 16,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-154",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-3d2f257262c8bcc1-1",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 16,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-155",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-03f02402e669975e-1",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-156",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-9fc1bb97a8b526a1-1",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-157",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-9fc1bb97a8b526a1-4",
+        "anchorMeters": 27,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-158",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-21e6d767566476ff-1",
+        "anchorMeters": 8,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 9,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-159",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-6982c71b0e40778c-1",
+        "anchorMeters": 16,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-161",
+        "managedUnitCount": 24,
+        "anchorRoadId": "ngii-5fe15c5b5a5011c6-1",
+        "anchorMeters": 10,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-164",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-64583f30f3df9c1f-4",
+        "anchorMeters": 19,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 2,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-166",
+        "managedUnitCount": 22,
+        "anchorRoadId": "ngii-b21e60b0bb892e2e-1",
+        "anchorMeters": 21,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 2,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-167",
+        "managedUnitCount": 24,
+        "anchorRoadId": "ngii-bd0071dbd49b7d5f-1",
+        "anchorMeters": 69,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-168",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-538a5f7b404a9dba-1",
+        "anchorMeters": 24,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-169",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-bd0071dbd49b7d5f-1",
+        "anchorMeters": 111,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-170",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-291d2ee38c5a68dd-2",
+        "anchorMeters": 26,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-171",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-30b046e2160dad6a-1",
+        "anchorMeters": 25,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-172",
+        "managedUnitCount": 19,
+        "anchorRoadId": "ngii-8fb0c1953c85d725-1",
+        "anchorMeters": 15,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-173",
+        "managedUnitCount": 18,
+        "anchorRoadId": "ngii-7f771237ee767f49-1",
+        "anchorMeters": 22,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-174",
+        "managedUnitCount": 24,
+        "anchorRoadId": "ngii-13225063683b843e-1",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-175",
+        "managedUnitCount": 28,
+        "anchorRoadId": "ngii-872fa1f3e5a3b7e4-1",
+        "anchorMeters": 4,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-176",
+        "managedUnitCount": 16,
+        "anchorRoadId": "ngii-15d2be76beecbfad-1",
+        "anchorMeters": 18,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 2,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-178",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-910a86cd905dd5c1-3",
+        "anchorMeters": 22,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 6,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-180",
+        "managedUnitCount": 17,
+        "anchorRoadId": "ngii-3f3f086d6f368248-2",
+        "anchorMeters": 15,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-181",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-1c232ea8ce98a554-1",
+        "anchorMeters": 4,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 10,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-182",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-4ad96434e6e1e52d-2",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-183",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-69b27de191a416ef-2",
+        "anchorMeters": 14,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-184",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-7f27305af776ae39-2",
+        "anchorMeters": 4,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-185",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-7cd65aadb45f48ab-1",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-186",
+        "managedUnitCount": 22,
+        "anchorRoadId": "ngii-a5e153f4e497c116-1",
+        "anchorMeters": 132,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-187",
+        "managedUnitCount": 14,
+        "anchorRoadId": "ngii-e9bf7bc92a9ec436-2",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 5,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-188",
+        "managedUnitCount": 11,
+        "anchorRoadId": "ngii-53c35c64b35451d8-1",
+        "anchorMeters": 32,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-189",
+        "managedUnitCount": 29,
+        "anchorRoadId": "ngii-e8e1b6d6a54f3c8a-1",
+        "anchorMeters": 127,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 1,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-190",
+        "managedUnitCount": 24,
+        "anchorRoadId": "ngii-e7c3bc43373b606a-2",
+        "anchorMeters": 0,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-191",
+        "managedUnitCount": 5,
+        "anchorRoadId": "ngii-e956a861779eddae-1",
+        "anchorMeters": 28,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 2,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-192",
+        "managedUnitCount": 6,
+        "anchorRoadId": "ngii-6a9ef9245ed6107e-2",
+        "anchorMeters": 12,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-193",
+        "managedUnitCount": 28,
+        "anchorRoadId": "ngii-b64d1627444e7551-6",
+        "anchorMeters": 19,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-195",
+        "managedUnitCount": 15,
+        "anchorRoadId": "ngii-fea296cfbd070013-1",
+        "anchorMeters": 41,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-196",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-7c159caadb74de0e-2",
+        "anchorMeters": 19,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 8,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-199",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-2c9eba7a3241c238-2",
+        "anchorMeters": 16,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 3,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-201",
+        "managedUnitCount": 26,
+        "anchorRoadId": "ngii-769f599452e7f000-1",
+        "anchorMeters": 32,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 2,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-204",
+        "managedUnitCount": 16,
+        "anchorRoadId": "ngii-ef3d3b5d99299f82-1",
+        "anchorMeters": 15,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 9,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-206",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-4ee73684b5848717-1",
+        "anchorMeters": 37,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 2,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-208",
+        "managedUnitCount": 16,
+        "anchorRoadId": "ngii-de153d6b5bb004b1-3",
+        "anchorMeters": 11,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 5,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-212",
+        "managedUnitCount": 16,
+        "anchorRoadId": "ngii-b64d1627444e7551-6",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-213",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-d39262573688181d-1",
+        "anchorMeters": 4,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-214",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-6c41fc69130877a8-1",
+        "anchorMeters": 6,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 7,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-215",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-19370366719e9853-1",
+        "anchorMeters": 136,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 4,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-216",
+        "managedUnitCount": 10,
+        "anchorRoadId": "ngii-b3f638d8b60f91ee-3",
+        "anchorMeters": 7,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-217",
+        "managedUnitCount": 6,
+        "anchorRoadId": "ngii-4889ebedb23417bf-2",
+        "anchorMeters": 0,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 12,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-219",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-98989d9a10dbaf65-3",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-222",
+        "managedUnitCount": 30,
+        "anchorRoadId": "ngii-7ed0b5795a3ec541-2",
+        "anchorMeters": 7,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 2,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-226",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-4f494f92c08ef781-1",
+        "anchorMeters": 16,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 1,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-229",
+        "managedUnitCount": 9,
+        "anchorRoadId": "ngii-f18d87113e85c43e-1",
+        "anchorMeters": 6,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 2,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-230",
+        "managedUnitCount": 19,
+        "anchorRoadId": "ngii-f18d87113e85c43e-1",
+        "anchorMeters": 9,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 3,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-234",
+        "managedUnitCount": 15,
+        "anchorRoadId": "ngii-e26de50c8914a51e-2",
+        "anchorMeters": 23,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 3,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-240",
+        "managedUnitCount": 6,
+        "anchorRoadId": "ngii-972c1b98397fe313-2",
+        "anchorMeters": 1,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 13,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-241",
+        "managedUnitCount": 6,
+        "anchorRoadId": "ngii-12fa0f06bed147f4-4",
+        "anchorMeters": 21,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-242",
+        "managedUnitCount": 8,
+        "anchorRoadId": "ngii-12fa0f06bed147f4-3",
+        "anchorMeters": 0,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-247",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-03012f8f4d8df558-1",
+        "anchorMeters": 20,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 5,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-249",
+        "managedUnitCount": 17,
+        "anchorRoadId": "ngii-01b276605553ce24-2",
+        "anchorMeters": 2,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 2,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-250",
+        "managedUnitCount": 15,
+        "anchorRoadId": "ngii-78037643f4ddab1c-2",
+        "anchorMeters": 38,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 1,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-251",
+        "managedUnitCount": 7,
+        "anchorRoadId": "ngii-625885ca062cbe8d-2",
+        "anchorMeters": 39,
+        "corridorLengthMeters": 200,
+        "linkedRoadCount": 6,
+        "method": "road_name_and_coordinate"
+      },
+      {
+        "clusterId": "동구-255",
+        "managedUnitCount": 5,
+        "anchorRoadId": "ngii-efa8afe00f01f838-3",
+        "anchorMeters": 4,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 3,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-258",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-2349420a76766953-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-261",
+        "managedUnitCount": 21,
+        "anchorRoadId": "ngii-8b762dc86fe47535-1",
+        "anchorMeters": 33,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 2,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-262",
+        "managedUnitCount": 20,
+        "anchorRoadId": "ngii-258a623876af9ef8-2",
+        "anchorMeters": 16,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 3,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-263",
+        "managedUnitCount": 12,
+        "anchorRoadId": "ngii-00ae53e7fd954629-1",
+        "anchorMeters": 3,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 4,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-264",
+        "managedUnitCount": 13,
+        "anchorRoadId": "ngii-00ae53e7fd954629-1",
+        "anchorMeters": 27,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 2,
+        "method": "parcel_and_coordinate"
+      },
+      {
+        "clusterId": "동구-268",
+        "managedUnitCount": 17,
+        "anchorRoadId": "ngii-4c41bb2d3a0d40c5-2",
+        "anchorMeters": 6,
+        "corridorLengthMeters": 150,
+        "linkedRoadCount": 3,
+        "method": "parcel_and_coordinate"
+      }
+    ],
+    "disconnectedNearby": [
+      {
+        "clusterId": "동구-03",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-7ed0b5795a3ec541-2",
+          "ngii-b8327ced24d366e6-1"
+        ]
+      },
+      {
+        "clusterId": "동구-05",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-7ed0b5795a3ec541-2",
+          "ngii-b8327ced24d366e6-1"
+        ]
+      },
+      {
+        "clusterId": "동구-06",
+        "nearbyButExcluded": 6,
+        "sampleRoadIds": [
+          "ngii-078b97e547366ac0-1",
+          "ngii-078b97e547366ac0-2",
+          "ngii-4bfd611828757abe-1",
+          "ngii-4bfd611828757abe-2",
+          "ngii-571d5cd6b0e9733e-1"
+        ]
+      },
+      {
+        "clusterId": "동구-08",
+        "nearbyButExcluded": 8,
+        "sampleRoadIds": [
+          "ngii-2f3e42277f239f84-1",
+          "ngii-2f3e42277f239f84-2",
+          "ngii-3c3e91be5a063845-1",
+          "ngii-621b21fa5f3f2be9-1",
+          "ngii-621b21fa5f3f2be9-2"
+        ]
+      },
+      {
+        "clusterId": "동구-10",
+        "nearbyButExcluded": 17,
+        "sampleRoadIds": [
+          "ngii-00bc6d6f5f8d8ec9-1",
+          "ngii-01a1d6c432ec1e67-1",
+          "ngii-10ed15dc24963894-1",
+          "ngii-30c792fa874d7081-1",
+          "ngii-44b3b868dbfda5cb-1"
+        ]
+      },
+      {
+        "clusterId": "동구-11",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-0156633daf5ffa8b-1",
+          "ngii-0156633daf5ffa8b-2",
+          "ngii-0156633daf5ffa8b-3"
+        ]
+      },
+      {
+        "clusterId": "동구-15",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-278103d662a2b3b6-1",
+          "ngii-84eeb98747fd0846-1",
+          "ngii-84eeb98747fd0846-2"
+        ]
+      },
+      {
+        "clusterId": "동구-16",
+        "nearbyButExcluded": 6,
+        "sampleRoadIds": [
+          "ngii-0c90e828ff3a99ee-1",
+          "ngii-22d0cf8494b16fb3-1",
+          "ngii-5d63672f255a37bb-1",
+          "ngii-5d63672f255a37bb-2",
+          "ngii-7a05b512b0227dc5-1"
+        ]
+      },
+      {
+        "clusterId": "동구-18",
+        "nearbyButExcluded": 8,
+        "sampleRoadIds": [
+          "ngii-0d0a6aa377aa81ce-1",
+          "ngii-3365b5115bb29145-1",
+          "ngii-59281a1d3e4d7f38-1",
+          "ngii-6df0b0de89667093-1",
+          "ngii-743e5c88bf8e03fc-1"
+        ]
+      },
+      {
+        "clusterId": "동구-20",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-12b3790375a6a030-1",
+          "ngii-c118ced26e8accd0-2",
+          "ngii-c118ced26e8accd0-3",
+          "ngii-f3401ab881c44d7c-1"
+        ]
+      },
+      {
+        "clusterId": "동구-24",
+        "nearbyButExcluded": 20,
+        "sampleRoadIds": [
+          "ngii-01a1d6c432ec1e67-1",
+          "ngii-03012f8f4d8df558-1",
+          "ngii-10ed15dc24963894-1",
+          "ngii-1a3aecb115f2b050-1",
+          "ngii-30c792fa874d7081-1"
+        ]
+      },
+      {
+        "clusterId": "동구-25",
+        "nearbyButExcluded": 19,
+        "sampleRoadIds": [
+          "ngii-00bc6d6f5f8d8ec9-1",
+          "ngii-01a1d6c432ec1e67-1",
+          "ngii-03012f8f4d8df558-1",
+          "ngii-10ed15dc24963894-1",
+          "ngii-1a3aecb115f2b050-1"
+        ]
+      },
+      {
+        "clusterId": "동구-26",
+        "nearbyButExcluded": 10,
+        "sampleRoadIds": [
+          "ngii-00b53f740d55d058-1",
+          "ngii-0e47c8f764627ea1-1",
+          "ngii-0e47c8f764627ea1-2",
+          "ngii-53c966ba005109fb-1",
+          "ngii-6eedbb6844e71204-1"
+        ]
+      },
+      {
+        "clusterId": "동구-27",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-0156633daf5ffa8b-1",
+          "ngii-0156633daf5ffa8b-2",
+          "ngii-0156633daf5ffa8b-3"
+        ]
+      },
+      {
+        "clusterId": "동구-28",
+        "nearbyButExcluded": 10,
+        "sampleRoadIds": [
+          "ngii-24b33d294d03ee1b-1",
+          "ngii-2da2af2769cac248-2",
+          "ngii-2da2af2769cac248-3",
+          "ngii-2da2af2769cac248-4",
+          "ngii-2da2af2769cac248-5"
+        ]
+      },
+      {
+        "clusterId": "동구-31",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-63b14683846c1cdd-1",
+          "ngii-6ccecc197cb3bcdf-1",
+          "ngii-8d13e7e98239f012-1",
+          "ngii-9e05d0ceeacf205e-1",
+          "ngii-9e05d0ceeacf205e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-38",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-574910c779524720-2"
+        ]
+      },
+      {
+        "clusterId": "동구-39",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-63b14683846c1cdd-1",
+          "ngii-cb79aeafb96f2423-1",
+          "ngii-df8cc98d826e9fa6-1",
+          "ngii-e7e2f25d0f259d1a-2"
+        ]
+      },
+      {
+        "clusterId": "동구-40",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-a05f2da141acd552-1",
+          "ngii-cd2ce4bd6941ee58-1",
+          "ngii-cd2ce4bd6941ee58-2",
+          "ngii-e78f139f65f27196-1",
+          "ngii-e78f139f65f27196-2"
+        ]
+      },
+      {
+        "clusterId": "동구-42",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-63b14683846c1cdd-1",
+          "ngii-6ccecc197cb3bcdf-1",
+          "ngii-8d13e7e98239f012-1",
+          "ngii-9e05d0ceeacf205e-1",
+          "ngii-9e05d0ceeacf205e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-44",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-02aaba2e1c312aa1-1",
+          "ngii-4ee73684b5848717-1"
+        ]
+      },
+      {
+        "clusterId": "동구-45",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-02aaba2e1c312aa1-1",
+          "ngii-4ee73684b5848717-1"
+        ]
+      },
+      {
+        "clusterId": "동구-46",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-0d0a6aa377aa81ce-1",
+          "ngii-6df0b0de89667093-1",
+          "ngii-e7c58e80e7eef5bc-1",
+          "ngii-fe0585e14cdc5f25-1"
+        ]
+      },
+      {
+        "clusterId": "동구-52",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-b57320b36d43bb7c-2"
+        ]
+      },
+      {
+        "clusterId": "동구-54",
+        "nearbyButExcluded": 20,
+        "sampleRoadIds": [
+          "ngii-0db2e6e1fefa0eb7-1",
+          "ngii-11d78a1d4667cae9-1",
+          "ngii-26042b11f5aab232-1",
+          "ngii-29dc166cb075cc88-1",
+          "ngii-29dc166cb075cc88-2"
+        ]
+      },
+      {
+        "clusterId": "동구-57",
+        "nearbyButExcluded": 18,
+        "sampleRoadIds": [
+          "ngii-0033c70fc34771bf-1",
+          "ngii-081bed95b23ae652-1",
+          "ngii-127fe8c9ebaf24fd-1",
+          "ngii-12ae267e0e148a2d-1",
+          "ngii-12ae267e0e148a2d-2"
+        ]
+      },
+      {
+        "clusterId": "동구-60",
+        "nearbyButExcluded": 15,
+        "sampleRoadIds": [
+          "ngii-05e67121b97c8945-1",
+          "ngii-06e02bfe1cfe6b5d-2",
+          "ngii-0f1f6c76c039060c-1",
+          "ngii-1e88b84b9aa22982-2",
+          "ngii-6e6dd25b2da9cb83-1"
+        ]
+      },
+      {
+        "clusterId": "동구-62",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-821d2f9e59a6ac1e-1",
+          "ngii-bf7a64abfcff92d7-1"
+        ]
+      },
+      {
+        "clusterId": "동구-65",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-6d2d88bd2e4f79de-1",
+          "ngii-993f06edcb5a0443-1"
+        ]
+      },
+      {
+        "clusterId": "동구-66",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-6d2d88bd2e4f79de-1",
+          "ngii-993f06edcb5a0443-1"
+        ]
+      },
+      {
+        "clusterId": "동구-67",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-1099eec60d205100-11",
+          "ngii-1099eec60d205100-12",
+          "ngii-48aa83bda3dfd8f5-1",
+          "ngii-edd56d9f8bde9f1e-1",
+          "ngii-edd56d9f8bde9f1e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-69",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-92b8151b958287ce-1",
+          "ngii-d27b0f8c523742fd-1",
+          "ngii-d27b0f8c523742fd-2"
+        ]
+      },
+      {
+        "clusterId": "동구-70",
+        "nearbyButExcluded": 37,
+        "sampleRoadIds": [
+          "ngii-08f154dc1394214d-1",
+          "ngii-08f154dc1394214d-2",
+          "ngii-0d07229ab65689e4-1",
+          "ngii-211ba7a60c9bd2b6-1",
+          "ngii-328784a2a4b7eb02-1"
+        ]
+      },
+      {
+        "clusterId": "동구-71",
+        "nearbyButExcluded": 16,
+        "sampleRoadIds": [
+          "ngii-19418d29aee7c586-1",
+          "ngii-194b97617ab9f607-1",
+          "ngii-291d2ee38c5a68dd-1",
+          "ngii-291d2ee38c5a68dd-2",
+          "ngii-30b046e2160dad6a-1"
+        ]
+      },
+      {
+        "clusterId": "동구-74",
+        "nearbyButExcluded": 6,
+        "sampleRoadIds": [
+          "ngii-078b97e547366ac0-1",
+          "ngii-078b97e547366ac0-2",
+          "ngii-4bfd611828757abe-1",
+          "ngii-4bfd611828757abe-2",
+          "ngii-571d5cd6b0e9733e-1"
+        ]
+      },
+      {
+        "clusterId": "동구-79",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-1f6645dee3922d88-1",
+          "ngii-6443ca75730bbf96-1",
+          "ngii-6443ca75730bbf96-2",
+          "ngii-78ea8cda739f1bff-1",
+          "ngii-78ea8cda739f1bff-2"
+        ]
+      },
+      {
+        "clusterId": "동구-81",
+        "nearbyButExcluded": 14,
+        "sampleRoadIds": [
+          "ngii-12b432e56cd85a8e-1",
+          "ngii-12b432e56cd85a8e-2",
+          "ngii-1adaac98e7d8c344-1",
+          "ngii-1adaac98e7d8c344-2",
+          "ngii-1c232ea8ce98a554-1"
+        ]
+      },
+      {
+        "clusterId": "동구-89",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-8fb6d492a0446aea-1",
+          "ngii-8fb6d492a0446aea-2",
+          "ngii-8fb6d492a0446aea-3",
+          "ngii-bf672a51193babb2-1",
+          "ngii-d2084fc03fb4f4a2-1"
+        ]
+      },
+      {
+        "clusterId": "동구-90",
+        "nearbyButExcluded": 8,
+        "sampleRoadIds": [
+          "ngii-2f3e42277f239f84-1",
+          "ngii-2f3e42277f239f84-2",
+          "ngii-621b21fa5f3f2be9-1",
+          "ngii-621b21fa5f3f2be9-2",
+          "ngii-beee359adbc66245-1"
+        ]
+      },
+      {
+        "clusterId": "동구-91",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-5f57ccd0c80c327d-1",
+          "ngii-5f57ccd0c80c327d-2",
+          "ngii-6474b1f03e1d275e-1",
+          "ngii-888ad8ce15e4e24e-1"
+        ]
+      },
+      {
+        "clusterId": "동구-94",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-78ea8cda739f1bff-1",
+          "ngii-78ea8cda739f1bff-2",
+          "ngii-78ea8cda739f1bff-3"
+        ]
+      },
+      {
+        "clusterId": "동구-101",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-9b7c47eb73c57003-1",
+          "ngii-9b7c47eb73c57003-2",
+          "ngii-f748e66702b8dea2-1"
+        ]
+      },
+      {
+        "clusterId": "동구-102",
+        "nearbyButExcluded": 9,
+        "sampleRoadIds": [
+          "ngii-11d78a1d4667cae9-1",
+          "ngii-32cea4f09b5c6507-1",
+          "ngii-32cea4f09b5c6507-2",
+          "ngii-35ee724c2e8cc3d3-1",
+          "ngii-53b1cac8cb49ae70-1"
+        ]
+      },
+      {
+        "clusterId": "동구-104",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-426eff220cd284a5-1",
+          "ngii-426eff220cd284a5-2",
+          "ngii-c2a270724316ab6f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-105",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-426eff220cd284a5-1",
+          "ngii-426eff220cd284a5-2",
+          "ngii-c2a270724316ab6f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-106",
+        "nearbyButExcluded": 15,
+        "sampleRoadIds": [
+          "ngii-3298675f29e820db-1",
+          "ngii-3298675f29e820db-2",
+          "ngii-501eda317edb852d-1",
+          "ngii-501eda317edb852d-2",
+          "ngii-7bfc798d61cd094e-1"
+        ]
+      },
+      {
+        "clusterId": "동구-110",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-c0e1a45ed6f3be37-1",
+          "ngii-cfd90bad70dab566-1"
+        ]
+      },
+      {
+        "clusterId": "동구-111",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-71bd201e01bf3c91-1",
+          "ngii-71bd201e01bf3c91-2",
+          "ngii-cc6dfd099f78b491-1",
+          "ngii-cc6dfd099f78b491-2",
+          "ngii-cc6dfd099f78b491-3"
+        ]
+      },
+      {
+        "clusterId": "동구-113",
+        "nearbyButExcluded": 16,
+        "sampleRoadIds": [
+          "ngii-12b432e56cd85a8e-1",
+          "ngii-12b432e56cd85a8e-2",
+          "ngii-1adaac98e7d8c344-1",
+          "ngii-1adaac98e7d8c344-2",
+          "ngii-1c232ea8ce98a554-1"
+        ]
+      },
+      {
+        "clusterId": "동구-118",
+        "nearbyButExcluded": 15,
+        "sampleRoadIds": [
+          "ngii-1675fdd0f189ddf0-1",
+          "ngii-1950228956456fbf-1",
+          "ngii-54d3fca0df81a6c1-1",
+          "ngii-666bf89fc2da4479-1",
+          "ngii-8d0364f574fa2832-1"
+        ]
+      },
+      {
+        "clusterId": "동구-119",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-2cc03d2cf7089d91-2"
+        ]
+      },
+      {
+        "clusterId": "동구-124",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-862cf316113f66f1-1",
+          "ngii-862cf316113f66f1-2",
+          "ngii-862cf316113f66f1-3",
+          "ngii-cba201def0eb8558-1"
+        ]
+      },
+      {
+        "clusterId": "동구-125",
+        "nearbyButExcluded": 33,
+        "sampleRoadIds": [
+          "ngii-12393991065e5d90-1",
+          "ngii-12393991065e5d90-2",
+          "ngii-1b07ab438ec18e43-1",
+          "ngii-1b07ab438ec18e43-2",
+          "ngii-22946c66e3087c6d-4"
+        ]
+      },
+      {
+        "clusterId": "동구-133",
+        "nearbyButExcluded": 12,
+        "sampleRoadIds": [
+          "ngii-02c520b979a40b6a-1",
+          "ngii-13fca37866633727-1",
+          "ngii-2c8507b91bba889c-1",
+          "ngii-5197dac544aece35-1",
+          "ngii-680d2fdd11af0bfd-1"
+        ]
+      },
+      {
+        "clusterId": "동구-135",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-13bc03e2ad864b37-1",
+          "ngii-1b3ac03efc6d7346-1",
+          "ngii-1d04886b675c92bf-1",
+          "ngii-5b80eaf87186aff9-1",
+          "ngii-5ca9edbe2790d20b-1"
+        ]
+      },
+      {
+        "clusterId": "동구-137",
+        "nearbyButExcluded": 19,
+        "sampleRoadIds": [
+          "ngii-02dc3a4e51ea628b-1",
+          "ngii-28c4c015479c8bae-1",
+          "ngii-30eb0fdaed254496-2",
+          "ngii-37dca4c92d7e1e35-1",
+          "ngii-41b0e91aeb10d543-1"
+        ]
+      },
+      {
+        "clusterId": "동구-142",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-7114e8a558415d99-2",
+          "ngii-f67d1aaba49cfbf3-1"
+        ]
+      },
+      {
+        "clusterId": "동구-143",
+        "nearbyButExcluded": 12,
+        "sampleRoadIds": [
+          "ngii-00ae53e7fd954629-1",
+          "ngii-0d5194ecd2e0c15d-1",
+          "ngii-14d9a2e4912bfb34-1",
+          "ngii-1c45d19e81b6255c-1",
+          "ngii-9f356e49d4c88198-1"
+        ]
+      },
+      {
+        "clusterId": "동구-144",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-e82c73892ead5f95-2"
+        ]
+      },
+      {
+        "clusterId": "동구-147",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-c118ced26e8accd0-2"
+        ]
+      },
+      {
+        "clusterId": "동구-153",
+        "nearbyButExcluded": 13,
+        "sampleRoadIds": [
+          "ngii-02dc3a4e51ea628b-1",
+          "ngii-28c4c015479c8bae-1",
+          "ngii-30eb0fdaed254496-2",
+          "ngii-41b0e91aeb10d543-1",
+          "ngii-41b0e91aeb10d543-2"
+        ]
+      },
+      {
+        "clusterId": "동구-156",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-c2a270724316ab6f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-157",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-c2a270724316ab6f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-161",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-c0e1a45ed6f3be37-1",
+          "ngii-cfd90bad70dab566-1"
+        ]
+      },
+      {
+        "clusterId": "동구-167",
+        "nearbyButExcluded": 9,
+        "sampleRoadIds": [
+          "ngii-19418d29aee7c586-1",
+          "ngii-291d2ee38c5a68dd-1",
+          "ngii-291d2ee38c5a68dd-2",
+          "ngii-30b046e2160dad6a-1",
+          "ngii-736e5a81fb8e7756-1"
+        ]
+      },
+      {
+        "clusterId": "동구-169",
+        "nearbyButExcluded": 9,
+        "sampleRoadIds": [
+          "ngii-19418d29aee7c586-1",
+          "ngii-291d2ee38c5a68dd-1",
+          "ngii-291d2ee38c5a68dd-2",
+          "ngii-30b046e2160dad6a-1",
+          "ngii-736e5a81fb8e7756-1"
+        ]
+      },
+      {
+        "clusterId": "동구-170",
+        "nearbyButExcluded": 10,
+        "sampleRoadIds": [
+          "ngii-30b046e2160dad6a-1",
+          "ngii-44e5c9fb83e0476e-1",
+          "ngii-4515cf2567616436-1",
+          "ngii-518b23e1666b193a-1",
+          "ngii-64c268b0134fbd92-1"
+        ]
+      },
+      {
+        "clusterId": "동구-171",
+        "nearbyButExcluded": 17,
+        "sampleRoadIds": [
+          "ngii-19418d29aee7c586-1",
+          "ngii-291d2ee38c5a68dd-1",
+          "ngii-291d2ee38c5a68dd-2",
+          "ngii-44e5c9fb83e0476e-1",
+          "ngii-4515cf2567616436-1"
+        ]
+      },
+      {
+        "clusterId": "동구-172",
+        "nearbyButExcluded": 14,
+        "sampleRoadIds": [
+          "ngii-1f366e8def33bdd1-1",
+          "ngii-31a57897ae3310e8-1",
+          "ngii-35f647063f165838-1",
+          "ngii-44e5c9fb83e0476e-1",
+          "ngii-4515cf2567616436-1"
+        ]
+      },
+      {
+        "clusterId": "동구-173",
+        "nearbyButExcluded": 13,
+        "sampleRoadIds": [
+          "ngii-1f366e8def33bdd1-1",
+          "ngii-35f647063f165838-1",
+          "ngii-44e5c9fb83e0476e-1",
+          "ngii-4515cf2567616436-1",
+          "ngii-518b23e1666b193a-1"
+        ]
+      },
+      {
+        "clusterId": "동구-174",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-31a57897ae3310e8-1",
+          "ngii-872fa1f3e5a3b7e4-1",
+          "ngii-96728780d172036e-1",
+          "ngii-96728780d172036e-2",
+          "ngii-96728780d172036e-3"
+        ]
+      },
+      {
+        "clusterId": "동구-175",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-13225063683b843e-1",
+          "ngii-31a57897ae3310e8-1",
+          "ngii-96728780d172036e-1",
+          "ngii-96728780d172036e-2",
+          "ngii-96728780d172036e-3"
+        ]
+      },
+      {
+        "clusterId": "동구-181",
+        "nearbyButExcluded": 9,
+        "sampleRoadIds": [
+          "ngii-29c3d1bdc23df137-1",
+          "ngii-5ed096e2cd20a2c2-1",
+          "ngii-5ed096e2cd20a2c2-2",
+          "ngii-5ed096e2cd20a2c2-3",
+          "ngii-6c4a919484c75c6d-1"
+        ]
+      },
+      {
+        "clusterId": "동구-185",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-1f1178be6bb6f116-1",
+          "ngii-791afdd7c4fcdbe8-1"
+        ]
+      },
+      {
+        "clusterId": "동구-186",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-c56a8ed86e344541-2",
+          "ngii-c56a8ed86e344541-3",
+          "ngii-fee1669c741f5439-1",
+          "ngii-fee1669c741f5439-2"
+        ]
+      },
+      {
+        "clusterId": "동구-189",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-a54c7d1aa23f925f-2",
+          "ngii-a54c7d1aa23f925f-3",
+          "ngii-a54c7d1aa23f925f-4",
+          "ngii-a54c7d1aa23f925f-5"
+        ]
+      },
+      {
+        "clusterId": "동구-191",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-4774131e31bb0e39-1",
+          "ngii-5475f163333e788c-1",
+          "ngii-5475f163333e788c-2",
+          "ngii-89d6be6b2ed6531f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-195",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-2e7146be2ff5ad97-1"
+        ]
+      },
+      {
+        "clusterId": "동구-196",
+        "nearbyButExcluded": 18,
+        "sampleRoadIds": [
+          "ngii-0db2e6e1fefa0eb7-1",
+          "ngii-11d78a1d4667cae9-1",
+          "ngii-26042b11f5aab232-1",
+          "ngii-29dc166cb075cc88-1",
+          "ngii-29dc166cb075cc88-2"
+        ]
+      },
+      {
+        "clusterId": "동구-199",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-0f267ae2e2be5ab5-1",
+          "ngii-332120f7f856a6fb-1",
+          "ngii-332120f7f856a6fb-2"
+        ]
+      },
+      {
+        "clusterId": "동구-201",
+        "nearbyButExcluded": 16,
+        "sampleRoadIds": [
+          "ngii-12393991065e5d90-1",
+          "ngii-12393991065e5d90-2",
+          "ngii-1b07ab438ec18e43-1",
+          "ngii-1b07ab438ec18e43-2",
+          "ngii-3fb234ed3ff027ec-1"
+        ]
+      },
+      {
+        "clusterId": "동구-204",
+        "nearbyButExcluded": 11,
+        "sampleRoadIds": [
+          "ngii-148cedbda5fc6a16-1",
+          "ngii-148cedbda5fc6a16-2",
+          "ngii-290dac79fff9c1c4-1",
+          "ngii-290dac79fff9c1c4-2",
+          "ngii-49b63261f081e992-1"
+        ]
+      },
+      {
+        "clusterId": "동구-206",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-000eab58abc2e726-1",
+          "ngii-000eab58abc2e726-2",
+          "ngii-1884351d11690bce-1",
+          "ngii-53818f3292da4633-1",
+          "ngii-a74d3a8e81cedce1-1"
+        ]
+      },
+      {
+        "clusterId": "동구-217",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-ac817c82f3611a36-1"
+        ]
+      },
+      {
+        "clusterId": "동구-222",
+        "nearbyButExcluded": 15,
+        "sampleRoadIds": [
+          "ngii-1431ffc0a2c8a90e-1",
+          "ngii-258a623876af9ef8-1",
+          "ngii-258a623876af9ef8-2",
+          "ngii-258a623876af9ef8-3",
+          "ngii-67cc6724369be926-1"
+        ]
+      },
+      {
+        "clusterId": "동구-226",
+        "nearbyButExcluded": 28,
+        "sampleRoadIds": [
+          "ngii-12393991065e5d90-1",
+          "ngii-12393991065e5d90-2",
+          "ngii-1b07ab438ec18e43-1",
+          "ngii-1b07ab438ec18e43-2",
+          "ngii-22946c66e3087c6d-2"
+        ]
+      },
+      {
+        "clusterId": "동구-229",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-0f267ae2e2be5ab5-1",
+          "ngii-332120f7f856a6fb-1",
+          "ngii-332120f7f856a6fb-2",
+          "ngii-db84aaf1b2d5547e-1",
+          "ngii-db84aaf1b2d5547e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-230",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-0f267ae2e2be5ab5-1",
+          "ngii-332120f7f856a6fb-1",
+          "ngii-332120f7f856a6fb-2",
+          "ngii-db84aaf1b2d5547e-1",
+          "ngii-db84aaf1b2d5547e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-247",
+        "nearbyButExcluded": 14,
+        "sampleRoadIds": [
+          "ngii-00bc6d6f5f8d8ec9-1",
+          "ngii-01a1d6c432ec1e67-1",
+          "ngii-10ed15dc24963894-1",
+          "ngii-30c792fa874d7081-1",
+          "ngii-5ec6df9da33e0479-1"
+        ]
+      },
+      {
+        "clusterId": "동구-249",
+        "nearbyButExcluded": 6,
+        "sampleRoadIds": [
+          "ngii-073103baba1de2e4-1",
+          "ngii-073103baba1de2e4-2",
+          "ngii-073103baba1de2e4-3",
+          "ngii-14e2aeea9e940e19-1",
+          "ngii-14e2aeea9e940e19-2"
+        ]
+      },
+      {
+        "clusterId": "동구-261",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-8f4f670777caa0b1-2",
+          "ngii-8f4f670777caa0b1-3"
+        ]
+      },
+      {
+        "clusterId": "동구-262",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-7ed0b5795a3ec541-2",
+          "ngii-b8327ced24d366e6-1"
+        ]
+      },
+      {
+        "clusterId": "동구-263",
+        "nearbyButExcluded": 19,
+        "sampleRoadIds": [
+          "ngii-0d5194ecd2e0c15d-1",
+          "ngii-14d9a2e4912bfb34-1",
+          "ngii-1709171318cf2524-1",
+          "ngii-1709171318cf2524-2",
+          "ngii-190e129a8d19bf36-1"
+        ]
+      },
+      {
+        "clusterId": "동구-264",
+        "nearbyButExcluded": 21,
+        "sampleRoadIds": [
+          "ngii-0d5194ecd2e0c15d-1",
+          "ngii-14d9a2e4912bfb34-1",
+          "ngii-1709171318cf2524-1",
+          "ngii-1709171318cf2524-2",
+          "ngii-1709171318cf2524-3"
+        ]
+      },
+      {
+        "clusterId": "동구-268",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-e82c73892ead5f95-2"
+        ]
+      }
+    ],
+    "outsideCorridorNearby": [
+      {
+        "clusterId": "동구-01",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-03",
+        "nearbyButExcluded": 11
+      },
+      {
+        "clusterId": "동구-04",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-05",
+        "nearbyButExcluded": 10
+      },
+      {
+        "clusterId": "동구-06",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-07",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-11",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-13",
+        "nearbyButExcluded": 8
+      },
+      {
+        "clusterId": "동구-14",
+        "nearbyButExcluded": 33
+      },
+      {
+        "clusterId": "동구-16",
+        "nearbyButExcluded": 6
+      },
+      {
+        "clusterId": "동구-17",
+        "nearbyButExcluded": 8
+      },
+      {
+        "clusterId": "동구-18",
+        "nearbyButExcluded": 18
+      },
+      {
+        "clusterId": "동구-19",
+        "nearbyButExcluded": 25
+      },
+      {
+        "clusterId": "동구-20",
+        "nearbyButExcluded": 38
+      },
+      {
+        "clusterId": "동구-26",
+        "nearbyButExcluded": 10
+      },
+      {
+        "clusterId": "동구-27",
+        "nearbyButExcluded": 3
+      },
+      {
+        "clusterId": "동구-28",
+        "nearbyButExcluded": 7
+      },
+      {
+        "clusterId": "동구-29",
+        "nearbyButExcluded": 10
+      },
+      {
+        "clusterId": "동구-30",
+        "nearbyButExcluded": 9
+      },
+      {
+        "clusterId": "동구-31",
+        "nearbyButExcluded": 6
+      },
+      {
+        "clusterId": "동구-34",
+        "nearbyButExcluded": 46
+      },
+      {
+        "clusterId": "동구-38",
+        "nearbyButExcluded": 28
+      },
+      {
+        "clusterId": "동구-39",
+        "nearbyButExcluded": 21
+      },
+      {
+        "clusterId": "동구-40",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-41",
+        "nearbyButExcluded": 17
+      },
+      {
+        "clusterId": "동구-42",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-43",
+        "nearbyButExcluded": 21
+      },
+      {
+        "clusterId": "동구-44",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-45",
+        "nearbyButExcluded": 1
+      },
+      {
+        "clusterId": "동구-46",
+        "nearbyButExcluded": 24
+      },
+      {
+        "clusterId": "동구-47",
+        "nearbyButExcluded": 31
+      },
+      {
+        "clusterId": "동구-48",
+        "nearbyButExcluded": 13
+      },
+      {
+        "clusterId": "동구-49",
+        "nearbyButExcluded": 3
+      },
+      {
+        "clusterId": "동구-51",
+        "nearbyButExcluded": 18
+      },
+      {
+        "clusterId": "동구-52",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-53",
+        "nearbyButExcluded": 9
+      },
+      {
+        "clusterId": "동구-54",
+        "nearbyButExcluded": 10
+      },
+      {
+        "clusterId": "동구-55",
+        "nearbyButExcluded": 8
+      },
+      {
+        "clusterId": "동구-56",
+        "nearbyButExcluded": 8
+      },
+      {
+        "clusterId": "동구-57",
+        "nearbyButExcluded": 21
+      },
+      {
+        "clusterId": "동구-58",
+        "nearbyButExcluded": 14
+      },
+      {
+        "clusterId": "동구-61",
+        "nearbyButExcluded": 15
+      },
+      {
+        "clusterId": "동구-62",
+        "nearbyButExcluded": 17
+      },
+      {
+        "clusterId": "동구-64",
+        "nearbyButExcluded": 28
+      },
+      {
+        "clusterId": "동구-65",
+        "nearbyButExcluded": 32
+      },
+      {
+        "clusterId": "동구-66",
+        "nearbyButExcluded": 30
+      },
+      {
+        "clusterId": "동구-67",
+        "nearbyButExcluded": 19
+      },
+      {
+        "clusterId": "동구-68",
+        "nearbyButExcluded": 22
+      },
+      {
+        "clusterId": "동구-69",
+        "nearbyButExcluded": 18
+      },
+      {
+        "clusterId": "동구-70",
+        "nearbyButExcluded": 4
+      },
+      {
+        "clusterId": "동구-73",
+        "nearbyButExcluded": 3
+      },
+      {
+        "clusterId": "동구-74",
+        "nearbyButExcluded": 5
+      },
+      {
+        "clusterId": "동구-75",
+        "nearbyButExcluded": 4
+      },
+      {
+        "clusterId": "동구-76",
+        "nearbyButExcluded": 24
+      },
+      {
+        "clusterId": "동구-77",
+        "nearbyButExcluded": 27
+      },
+      {
+        "clusterId": "동구-79",
+        "nearbyButExcluded": 5
+      },
+      {
+        "clusterId": "동구-80",
+        "nearbyButExcluded": 22
+      },
+      {
+        "clusterId": "동구-81",
+        "nearbyButExcluded": 20
+      },
+      {
+        "clusterId": "동구-83",
+        "nearbyButExcluded": 13
+      },
+      {
+        "clusterId": "동구-85",
+        "nearbyButExcluded": 16
+      },
+      {
+        "clusterId": "동구-86",
+        "nearbyButExcluded": 36
+      },
+      {
+        "clusterId": "동구-87",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-89",
+        "nearbyButExcluded": 16
+      },
+      {
+        "clusterId": "동구-91",
+        "nearbyButExcluded": 8
+      },
+      {
+        "clusterId": "동구-92",
+        "nearbyButExcluded": 4
+      },
+      {
+        "clusterId": "동구-93",
+        "nearbyButExcluded": 18
+      },
+      {
+        "clusterId": "동구-94",
+        "nearbyButExcluded": 10
+      },
+      {
+        "clusterId": "동구-95",
+        "nearbyButExcluded": 17
+      },
+      {
+        "clusterId": "동구-96",
+        "nearbyButExcluded": 8
+      },
+      {
+        "clusterId": "동구-98",
+        "nearbyButExcluded": 28
+      },
+      {
+        "clusterId": "동구-99",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-100",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-101",
+        "nearbyButExcluded": 8
+      },
+      {
+        "clusterId": "동구-102",
+        "nearbyButExcluded": 16
+      },
+      {
+        "clusterId": "동구-103",
+        "nearbyButExcluded": 10
+      },
+      {
+        "clusterId": "동구-104",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-105",
+        "nearbyButExcluded": 11
+      },
+      {
+        "clusterId": "동구-107",
+        "nearbyButExcluded": 14
+      },
+      {
+        "clusterId": "동구-109",
+        "nearbyButExcluded": 22
+      },
+      {
+        "clusterId": "동구-110",
+        "nearbyButExcluded": 19
+      },
+      {
+        "clusterId": "동구-111",
+        "nearbyButExcluded": 6
+      },
+      {
+        "clusterId": "동구-112",
+        "nearbyButExcluded": 15
+      },
+      {
+        "clusterId": "동구-113",
+        "nearbyButExcluded": 19
+      },
+      {
+        "clusterId": "동구-114",
+        "nearbyButExcluded": 22
+      },
+      {
+        "clusterId": "동구-115",
+        "nearbyButExcluded": 14
+      },
+      {
+        "clusterId": "동구-116",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-118",
+        "nearbyButExcluded": 4
+      },
+      {
+        "clusterId": "동구-119",
+        "nearbyButExcluded": 16
+      },
+      {
+        "clusterId": "동구-120",
+        "nearbyButExcluded": 4
+      },
+      {
+        "clusterId": "동구-121",
+        "nearbyButExcluded": 7
+      },
+      {
+        "clusterId": "동구-122",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-123",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-124",
+        "nearbyButExcluded": 9
+      },
+      {
+        "clusterId": "동구-129",
+        "nearbyButExcluded": 17
+      },
+      {
+        "clusterId": "동구-131",
+        "nearbyButExcluded": 32
+      },
+      {
+        "clusterId": "동구-132",
+        "nearbyButExcluded": 1
+      },
+      {
+        "clusterId": "동구-133",
+        "nearbyButExcluded": 13
+      },
+      {
+        "clusterId": "동구-135",
+        "nearbyButExcluded": 10
+      },
+      {
+        "clusterId": "동구-137",
+        "nearbyButExcluded": 16
+      },
+      {
+        "clusterId": "동구-138",
+        "nearbyButExcluded": 8
+      },
+      {
+        "clusterId": "동구-139",
+        "nearbyButExcluded": 19
+      },
+      {
+        "clusterId": "동구-140",
+        "nearbyButExcluded": 14
+      },
+      {
+        "clusterId": "동구-141",
+        "nearbyButExcluded": 9
+      },
+      {
+        "clusterId": "동구-142",
+        "nearbyButExcluded": 5
+      },
+      {
+        "clusterId": "동구-143",
+        "nearbyButExcluded": 18
+      },
+      {
+        "clusterId": "동구-144",
+        "nearbyButExcluded": 25
+      },
+      {
+        "clusterId": "동구-147",
+        "nearbyButExcluded": 24
+      },
+      {
+        "clusterId": "동구-149",
+        "nearbyButExcluded": 3
+      },
+      {
+        "clusterId": "동구-150",
+        "nearbyButExcluded": 14
+      },
+      {
+        "clusterId": "동구-151",
+        "nearbyButExcluded": 21
+      },
+      {
+        "clusterId": "동구-153",
+        "nearbyButExcluded": 14
+      },
+      {
+        "clusterId": "동구-154",
+        "nearbyButExcluded": 24
+      },
+      {
+        "clusterId": "동구-155",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-156",
+        "nearbyButExcluded": 21
+      },
+      {
+        "clusterId": "동구-157",
+        "nearbyButExcluded": 20
+      },
+      {
+        "clusterId": "동구-158",
+        "nearbyButExcluded": 18
+      },
+      {
+        "clusterId": "동구-159",
+        "nearbyButExcluded": 23
+      },
+      {
+        "clusterId": "동구-161",
+        "nearbyButExcluded": 10
+      },
+      {
+        "clusterId": "동구-164",
+        "nearbyButExcluded": 3
+      },
+      {
+        "clusterId": "동구-170",
+        "nearbyButExcluded": 3
+      },
+      {
+        "clusterId": "동구-178",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-180",
+        "nearbyButExcluded": 17
+      },
+      {
+        "clusterId": "동구-181",
+        "nearbyButExcluded": 15
+      },
+      {
+        "clusterId": "동구-182",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-183",
+        "nearbyButExcluded": 13
+      },
+      {
+        "clusterId": "동구-184",
+        "nearbyButExcluded": 21
+      },
+      {
+        "clusterId": "동구-185",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-186",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-187",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-188",
+        "nearbyButExcluded": 1
+      },
+      {
+        "clusterId": "동구-190",
+        "nearbyButExcluded": 7
+      },
+      {
+        "clusterId": "동구-192",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-193",
+        "nearbyButExcluded": 19
+      },
+      {
+        "clusterId": "동구-195",
+        "nearbyButExcluded": 4
+      },
+      {
+        "clusterId": "동구-196",
+        "nearbyButExcluded": 11
+      },
+      {
+        "clusterId": "동구-201",
+        "nearbyButExcluded": 15
+      },
+      {
+        "clusterId": "동구-204",
+        "nearbyButExcluded": 20
+      },
+      {
+        "clusterId": "동구-208",
+        "nearbyButExcluded": 17
+      },
+      {
+        "clusterId": "동구-212",
+        "nearbyButExcluded": 19
+      },
+      {
+        "clusterId": "동구-213",
+        "nearbyButExcluded": 27
+      },
+      {
+        "clusterId": "동구-214",
+        "nearbyButExcluded": 21
+      },
+      {
+        "clusterId": "동구-215",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-216",
+        "nearbyButExcluded": 8
+      },
+      {
+        "clusterId": "동구-217",
+        "nearbyButExcluded": 12
+      },
+      {
+        "clusterId": "동구-219",
+        "nearbyButExcluded": 18
+      },
+      {
+        "clusterId": "동구-229",
+        "nearbyButExcluded": 1
+      },
+      {
+        "clusterId": "동구-234",
+        "nearbyButExcluded": 3
+      },
+      {
+        "clusterId": "동구-240",
+        "nearbyButExcluded": 25
+      },
+      {
+        "clusterId": "동구-241",
+        "nearbyButExcluded": 5
+      },
+      {
+        "clusterId": "동구-242",
+        "nearbyButExcluded": 5
+      },
+      {
+        "clusterId": "동구-249",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-251",
+        "nearbyButExcluded": 3
+      },
+      {
+        "clusterId": "동구-255",
+        "nearbyButExcluded": 1
+      },
+      {
+        "clusterId": "동구-258",
+        "nearbyButExcluded": 19
+      },
+      {
+        "clusterId": "동구-261",
+        "nearbyButExcluded": 20
+      },
+      {
+        "clusterId": "동구-262",
+        "nearbyButExcluded": 13
+      },
+      {
+        "clusterId": "동구-263",
+        "nearbyButExcluded": 2
+      },
+      {
+        "clusterId": "동구-264",
+        "nearbyButExcluded": 4
+      },
+      {
+        "clusterId": "동구-268",
+        "nearbyButExcluded": 20
+      }
+    ],
+    "disconnectedPropagation": [],
+    "farSegments": [],
+    "overlongAnchors": [],
+    "duplicateClusterOnRoad": [],
+    "sameAddressDistantRoads": [
+      {
+        "address": "학동 1003-1",
+        "coordinates": [
+          [
+            126.933875,
+            35.130334
+          ],
+          [
+            126.936769,
+            35.133155
+          ]
+        ],
+        "meters": 409
+      },
+      {
+        "address": "학동 1003-1",
+        "coordinates": [
+          [
+            126.933875,
+            35.130334
+          ],
+          [
+            126.922976,
+            35.134887
+          ]
+        ],
+        "meters": 1113
+      },
+      {
+        "address": "학동 1003-1",
+        "coordinates": [
+          [
+            126.936769,
+            35.133155
+          ],
+          [
+            126.922976,
+            35.134887
+          ]
+        ],
+        "meters": 1269
+      },
+      {
+        "address": "지산동 724-1",
+        "coordinates": [
+          [
+            126.936887,
+            35.149468
+          ],
+          [
+            126.92833,
+            35.151165
+          ]
+        ],
+        "meters": 801
+      },
+      {
+        "address": "산수동 561-1",
+        "coordinates": [
+          [
+            126.930936,
+            35.153012
+          ],
+          [
+            126.931096,
+            35.157751
+          ]
+        ],
+        "meters": 527
+      },
+      {
+        "address": "산수동 561-1",
+        "coordinates": [
+          [
+            126.930936,
+            35.153012
+          ],
+          [
+            126.927612,
+            35.158673
+          ]
+        ],
+        "meters": 698
+      },
+      {
+        "address": "산수동 561-1",
+        "coordinates": [
+          [
+            126.931096,
+            35.157751
+          ],
+          [
+            126.927612,
+            35.158673
+          ]
+        ],
+        "meters": 333
+      }
+    ],
+    "linkedRoadCount": 937
+  },
+  "confidenceClusters": {
+    "high": 138,
+    "medium": 4,
+    "low": 50,
+    "unmatched": 72
+  },
+  "linkedPerCluster": {
+    "count": 192,
+    "mean": 5.64,
+    "median": 5,
+    "p10": 2,
+    "p25": 3,
+    "p75": 7,
+    "p90": 9,
+    "max": 20,
+    "le30": 100,
+    "ge80": 0
+  },
+  "previousMatchingReference": {
+    "source": "PR #26 (2026-09-26)",
+    "matchedClusters": 192,
     "linkedRoadCount": 2047
+  },
+  "corridorComparison": {
+    "C1-200m": {
+      "linkedRoadCount": 937,
+      "linkedPerCluster": {
+        "count": 192,
+        "mean": 5.64,
+        "median": 5,
+        "p10": 2,
+        "p25": 3,
+        "p75": 7,
+        "p90": 9,
+        "max": 20,
+        "le30": 100,
+        "ge80": 0
+      },
+      "clusterOver20": 0,
+      "lightingMean": 50.78
+    },
+    "C1-300m": {
+      "linkedRoadCount": 1263,
+      "linkedPerCluster": {
+        "count": 192,
+        "mean": 7.96,
+        "median": 7,
+        "p10": 2,
+        "p25": 4,
+        "p75": 11,
+        "p90": 15,
+        "max": 29,
+        "le30": 100,
+        "ge80": 0
+      },
+      "clusterOver20": 8,
+      "lightingMean": 50.99
+    },
+    "C1-400m": {
+      "linkedRoadCount": 1500,
+      "linkedPerCluster": {
+        "count": 192,
+        "mean": 9.9,
+        "median": 9,
+        "p10": 2,
+        "p25": 4,
+        "p75": 14,
+        "p90": 19,
+        "max": 38,
+        "le30": 99.48,
+        "ge80": 0
+      },
+      "clusterOver20": 15,
+      "lightingMean": 51.16
+    },
+    "C1-500m": {
+      "linkedRoadCount": 1660,
+      "linkedPerCluster": {
+        "count": 192,
+        "mean": 11.57,
+        "median": 10,
+        "p10": 2,
+        "p25": 4,
+        "p75": 17,
+        "p90": 22,
+        "max": 46,
+        "le30": 96.35,
+        "ge80": 0
+      },
+      "clusterOver20": 31,
+      "lightingMean": 51.29
+    },
+    "C2-log": {
+      "linkedRoadCount": 1241,
+      "linkedPerCluster": {
+        "count": 192,
+        "mean": 7.81,
+        "median": 7,
+        "p10": 2,
+        "p25": 4,
+        "p75": 11,
+        "p90": 14,
+        "max": 29,
+        "le30": 100,
+        "ge80": 0
+      },
+      "clusterOver20": 7,
+      "lightingMean": 50.98
+    }
+  },
+  "strengthComparison": {
+    "A": {
+      "lightingMean": 50.69,
+      "ge20": 0.09
+    },
+    "B": {
+      "lightingMean": 50.82,
+      "ge20": 0.43
+    },
+    "C": {
+      "lightingMean": 50.78,
+      "ge20": 0.15
+    }
   },
   "lighting": {
     "actual": {
@@ -1437,21 +4477,35 @@
       "p25": 7,
       "p75": 93,
       "p90": 97,
+      "max": 100,
       "le30": 45.97,
       "ge80": 41.47
     },
     "A": {
       "count": 10651,
-      "mean": 49.99,
-      "median": 48,
+      "mean": 50.23,
+      "median": 49,
       "p10": 2,
-      "p25": 9,
-      "p75": 91,
+      "p25": 8,
+      "p75": 93,
       "p90": 97,
-      "le30": 45.33,
-      "ge80": 39.87
+      "max": 100,
+      "le30": 45.71,
+      "ge80": 40.97
     },
     "B": {
+      "count": 10651,
+      "mean": 50.78,
+      "median": 50,
+      "p10": 2,
+      "p25": 8,
+      "p75": 93,
+      "p90": 97,
+      "max": 100,
+      "le30": 45.28,
+      "ge80": 41.63
+    },
+    "previousDeployment": {
       "count": 10651,
       "mean": 51.27,
       "median": 50,
@@ -1459,19 +4513,9 @@
       "p25": 9,
       "p75": 93,
       "p90": 98,
+      "max": 100,
       "le30": 44.51,
       "ge80": 41.8
-    },
-    "previousDirectPoint": {
-      "count": 10651,
-      "mean": 54.02,
-      "median": 66,
-      "p10": 2,
-      "p25": 9,
-      "p75": 94,
-      "p90": 98,
-      "le30": 41.39,
-      "ge80": 45.64
     }
   },
   "safetyV2": {
@@ -1483,21 +4527,35 @@
       "p25": 30,
       "p75": 69,
       "p90": 74,
+      "max": 87,
       "le30": 25.17,
       "ge80": 1.87
     },
     "A": {
       "count": 10651,
-      "mean": 50.64,
+      "mean": 50.7,
       "median": 57,
       "p10": 20,
       "p25": 30,
-      "p75": 68,
+      "p75": 69,
       "p90": 74,
-      "le30": 25.03,
-      "ge80": 1.42
+      "max": 87,
+      "le30": 25.15,
+      "ge80": 1.58
     },
     "B": {
+      "count": 10651,
+      "mean": 50.85,
+      "median": 57,
+      "p10": 20,
+      "p25": 30,
+      "p75": 69,
+      "p90": 74,
+      "max": 87,
+      "le30": 25.12,
+      "ge80": 1.92
+    },
+    "previousDeployment": {
       "count": 10651,
       "mean": 50.99,
       "median": 57,
@@ -1505,1174 +4563,1492 @@
       "p25": 31,
       "p75": 69,
       "p90": 74,
+      "max": 87,
       "le30": 24.96,
       "ge80": 1.97
     }
   },
   "changes": {
     "A": {
-      "ge10": 2.61,
-      "ge20": 0.08,
-      "ge30": 0
+      "ge5": 2.84,
+      "ge10": 1.41,
+      "ge20": 0,
+      "maxIncrease": 18
     },
     "B": {
-      "ge10": 3.68,
-      "ge20": 0.74,
-      "ge30": 0
+      "ge5": 3.91,
+      "ge10": 2.66,
+      "ge20": 0.15,
+      "maxIncrease": 22
     }
   },
   "safetyChanges": {
     "A": {
+      "ge5": 0.11,
+      "ge10": 0,
+      "ge20": 0,
+      "maxIncrease": 6
+    },
+    "B": {
+      "ge5": 0.67,
       "ge10": 0,
       "ge20": 0,
       "maxIncrease": 7
+    }
+  },
+  "previousToCurrent": {
+    "lighting": {
+      "ge5": 0.52,
+      "ge10": 0.08,
+      "ge20": 0,
+      "maxIncrease": 12,
+      "meanDelta": -0.49,
+      "decreased5": 506,
+      "minDelta": -25
     },
-    "B": {
+    "safety": {
+      "ge5": 0,
       "ge10": 0,
       "ge20": 0,
-      "maxIncrease": 9
+      "maxIncrease": 3,
+      "meanDelta": -0.14,
+      "decreased5": 65,
+      "minDelta": -8
     }
   },
   "byDong": {
     "지원2동": {
-      "n": 3236,
-      "actual": 27.8,
-      "A": 28,
-      "B": 28.5
+      "roads": 3236,
+      "actual": 27.83,
+      "applied": 28.12,
+      "delta": 0.29,
+      "safetyActual": 36.26,
+      "safetyApplied": 36.36,
+      "safetyDelta": 0.09
     },
     "학운동": {
-      "n": 1457,
+      "roads": 1457,
       "actual": 34.2,
-      "A": 34,
-      "B": 34.8
+      "applied": 34.47,
+      "delta": 0.27,
+      "safetyActual": 38.63,
+      "safetyApplied": 38.71,
+      "safetyDelta": 0.08
     },
     "서남동": {
-      "n": 580,
-      "actual": 70,
-      "A": 69.3,
-      "B": 71.1
+      "roads": 580,
+      "actual": 69.98,
+      "applied": 70.59,
+      "delta": 0.61,
+      "safetyActual": 64.22,
+      "safetyApplied": 64.38,
+      "safetyDelta": 0.16
     },
     "산수1동": {
-      "n": 466,
-      "actual": 78.3,
-      "A": 77.4,
-      "B": 79.2
+      "roads": 466,
+      "actual": 78.26,
+      "applied": 78.73,
+      "delta": 0.47,
+      "safetyActual": 64.83,
+      "safetyApplied": 64.94,
+      "safetyDelta": 0.11
     },
     "지산2동": {
-      "n": 844,
-      "actual": 51,
-      "A": 50.8,
-      "B": 51.7
+      "roads": 844,
+      "actual": 50.97,
+      "applied": 51.17,
+      "delta": 0.21,
+      "safetyActual": 50.67,
+      "safetyApplied": 50.72,
+      "safetyDelta": 0.05
     },
     "산수2동": {
-      "n": 557,
+      "roads": 557,
       "actual": 63.1,
-      "A": 61.7,
-      "B": 64.1
+      "applied": 63.64,
+      "delta": 0.54,
+      "safetyActual": 59.7,
+      "safetyApplied": 59.84,
+      "safetyDelta": 0.15
     },
     "지원1동": {
-      "n": 690,
-      "actual": 63.8,
-      "A": 63.3,
-      "B": 64.6
+      "roads": 690,
+      "actual": 63.83,
+      "applied": 64.27,
+      "delta": 0.45,
+      "safetyActual": 56.56,
+      "safetyApplied": 56.69,
+      "safetyDelta": 0.12
     },
     "계림2동": {
-      "n": 220,
-      "actual": 59.9,
-      "A": 59,
-      "B": 61.5
+      "roads": 220,
+      "actual": 59.94,
+      "applied": 60.73,
+      "delta": 0.8,
+      "safetyActual": 62.6,
+      "safetyApplied": 62.81,
+      "safetyDelta": 0.21
     },
     "동명동": {
-      "n": 555,
-      "actual": 85.5,
-      "A": 84.4,
-      "B": 86.1
+      "roads": 555,
+      "actual": 85.48,
+      "applied": 85.9,
+      "delta": 0.41,
+      "safetyActual": 68.25,
+      "safetyApplied": 68.35,
+      "safetyDelta": 0.1
     },
     "학동": {
-      "n": 398,
-      "actual": 45.3,
-      "A": 44.7,
-      "B": 47.1
+      "roads": 398,
+      "actual": 45.33,
+      "applied": 46.63,
+      "delta": 1.3,
+      "safetyActual": 57.76,
+      "safetyApplied": 58.1,
+      "safetyDelta": 0.33
     },
     "충장동": {
-      "n": 708,
-      "actual": 61.2,
-      "A": 62,
-      "B": 64.4
+      "roads": 708,
+      "actual": 61.23,
+      "applied": 63.21,
+      "delta": 1.98,
+      "safetyActual": 65.48,
+      "safetyApplied": 65.98,
+      "safetyDelta": 0.5
     },
     "계림1동": {
-      "n": 554,
-      "actual": 75.1,
-      "A": 75.4,
-      "B": 77
+      "roads": 554,
+      "actual": 75.15,
+      "applied": 76.14,
+      "delta": 0.99,
+      "safetyActual": 66.46,
+      "safetyApplied": 66.71,
+      "safetyDelta": 0.25
     },
     "지산1동": {
-      "n": 386,
-      "actual": 83.9,
-      "A": 83,
-      "B": 84.5
+      "roads": 386,
+      "actual": 83.86,
+      "applied": 84.11,
+      "delta": 0.25,
+      "safetyActual": 67.72,
+      "safetyApplied": 67.78,
+      "safetyDelta": 0.06
     }
   },
-  "anomalies": [
+  "examples": [
     {
-      "roadId": "ngii-00bc6d6f5f8d8ec9-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 1,
-      "actual": 99,
-      "A": 99,
-      "B": 99
-    },
-    {
-      "roadId": "ngii-01a1d6c432ec1e67-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 67,
-      "A": 62,
-      "B": 70
-    },
-    {
-      "roadId": "ngii-024d251da701e029-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 92,
-      "A": 80,
-      "B": 93
-    },
-    {
-      "roadId": "ngii-03012f8f4d8df558-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 55,
-      "evidence": 0.32,
-      "actual": 32,
-      "A": 32,
-      "B": 37
-    },
-    {
-      "roadId": "ngii-10ed15dc24963894-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 95,
-      "A": 84,
-      "B": 96
-    },
-    {
-      "roadId": "ngii-13225063683b843e-1",
-      "name": "필문대로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 1,
-      "actual": 57,
-      "A": 66,
-      "B": 68
-    },
-    {
-      "roadId": "ngii-19418d29aee7c586-1",
-      "name": "필문대로",
-      "adminDong": "동명동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 96,
-      "A": 85,
-      "B": 96
-    },
-    {
-      "roadId": "ngii-258a623876af9ef8-2",
-      "name": "남문로",
-      "adminDong": "지원2동",
-      "recordCount": 52,
-      "evidence": 0.32,
+      "roadId": "ngii-b2b6511d2053a4e5-1",
+      "name": "제봉로",
+      "adminDong": "충장동",
+      "clusterIds": [
+        "동구-55",
+        "동구-96"
+      ],
+      "managedUnitCount": 21,
+      "corridorDistanceMeters": 0,
+      "confidence": 1,
       "actual": 3,
-      "A": 9,
-      "B": 11
+      "applied": 25,
+      "increase": 22,
+      "safetyActual": 58,
+      "safetyApplied": 64
     },
     {
-      "roadId": "ngii-258a623876af9ef8-3",
-      "name": "남문로",
-      "adminDong": "지원2동",
-      "recordCount": 52,
-      "evidence": 0.32,
+      "roadId": "ngii-b64d1627444e7551-6",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "clusterIds": [
+        "동구-193",
+        "동구-212"
+      ],
+      "managedUnitCount": 44,
+      "corridorDistanceMeters": 0,
+      "confidence": 1,
       "actual": 3,
-      "A": 9,
-      "B": 11
+      "applied": 25,
+      "increase": 22,
+      "safetyActual": 46,
+      "safetyApplied": 53
     },
     {
-      "roadId": "ngii-278103d662a2b3b6-1",
-      "name": "남문로",
-      "adminDong": "학동",
-      "recordCount": 75,
-      "evidence": 0.4,
-      "actual": 88,
-      "A": 78,
-      "B": 89
-    },
-    {
-      "roadId": "ngii-286ff45c09cfb6eb-1",
+      "roadId": "ngii-6c41fc69130877a8-2",
       "name": "무등로",
       "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 16,
-      "A": 21,
-      "B": 24
+      "clusterIds": [
+        "동구-214",
+        "동구-98"
+      ],
+      "managedUnitCount": 28,
+      "corridorDistanceMeters": 0,
+      "confidence": 1,
+      "actual": 6,
+      "applied": 27,
+      "increase": 21,
+      "safetyActual": 50,
+      "safetyApplied": 56
     },
     {
-      "roadId": "ngii-291d2ee38c5a68dd-1",
-      "name": "필문대로",
-      "adminDong": "동명동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 93,
-      "A": 82,
-      "B": 94
-    },
-    {
-      "roadId": "ngii-291d2ee38c5a68dd-2",
-      "name": "필문대로",
-      "adminDong": "동명동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 90,
-      "A": 80,
-      "B": 91
-    },
-    {
-      "roadId": "ngii-2aa8111c62872806-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 40,
-      "A": 38,
-      "B": 45
-    },
-    {
-      "roadId": "ngii-2aaa5a7d7c4fe54e-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 97,
-      "A": 84,
-      "B": 97
-    },
-    {
-      "roadId": "ngii-2f3e42277f239f84-1",
+      "roadId": "ngii-c3ab84d31aaeb65b-1",
       "name": "남문로",
       "adminDong": "학동",
-      "recordCount": 61,
-      "evidence": 0.32,
-      "actual": 91,
-      "A": 79,
-      "B": 92
+      "clusterIds": [
+        "동구-11",
+        "동구-27"
+      ],
+      "managedUnitCount": 29,
+      "corridorDistanceMeters": 0,
+      "confidence": 1,
+      "actual": 6,
+      "applied": 27,
+      "increase": 21,
+      "safetyActual": 58,
+      "safetyApplied": 63
     },
     {
-      "roadId": "ngii-2f3e42277f239f84-2",
-      "name": "남문로",
-      "adminDong": "학동",
-      "recordCount": 61,
-      "evidence": 0.32,
-      "actual": 28,
-      "A": 29,
-      "B": 34
-    },
-    {
-      "roadId": "ngii-30b046e2160dad6a-1",
-      "name": "필문대로",
-      "adminDong": "동명동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 34,
-      "A": 35,
-      "B": 41
-    },
-    {
-      "roadId": "ngii-30c792fa874d7081-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 1,
-      "actual": 92,
-      "A": 94,
-      "B": 94
-    },
-    {
-      "roadId": "ngii-31a57897ae3310e8-1",
-      "name": "필문대로",
-      "adminDong": "산수1동",
-      "recordCount": 71,
-      "evidence": 0.32,
-      "actual": 50,
-      "A": 46,
-      "B": 54
-    },
-    {
-      "roadId": "ngii-44b3b868dbfda5cb-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 36,
-      "A": 37,
-      "B": 42
-    },
-    {
-      "roadId": "ngii-44b3b868dbfda5cb-2",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 95,
-      "A": 84,
-      "B": 96
-    },
-    {
-      "roadId": "ngii-44e5c9fb83e0476e-1",
-      "name": "필문대로",
-      "adminDong": "지산1동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 99,
-      "A": 87,
-      "B": 99
-    },
-    {
-      "roadId": "ngii-4515cf2567616436-1",
-      "name": "필문대로",
-      "adminDong": "지산1동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 99,
-      "A": 87,
-      "B": 99
-    },
-    {
-      "roadId": "ngii-48c69e2689bdbc7b-1",
+      "roadId": "ngii-ecf5f758e81e8464-1",
       "name": "무등로",
       "adminDong": "계림1동",
-      "recordCount": 68,
-      "evidence": 0.4,
-      "actual": 12,
-      "A": 18,
-      "B": 21
-    },
-    {
-      "roadId": "ngii-48c69e2689bdbc7b-2",
-      "name": "무등로",
-      "adminDong": "계림1동",
-      "recordCount": 68,
-      "evidence": 0.4,
-      "actual": 12,
-      "A": 18,
-      "B": 21
-    },
-    {
-      "roadId": "ngii-49778866afe42f7d-1",
-      "name": "무등로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 14,
-      "A": 19,
-      "B": 23
-    },
-    {
-      "roadId": "ngii-4d1fac0b8bd31c20-1",
-      "name": "무등로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 12,
-      "A": 18,
-      "B": 21
-    },
-    {
-      "roadId": "ngii-4d1fac0b8bd31c20-2",
-      "name": "무등로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 12,
-      "A": 18,
-      "B": 21
-    },
-    {
-      "roadId": "ngii-4e385b56939922c0-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 56,
-      "evidence": 0.32,
-      "actual": 97,
-      "A": 84,
-      "B": 97
-    },
-    {
-      "roadId": "ngii-4e385b56939922c0-2",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 56,
-      "evidence": 0.32,
-      "actual": 98,
-      "A": 85,
-      "B": 98
-    },
-    {
-      "roadId": "ngii-518b23e1666b193a-1",
-      "name": "필문대로",
-      "adminDong": "지산1동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 91,
-      "A": 81,
-      "B": 92
-    },
-    {
-      "roadId": "ngii-53ff48840103c74e-1",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 5,
-      "A": 12,
-      "B": 15
-    },
-    {
-      "roadId": "ngii-53ff48840103c74e-2",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
+      "clusterIds": [
+        "동구-100",
+        "동구-99"
+      ],
+      "managedUnitCount": 24,
+      "corridorDistanceMeters": 0,
+      "confidence": 1,
       "actual": 6,
-      "A": 13,
-      "B": 15
+      "applied": 27,
+      "increase": 21,
+      "safetyActual": 50,
+      "safetyApplied": 57
     },
     {
-      "roadId": "ngii-53ff48840103c74e-3",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 6,
-      "A": 13,
-      "B": 15
-    },
-    {
-      "roadId": "ngii-53ff48840103c74e-4",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 6,
-      "A": 13,
-      "B": 15
-    },
-    {
-      "roadId": "ngii-5985b05903e47775-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 69,
-      "evidence": 0.4,
-      "actual": 98,
-      "A": 86,
-      "B": 98
-    },
-    {
-      "roadId": "ngii-5ec6df9da33e0479-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 1,
-      "actual": 98,
-      "A": 98,
-      "B": 99
-    },
-    {
-      "roadId": "ngii-5f57ccd0c80c327d-1",
-      "name": "제봉로",
-      "adminDong": "충장동",
-      "recordCount": 54,
-      "evidence": 0.4,
-      "actual": 32,
-      "A": 34,
-      "B": 39
-    },
-    {
-      "roadId": "ngii-5f57ccd0c80c327d-2",
-      "name": "제봉로",
-      "adminDong": "충장동",
-      "recordCount": 54,
-      "evidence": 0.4,
-      "actual": 12,
-      "A": 18,
-      "B": 21
-    },
-    {
-      "roadId": "ngii-621b21fa5f3f2be9-1",
-      "name": "남문로",
-      "adminDong": "학동",
-      "recordCount": 61,
-      "evidence": 0.4,
-      "actual": 43,
-      "A": 42,
-      "B": 49
-    },
-    {
-      "roadId": "ngii-621b21fa5f3f2be9-2",
-      "name": "남문로",
-      "adminDong": "학동",
-      "recordCount": 61,
-      "evidence": 0.4,
-      "actual": 97,
-      "A": 86,
-      "B": 97
-    },
-    {
-      "roadId": "ngii-630b0f914168dd8c-1",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 37,
-      "A": 38,
-      "B": 43
-    },
-    {
-      "roadId": "ngii-630b0f914168dd8c-2",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 93,
-      "A": 82,
-      "B": 94
-    },
-    {
-      "roadId": "ngii-64c268b0134fbd92-1",
-      "name": "필문대로",
-      "adminDong": "지산1동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 99,
-      "A": 87,
-      "B": 99
-    },
-    {
-      "roadId": "ngii-666a48a11244af82-1",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 97,
-      "A": 86,
-      "B": 97
-    },
-    {
-      "roadId": "ngii-666a48a11244af82-2",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 43,
-      "A": 42,
-      "B": 49
-    },
-    {
-      "roadId": "ngii-66f5dd6667018394-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 59,
-      "A": 55,
-      "B": 63
-    },
-    {
-      "roadId": "ngii-67cc6724369be926-1",
-      "name": "남문로",
-      "adminDong": "지원2동",
-      "recordCount": 57,
-      "evidence": 1,
-      "actual": 7,
-      "A": 26,
-      "B": 30
-    },
-    {
-      "roadId": "ngii-6c3fce9c715cb7dd-1",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 88,
-      "A": 78,
-      "B": 89
-    },
-    {
-      "roadId": "ngii-7057b6f3c4e43331-1",
-      "name": "무등로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 63,
-      "A": 58,
-      "B": 67
-    },
-    {
-      "roadId": "ngii-736e5a81fb8e7756-1",
-      "name": "필문대로",
+      "roadId": "ngii-5ed096e2cd20a2c2-2",
+      "name": "동명로",
       "adminDong": "동명동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 95,
-      "A": 84,
-      "B": 96
+      "clusterIds": [
+        "동구-113",
+        "동구-81"
+      ],
+      "managedUnitCount": 22,
+      "corridorDistanceMeters": 25.2,
+      "confidence": 1,
+      "actual": 3,
+      "applied": 23,
+      "increase": 20,
+      "safetyActual": 59,
+      "safetyApplied": 64
     },
     {
-      "roadId": "ngii-75adac66e10c9ec0-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 1,
-      "actual": 8,
-      "A": 26,
-      "B": 31
-    },
-    {
-      "roadId": "ngii-75adac66e10c9ec0-2",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 8,
-      "A": 14,
-      "B": 17
-    },
-    {
-      "roadId": "ngii-7647b34ac0e251f0-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 97,
-      "A": 86,
-      "B": 97
-    },
-    {
-      "roadId": "ngii-7d7f10b783dd79a6-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 56,
-      "evidence": 0.4,
-      "actual": 72,
-      "A": 66,
-      "B": 75
-    },
-    {
-      "roadId": "ngii-7ed0b5795a3ec541-2",
-      "name": "남문로",
-      "adminDong": "지원2동",
-      "recordCount": 62,
-      "evidence": 0.32,
-      "actual": 14,
-      "A": 18,
-      "B": 21
-    },
-    {
-      "roadId": "ngii-8360c5c3f645595a-1",
-      "name": "필문대로",
-      "adminDong": "동명동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 99,
-      "A": 87,
-      "B": 99
-    },
-    {
-      "roadId": "ngii-84eeb98747fd0846-1",
-      "name": "남문로",
-      "adminDong": "학동",
-      "recordCount": 75,
-      "evidence": 0.4,
-      "actual": 44,
-      "A": 43,
-      "B": 50
-    },
-    {
-      "roadId": "ngii-84eeb98747fd0846-2",
-      "name": "남문로",
-      "adminDong": "학동",
-      "recordCount": 75,
-      "evidence": 0.4,
-      "actual": 90,
-      "A": 80,
-      "B": 91
-    },
-    {
-      "roadId": "ngii-861beba704a4bbba-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 93,
-      "A": 82,
-      "B": 94
-    },
-    {
-      "roadId": "ngii-872fa1f3e5a3b7e4-1",
-      "name": "필문대로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 1,
-      "actual": 56,
-      "A": 65,
-      "B": 67
-    },
-    {
-      "roadId": "ngii-888ad8ce15e4e24e-1",
-      "name": "제봉로",
-      "adminDong": "충장동",
-      "recordCount": 54,
-      "evidence": 0.4,
-      "actual": 88,
-      "A": 78,
-      "B": 89
-    },
-    {
-      "roadId": "ngii-88f34958ac065189-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 61,
-      "A": 55,
-      "B": 64
-    },
-    {
-      "roadId": "ngii-88f34958ac065189-2",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 2,
-      "A": 8,
-      "B": 10
-    },
-    {
-      "roadId": "ngii-8e1aba7c1eacbae2-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 1,
-      "actual": 87,
-      "A": 90,
-      "B": 90
-    },
-    {
-      "roadId": "ngii-92acce41d9b0c30a-1",
-      "name": "필문대로",
-      "adminDong": "지산1동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 76,
-      "A": 69,
-      "B": 78
-    },
-    {
-      "roadId": "ngii-940c00f0ed41d3b9-1",
-      "name": "필문대로",
-      "adminDong": "지산1동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 95,
-      "A": 84,
-      "B": 96
-    },
-    {
-      "roadId": "ngii-96728780d172036e-1",
-      "name": "필문대로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 1,
-      "actual": 97,
-      "A": 98,
-      "B": 98
-    },
-    {
-      "roadId": "ngii-96728780d172036e-2",
-      "name": "필문대로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 1,
-      "actual": 98,
-      "A": 98,
-      "B": 99
-    },
-    {
-      "roadId": "ngii-96728780d172036e-3",
-      "name": "필문대로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.32,
-      "actual": 70,
-      "A": 62,
-      "B": 72
-    },
-    {
-      "roadId": "ngii-9af38a788049b75e-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 95,
-      "A": 82,
-      "B": 95
-    },
-    {
-      "roadId": "ngii-9fc1bb97a8b526a1-4",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 7,
-      "A": 14,
-      "B": 16
-    },
-    {
-      "roadId": "ngii-a348c0dd80a9c5cd-1",
-      "name": "무등로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 66,
-      "A": 61,
-      "B": 69
-    },
-    {
-      "roadId": "ngii-a54c7d1aa23f925f-2",
-      "name": "필문대로",
-      "adminDong": "계림2동",
-      "recordCount": 53,
-      "evidence": 0.32,
+      "roadId": "ngii-768d009e7c3ae0c8-1",
+      "name": "밤실로",
+      "adminDong": "지산2동",
+      "clusterIds": [
+        "동구-58",
+        "동구-64"
+      ],
+      "managedUnitCount": 38,
+      "corridorDistanceMeters": 0,
+      "confidence": 1,
       "actual": 5,
-      "A": 10,
-      "B": 13
+      "applied": 25,
+      "increase": 20,
+      "safetyActual": 57,
+      "safetyApplied": 62
     },
     {
-      "roadId": "ngii-a54c7d1aa23f925f-3",
-      "name": "필문대로",
-      "adminDong": "계림2동",
-      "recordCount": 53,
-      "evidence": 0.32,
-      "actual": 5,
-      "A": 10,
-      "B": 13
-    },
-    {
-      "roadId": "ngii-a59d0221c427a36a-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 99,
-      "A": 86,
-      "B": 99
-    },
-    {
-      "roadId": "ngii-a59d0221c427a36a-2",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 77,
-      "A": 68,
-      "B": 79
-    },
-    {
-      "roadId": "ngii-a5e0d60a7ed6f8b0-1",
-      "name": "남문로",
-      "adminDong": "지원2동",
-      "recordCount": 62,
-      "evidence": 0.32,
-      "actual": 3,
-      "A": 9,
-      "B": 11
-    },
-    {
-      "roadId": "ngii-af62db773094e5cb-1",
-      "name": "무등로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 13,
-      "A": 18,
-      "B": 22
-    },
-    {
-      "roadId": "ngii-b4e16a2907054ebb-1",
-      "name": "필문대로",
-      "adminDong": "동명동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 91,
-      "A": 81,
-      "B": 92
-    },
-    {
-      "roadId": "ngii-b64d1627444e7551-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 3,
-      "A": 9,
-      "B": 11
-    },
-    {
-      "roadId": "ngii-b64d1627444e7551-2",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 3,
-      "A": 9,
-      "B": 11
-    },
-    {
-      "roadId": "ngii-b64d1627444e7551-3",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.4,
-      "actual": 3,
-      "A": 10,
-      "B": 13
-    },
-    {
-      "roadId": "ngii-b8327ced24d366e6-1",
-      "name": "남문로",
-      "adminDong": "지원2동",
-      "recordCount": 62,
-      "evidence": 0.32,
-      "actual": 61,
-      "A": 55,
-      "B": 64
-    },
-    {
-      "roadId": "ngii-b868caff87a406e3-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 86,
-      "A": 77,
-      "B": 87
-    },
-    {
-      "roadId": "ngii-bd0071dbd49b7d5f-1",
-      "name": "필문대로",
-      "adminDong": "동명동",
-      "recordCount": 55,
-      "evidence": 0.4,
-      "actual": 38,
-      "A": 38,
-      "B": 44
-    },
-    {
-      "roadId": "ngii-be907b5c95c382d1-1",
-      "name": "필문대로",
-      "adminDong": "동명동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 47,
-      "A": 46,
-      "B": 52
-    },
-    {
-      "roadId": "ngii-beee359adbc66245-1",
-      "name": "남문로",
-      "adminDong": "학동",
-      "recordCount": 61,
-      "evidence": 0.32,
-      "actual": 26,
-      "A": 27,
-      "B": 32
-    },
-    {
-      "roadId": "ngii-c2a270724316ab6f-1",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 92,
-      "A": 82,
-      "B": 93
-    },
-    {
-      "roadId": "ngii-c62729568dfd44ea-1",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 62,
-      "evidence": 0.4,
-      "actual": 7,
-      "A": 14,
-      "B": 16
-    },
-    {
-      "roadId": "ngii-c62729568dfd44ea-2",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 50,
-      "evidence": 0.4,
-      "actual": 47,
-      "A": 46,
-      "B": 52
-    },
-    {
-      "roadId": "ngii-c62729568dfd44ea-3",
-      "name": "금남로",
-      "adminDong": "충장동",
-      "recordCount": 50,
-      "evidence": 0.4,
-      "actual": 57,
-      "A": 54,
-      "B": 61
-    },
-    {
-      "roadId": "ngii-ceedb05f85c0a558-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 1,
-      "actual": 51,
-      "A": 61,
-      "B": 63
-    },
-    {
-      "roadId": "ngii-d6affeaf552321aa-1",
-      "name": "필문대로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 1,
-      "actual": 50,
-      "A": 60,
-      "B": 63
-    },
-    {
-      "roadId": "ngii-dda2ca9435f47b17-1",
-      "name": "필문대로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 31,
-      "A": 33,
-      "B": 38
-    },
-    {
-      "roadId": "ngii-dec93ab30fbabb12-1",
-      "name": "무등로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 64,
-      "A": 59,
-      "B": 68
-    },
-    {
-      "roadId": "ngii-e002ad9ef5806a5f-1",
-      "name": "무등로",
-      "adminDong": "계림2동",
-      "recordCount": 68,
-      "evidence": 0.32,
-      "actual": 96,
-      "A": 83,
-      "B": 96
-    },
-    {
-      "roadId": "ngii-e44a0ae257ba8592-1",
-      "name": "남문로",
-      "adminDong": "지원2동",
-      "recordCount": 57,
-      "evidence": 1,
-      "actual": 7,
-      "A": 26,
-      "B": 30
+      "roadId": "ngii-77a257ad6d9c7cb9-1",
+      "name": "서남로",
+      "adminDong": "서남동",
+      "clusterIds": [
+        "동구-06",
+        "동구-74"
+      ],
+      "managedUnitCount": 22,
+      "corridorDistanceMeters": 0,
+      "confidence": 1,
+      "actual": 10,
+      "applied": 30,
+      "increase": 20,
+      "safetyActual": 66,
+      "safetyApplied": 71
     },
     {
       "roadId": "ngii-e44a0ae257ba8592-2",
       "name": "남문로",
       "adminDong": "지원2동",
-      "recordCount": 57,
-      "evidence": 1,
+      "clusterIds": [
+        "동구-03",
+        "동구-05"
+      ],
+      "managedUnitCount": 57,
+      "corridorDistanceMeters": 0,
+      "confidence": 1,
       "actual": 7,
-      "A": 26,
-      "B": 30
+      "applied": 26,
+      "increase": 19,
+      "safetyActual": 59,
+      "safetyApplied": 64
     },
     {
-      "roadId": "ngii-e46b9b0b2591f98a-1",
-      "name": "필문대로",
-      "adminDong": "동명동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 95,
-      "A": 84,
-      "B": 96
-    },
-    {
-      "roadId": "ngii-ec6a5f0b9b540647-1",
-      "name": "필문대로",
-      "adminDong": "지산1동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 95,
-      "A": 84,
-      "B": 96
-    },
-    {
-      "roadId": "ngii-f0a3ee219f6aff0c-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 69,
-      "evidence": 0.4,
-      "actual": 56,
-      "A": 53,
-      "B": 60
-    },
-    {
-      "roadId": "ngii-f37ea3740dab00eb-1",
-      "name": "무등로",
-      "adminDong": "산수1동",
-      "recordCount": 52,
-      "evidence": 0.4,
-      "actual": 73,
-      "A": 66,
-      "B": 76
-    },
-    {
-      "roadId": "ngii-fcfd812940bfc7aa-1",
-      "name": "필문대로",
-      "adminDong": "지산1동",
-      "recordCount": 66,
-      "evidence": 0.4,
-      "actual": 93,
-      "A": 82,
-      "B": 94
-    },
-    {
-      "roadId": "ngii-fe20eec18050a6a3-1",
-      "name": "남문로",
-      "adminDong": "지원1동",
-      "recordCount": 78,
-      "evidence": 0.4,
-      "actual": 77,
-      "A": 70,
-      "B": 79
+      "roadId": "ngii-6868e3b3ca1d69ba-2",
+      "name": "지호로",
+      "adminDong": "산수2동",
+      "clusterIds": [
+        "동구-56"
+      ],
+      "managedUnitCount": 7,
+      "corridorDistanceMeters": 0,
+      "confidence": 1,
+      "actual": 4,
+      "applied": 21,
+      "increase": 17,
+      "safetyActual": 61,
+      "safetyApplied": 66
     }
-  ]
+  ],
+  "anomalies": {
+    "clusterOver20": [],
+    "farSegments": [],
+    "disconnectedPropagation": [],
+    "duplicateClusterOnRoad": [],
+    "singleClusterLargeIncrease": [],
+    "allLargeIncrease": [
+      {
+        "roadId": "ngii-5ed096e2cd20a2c2-2",
+        "name": "동명로",
+        "adminDong": "동명동",
+        "clusterIds": [
+          "동구-113",
+          "동구-81"
+        ],
+        "actual": 3,
+        "applied": 23,
+        "increase": 20
+      },
+      {
+        "roadId": "ngii-69b27de191a416ef-2",
+        "name": "구성로",
+        "adminDong": "충장동",
+        "clusterIds": [
+          "동구-107",
+          "동구-183"
+        ],
+        "actual": 11,
+        "applied": 31,
+        "increase": 20
+      },
+      {
+        "roadId": "ngii-6c41fc69130877a8-2",
+        "name": "무등로",
+        "adminDong": "산수1동",
+        "clusterIds": [
+          "동구-214",
+          "동구-98"
+        ],
+        "actual": 6,
+        "applied": 27,
+        "increase": 21
+      },
+      {
+        "roadId": "ngii-74e9fac5f3968da7-3",
+        "name": "제봉로",
+        "adminDong": "충장동",
+        "clusterIds": [
+          "동구-55",
+          "동구-96"
+        ],
+        "actual": 2,
+        "applied": 22,
+        "increase": 20
+      },
+      {
+        "roadId": "ngii-768d009e7c3ae0c8-1",
+        "name": "밤실로",
+        "adminDong": "지산2동",
+        "clusterIds": [
+          "동구-58",
+          "동구-64"
+        ],
+        "actual": 5,
+        "applied": 25,
+        "increase": 20
+      },
+      {
+        "roadId": "ngii-77a257ad6d9c7cb9-1",
+        "name": "서남로",
+        "adminDong": "서남동",
+        "clusterIds": [
+          "동구-06",
+          "동구-74"
+        ],
+        "actual": 10,
+        "applied": 30,
+        "increase": 20
+      },
+      {
+        "roadId": "ngii-96ab4d77274ec933-2",
+        "name": "서석로",
+        "adminDong": "충장동",
+        "clusterIds": [
+          "동구-52",
+          "동구-87"
+        ],
+        "actual": 2,
+        "applied": 23,
+        "increase": 21
+      },
+      {
+        "roadId": "ngii-9d23d060dbc05aee-1",
+        "name": "중앙로",
+        "adminDong": "충장동",
+        "clusterIds": [
+          "동구-103",
+          "동구-140"
+        ],
+        "actual": 3,
+        "applied": 24,
+        "increase": 21
+      },
+      {
+        "roadId": "ngii-a0702a6270b37f72-1",
+        "name": "제봉로",
+        "adminDong": "학동",
+        "clusterIds": [
+          "동구-41",
+          "동구-93"
+        ],
+        "actual": 11,
+        "applied": 31,
+        "increase": 20
+      },
+      {
+        "roadId": "ngii-b2b6511d2053a4e5-1",
+        "name": "제봉로",
+        "adminDong": "충장동",
+        "clusterIds": [
+          "동구-55",
+          "동구-96"
+        ],
+        "actual": 3,
+        "applied": 25,
+        "increase": 22
+      },
+      {
+        "roadId": "ngii-b64d1627444e7551-6",
+        "name": "무등로",
+        "adminDong": "계림2동",
+        "clusterIds": [
+          "동구-193",
+          "동구-212"
+        ],
+        "actual": 3,
+        "applied": 25,
+        "increase": 22
+      },
+      {
+        "roadId": "ngii-c3ab84d31aaeb65b-1",
+        "name": "남문로",
+        "adminDong": "학동",
+        "clusterIds": [
+          "동구-11",
+          "동구-27"
+        ],
+        "actual": 6,
+        "applied": 27,
+        "increase": 21
+      },
+      {
+        "roadId": "ngii-c62729568dfd44ea-4",
+        "name": "금남로",
+        "adminDong": "충장동",
+        "clusterIds": [
+          "동구-104",
+          "동구-105"
+        ],
+        "actual": 7,
+        "applied": 27,
+        "increase": 20
+      },
+      {
+        "roadId": "ngii-ecf5f758e81e8464-1",
+        "name": "무등로",
+        "adminDong": "계림1동",
+        "clusterIds": [
+          "동구-100",
+          "동구-99"
+        ],
+        "actual": 6,
+        "applied": 27,
+        "increase": 21
+      },
+      {
+        "roadId": "ngii-ecf5f758e81e8464-2",
+        "name": "무등로",
+        "adminDong": "계림1동",
+        "clusterIds": [
+          "동구-100",
+          "동구-99"
+        ],
+        "actual": 6,
+        "applied": 27,
+        "increase": 21
+      },
+      {
+        "roadId": "ngii-f63cd092e774120c-1",
+        "name": "구성로",
+        "adminDong": "충장동",
+        "clusterIds": [
+          "동구-07",
+          "동구-107",
+          "동구-183"
+        ],
+        "actual": 7,
+        "applied": 28,
+        "increase": 21
+      }
+    ],
+    "overlongAnchors": [],
+    "disconnectedNearbyExcluded": [
+      {
+        "clusterId": "동구-03",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-7ed0b5795a3ec541-2",
+          "ngii-b8327ced24d366e6-1"
+        ]
+      },
+      {
+        "clusterId": "동구-05",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-7ed0b5795a3ec541-2",
+          "ngii-b8327ced24d366e6-1"
+        ]
+      },
+      {
+        "clusterId": "동구-06",
+        "nearbyButExcluded": 6,
+        "sampleRoadIds": [
+          "ngii-078b97e547366ac0-1",
+          "ngii-078b97e547366ac0-2",
+          "ngii-4bfd611828757abe-1",
+          "ngii-4bfd611828757abe-2",
+          "ngii-571d5cd6b0e9733e-1"
+        ]
+      },
+      {
+        "clusterId": "동구-08",
+        "nearbyButExcluded": 8,
+        "sampleRoadIds": [
+          "ngii-2f3e42277f239f84-1",
+          "ngii-2f3e42277f239f84-2",
+          "ngii-3c3e91be5a063845-1",
+          "ngii-621b21fa5f3f2be9-1",
+          "ngii-621b21fa5f3f2be9-2"
+        ]
+      },
+      {
+        "clusterId": "동구-10",
+        "nearbyButExcluded": 17,
+        "sampleRoadIds": [
+          "ngii-00bc6d6f5f8d8ec9-1",
+          "ngii-01a1d6c432ec1e67-1",
+          "ngii-10ed15dc24963894-1",
+          "ngii-30c792fa874d7081-1",
+          "ngii-44b3b868dbfda5cb-1"
+        ]
+      },
+      {
+        "clusterId": "동구-11",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-0156633daf5ffa8b-1",
+          "ngii-0156633daf5ffa8b-2",
+          "ngii-0156633daf5ffa8b-3"
+        ]
+      },
+      {
+        "clusterId": "동구-15",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-278103d662a2b3b6-1",
+          "ngii-84eeb98747fd0846-1",
+          "ngii-84eeb98747fd0846-2"
+        ]
+      },
+      {
+        "clusterId": "동구-16",
+        "nearbyButExcluded": 6,
+        "sampleRoadIds": [
+          "ngii-0c90e828ff3a99ee-1",
+          "ngii-22d0cf8494b16fb3-1",
+          "ngii-5d63672f255a37bb-1",
+          "ngii-5d63672f255a37bb-2",
+          "ngii-7a05b512b0227dc5-1"
+        ]
+      },
+      {
+        "clusterId": "동구-18",
+        "nearbyButExcluded": 8,
+        "sampleRoadIds": [
+          "ngii-0d0a6aa377aa81ce-1",
+          "ngii-3365b5115bb29145-1",
+          "ngii-59281a1d3e4d7f38-1",
+          "ngii-6df0b0de89667093-1",
+          "ngii-743e5c88bf8e03fc-1"
+        ]
+      },
+      {
+        "clusterId": "동구-20",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-12b3790375a6a030-1",
+          "ngii-c118ced26e8accd0-2",
+          "ngii-c118ced26e8accd0-3",
+          "ngii-f3401ab881c44d7c-1"
+        ]
+      },
+      {
+        "clusterId": "동구-24",
+        "nearbyButExcluded": 20,
+        "sampleRoadIds": [
+          "ngii-01a1d6c432ec1e67-1",
+          "ngii-03012f8f4d8df558-1",
+          "ngii-10ed15dc24963894-1",
+          "ngii-1a3aecb115f2b050-1",
+          "ngii-30c792fa874d7081-1"
+        ]
+      },
+      {
+        "clusterId": "동구-25",
+        "nearbyButExcluded": 19,
+        "sampleRoadIds": [
+          "ngii-00bc6d6f5f8d8ec9-1",
+          "ngii-01a1d6c432ec1e67-1",
+          "ngii-03012f8f4d8df558-1",
+          "ngii-10ed15dc24963894-1",
+          "ngii-1a3aecb115f2b050-1"
+        ]
+      },
+      {
+        "clusterId": "동구-26",
+        "nearbyButExcluded": 10,
+        "sampleRoadIds": [
+          "ngii-00b53f740d55d058-1",
+          "ngii-0e47c8f764627ea1-1",
+          "ngii-0e47c8f764627ea1-2",
+          "ngii-53c966ba005109fb-1",
+          "ngii-6eedbb6844e71204-1"
+        ]
+      },
+      {
+        "clusterId": "동구-27",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-0156633daf5ffa8b-1",
+          "ngii-0156633daf5ffa8b-2",
+          "ngii-0156633daf5ffa8b-3"
+        ]
+      },
+      {
+        "clusterId": "동구-28",
+        "nearbyButExcluded": 10,
+        "sampleRoadIds": [
+          "ngii-24b33d294d03ee1b-1",
+          "ngii-2da2af2769cac248-2",
+          "ngii-2da2af2769cac248-3",
+          "ngii-2da2af2769cac248-4",
+          "ngii-2da2af2769cac248-5"
+        ]
+      },
+      {
+        "clusterId": "동구-31",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-63b14683846c1cdd-1",
+          "ngii-6ccecc197cb3bcdf-1",
+          "ngii-8d13e7e98239f012-1",
+          "ngii-9e05d0ceeacf205e-1",
+          "ngii-9e05d0ceeacf205e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-38",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-574910c779524720-2"
+        ]
+      },
+      {
+        "clusterId": "동구-39",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-63b14683846c1cdd-1",
+          "ngii-cb79aeafb96f2423-1",
+          "ngii-df8cc98d826e9fa6-1",
+          "ngii-e7e2f25d0f259d1a-2"
+        ]
+      },
+      {
+        "clusterId": "동구-40",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-a05f2da141acd552-1",
+          "ngii-cd2ce4bd6941ee58-1",
+          "ngii-cd2ce4bd6941ee58-2",
+          "ngii-e78f139f65f27196-1",
+          "ngii-e78f139f65f27196-2"
+        ]
+      },
+      {
+        "clusterId": "동구-42",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-63b14683846c1cdd-1",
+          "ngii-6ccecc197cb3bcdf-1",
+          "ngii-8d13e7e98239f012-1",
+          "ngii-9e05d0ceeacf205e-1",
+          "ngii-9e05d0ceeacf205e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-44",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-02aaba2e1c312aa1-1",
+          "ngii-4ee73684b5848717-1"
+        ]
+      },
+      {
+        "clusterId": "동구-45",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-02aaba2e1c312aa1-1",
+          "ngii-4ee73684b5848717-1"
+        ]
+      },
+      {
+        "clusterId": "동구-46",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-0d0a6aa377aa81ce-1",
+          "ngii-6df0b0de89667093-1",
+          "ngii-e7c58e80e7eef5bc-1",
+          "ngii-fe0585e14cdc5f25-1"
+        ]
+      },
+      {
+        "clusterId": "동구-52",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-b57320b36d43bb7c-2"
+        ]
+      },
+      {
+        "clusterId": "동구-54",
+        "nearbyButExcluded": 20,
+        "sampleRoadIds": [
+          "ngii-0db2e6e1fefa0eb7-1",
+          "ngii-11d78a1d4667cae9-1",
+          "ngii-26042b11f5aab232-1",
+          "ngii-29dc166cb075cc88-1",
+          "ngii-29dc166cb075cc88-2"
+        ]
+      },
+      {
+        "clusterId": "동구-57",
+        "nearbyButExcluded": 18,
+        "sampleRoadIds": [
+          "ngii-0033c70fc34771bf-1",
+          "ngii-081bed95b23ae652-1",
+          "ngii-127fe8c9ebaf24fd-1",
+          "ngii-12ae267e0e148a2d-1",
+          "ngii-12ae267e0e148a2d-2"
+        ]
+      },
+      {
+        "clusterId": "동구-60",
+        "nearbyButExcluded": 15,
+        "sampleRoadIds": [
+          "ngii-05e67121b97c8945-1",
+          "ngii-06e02bfe1cfe6b5d-2",
+          "ngii-0f1f6c76c039060c-1",
+          "ngii-1e88b84b9aa22982-2",
+          "ngii-6e6dd25b2da9cb83-1"
+        ]
+      },
+      {
+        "clusterId": "동구-62",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-821d2f9e59a6ac1e-1",
+          "ngii-bf7a64abfcff92d7-1"
+        ]
+      },
+      {
+        "clusterId": "동구-65",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-6d2d88bd2e4f79de-1",
+          "ngii-993f06edcb5a0443-1"
+        ]
+      },
+      {
+        "clusterId": "동구-66",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-6d2d88bd2e4f79de-1",
+          "ngii-993f06edcb5a0443-1"
+        ]
+      },
+      {
+        "clusterId": "동구-67",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-1099eec60d205100-11",
+          "ngii-1099eec60d205100-12",
+          "ngii-48aa83bda3dfd8f5-1",
+          "ngii-edd56d9f8bde9f1e-1",
+          "ngii-edd56d9f8bde9f1e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-69",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-92b8151b958287ce-1",
+          "ngii-d27b0f8c523742fd-1",
+          "ngii-d27b0f8c523742fd-2"
+        ]
+      },
+      {
+        "clusterId": "동구-70",
+        "nearbyButExcluded": 37,
+        "sampleRoadIds": [
+          "ngii-08f154dc1394214d-1",
+          "ngii-08f154dc1394214d-2",
+          "ngii-0d07229ab65689e4-1",
+          "ngii-211ba7a60c9bd2b6-1",
+          "ngii-328784a2a4b7eb02-1"
+        ]
+      },
+      {
+        "clusterId": "동구-71",
+        "nearbyButExcluded": 16,
+        "sampleRoadIds": [
+          "ngii-19418d29aee7c586-1",
+          "ngii-194b97617ab9f607-1",
+          "ngii-291d2ee38c5a68dd-1",
+          "ngii-291d2ee38c5a68dd-2",
+          "ngii-30b046e2160dad6a-1"
+        ]
+      },
+      {
+        "clusterId": "동구-74",
+        "nearbyButExcluded": 6,
+        "sampleRoadIds": [
+          "ngii-078b97e547366ac0-1",
+          "ngii-078b97e547366ac0-2",
+          "ngii-4bfd611828757abe-1",
+          "ngii-4bfd611828757abe-2",
+          "ngii-571d5cd6b0e9733e-1"
+        ]
+      },
+      {
+        "clusterId": "동구-79",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-1f6645dee3922d88-1",
+          "ngii-6443ca75730bbf96-1",
+          "ngii-6443ca75730bbf96-2",
+          "ngii-78ea8cda739f1bff-1",
+          "ngii-78ea8cda739f1bff-2"
+        ]
+      },
+      {
+        "clusterId": "동구-81",
+        "nearbyButExcluded": 14,
+        "sampleRoadIds": [
+          "ngii-12b432e56cd85a8e-1",
+          "ngii-12b432e56cd85a8e-2",
+          "ngii-1adaac98e7d8c344-1",
+          "ngii-1adaac98e7d8c344-2",
+          "ngii-1c232ea8ce98a554-1"
+        ]
+      },
+      {
+        "clusterId": "동구-89",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-8fb6d492a0446aea-1",
+          "ngii-8fb6d492a0446aea-2",
+          "ngii-8fb6d492a0446aea-3",
+          "ngii-bf672a51193babb2-1",
+          "ngii-d2084fc03fb4f4a2-1"
+        ]
+      },
+      {
+        "clusterId": "동구-90",
+        "nearbyButExcluded": 8,
+        "sampleRoadIds": [
+          "ngii-2f3e42277f239f84-1",
+          "ngii-2f3e42277f239f84-2",
+          "ngii-621b21fa5f3f2be9-1",
+          "ngii-621b21fa5f3f2be9-2",
+          "ngii-beee359adbc66245-1"
+        ]
+      },
+      {
+        "clusterId": "동구-91",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-5f57ccd0c80c327d-1",
+          "ngii-5f57ccd0c80c327d-2",
+          "ngii-6474b1f03e1d275e-1",
+          "ngii-888ad8ce15e4e24e-1"
+        ]
+      },
+      {
+        "clusterId": "동구-94",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-78ea8cda739f1bff-1",
+          "ngii-78ea8cda739f1bff-2",
+          "ngii-78ea8cda739f1bff-3"
+        ]
+      },
+      {
+        "clusterId": "동구-101",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-9b7c47eb73c57003-1",
+          "ngii-9b7c47eb73c57003-2",
+          "ngii-f748e66702b8dea2-1"
+        ]
+      },
+      {
+        "clusterId": "동구-102",
+        "nearbyButExcluded": 9,
+        "sampleRoadIds": [
+          "ngii-11d78a1d4667cae9-1",
+          "ngii-32cea4f09b5c6507-1",
+          "ngii-32cea4f09b5c6507-2",
+          "ngii-35ee724c2e8cc3d3-1",
+          "ngii-53b1cac8cb49ae70-1"
+        ]
+      },
+      {
+        "clusterId": "동구-104",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-426eff220cd284a5-1",
+          "ngii-426eff220cd284a5-2",
+          "ngii-c2a270724316ab6f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-105",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-426eff220cd284a5-1",
+          "ngii-426eff220cd284a5-2",
+          "ngii-c2a270724316ab6f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-106",
+        "nearbyButExcluded": 15,
+        "sampleRoadIds": [
+          "ngii-3298675f29e820db-1",
+          "ngii-3298675f29e820db-2",
+          "ngii-501eda317edb852d-1",
+          "ngii-501eda317edb852d-2",
+          "ngii-7bfc798d61cd094e-1"
+        ]
+      },
+      {
+        "clusterId": "동구-110",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-c0e1a45ed6f3be37-1",
+          "ngii-cfd90bad70dab566-1"
+        ]
+      },
+      {
+        "clusterId": "동구-111",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-71bd201e01bf3c91-1",
+          "ngii-71bd201e01bf3c91-2",
+          "ngii-cc6dfd099f78b491-1",
+          "ngii-cc6dfd099f78b491-2",
+          "ngii-cc6dfd099f78b491-3"
+        ]
+      },
+      {
+        "clusterId": "동구-113",
+        "nearbyButExcluded": 16,
+        "sampleRoadIds": [
+          "ngii-12b432e56cd85a8e-1",
+          "ngii-12b432e56cd85a8e-2",
+          "ngii-1adaac98e7d8c344-1",
+          "ngii-1adaac98e7d8c344-2",
+          "ngii-1c232ea8ce98a554-1"
+        ]
+      },
+      {
+        "clusterId": "동구-118",
+        "nearbyButExcluded": 15,
+        "sampleRoadIds": [
+          "ngii-1675fdd0f189ddf0-1",
+          "ngii-1950228956456fbf-1",
+          "ngii-54d3fca0df81a6c1-1",
+          "ngii-666bf89fc2da4479-1",
+          "ngii-8d0364f574fa2832-1"
+        ]
+      },
+      {
+        "clusterId": "동구-119",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-2cc03d2cf7089d91-2"
+        ]
+      },
+      {
+        "clusterId": "동구-124",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-862cf316113f66f1-1",
+          "ngii-862cf316113f66f1-2",
+          "ngii-862cf316113f66f1-3",
+          "ngii-cba201def0eb8558-1"
+        ]
+      },
+      {
+        "clusterId": "동구-125",
+        "nearbyButExcluded": 33,
+        "sampleRoadIds": [
+          "ngii-12393991065e5d90-1",
+          "ngii-12393991065e5d90-2",
+          "ngii-1b07ab438ec18e43-1",
+          "ngii-1b07ab438ec18e43-2",
+          "ngii-22946c66e3087c6d-4"
+        ]
+      },
+      {
+        "clusterId": "동구-133",
+        "nearbyButExcluded": 12,
+        "sampleRoadIds": [
+          "ngii-02c520b979a40b6a-1",
+          "ngii-13fca37866633727-1",
+          "ngii-2c8507b91bba889c-1",
+          "ngii-5197dac544aece35-1",
+          "ngii-680d2fdd11af0bfd-1"
+        ]
+      },
+      {
+        "clusterId": "동구-135",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-13bc03e2ad864b37-1",
+          "ngii-1b3ac03efc6d7346-1",
+          "ngii-1d04886b675c92bf-1",
+          "ngii-5b80eaf87186aff9-1",
+          "ngii-5ca9edbe2790d20b-1"
+        ]
+      },
+      {
+        "clusterId": "동구-137",
+        "nearbyButExcluded": 19,
+        "sampleRoadIds": [
+          "ngii-02dc3a4e51ea628b-1",
+          "ngii-28c4c015479c8bae-1",
+          "ngii-30eb0fdaed254496-2",
+          "ngii-37dca4c92d7e1e35-1",
+          "ngii-41b0e91aeb10d543-1"
+        ]
+      },
+      {
+        "clusterId": "동구-142",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-7114e8a558415d99-2",
+          "ngii-f67d1aaba49cfbf3-1"
+        ]
+      },
+      {
+        "clusterId": "동구-143",
+        "nearbyButExcluded": 12,
+        "sampleRoadIds": [
+          "ngii-00ae53e7fd954629-1",
+          "ngii-0d5194ecd2e0c15d-1",
+          "ngii-14d9a2e4912bfb34-1",
+          "ngii-1c45d19e81b6255c-1",
+          "ngii-9f356e49d4c88198-1"
+        ]
+      },
+      {
+        "clusterId": "동구-144",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-e82c73892ead5f95-2"
+        ]
+      },
+      {
+        "clusterId": "동구-147",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-c118ced26e8accd0-2"
+        ]
+      },
+      {
+        "clusterId": "동구-153",
+        "nearbyButExcluded": 13,
+        "sampleRoadIds": [
+          "ngii-02dc3a4e51ea628b-1",
+          "ngii-28c4c015479c8bae-1",
+          "ngii-30eb0fdaed254496-2",
+          "ngii-41b0e91aeb10d543-1",
+          "ngii-41b0e91aeb10d543-2"
+        ]
+      },
+      {
+        "clusterId": "동구-156",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-c2a270724316ab6f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-157",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-c2a270724316ab6f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-161",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-c0e1a45ed6f3be37-1",
+          "ngii-cfd90bad70dab566-1"
+        ]
+      },
+      {
+        "clusterId": "동구-167",
+        "nearbyButExcluded": 9,
+        "sampleRoadIds": [
+          "ngii-19418d29aee7c586-1",
+          "ngii-291d2ee38c5a68dd-1",
+          "ngii-291d2ee38c5a68dd-2",
+          "ngii-30b046e2160dad6a-1",
+          "ngii-736e5a81fb8e7756-1"
+        ]
+      },
+      {
+        "clusterId": "동구-169",
+        "nearbyButExcluded": 9,
+        "sampleRoadIds": [
+          "ngii-19418d29aee7c586-1",
+          "ngii-291d2ee38c5a68dd-1",
+          "ngii-291d2ee38c5a68dd-2",
+          "ngii-30b046e2160dad6a-1",
+          "ngii-736e5a81fb8e7756-1"
+        ]
+      },
+      {
+        "clusterId": "동구-170",
+        "nearbyButExcluded": 10,
+        "sampleRoadIds": [
+          "ngii-30b046e2160dad6a-1",
+          "ngii-44e5c9fb83e0476e-1",
+          "ngii-4515cf2567616436-1",
+          "ngii-518b23e1666b193a-1",
+          "ngii-64c268b0134fbd92-1"
+        ]
+      },
+      {
+        "clusterId": "동구-171",
+        "nearbyButExcluded": 17,
+        "sampleRoadIds": [
+          "ngii-19418d29aee7c586-1",
+          "ngii-291d2ee38c5a68dd-1",
+          "ngii-291d2ee38c5a68dd-2",
+          "ngii-44e5c9fb83e0476e-1",
+          "ngii-4515cf2567616436-1"
+        ]
+      },
+      {
+        "clusterId": "동구-172",
+        "nearbyButExcluded": 14,
+        "sampleRoadIds": [
+          "ngii-1f366e8def33bdd1-1",
+          "ngii-31a57897ae3310e8-1",
+          "ngii-35f647063f165838-1",
+          "ngii-44e5c9fb83e0476e-1",
+          "ngii-4515cf2567616436-1"
+        ]
+      },
+      {
+        "clusterId": "동구-173",
+        "nearbyButExcluded": 13,
+        "sampleRoadIds": [
+          "ngii-1f366e8def33bdd1-1",
+          "ngii-35f647063f165838-1",
+          "ngii-44e5c9fb83e0476e-1",
+          "ngii-4515cf2567616436-1",
+          "ngii-518b23e1666b193a-1"
+        ]
+      },
+      {
+        "clusterId": "동구-174",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-31a57897ae3310e8-1",
+          "ngii-872fa1f3e5a3b7e4-1",
+          "ngii-96728780d172036e-1",
+          "ngii-96728780d172036e-2",
+          "ngii-96728780d172036e-3"
+        ]
+      },
+      {
+        "clusterId": "동구-175",
+        "nearbyButExcluded": 7,
+        "sampleRoadIds": [
+          "ngii-13225063683b843e-1",
+          "ngii-31a57897ae3310e8-1",
+          "ngii-96728780d172036e-1",
+          "ngii-96728780d172036e-2",
+          "ngii-96728780d172036e-3"
+        ]
+      },
+      {
+        "clusterId": "동구-181",
+        "nearbyButExcluded": 9,
+        "sampleRoadIds": [
+          "ngii-29c3d1bdc23df137-1",
+          "ngii-5ed096e2cd20a2c2-1",
+          "ngii-5ed096e2cd20a2c2-2",
+          "ngii-5ed096e2cd20a2c2-3",
+          "ngii-6c4a919484c75c6d-1"
+        ]
+      },
+      {
+        "clusterId": "동구-185",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-1f1178be6bb6f116-1",
+          "ngii-791afdd7c4fcdbe8-1"
+        ]
+      },
+      {
+        "clusterId": "동구-186",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-c56a8ed86e344541-2",
+          "ngii-c56a8ed86e344541-3",
+          "ngii-fee1669c741f5439-1",
+          "ngii-fee1669c741f5439-2"
+        ]
+      },
+      {
+        "clusterId": "동구-189",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-a54c7d1aa23f925f-2",
+          "ngii-a54c7d1aa23f925f-3",
+          "ngii-a54c7d1aa23f925f-4",
+          "ngii-a54c7d1aa23f925f-5"
+        ]
+      },
+      {
+        "clusterId": "동구-191",
+        "nearbyButExcluded": 4,
+        "sampleRoadIds": [
+          "ngii-4774131e31bb0e39-1",
+          "ngii-5475f163333e788c-1",
+          "ngii-5475f163333e788c-2",
+          "ngii-89d6be6b2ed6531f-1"
+        ]
+      },
+      {
+        "clusterId": "동구-195",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-2e7146be2ff5ad97-1"
+        ]
+      },
+      {
+        "clusterId": "동구-196",
+        "nearbyButExcluded": 18,
+        "sampleRoadIds": [
+          "ngii-0db2e6e1fefa0eb7-1",
+          "ngii-11d78a1d4667cae9-1",
+          "ngii-26042b11f5aab232-1",
+          "ngii-29dc166cb075cc88-1",
+          "ngii-29dc166cb075cc88-2"
+        ]
+      },
+      {
+        "clusterId": "동구-199",
+        "nearbyButExcluded": 3,
+        "sampleRoadIds": [
+          "ngii-0f267ae2e2be5ab5-1",
+          "ngii-332120f7f856a6fb-1",
+          "ngii-332120f7f856a6fb-2"
+        ]
+      },
+      {
+        "clusterId": "동구-201",
+        "nearbyButExcluded": 16,
+        "sampleRoadIds": [
+          "ngii-12393991065e5d90-1",
+          "ngii-12393991065e5d90-2",
+          "ngii-1b07ab438ec18e43-1",
+          "ngii-1b07ab438ec18e43-2",
+          "ngii-3fb234ed3ff027ec-1"
+        ]
+      },
+      {
+        "clusterId": "동구-204",
+        "nearbyButExcluded": 11,
+        "sampleRoadIds": [
+          "ngii-148cedbda5fc6a16-1",
+          "ngii-148cedbda5fc6a16-2",
+          "ngii-290dac79fff9c1c4-1",
+          "ngii-290dac79fff9c1c4-2",
+          "ngii-49b63261f081e992-1"
+        ]
+      },
+      {
+        "clusterId": "동구-206",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-000eab58abc2e726-1",
+          "ngii-000eab58abc2e726-2",
+          "ngii-1884351d11690bce-1",
+          "ngii-53818f3292da4633-1",
+          "ngii-a74d3a8e81cedce1-1"
+        ]
+      },
+      {
+        "clusterId": "동구-217",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-ac817c82f3611a36-1"
+        ]
+      },
+      {
+        "clusterId": "동구-222",
+        "nearbyButExcluded": 15,
+        "sampleRoadIds": [
+          "ngii-1431ffc0a2c8a90e-1",
+          "ngii-258a623876af9ef8-1",
+          "ngii-258a623876af9ef8-2",
+          "ngii-258a623876af9ef8-3",
+          "ngii-67cc6724369be926-1"
+        ]
+      },
+      {
+        "clusterId": "동구-226",
+        "nearbyButExcluded": 28,
+        "sampleRoadIds": [
+          "ngii-12393991065e5d90-1",
+          "ngii-12393991065e5d90-2",
+          "ngii-1b07ab438ec18e43-1",
+          "ngii-1b07ab438ec18e43-2",
+          "ngii-22946c66e3087c6d-2"
+        ]
+      },
+      {
+        "clusterId": "동구-229",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-0f267ae2e2be5ab5-1",
+          "ngii-332120f7f856a6fb-1",
+          "ngii-332120f7f856a6fb-2",
+          "ngii-db84aaf1b2d5547e-1",
+          "ngii-db84aaf1b2d5547e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-230",
+        "nearbyButExcluded": 5,
+        "sampleRoadIds": [
+          "ngii-0f267ae2e2be5ab5-1",
+          "ngii-332120f7f856a6fb-1",
+          "ngii-332120f7f856a6fb-2",
+          "ngii-db84aaf1b2d5547e-1",
+          "ngii-db84aaf1b2d5547e-2"
+        ]
+      },
+      {
+        "clusterId": "동구-247",
+        "nearbyButExcluded": 14,
+        "sampleRoadIds": [
+          "ngii-00bc6d6f5f8d8ec9-1",
+          "ngii-01a1d6c432ec1e67-1",
+          "ngii-10ed15dc24963894-1",
+          "ngii-30c792fa874d7081-1",
+          "ngii-5ec6df9da33e0479-1"
+        ]
+      },
+      {
+        "clusterId": "동구-249",
+        "nearbyButExcluded": 6,
+        "sampleRoadIds": [
+          "ngii-073103baba1de2e4-1",
+          "ngii-073103baba1de2e4-2",
+          "ngii-073103baba1de2e4-3",
+          "ngii-14e2aeea9e940e19-1",
+          "ngii-14e2aeea9e940e19-2"
+        ]
+      },
+      {
+        "clusterId": "동구-261",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-8f4f670777caa0b1-2",
+          "ngii-8f4f670777caa0b1-3"
+        ]
+      },
+      {
+        "clusterId": "동구-262",
+        "nearbyButExcluded": 2,
+        "sampleRoadIds": [
+          "ngii-7ed0b5795a3ec541-2",
+          "ngii-b8327ced24d366e6-1"
+        ]
+      },
+      {
+        "clusterId": "동구-263",
+        "nearbyButExcluded": 19,
+        "sampleRoadIds": [
+          "ngii-0d5194ecd2e0c15d-1",
+          "ngii-14d9a2e4912bfb34-1",
+          "ngii-1709171318cf2524-1",
+          "ngii-1709171318cf2524-2",
+          "ngii-190e129a8d19bf36-1"
+        ]
+      },
+      {
+        "clusterId": "동구-264",
+        "nearbyButExcluded": 21,
+        "sampleRoadIds": [
+          "ngii-0d5194ecd2e0c15d-1",
+          "ngii-14d9a2e4912bfb34-1",
+          "ngii-1709171318cf2524-1",
+          "ngii-1709171318cf2524-2",
+          "ngii-1709171318cf2524-3"
+        ]
+      },
+      {
+        "clusterId": "동구-268",
+        "nearbyButExcluded": 1,
+        "sampleRoadIds": [
+          "ngii-e82c73892ead5f95-2"
+        ]
+      }
+    ]
+  }
 }

@@ -122,9 +122,15 @@ test("관리행 20건의 추정치로도 긴 보안등 암구간은 사라지지
   const scored = calculateRoadSafety({ ...dataset, roadSegments: featureCollection([road]),
     features: featureCollection([streetlight(0, "s")]),
     roadLightingEvidenceByRoad: { "test-road": estimate } }).features[0].properties;
+  const withoutEstimate = calculateRoadSafety({ ...dataset, roadSegments: featureCollection([road]),
+    features: featureCollection([streetlight(0, "s")]), roadLightingEvidenceByRoad: {} }).features[0].properties;
   assert.ok(metrics.maxDarkGapMeters >= 100);
   assert.equal(metrics.darkGapScore, 0);
   assert.equal(scored.maxDarkGapMeters, Math.round(metrics.maxDarkGapMeters));
+  for (const key of ["lightingCoverage", "maxDarkGapMeters", "lightingUniformityScore", "actualLightingScore"] as const) {
+    assert.equal(scored[key], withoutEstimate[key], `${key}는 실제 보안등 좌표만 사용`);
+  }
+  assert.ok(scored.lightingScore > withoutEstimate.lightingScore);
   const models = estimatedRoadLightingModels(metrics.lightingScore, estimate, false);
   assert.ok(models.A <= 60 && models.B <= 60);
   assert.ok(models.A < 100 && models.B < 100);

@@ -1,0 +1,4254 @@
+{
+  "source": "odcloud:15113447",
+  "estimated": true,
+  "clusters": [
+    {
+      "clusterId": "동구-01",
+      "managedUnitCount": 33,
+      "representativeCoordinate": [
+        126.918169,
+        35.11586
+      ],
+      "roadAddresses": [
+        "화산로205"
+      ],
+      "parcelAddresses": [
+        "용산동 634-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 33,
+      "parcelAddressManagedUnitCount": 33
+    },
+    {
+      "clusterId": "동구-02",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.936912,
+        35.11206
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 176"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-03",
+      "managedUnitCount": 25,
+      "representativeCoordinate": [
+        126.947387,
+        35.088696
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동 472-10"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 25
+    },
+    {
+      "clusterId": "동구-04",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.961105,
+        35.093209
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용연동564"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-05",
+      "managedUnitCount": 32,
+      "representativeCoordinate": [
+        126.947355,
+        35.088994
+      ],
+      "roadAddresses": [
+        "남문로 162"
+      ],
+      "parcelAddresses": [
+        "선교동 475"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 32,
+      "parcelAddressManagedUnitCount": 32
+    },
+    {
+      "clusterId": "동구-06",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.924207,
+        35.14475
+      ],
+      "roadAddresses": [
+        "서남로 26"
+      ],
+      "parcelAddresses": [
+        "서석동 25-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 13,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-07",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.915434,
+        35.154023
+      ],
+      "roadAddresses": [
+        "구성로212"
+      ],
+      "parcelAddresses": [
+        "대인동 312-19"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-08",
+      "managedUnitCount": 28,
+      "representativeCoordinate": [
+        126.925886,
+        35.136057
+      ],
+      "roadAddresses": [
+        "남문로 737-1"
+      ],
+      "parcelAddresses": [
+        "학동 629-17"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 28,
+      "parcelAddressManagedUnitCount": 28
+    },
+    {
+      "clusterId": "동구-09",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.933224,
+        35.120425
+      ],
+      "roadAddresses": [
+        "남문로 551"
+      ],
+      "parcelAddresses": [
+        "용산동 270-8"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 6,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-10",
+      "managedUnitCount": 35,
+      "representativeCoordinate": [
+        126.930949,
+        35.126769
+      ],
+      "roadAddresses": [
+        "남문로 623"
+      ],
+      "parcelAddresses": [
+        "소태동 579-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 35,
+      "parcelAddressManagedUnitCount": 35
+    },
+    {
+      "clusterId": "동구-11",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.929053,
+        35.130823
+      ],
+      "roadAddresses": [
+        "남문로 673"
+      ],
+      "parcelAddresses": [
+        "학동 859-9"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-12",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.95176,
+        35.08114
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동 482"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-13",
+      "managedUnitCount": 19,
+      "representativeCoordinate": [
+        126.957597,
+        35.133199
+      ],
+      "roadAddresses": [
+        "증심사길30번길 20"
+      ],
+      "parcelAddresses": [
+        "운림동 979"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 19,
+      "parcelAddressManagedUnitCount": 19
+    },
+    {
+      "clusterId": "동구-14",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.934355,
+        35.105653
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "월남동 222-4"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-15",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.927974,
+        35.135669
+      ],
+      "roadAddresses": [
+        "남문로 734"
+      ],
+      "parcelAddresses": [
+        "학동 623"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-16",
+      "managedUnitCount": 39,
+      "representativeCoordinate": [
+        126.92991,
+        35.124985
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 636"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 39
+    },
+    {
+      "clusterId": "동구-17",
+      "managedUnitCount": 5,
+      "representativeCoordinate": [
+        126.933149,
+        35.127105
+      ],
+      "roadAddresses": [
+        "지원로5번길 20"
+      ],
+      "parcelAddresses": [
+        "소태동 566-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 5,
+      "parcelAddressManagedUnitCount": 5
+    },
+    {
+      "clusterId": "동구-18",
+      "managedUnitCount": 3,
+      "representativeCoordinate": [
+        126.933525,
+        35.128154
+      ],
+      "roadAddresses": [
+        "학소로 92"
+      ],
+      "parcelAddresses": [
+        "소태동 550-8"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 3,
+      "parcelAddressManagedUnitCount": 3
+    },
+    {
+      "clusterId": "동구-19",
+      "managedUnitCount": 28,
+      "representativeCoordinate": [
+        126.932257,
+        35.132522
+      ],
+      "roadAddresses": [
+        "의재로 46"
+      ],
+      "parcelAddresses": [
+        "학동 732-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 28,
+      "parcelAddressManagedUnitCount": 28
+    },
+    {
+      "clusterId": "동구-20",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.942643,
+        35.134591
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "운림동 600-4"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-21",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.937906,
+        35.104776
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "월남동 157"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-22",
+      "managedUnitCount": 25,
+      "representativeCoordinate": [
+        126.939482,
+        35.09922
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "월남동 159-21"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 25
+    },
+    {
+      "clusterId": "동구-23",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.934859,
+        35.120555
+      ],
+      "roadAddresses": [
+        "남문로 550"
+      ],
+      "parcelAddresses": [
+        "소태동 691"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-24",
+      "managedUnitCount": 34,
+      "representativeCoordinate": [
+        126.931741,
+        35.125909
+      ],
+      "roadAddresses": [
+        "남문로 614-1"
+      ],
+      "parcelAddresses": [
+        "소태동 601"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 34,
+      "parcelAddressManagedUnitCount": 34
+    },
+    {
+      "clusterId": "동구-25",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.932414,
+        35.125618
+      ],
+      "roadAddresses": [
+        "남문로 610"
+      ],
+      "parcelAddresses": [
+        "소태동 566-28"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-26",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.934813,
+        35.124706
+      ],
+      "roadAddresses": [
+        "학소로 51"
+      ],
+      "parcelAddresses": [
+        "소태동 623"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 17,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-27",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.929474,
+        35.130907
+      ],
+      "roadAddresses": [
+        "남문로 672"
+      ],
+      "parcelAddresses": [
+        "학동 750-59"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 15,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-28",
+      "managedUnitCount": 19,
+      "representativeCoordinate": [
+        126.933875,
+        35.130334
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 1003-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 19
+    },
+    {
+      "clusterId": "동구-29",
+      "managedUnitCount": 21,
+      "representativeCoordinate": [
+        126.950012,
+        35.133674
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "운림동 324"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 21
+    },
+    {
+      "clusterId": "동구-30",
+      "managedUnitCount": 20,
+      "representativeCoordinate": [
+        126.950484,
+        35.133957
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "운림동 496-4"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 20
+    },
+    {
+      "clusterId": "동구-31",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.919423,
+        35.142229
+      ],
+      "roadAddresses": [
+        "백서로 127"
+      ],
+      "parcelAddresses": [
+        "금동 185-5"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-32",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.94145,
+        35.133508
+      ],
+      "roadAddresses": [
+        "의재로109번길 10"
+      ],
+      "parcelAddresses": [
+        "운림동 619"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 6,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-33",
+      "managedUnitCount": 18,
+      "representativeCoordinate": [
+        126.941427,
+        35.1321
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "운림동 640-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 18
+    },
+    {
+      "clusterId": "동구-34",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.938056,
+        35.121075
+      ],
+      "roadAddresses": [
+        "소태길 43-2"
+      ],
+      "parcelAddresses": [
+        "소태동341-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-35",
+      "managedUnitCount": 25,
+      "representativeCoordinate": [
+        126.939969,
+        35.099239
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "내남동 17"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 25
+    },
+    {
+      "clusterId": "동구-36",
+      "managedUnitCount": 16,
+      "representativeCoordinate": [
+        126.925258,
+        35.11743
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 733"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 16
+    },
+    {
+      "clusterId": "동구-38",
+      "managedUnitCount": 5,
+      "representativeCoordinate": [
+        126.936769,
+        35.133155
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 1003-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 5
+    },
+    {
+      "clusterId": "동구-39",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.922347,
+        35.143333
+      ],
+      "roadAddresses": [
+        "백서로 157"
+      ],
+      "parcelAddresses": [
+        "서석동 125-6"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-40",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.920324,
+        35.142958
+      ],
+      "roadAddresses": [
+        "문화전당로 3-1"
+      ],
+      "parcelAddresses": [
+        "남동 124"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-41",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.921356,
+        35.141272
+      ],
+      "roadAddresses": [
+        "제봉로 27"
+      ],
+      "parcelAddresses": [
+        "학동 67"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-42",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.920321,
+        35.142372
+      ],
+      "roadAddresses": [
+        "백서로 136-4"
+      ],
+      "parcelAddresses": [
+        "학동 116-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 8,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-43",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.921369,
+        35.144215
+      ],
+      "roadAddresses": [
+        "제봉로 64"
+      ],
+      "parcelAddresses": [
+        "남동 62"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-44",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.934315,
+        35.117366
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 165-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-45",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.934736,
+        35.117336
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동694-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-46",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.932851,
+        35.129206
+      ],
+      "roadAddresses": [
+        "학소로109"
+      ],
+      "parcelAddresses": [
+        "소태동1103"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-47",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.926228,
+        35.135123
+      ],
+      "roadAddresses": [
+        "남문로724번길 4"
+      ],
+      "parcelAddresses": [
+        "학동 647-7"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-48",
+      "managedUnitCount": 21,
+      "representativeCoordinate": [
+        126.927554,
+        35.129735
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 898-95"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 21
+    },
+    {
+      "clusterId": "동구-49",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.927499,
+        35.133061
+      ],
+      "roadAddresses": [
+        "남문로701번길 8"
+      ],
+      "parcelAddresses": [
+        "학동 890-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 13,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-51",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.913885,
+        35.144911
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "불로동 200"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-52",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.915995,
+        35.14584
+      ],
+      "roadAddresses": [
+        "서석로 21"
+      ],
+      "parcelAddresses": [
+        "불로동 118-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-53",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.920654,
+        35.139988
+      ],
+      "roadAddresses": [
+        "양림로 115-1"
+      ],
+      "parcelAddresses": [
+        "학동 74-7"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-54",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.92053,
+        35.154249
+      ],
+      "roadAddresses": [
+        "중앙로 254"
+      ],
+      "parcelAddresses": [
+        "동명동 248-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-55",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.913847,
+        35.154744
+      ],
+      "roadAddresses": [
+        "제봉로 219-1"
+      ],
+      "parcelAddresses": [
+        "대인동 20-12"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 10,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-56",
+      "managedUnitCount": 7,
+      "representativeCoordinate": [
+        126.941627,
+        35.153764
+      ],
+      "roadAddresses": [
+        "지호로 224"
+      ],
+      "parcelAddresses": [
+        "산수동 8-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 7,
+      "parcelAddressManagedUnitCount": 7
+    },
+    {
+      "clusterId": "동구-57",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.92525,
+        35.145552
+      ],
+      "roadAddresses": [
+        "백서로 196"
+      ],
+      "parcelAddresses": [
+        "서석동 21"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-58",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.937011,
+        35.148743
+      ],
+      "roadAddresses": [
+        "밤실로 12-1"
+      ],
+      "parcelAddresses": [
+        "지산동 227-18"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-59",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.92237,
+        35.135963
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 904-139"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-60",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.924214,
+        35.155098
+      ],
+      "roadAddresses": [
+        "동계로 37"
+      ],
+      "parcelAddresses": [
+        "산수동 371-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-61",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.917416,
+        35.155998
+      ],
+      "roadAddresses": [
+        "구성로 240"
+      ],
+      "parcelAddresses": [
+        "계림동 514-30"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 17,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-62",
+      "managedUnitCount": 7,
+      "representativeCoordinate": [
+        126.930644,
+        35.148856
+      ],
+      "roadAddresses": [
+        "지호로 13"
+      ],
+      "parcelAddresses": [
+        "지산동 694-37"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 7,
+      "parcelAddressManagedUnitCount": 7
+    },
+    {
+      "clusterId": "동구-63",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.936241,
+        35.147786
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "지산동 691-58"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-64",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.936887,
+        35.149468
+      ],
+      "roadAddresses": [
+        "밤실로 19"
+      ],
+      "parcelAddresses": [
+        "지산동 724-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 24,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-65",
+      "managedUnitCount": 16,
+      "representativeCoordinate": [
+        126.942989,
+        35.149422
+      ],
+      "roadAddresses": [
+        "지호로 133"
+      ],
+      "parcelAddresses": [
+        "지산동 76-12"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 16,
+      "parcelAddressManagedUnitCount": 16
+    },
+    {
+      "clusterId": "동구-66",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.944688,
+        35.150446
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "지산동 산 46-8"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-67",
+      "managedUnitCount": 29,
+      "representativeCoordinate": [
+        126.942544,
+        35.156945
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동 산 52-8"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 29
+    },
+    {
+      "clusterId": "동구-68",
+      "managedUnitCount": 18,
+      "representativeCoordinate": [
+        126.939826,
+        35.157227
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동 산 20-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 18
+    },
+    {
+      "clusterId": "동구-69",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.936543,
+        35.154824
+      ],
+      "roadAddresses": [
+        "필문대로187번길 34-1"
+      ],
+      "parcelAddresses": [
+        "산수동 512-32"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 17,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-70",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.934257,
+        35.153447
+      ],
+      "roadAddresses": [
+        "필문대로191번길 25"
+      ],
+      "parcelAddresses": [
+        "산수동 516-23"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 15,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-71",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.930951,
+        35.151011
+      ],
+      "roadAddresses": [
+        "필문대로 219"
+      ],
+      "parcelAddresses": [
+        "지산동 719-47"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-72",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.916631,
+        35.151409
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "대인동 136-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-73",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.928011,
+        35.151814
+      ],
+      "roadAddresses": [
+        "동명로69번길 20"
+      ],
+      "parcelAddresses": [
+        "지산동 671"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 15,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-74",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.92383,
+        35.145053
+      ],
+      "roadAddresses": [
+        "서남로 19"
+      ],
+      "parcelAddresses": [
+        "서석동 27-5"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-75",
+      "managedUnitCount": 26,
+      "representativeCoordinate": [
+        126.93505,
+        35.161557
+      ],
+      "roadAddresses": [
+        "밤실로 147"
+      ],
+      "parcelAddresses": [
+        "산수동 568-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 26,
+      "parcelAddressManagedUnitCount": 26
+    },
+    {
+      "clusterId": "동구-76",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.935996,
+        35.15641
+      ],
+      "roadAddresses": [
+        "밤실로 99"
+      ],
+      "parcelAddresses": [
+        "산수동 509-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 8,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-77",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.934856,
+        35.155734
+      ],
+      "roadAddresses": [
+        "무등로 503-2"
+      ],
+      "parcelAddresses": [
+        "산수동 509-60"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-78",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.933697,
+        35.120483
+      ],
+      "roadAddresses": [
+        "남문로 552"
+      ],
+      "parcelAddresses": [
+        "소태동 688-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 8,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-79",
+      "managedUnitCount": 20,
+      "representativeCoordinate": [
+        126.921498,
+        35.150145
+      ],
+      "roadAddresses": [
+        "제봉로 134"
+      ],
+      "parcelAddresses": [
+        "대의동 91"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 20,
+      "parcelAddressManagedUnitCount": 20
+    },
+    {
+      "clusterId": "동구-80",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.937574,
+        35.156595
+      ],
+      "roadAddresses": [
+        "무등로 529"
+      ],
+      "parcelAddresses": [
+        "산수동 89-11"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-81",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.926116,
+        35.151473
+      ],
+      "roadAddresses": [
+        "동명로 52"
+      ],
+      "parcelAddresses": [
+        "동명동 161-5"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 10,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-82",
+      "managedUnitCount": 3,
+      "representativeCoordinate": [
+        126.927291,
+        35.153287
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동 358-21"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 3
+    },
+    {
+      "clusterId": "동구-83",
+      "managedUnitCount": 37,
+      "representativeCoordinate": [
+        126.924802,
+        35.153726
+      ],
+      "roadAddresses": [
+        "동명로67번길 41"
+      ],
+      "parcelAddresses": [
+        "산수동 365-51"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 37,
+      "parcelAddressManagedUnitCount": 37
+    },
+    {
+      "clusterId": "동구-84",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.925743,
+        35.153914
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동 724"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-85",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.929262,
+        35.154295
+      ],
+      "roadAddresses": [
+        "경양로 355"
+      ],
+      "parcelAddresses": [
+        "산수동 401-94"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-86",
+      "managedUnitCount": 16,
+      "representativeCoordinate": [
+        126.926269,
+        35.149041
+      ],
+      "roadAddresses": [
+        "동계천로 150"
+      ],
+      "parcelAddresses": [
+        "동명동 143-78"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 16,
+      "parcelAddressManagedUnitCount": 16
+    },
+    {
+      "clusterId": "동구-87",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.915551,
+        35.145412
+      ],
+      "roadAddresses": [
+        "서석로 18"
+      ],
+      "parcelAddresses": [
+        "불로동 141"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-88",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.922568,
+        35.135902
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 1026"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-89",
+      "managedUnitCount": 30,
+      "representativeCoordinate": [
+        126.922976,
+        35.134887
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 1003-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 30
+    },
+    {
+      "clusterId": "동구-90",
+      "managedUnitCount": 33,
+      "representativeCoordinate": [
+        126.925591,
+        35.136942
+      ],
+      "roadAddresses": [
+        "남문로 748"
+      ],
+      "parcelAddresses": [
+        "학동 618-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 33,
+      "parcelAddressManagedUnitCount": 33
+    },
+    {
+      "clusterId": "동구-91",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.922017,
+        35.147723
+      ],
+      "roadAddresses": [
+        "제봉로 104"
+      ],
+      "parcelAddresses": [
+        "장동 103-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 13,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-92",
+      "managedUnitCount": 5,
+      "representativeCoordinate": [
+        126.924512,
+        35.146483
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "서석동 37-10"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 5
+    },
+    {
+      "clusterId": "동구-93",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.921585,
+        35.141409
+      ],
+      "roadAddresses": [
+        "제봉로 42"
+      ],
+      "parcelAddresses": [
+        "학동 8"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-94",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.920088,
+        35.150777
+      ],
+      "roadAddresses": [
+        "제봉로 147"
+      ],
+      "parcelAddresses": [
+        "궁동 17-21"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 13,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-95",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.915332,
+        35.153781
+      ],
+      "roadAddresses": [
+        "제봉로 201"
+      ],
+      "parcelAddresses": [
+        "대인동 32-19"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-96",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.913991,
+        35.15492
+      ],
+      "roadAddresses": [
+        "제봉로 220"
+      ],
+      "parcelAddresses": [
+        "대인동 324-21"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-97",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.914442,
+        35.156339
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "대인동 331"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-98",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.930755,
+        35.155949
+      ],
+      "roadAddresses": [
+        "무등로 459"
+      ],
+      "parcelAddresses": [
+        "산수동 540-23"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 15,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-99",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.918723,
+        35.161963
+      ],
+      "roadAddresses": [
+        "무등로 325"
+      ],
+      "parcelAddresses": [
+        "계림동 559-14"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-100",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.918308,
+        35.161806
+      ],
+      "roadAddresses": [
+        "무등로 324"
+      ],
+      "parcelAddresses": [
+        "계림동 562-4"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-101",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.917506,
+        35.159772
+      ],
+      "roadAddresses": [
+        "중흥로 220-1"
+      ],
+      "parcelAddresses": [
+        "계림동 581-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-102",
+      "managedUnitCount": 18,
+      "representativeCoordinate": [
+        126.920759,
+        35.156591
+      ],
+      "roadAddresses": [
+        "중앙로 278"
+      ],
+      "parcelAddresses": [
+        "계림동 250-95"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 18,
+      "parcelAddressManagedUnitCount": 18
+    },
+    {
+      "clusterId": "동구-103",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.912956,
+        35.148264
+      ],
+      "roadAddresses": [
+        "중앙로 155"
+      ],
+      "parcelAddresses": [
+        "호남동 35-16"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 15,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-104",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.917515,
+        35.148628
+      ],
+      "roadAddresses": [
+        "금남로 236"
+      ],
+      "parcelAddresses": [
+        "금남로2가 22-5"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 24,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-105",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.917963,
+        35.14872
+      ],
+      "roadAddresses": [
+        "금남로 239"
+      ],
+      "parcelAddresses": [
+        "금남로2가 19-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-106",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.910965,
+        35.154412
+      ],
+      "roadAddresses": [
+        "독립로 260-1"
+      ],
+      "parcelAddresses": [
+        "금남로5가 5-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 8,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-107",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.914419,
+        35.15337
+      ],
+      "roadAddresses": [
+        "구성로 200"
+      ],
+      "parcelAddresses": [
+        "대인동 80-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 8,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-108",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.925793,
+        35.153775
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동 365-12"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-109",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.920791,
+        35.143619
+      ],
+      "roadAddresses": [
+        "제봉로 57"
+      ],
+      "parcelAddresses": [
+        "남동 112-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-110",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.911807,
+        35.151295
+      ],
+      "roadAddresses": [
+        "충장로 30-1"
+      ],
+      "parcelAddresses": [
+        "충장로5가 83-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 10,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-111",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.909274,
+        35.152917
+      ],
+      "roadAddresses": [
+        "독립로 236-1"
+      ],
+      "parcelAddresses": [
+        "충장로5가 103-4"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 10,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-112",
+      "managedUnitCount": 26,
+      "representativeCoordinate": [
+        126.917216,
+        35.147629
+      ],
+      "roadAddresses": [
+        "충장로 94"
+      ],
+      "parcelAddresses": [
+        "충장로2가 16"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 26,
+      "parcelAddressManagedUnitCount": 26
+    },
+    {
+      "clusterId": "동구-113",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.925888,
+        35.15167
+      ],
+      "roadAddresses": [
+        "동명로 49"
+      ],
+      "parcelAddresses": [
+        "동명동 175-5"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-114",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.928027,
+        35.158557
+      ],
+      "roadAddresses": [
+        "무등로 421-2"
+      ],
+      "parcelAddresses": [
+        "산수동 547-37"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-115",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.92068,
+        35.159816
+      ],
+      "roadAddresses": [
+        "중앙로 320"
+      ],
+      "parcelAddresses": [
+        "계림동 85-24"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 10,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-116",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.920509,
+        35.163051
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동 100-10"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-117",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.935424,
+        35.11508
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 181"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-118",
+      "managedUnitCount": 29,
+      "representativeCoordinate": [
+        126.917614,
+        35.157067
+      ],
+      "roadAddresses": [
+        "경양로 247-1"
+      ],
+      "parcelAddresses": [
+        "계림동 484-6"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 29,
+      "parcelAddressManagedUnitCount": 29
+    },
+    {
+      "clusterId": "동구-119",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.923409,
+        35.152846
+      ],
+      "roadAddresses": [
+        "동계로1번길 10-14"
+      ],
+      "parcelAddresses": [
+        "동명동 200-206"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 10,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-120",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.920541,
+        35.152271
+      ],
+      "roadAddresses": [
+        "제봉로158번길 8"
+      ],
+      "parcelAddresses": [
+        "장동 39-12"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 13,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-121",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.918934,
+        35.149584
+      ],
+      "roadAddresses": [
+        "예술길 26"
+      ],
+      "parcelAddresses": [
+        "궁동 40"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-122",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.918237,
+        35.150583
+      ],
+      "roadAddresses": [
+        "제봉로 167"
+      ],
+      "parcelAddresses": [
+        "궁동 6-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 8,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-123",
+      "managedUnitCount": 5,
+      "representativeCoordinate": [
+        126.933632,
+        35.150836
+      ],
+      "roadAddresses": [
+        "지산로78번길 5"
+      ],
+      "parcelAddresses": [
+        "지산동 342-118"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 5,
+      "parcelAddressManagedUnitCount": 5
+    },
+    {
+      "clusterId": "동구-124",
+      "managedUnitCount": 20,
+      "representativeCoordinate": [
+        126.934303,
+        35.114399
+      ],
+      "roadAddresses": [
+        "화산로350번길 70"
+      ],
+      "parcelAddresses": [
+        "용산동 산 261-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 20,
+      "parcelAddressManagedUnitCount": 20
+    },
+    {
+      "clusterId": "동구-125",
+      "managedUnitCount": 16,
+      "representativeCoordinate": [
+        126.939441,
+        35.094586
+      ],
+      "roadAddresses": [
+        "남계길 37"
+      ],
+      "parcelAddresses": [
+        "내남동 299-5"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 16,
+      "parcelAddressManagedUnitCount": 16
+    },
+    {
+      "clusterId": "동구-126",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.939141,
+        35.132965
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "운림동 603-8"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-127",
+      "managedUnitCount": 18,
+      "representativeCoordinate": [
+        126.939723,
+        35.132159
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 762"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 18
+    },
+    {
+      "clusterId": "동구-128",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.931336,
+        35.128687
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 532-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-129",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.944302,
+        35.132423
+      ],
+      "roadAddresses": [
+        "의재로 151"
+      ],
+      "parcelAddresses": [
+        "운림동 670-4"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-130",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.94431,
+        35.13217
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "운림동 661-15"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-131",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.92562,
+        35.138317
+      ],
+      "roadAddresses": [
+        "남문로724번길 50"
+      ],
+      "parcelAddresses": [
+        "학동 539-6"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-132",
+      "managedUnitCount": 7,
+      "representativeCoordinate": [
+        126.931823,
+        35.121173
+      ],
+      "roadAddresses": [
+        "화산로351번길14"
+      ],
+      "parcelAddresses": [
+        "용산동 636-154"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 7,
+      "parcelAddressManagedUnitCount": 7
+    },
+    {
+      "clusterId": "동구-133",
+      "managedUnitCount": 4,
+      "representativeCoordinate": [
+        126.93862,
+        35.148654
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "지산동 691-111"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 4
+    },
+    {
+      "clusterId": "동구-134",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.923988,
+        35.156408
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동 724"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-135",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.934389,
+        35.127715
+      ],
+      "roadAddresses": [
+        "학소로86번길 7-1"
+      ],
+      "parcelAddresses": [
+        "소태동 557-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-136",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.923519,
+        35.151189
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "동명동 200-166"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-137",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.9309,
+        35.118335
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 147-7"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-138",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.937699,
+        35.14943
+      ],
+      "roadAddresses": [
+        "밤실로20번길 7"
+      ],
+      "parcelAddresses": [
+        "지산동 258-7"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-139",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.9316,
+        35.133286
+      ],
+      "roadAddresses": [
+        "의재로33번길 6-1"
+      ],
+      "parcelAddresses": [
+        "학동 719-4"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 6,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-140",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.913568,
+        35.148447
+      ],
+      "roadAddresses": [
+        "중앙로 162-1"
+      ],
+      "parcelAddresses": [
+        "황금동 5-7"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-141",
+      "managedUnitCount": 4,
+      "representativeCoordinate": [
+        126.924314,
+        35.158482
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동 54"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 4
+    },
+    {
+      "clusterId": "동구-142",
+      "managedUnitCount": 4,
+      "representativeCoordinate": [
+        126.935246,
+        35.123709
+      ],
+      "roadAddresses": [
+        "학소로42번길 3"
+      ],
+      "parcelAddresses": [
+        "소태동 635-6"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 4,
+      "parcelAddressManagedUnitCount": 4
+    },
+    {
+      "clusterId": "동구-143",
+      "managedUnitCount": 19,
+      "representativeCoordinate": [
+        126.951829,
+        35.090522
+      ],
+      "roadAddresses": [
+        "선교로 44"
+      ],
+      "parcelAddresses": [
+        "선교동 410-11"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 19,
+      "parcelAddressManagedUnitCount": 19
+    },
+    {
+      "clusterId": "동구-144",
+      "managedUnitCount": 18,
+      "representativeCoordinate": [
+        126.952736,
+        35.090847
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동 410"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 18
+    },
+    {
+      "clusterId": "동구-147",
+      "managedUnitCount": 4,
+      "representativeCoordinate": [
+        126.942725,
+        35.132491
+      ],
+      "roadAddresses": [
+        "운림길 85"
+      ],
+      "parcelAddresses": [
+        "운림동 650-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 4,
+      "parcelAddressManagedUnitCount": 4
+    },
+    {
+      "clusterId": "동구-148",
+      "managedUnitCount": 22,
+      "representativeCoordinate": [
+        126.90968,
+        35.149718
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "수기동 138"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 22
+    },
+    {
+      "clusterId": "동구-149",
+      "managedUnitCount": 5,
+      "representativeCoordinate": [
+        126.933503,
+        35.132915
+      ],
+      "roadAddresses": [
+        "의재로51번길 6"
+      ],
+      "parcelAddresses": [
+        "학동 722-9"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 5,
+      "parcelAddressManagedUnitCount": 5
+    },
+    {
+      "clusterId": "동구-150",
+      "managedUnitCount": 41,
+      "representativeCoordinate": [
+        126.9178,
+        35.141319
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 998"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 41
+    },
+    {
+      "clusterId": "동구-151",
+      "managedUnitCount": 27,
+      "representativeCoordinate": [
+        126.944066,
+        35.131008
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "운림동 693"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 27
+    },
+    {
+      "clusterId": "동구-152",
+      "managedUnitCount": 4,
+      "representativeCoordinate": [
+        126.924239,
+        35.158325
+      ],
+      "roadAddresses": [
+        "계림30번길 15"
+      ],
+      "parcelAddresses": [
+        "계림동 1815"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 4,
+      "parcelAddressManagedUnitCount": 4
+    },
+    {
+      "clusterId": "동구-153",
+      "managedUnitCount": 4,
+      "representativeCoordinate": [
+        126.93046,
+        35.117567
+      ],
+      "roadAddresses": [
+        "화산로 320"
+      ],
+      "parcelAddresses": [
+        "용산동 144-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 4,
+      "parcelAddressManagedUnitCount": 4
+    },
+    {
+      "clusterId": "동구-154",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.927292,
+        35.10493
+      ],
+      "roadAddresses": [
+        "칠전길 70"
+      ],
+      "parcelAddresses": [
+        "월남동 467"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 13,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-155",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.919881,
+        35.162797
+      ],
+      "roadAddresses": [
+        "중앙로 347"
+      ],
+      "parcelAddresses": [
+        "계림동 553-7"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-156",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.914274,
+        35.150796
+      ],
+      "roadAddresses": [
+        "금남로 196"
+      ],
+      "parcelAddresses": [
+        "금남로4가 83-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-157",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.915396,
+        35.150467
+      ],
+      "roadAddresses": [
+        "금남로 207"
+      ],
+      "parcelAddresses": [
+        "금남로4거 24-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-158",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.911581,
+        35.152597
+      ],
+      "roadAddresses": [
+        "금남로 166"
+      ],
+      "parcelAddresses": [
+        "금남로5가 62-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-159",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.911698,
+        35.152904
+      ],
+      "roadAddresses": [
+        "금남로 163-2"
+      ],
+      "parcelAddresses": [
+        "금남로5가 66-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-160",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.912986,
+        35.150545
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "충장로5가 49"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-161",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.910534,
+        35.152353
+      ],
+      "roadAddresses": [
+        "충장로 13-1"
+      ],
+      "parcelAddresses": [
+        "충장로5가 11-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 24,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-162",
+      "managedUnitCount": 28,
+      "representativeCoordinate": [
+        126.921274,
+        35.138297
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 942-9"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 28
+    },
+    {
+      "clusterId": "동구-163",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.921471,
+        35.138398
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 942-9"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-164",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.922606,
+        35.138858
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 47-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-165",
+      "managedUnitCount": 23,
+      "representativeCoordinate": [
+        126.924027,
+        35.141747
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 475-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 23
+    },
+    {
+      "clusterId": "동구-166",
+      "managedUnitCount": 22,
+      "representativeCoordinate": [
+        126.924423,
+        35.141687
+      ],
+      "roadAddresses": [
+        "필문대로339"
+      ],
+      "parcelAddresses": [
+        "학동 524-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 22,
+      "parcelAddressManagedUnitCount": 22
+    },
+    {
+      "clusterId": "동구-167",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.928298,
+        35.148432
+      ],
+      "roadAddresses": [
+        "필문대로 258"
+      ],
+      "parcelAddresses": [
+        "동명동 91-4"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 24,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-168",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.926935,
+        35.145542
+      ],
+      "roadAddresses": [
+        "필문대로 291"
+      ],
+      "parcelAddresses": [
+        "서석동 427-10"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-169",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.928454,
+        35.147884
+      ],
+      "roadAddresses": [
+        "필문대로 261"
+      ],
+      "parcelAddresses": [
+        "동명동 126"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 13,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-170",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.929495,
+        35.150148
+      ],
+      "roadAddresses": [
+        "필문대로 234"
+      ],
+      "parcelAddresses": [
+        "동명동 17-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-171",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.929963,
+        35.150041
+      ],
+      "roadAddresses": [
+        "필문대로 235"
+      ],
+      "parcelAddresses": [
+        "동명동 15-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-172",
+      "managedUnitCount": 19,
+      "representativeCoordinate": [
+        126.931385,
+        35.15307
+      ],
+      "roadAddresses": [
+        "필문대로 199"
+      ],
+      "parcelAddresses": [
+        "산수동 521-5"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 19,
+      "parcelAddressManagedUnitCount": 19
+    },
+    {
+      "clusterId": "동구-173",
+      "managedUnitCount": 18,
+      "representativeCoordinate": [
+        126.930936,
+        35.153012
+      ],
+      "roadAddresses": [
+        "필문대로 200"
+      ],
+      "parcelAddresses": [
+        "산수동 561-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 18,
+      "parcelAddressManagedUnitCount": 18
+    },
+    {
+      "clusterId": "동구-174",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.931553,
+        35.157668
+      ],
+      "roadAddresses": [
+        "필문대로 147"
+      ],
+      "parcelAddresses": [
+        "산수동 538-56"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 24,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-175",
+      "managedUnitCount": 28,
+      "representativeCoordinate": [
+        126.931096,
+        35.157751
+      ],
+      "roadAddresses": [
+        "필문대로 146"
+      ],
+      "parcelAddresses": [
+        "산수동 561-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 28,
+      "parcelAddressManagedUnitCount": 28
+    },
+    {
+      "clusterId": "동구-176",
+      "managedUnitCount": 16,
+      "representativeCoordinate": [
+        126.927654,
+        35.127897
+      ],
+      "roadAddresses": [
+        "천변좌로604번안길3"
+      ],
+      "parcelAddresses": [
+        "소태동 953"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 16,
+      "parcelAddressManagedUnitCount": 16
+    },
+    {
+      "clusterId": "동구-177",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.921753,
+        35.147314
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "광산동 115"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-178",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.920589,
+        35.145513
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "광산동 113"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-179",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.919252,
+        35.145904
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "광산동 113"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-180",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.919741,
+        35.148542
+      ],
+      "roadAddresses": [
+        "예술길 37"
+      ],
+      "parcelAddresses": [
+        "금남로1가 42"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 17,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-181",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.923469,
+        35.150819
+      ],
+      "roadAddresses": [
+        "동명로 18"
+      ],
+      "parcelAddresses": [
+        "동명동 154-230"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 10,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-182",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.911598,
+        35.150882
+      ],
+      "roadAddresses": [
+        "구성로 162"
+      ],
+      "parcelAddresses": [
+        "충장로5가 60-18"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 10,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-183",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.91414,
+        35.153332
+      ],
+      "roadAddresses": [
+        "구성로 195-2"
+      ],
+      "parcelAddresses": [
+        "대인동 292"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 8,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-184",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.917344,
+        35.151702
+      ],
+      "roadAddresses": [
+        "중앙로212-1"
+      ],
+      "parcelAddresses": [
+        "궁동 7-9"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 9,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-185",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.929312,
+        35.128651
+      ],
+      "roadAddresses": [
+        "천변좌로 626"
+      ],
+      "parcelAddresses": [
+        "소태동 985"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-186",
+      "managedUnitCount": 22,
+      "representativeCoordinate": [
+        126.913561,
+        35.158086
+      ],
+      "roadAddresses": [
+        "독립로 310"
+      ],
+      "parcelAddresses": [
+        "계림동 962"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 22,
+      "parcelAddressManagedUnitCount": 22
+    },
+    {
+      "clusterId": "동구-187",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.915481,
+        35.163097
+      ],
+      "roadAddresses": [
+        "독립로 366"
+      ],
+      "parcelAddresses": [
+        "계림동 811"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 14,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-188",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.917872,
+        35.165048
+      ],
+      "roadAddresses": [
+        "서암대로 314-1"
+      ],
+      "parcelAddresses": [
+        "계림동 627"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 11,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-189",
+      "managedUnitCount": 29,
+      "representativeCoordinate": [
+        126.923629,
+        35.163674
+      ],
+      "roadAddresses": [
+        "필문대로38-1"
+      ],
+      "parcelAddresses": [
+        "계림동 1065"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 29,
+      "parcelAddressManagedUnitCount": 29
+    },
+    {
+      "clusterId": "동구-190",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.927808,
+        35.132265
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 1012"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-191",
+      "managedUnitCount": 5,
+      "representativeCoordinate": [
+        126.928764,
+        35.16216
+      ],
+      "roadAddresses": [
+        "필문대로 90"
+      ],
+      "parcelAddresses": [
+        "계림동 1599"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 5,
+      "parcelAddressManagedUnitCount": 5
+    },
+    {
+      "clusterId": "동구-192",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.929967,
+        35.161148
+      ],
+      "roadAddresses": [
+        "필문대로106번길 2"
+      ],
+      "parcelAddresses": [
+        "계림동 1641"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 6,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-193",
+      "managedUnitCount": 28,
+      "representativeCoordinate": [
+        126.92334,
+        35.160805
+      ],
+      "roadAddresses": [
+        "무등로 369"
+      ],
+      "parcelAddresses": [
+        "계림동 122-9"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 28,
+      "parcelAddressManagedUnitCount": 28
+    },
+    {
+      "clusterId": "동구-194",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.920286,
+        35.158822
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동 290-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-195",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.920477,
+        35.156566
+      ],
+      "roadAddresses": [
+        "경양로277번길 16-3"
+      ],
+      "parcelAddresses": [
+        "계림동 95-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 15,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-196",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.919284,
+        35.153567
+      ],
+      "roadAddresses": [
+        "중앙로 237"
+      ],
+      "parcelAddresses": [
+        "계림동 386-15"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 13,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-197",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.938394,
+        35.104886
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "월남동 157"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-198",
+      "managedUnitCount": 22,
+      "representativeCoordinate": [
+        126.937444,
+        35.11075
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 산 250-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 22
+    },
+    {
+      "clusterId": "동구-199",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.942571,
+        35.091729
+      ],
+      "roadAddresses": [
+        "육판서길 1"
+      ],
+      "parcelAddresses": [
+        "내남동 51-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 8,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-200",
+      "managedUnitCount": 19,
+      "representativeCoordinate": [
+        126.925941,
+        35.152691
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "동명동 181-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 19
+    },
+    {
+      "clusterId": "동구-201",
+      "managedUnitCount": 26,
+      "representativeCoordinate": [
+        126.940835,
+        35.093924
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "내남동 17"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 26
+    },
+    {
+      "clusterId": "동구-202",
+      "managedUnitCount": 27,
+      "representativeCoordinate": [
+        126.94135,
+        35.093992
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "내남동 산 15"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 27
+    },
+    {
+      "clusterId": "동구-203",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.950041,
+        35.087481
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동 산 151"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-204",
+      "managedUnitCount": 16,
+      "representativeCoordinate": [
+        126.92833,
+        35.151165
+      ],
+      "roadAddresses": [
+        "동명로 71"
+      ],
+      "parcelAddresses": [
+        "지산동 724-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 16,
+      "parcelAddressManagedUnitCount": 16
+    },
+    {
+      "clusterId": "동구-205",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.938534,
+        35.103464
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "월남동 619"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-206",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.935163,
+        35.115807
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 696"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-207",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.930904,
+        35.119301
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 218-7"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-208",
+      "managedUnitCount": 16,
+      "representativeCoordinate": [
+        126.93113,
+        35.105934
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "월남동 371"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 16
+    },
+    {
+      "clusterId": "동구-209",
+      "managedUnitCount": 5,
+      "representativeCoordinate": [
+        126.925875,
+        35.157312
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동 454-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 5
+    },
+    {
+      "clusterId": "동구-210",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.936667,
+        35.121586
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 223-7"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-211",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.935423,
+        35.121201
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 229"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-212",
+      "managedUnitCount": 16,
+      "representativeCoordinate": [
+        126.923193,
+        35.160642
+      ],
+      "roadAddresses": [
+        "무등로 574"
+      ],
+      "parcelAddresses": [
+        "계림동 52"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 16,
+      "parcelAddressManagedUnitCount": 16
+    },
+    {
+      "clusterId": "동구-213",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.927612,
+        35.158673
+      ],
+      "roadAddresses": [
+        "무등로 418"
+      ],
+      "parcelAddresses": [
+        "산수동 561-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 12,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-214",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.930129,
+        35.156239
+      ],
+      "roadAddresses": [
+        "무등로 454-1"
+      ],
+      "parcelAddresses": [
+        "산수동 553-94"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 13,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-215",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.936695,
+        35.161743
+      ],
+      "roadAddresses": [
+        "갈마로 58"
+      ],
+      "parcelAddresses": [
+        "산수동 676"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 8,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-216",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.941507,
+        35.157735
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동 산 52-17"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-217",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.917498,
+        35.145379
+      ],
+      "roadAddresses": [
+        "문화전당로35번길 15"
+      ],
+      "parcelAddresses": [
+        "광산동 62"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 6,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-218",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.924077,
+        35.156586
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동 1821"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-219",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.917654,
+        35.150982
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "궁동 78"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-220",
+      "managedUnitCount": 23,
+      "representativeCoordinate": [
+        126.947549,
+        35.087706
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동 산 222-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 23
+    },
+    {
+      "clusterId": "동구-221",
+      "managedUnitCount": 23,
+      "representativeCoordinate": [
+        126.952521,
+        35.087198
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동 산 151"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 23
+    },
+    {
+      "clusterId": "동구-222",
+      "managedUnitCount": 30,
+      "representativeCoordinate": [
+        126.949639,
+        35.087719
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동 산 133-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 30
+    },
+    {
+      "clusterId": "동구-223",
+      "managedUnitCount": 20,
+      "representativeCoordinate": [
+        126.960212,
+        35.079912
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동 산 165-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 20
+    },
+    {
+      "clusterId": "동구-224",
+      "managedUnitCount": 35,
+      "representativeCoordinate": [
+        126.952623,
+        35.13329
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "운림동 산 185-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 35
+    },
+    {
+      "clusterId": "동구-225",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.938408,
+        35.098674
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "월남동 637"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-226",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.938795,
+        35.095327
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "내남동 307-10"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-227",
+      "managedUnitCount": 21,
+      "representativeCoordinate": [
+        126.937397,
+        35.130835
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 726-15"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 21
+    },
+    {
+      "clusterId": "동구-228",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.934849,
+        35.129841
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동 711-20"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-229",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.942002,
+        35.091056
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "내남동 903"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-230",
+      "managedUnitCount": 19,
+      "representativeCoordinate": [
+        126.941937,
+        35.091233
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "내남동 920"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 19
+    },
+    {
+      "clusterId": "동구-231",
+      "managedUnitCount": 5,
+      "representativeCoordinate": [
+        126.921507,
+        35.117068
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 445"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 5
+    },
+    {
+      "clusterId": "동구-232",
+      "managedUnitCount": 20,
+      "representativeCoordinate": [
+        126.924177,
+        35.118304
+      ],
+      "roadAddresses": [
+        "용산1로 12"
+      ],
+      "parcelAddresses": [
+        "용산동 727"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 20,
+      "parcelAddressManagedUnitCount": 20
+    },
+    {
+      "clusterId": "동구-233",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.92314,
+        35.117514
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 733"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-234",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.925355,
+        35.117546
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 733"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-235",
+      "managedUnitCount": 24,
+      "representativeCoordinate": [
+        126.927303,
+        35.117706
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 699"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 24
+    },
+    {
+      "clusterId": "동구-236",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.917146,
+        35.155955
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동 478-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-237",
+      "managedUnitCount": 18,
+      "representativeCoordinate": [
+        126.915947,
+        35.158112
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동 483-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 18
+    },
+    {
+      "clusterId": "동구-238",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.930919,
+        35.11932
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동 227-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-239",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.932684,
+        35.133946
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "학동 706-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-240",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.931161,
+        35.133525
+      ],
+      "roadAddresses": [
+        "의재로33번길 3-11"
+      ],
+      "parcelAddresses": [
+        "학동 676-43"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 6,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-241",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.922517,
+        35.158049
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동 239-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-242",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.92208,
+        35.157788
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동 239-20"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-243",
+      "managedUnitCount": 18,
+      "representativeCoordinate": [
+        126.921376,
+        35.155321
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동 233-18"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 18
+    },
+    {
+      "clusterId": "동구-244",
+      "managedUnitCount": 14,
+      "representativeCoordinate": [
+        126.937849,
+        35.155537
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동 86-10"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 14
+    },
+    {
+      "clusterId": "동구-245",
+      "managedUnitCount": 4,
+      "representativeCoordinate": [
+        126.921198,
+        35.154569
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "동명동267-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 4
+    },
+    {
+      "clusterId": "동구-246",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.924416,
+        35.153912
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "산수동370-2"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-247",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.932034,
+        35.123854
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동668-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-248",
+      "managedUnitCount": 8,
+      "representativeCoordinate": [
+        126.931692,
+        35.122473
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동636-287"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 8
+    },
+    {
+      "clusterId": "동구-249",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.930313,
+        35.125515
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "용산동298-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-250",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.936578,
+        35.105115
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "월남동620"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-251",
+      "managedUnitCount": 7,
+      "representativeCoordinate": [
+        126.911586,
+        35.149103
+      ],
+      "roadAddresses": [
+        "구성로152번길"
+      ],
+      "parcelAddresses": [
+        "호남동1-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 1,
+      "parcelAddressManagedUnitCount": 7
+    },
+    {
+      "clusterId": "동구-252",
+      "managedUnitCount": 7,
+      "representativeCoordinate": [
+        126.936734,
+        35.149241
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "지산동724-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 7
+    },
+    {
+      "clusterId": "동구-253",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.926383,
+        35.16021
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동1619"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-254",
+      "managedUnitCount": 7,
+      "representativeCoordinate": [
+        126.927761,
+        35.161117
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동1730"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 7
+    },
+    {
+      "clusterId": "동구-255",
+      "managedUnitCount": 5,
+      "representativeCoordinate": [
+        126.924516,
+        35.160902
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "계림동1369-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 5
+    },
+    {
+      "clusterId": "동구-256",
+      "managedUnitCount": 9,
+      "representativeCoordinate": [
+        126.923081,
+        35.148874
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "장동87-12"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 9
+    },
+    {
+      "clusterId": "동구-257",
+      "managedUnitCount": 10,
+      "representativeCoordinate": [
+        126.923401,
+        35.148849
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "장동87-12"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 10
+    },
+    {
+      "clusterId": "동구-258",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.93674,
+        35.124364
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동450-3"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-259",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.934749,
+        35.123056
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "소태동638-14"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-260",
+      "managedUnitCount": 6,
+      "representativeCoordinate": [
+        126.909064,
+        35.151782
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "충장로5가96-4"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 6
+    },
+    {
+      "clusterId": "동구-261",
+      "managedUnitCount": 21,
+      "representativeCoordinate": [
+        126.936094,
+        35.145977
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "지산동178-12"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 21
+    },
+    {
+      "clusterId": "동구-262",
+      "managedUnitCount": 20,
+      "representativeCoordinate": [
+        126.949,
+        35.087941
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동482"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 20
+    },
+    {
+      "clusterId": "동구-263",
+      "managedUnitCount": 12,
+      "representativeCoordinate": [
+        126.949308,
+        35.089642
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동227-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 12
+    },
+    {
+      "clusterId": "동구-264",
+      "managedUnitCount": 13,
+      "representativeCoordinate": [
+        126.949547,
+        35.089548
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동253-12"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 13
+    },
+    {
+      "clusterId": "동구-265",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.950089,
+        35.089222
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동472-34"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 17
+    },
+    {
+      "clusterId": "동구-266",
+      "managedUnitCount": 11,
+      "representativeCoordinate": [
+        126.950436,
+        35.088913
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동270"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 11
+    },
+    {
+      "clusterId": "동구-267",
+      "managedUnitCount": 15,
+      "representativeCoordinate": [
+        126.953171,
+        35.090298
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동339-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 15
+    },
+    {
+      "clusterId": "동구-268",
+      "managedUnitCount": 17,
+      "representativeCoordinate": [
+        126.952791,
+        35.088807
+      ],
+      "roadAddresses": [],
+      "parcelAddresses": [
+        "선교동282-1"
+      ],
+      "dataAsOf": "2024-04-15",
+      "roadAddressManagedUnitCount": 0,
+      "parcelAddressManagedUnitCount": 17
+    }
+  ]
+}
