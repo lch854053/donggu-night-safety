@@ -1,11 +1,10 @@
-// 2024-04-15 동구 가로등현황. 개별 관리번호 여러 건이 한 대표 좌표를 공유한다.
+// 동구 가로등현황: 여러 관리번호가 같은 대표 좌표·주소를 공유한다. 개별 등주 Point가 아니다.
 const ENDPOINT = "https://api.odcloud.kr/api/15113447/v1/uddi:6aec4d77-1e0e-4757-9af7-888d0257e427";
 const PAGE_SIZE = 1000;
 
 export async function collectRoadLights(key, getText) {
   if (!key) throw new Error("ROAD_LIGHT_SERVICE_KEY가 필요합니다.");
-  const features = [];
-  const coordinates = new Set();
+  const groups = new Map();
   const ids = new Set();
   let total = null;
   let dataAsOf = "";
@@ -29,23 +28,27 @@ export async function collectRoadLights(key, getText) {
       const id = String(row["관리번호"] || "").trim();
       if (!id) { invalid++; continue; }
       const coordinate = [lon.toFixed(6), lat.toFixed(6)].join(",");
-      if (ids.has(id) || coordinates.has(coordinate)) continue;
+      if (ids.has(id)) continue;
       ids.add(id);
-      coordinates.add(coordinate);
       const asOf = String(row["데이터기준일자"] || "").trim();
       if (asOf > dataAsOf) dataAsOf = asOf;
-      const roadName = String(row["소재지도로명주소"] || "").trim();
-      features.push({
-        type: "Feature",
-        properties: {
-          id: `road-light-${coordinate.replace(",", "-")}`, type: "road_light", name: roadName || "가로등 위치",
-          source: "odcloud:15113447", ...(roadName ? { roadName } : {}),
-          ...(asOf ? { dataAsOf: asOf } : {}),
-        },
-        geometry: { type: "Point", coordinates: [+lon.toFixed(6), +lat.toFixed(6)] },
-      });
+      const roadAddress = String(row["소재지도로명주소"] || "").trim();
+      const parcelAddress = String(row["소재지지번주소"] || "").trim();
+      const group = groups.get(coordinate) ?? {
+        representativeCoordinates: [+lon.toFixed(6), +lat.toFixed(6)],
+        recordCount: 0, roadAddresses: new Set(), parcelAddresses: new Set(), prefixes: new Set(),
+      };
+      group.recordCount++;
+      if (roadAddress) group.roadAddresses.add(roadAddress);
+      if (parcelAddress) group.parcelAddresses.add(parcelAddress);
+      group.prefixes.add(id.replace(/-\d+$/, ""));
+      groups.set(coordinate, group);
     }
   }
-  if (!features.length || !dataAsOf) throw new Error("가로등 좌표 또는 기준일자 없음 — 기존 자료 유지");
-  return { features, total, invalid, dataAsOf };
+  if (!groups.size || !dataAsOf) throw new Error("가로등 좌표 또는 기준일자 없음 — 기존 자료 유지");
+  return { groups: [...groups.values()].map((g) => ({
+    representativeCoordinates: g.representativeCoordinates, recordCount: g.recordCount,
+    roadAddresses: [...g.roadAddresses], parcelAddresses: [...g.parcelAddresses],
+    managementPrefixes: [...g.prefixes],
+  })), total, invalid, dataAsOf };
 }

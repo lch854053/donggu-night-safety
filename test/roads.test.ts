@@ -19,6 +19,7 @@ const dataset: SafetyDataset = {
   riskZones: readJson("public/data/risk-zones.geojson"),
   metadata: { sourceKind: "static", scoreKind: "client", updatedAt: "" },
   crimeRiskByRoad: crimeFile?.roads,
+  roadLightingEvidenceByRoad: readJson("public/data/road-light-evidence.json").roads,
 };
 
 test("shipped roads are current, unique, valid-length real segments with no sample risk penalties", () => {

@@ -99,7 +99,7 @@ function roadPopupContent(properties: Record<string, unknown>) {
   });
   const lighting = document.createElement("p");
   lighting.className = "road-popup-note";
-  lighting.textContent = `보안등 ${numericProperty(properties, "securityLightCount")}개 · 가로등 대표 위치 ${numericProperty(properties, "roadLightCount")}곳 · 조명 커버리지 ${numericProperty(properties, "lightingCoverage")}% · 최대 암구간 ${numericProperty(properties, "maxDarkGapMeters")}m · 조명환경 ${numericProperty(properties, "lightingScore")}/100`;
+  lighting.textContent = `보안등 실제 위치 ${numericProperty(properties, "securityLightCount")}개 · 조명 커버리지 ${numericProperty(properties, "lightingCoverage")}% · 최대 암구간 ${numericProperty(properties, "maxDarkGapMeters")}m · 조명환경 ${numericProperty(properties, "lightingScore")}/100`;
 
   // 관찰 메시지는 실제 수집된 데이터에서만 만든다. 없는 요소를 임의로 표시하지 않는다.
   const signals: string[] = [];
@@ -151,8 +151,15 @@ function roadPopupContent(properties: Record<string, unknown>) {
   const lightingNote = document.createElement("p");
   lightingNote.className = "road-popup-note";
   lightingNote.textContent =
-    "※ 실제 조도(lux)가 아니라 보안등·가로등 대표 위치와 거리 분포를 기반으로 계산한 상대적 추정값입니다.";
+    "※ 커버리지·암구간은 실제 보안등 위치 기반 추정치이며 실제 조도(lux)가 아닙니다.";
   content.append(name, label, scoreRow, metrics, lighting, note, lightingNote);
+  if (properties.roadLightingEstimated === true) {
+    const estimate = document.createElement("p");
+    estimate.className = "road-popup-note";
+    const method = String(properties.roadLightingMatchMethod ?? "");
+    estimate.textContent = `가로등: 공공 관리자료상 도로구간 설치 추정 · 근거 신뢰도 ${method === "road_name_and_coordinate" ? "높음" : method === "road_name" ? "보통" : "낮음"} · 관리행 ${numericProperty(properties, "roadLightingRecordCount")}건 (등주 수 아님). 개별 설치위치·실제 조도·등주 간격은 확인되지 않습니다.`;
+    content.append(estimate);
+  }
   const grade = document.createElement("p");
   grade.className = "road-popup-note";
   grade.textContent = properties.planningRoadGrade

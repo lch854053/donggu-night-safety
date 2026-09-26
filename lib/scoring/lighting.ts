@@ -71,7 +71,7 @@ export interface LightingMetrics {
 
 /**
  * 도로를 sampleIntervalMeters 간격으로 샘플링해 조명 환경 지표를 계산한다.
- * 실제 조도(lux)가 아닌 보안등·가로등 위치·거리 분포 기반의 상대적 추정값이다.
+ * 실제 조도(lux)가 아닌 개별 보안등 위치·거리 분포 기반의 상대적 추정값이다.
  *
  * 샘플×조명 위치 거리는 Turf distance(haversine) 대신 도로 시작점 기준
  * 등장투영 평면 미터로 계산한다. 전 구간에서 수십만 회 호출되는 전처리
@@ -97,10 +97,10 @@ export function computeLightingMetrics(
       .coordinates as [number, number];
     samples.push(toLocalMeters(point));
   }
-  const lights = lightFeatures.map((light) => {
+  const lights = lightFeatures.filter((light) =>
+    light.properties.type === "security_light" || light.properties.type === "streetlight").map((light) => {
     const [x, y] = toLocalMeters(light.geometry.coordinates);
-    const kind = light.properties.type === "road_light" ? "road_light" : "security_light";
-    const { sigmaMeters, cutoffMeters } = config.lightTypes[kind];
+    const { sigmaMeters, cutoffMeters } = config.lightTypes.security_light;
     return { x, y, sigmaMeters, cutoffSquared: cutoffMeters ** 2 };
   });
 

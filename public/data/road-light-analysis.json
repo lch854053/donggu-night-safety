@@ -1,0 +1,2678 @@
+{
+  "source": "odcloud:15113447",
+  "model": "comparison-only",
+  "matching": {
+    "recordCount": 3805,
+    "representativePointCount": 264,
+    "roadNameRows": 1973,
+    "matchedRows": 2786,
+    "highRows": 1938,
+    "mediumRows": 31,
+    "lowRows": 817,
+    "unmatchedRows": 1019,
+    "matchedGroups": 192,
+    "unmatchedGroups": [
+      {
+        "coordinate": [
+          126.936912,
+          35.11206
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동 176",
+        "recordCount": 24
+      },
+      {
+        "coordinate": [
+          126.95176,
+          35.08114
+        ],
+        "roadAddress": "",
+        "parcelAddress": "선교동 482",
+        "recordCount": 17
+      },
+      {
+        "coordinate": [
+          126.937906,
+          35.104776
+        ],
+        "roadAddress": "",
+        "parcelAddress": "월남동 157",
+        "recordCount": 24
+      },
+      {
+        "coordinate": [
+          126.939482,
+          35.09922
+        ],
+        "roadAddress": "",
+        "parcelAddress": "월남동 159-21",
+        "recordCount": 25
+      },
+      {
+        "coordinate": [
+          126.941427,
+          35.1321
+        ],
+        "roadAddress": "",
+        "parcelAddress": "운림동 640-3",
+        "recordCount": 18
+      },
+      {
+        "coordinate": [
+          126.939969,
+          35.099239
+        ],
+        "roadAddress": "",
+        "parcelAddress": "내남동 17",
+        "recordCount": 25
+      },
+      {
+        "coordinate": [
+          126.925258,
+          35.11743
+        ],
+        "roadAddress": "",
+        "parcelAddress": "용산동 733",
+        "recordCount": 16
+      },
+      {
+        "coordinate": [
+          126.92237,
+          35.135963
+        ],
+        "roadAddress": "",
+        "parcelAddress": "학동 904-139",
+        "recordCount": 10
+      },
+      {
+        "coordinate": [
+          126.936241,
+          35.147786
+        ],
+        "roadAddress": "",
+        "parcelAddress": "지산동 691-58",
+        "recordCount": 12
+      },
+      {
+        "coordinate": [
+          126.916631,
+          35.151409
+        ],
+        "roadAddress": "",
+        "parcelAddress": "대인동 136-1",
+        "recordCount": 10
+      },
+      {
+        "coordinate": [
+          126.927291,
+          35.153287
+        ],
+        "roadAddress": "",
+        "parcelAddress": "산수동 358-21",
+        "recordCount": 3
+      },
+      {
+        "coordinate": [
+          126.925743,
+          35.153914
+        ],
+        "roadAddress": "",
+        "parcelAddress": "산수동 724",
+        "recordCount": 9
+      },
+      {
+        "coordinate": [
+          126.922568,
+          35.135902
+        ],
+        "roadAddress": "",
+        "parcelAddress": "학동 1026",
+        "recordCount": 9
+      },
+      {
+        "coordinate": [
+          126.914442,
+          35.156339
+        ],
+        "roadAddress": "",
+        "parcelAddress": "대인동 331",
+        "recordCount": 14
+      },
+      {
+        "coordinate": [
+          126.925793,
+          35.153775
+        ],
+        "roadAddress": "",
+        "parcelAddress": "산수동 365-12",
+        "recordCount": 15
+      },
+      {
+        "coordinate": [
+          126.935424,
+          35.11508
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동 181",
+        "recordCount": 17
+      },
+      {
+        "coordinate": [
+          126.939141,
+          35.132965
+        ],
+        "roadAddress": "",
+        "parcelAddress": "운림동 603-8",
+        "recordCount": 10
+      },
+      {
+        "coordinate": [
+          126.939723,
+          35.132159
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동 762",
+        "recordCount": 18
+      },
+      {
+        "coordinate": [
+          126.931336,
+          35.128687
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동 532-1",
+        "recordCount": 10
+      },
+      {
+        "coordinate": [
+          126.94431,
+          35.13217
+        ],
+        "roadAddress": "",
+        "parcelAddress": "운림동 661-15",
+        "recordCount": 9
+      },
+      {
+        "coordinate": [
+          126.923988,
+          35.156408
+        ],
+        "roadAddress": "",
+        "parcelAddress": "산수동 724",
+        "recordCount": 6
+      },
+      {
+        "coordinate": [
+          126.923519,
+          35.151189
+        ],
+        "roadAddress": "",
+        "parcelAddress": "동명동 200-166",
+        "recordCount": 9
+      },
+      {
+        "coordinate": [
+          126.90968,
+          35.149718
+        ],
+        "roadAddress": "",
+        "parcelAddress": "수기동 138",
+        "recordCount": 22
+      },
+      {
+        "coordinate": [
+          126.924239,
+          35.158325
+        ],
+        "roadAddress": "계림30번길 15",
+        "parcelAddress": "계림동 1815",
+        "recordCount": 4
+      },
+      {
+        "coordinate": [
+          126.912986,
+          35.150545
+        ],
+        "roadAddress": "",
+        "parcelAddress": "충장로5가 49",
+        "recordCount": 24
+      },
+      {
+        "coordinate": [
+          126.921274,
+          35.138297
+        ],
+        "roadAddress": "",
+        "parcelAddress": "학동 942-9",
+        "recordCount": 28
+      },
+      {
+        "coordinate": [
+          126.921471,
+          35.138398
+        ],
+        "roadAddress": "",
+        "parcelAddress": "학동 942-9",
+        "recordCount": 11
+      },
+      {
+        "coordinate": [
+          126.924027,
+          35.141747
+        ],
+        "roadAddress": "",
+        "parcelAddress": "학동 475-2",
+        "recordCount": 23
+      },
+      {
+        "coordinate": [
+          126.921753,
+          35.147314
+        ],
+        "roadAddress": "",
+        "parcelAddress": "광산동 115",
+        "recordCount": 12
+      },
+      {
+        "coordinate": [
+          126.919252,
+          35.145904
+        ],
+        "roadAddress": "",
+        "parcelAddress": "광산동 113",
+        "recordCount": 14
+      },
+      {
+        "coordinate": [
+          126.920286,
+          35.158822
+        ],
+        "roadAddress": "",
+        "parcelAddress": "계림동 290-3",
+        "recordCount": 10
+      },
+      {
+        "coordinate": [
+          126.938394,
+          35.104886
+        ],
+        "roadAddress": "",
+        "parcelAddress": "월남동 157",
+        "recordCount": 24
+      },
+      {
+        "coordinate": [
+          126.937444,
+          35.11075
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동 산 250-3",
+        "recordCount": 22
+      },
+      {
+        "coordinate": [
+          126.925941,
+          35.152691
+        ],
+        "roadAddress": "",
+        "parcelAddress": "동명동 181-1",
+        "recordCount": 19
+      },
+      {
+        "coordinate": [
+          126.94135,
+          35.093992
+        ],
+        "roadAddress": "",
+        "parcelAddress": "내남동 산 15",
+        "recordCount": 27
+      },
+      {
+        "coordinate": [
+          126.950041,
+          35.087481
+        ],
+        "roadAddress": "",
+        "parcelAddress": "선교동 산 151",
+        "recordCount": 6
+      },
+      {
+        "coordinate": [
+          126.938534,
+          35.103464
+        ],
+        "roadAddress": "",
+        "parcelAddress": "월남동 619",
+        "recordCount": 10
+      },
+      {
+        "coordinate": [
+          126.930904,
+          35.119301
+        ],
+        "roadAddress": "",
+        "parcelAddress": "용산동 218-7",
+        "recordCount": 17
+      },
+      {
+        "coordinate": [
+          126.925875,
+          35.157312
+        ],
+        "roadAddress": "",
+        "parcelAddress": "산수동 454-1",
+        "recordCount": 5
+      },
+      {
+        "coordinate": [
+          126.936667,
+          35.121586
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동 223-7",
+        "recordCount": 6
+      },
+      {
+        "coordinate": [
+          126.935423,
+          35.121201
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동 229",
+        "recordCount": 6
+      },
+      {
+        "coordinate": [
+          126.924077,
+          35.156586
+        ],
+        "roadAddress": "",
+        "parcelAddress": "계림동 1821",
+        "recordCount": 11
+      },
+      {
+        "coordinate": [
+          126.947549,
+          35.087706
+        ],
+        "roadAddress": "",
+        "parcelAddress": "선교동 산 222-1",
+        "recordCount": 23
+      },
+      {
+        "coordinate": [
+          126.952521,
+          35.087198
+        ],
+        "roadAddress": "",
+        "parcelAddress": "선교동 산 151",
+        "recordCount": 23
+      },
+      {
+        "coordinate": [
+          126.960212,
+          35.079912
+        ],
+        "roadAddress": "",
+        "parcelAddress": "선교동 산 165-1",
+        "recordCount": 20
+      },
+      {
+        "coordinate": [
+          126.952623,
+          35.13329
+        ],
+        "roadAddress": "",
+        "parcelAddress": "운림동 산 185-2",
+        "recordCount": 35
+      },
+      {
+        "coordinate": [
+          126.938408,
+          35.098674
+        ],
+        "roadAddress": "",
+        "parcelAddress": "월남동 637",
+        "recordCount": 9
+      },
+      {
+        "coordinate": [
+          126.937397,
+          35.130835
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동 726-15",
+        "recordCount": 21
+      },
+      {
+        "coordinate": [
+          126.934849,
+          35.129841
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동 711-20",
+        "recordCount": 9
+      },
+      {
+        "coordinate": [
+          126.921507,
+          35.117068
+        ],
+        "roadAddress": "",
+        "parcelAddress": "용산동 445",
+        "recordCount": 5
+      },
+      {
+        "coordinate": [
+          126.924177,
+          35.118304
+        ],
+        "roadAddress": "용산1로 12",
+        "parcelAddress": "용산동 727",
+        "recordCount": 20
+      },
+      {
+        "coordinate": [
+          126.92314,
+          35.117514
+        ],
+        "roadAddress": "",
+        "parcelAddress": "용산동 733",
+        "recordCount": 17
+      },
+      {
+        "coordinate": [
+          126.927303,
+          35.117706
+        ],
+        "roadAddress": "",
+        "parcelAddress": "용산동 699",
+        "recordCount": 24
+      },
+      {
+        "coordinate": [
+          126.917146,
+          35.155955
+        ],
+        "roadAddress": "",
+        "parcelAddress": "계림동 478-2",
+        "recordCount": 9
+      },
+      {
+        "coordinate": [
+          126.915947,
+          35.158112
+        ],
+        "roadAddress": "",
+        "parcelAddress": "계림동 483-2",
+        "recordCount": 18
+      },
+      {
+        "coordinate": [
+          126.930919,
+          35.11932
+        ],
+        "roadAddress": "",
+        "parcelAddress": "용산동 227-3",
+        "recordCount": 6
+      },
+      {
+        "coordinate": [
+          126.932684,
+          35.133946
+        ],
+        "roadAddress": "",
+        "parcelAddress": "학동 706-1",
+        "recordCount": 10
+      },
+      {
+        "coordinate": [
+          126.921376,
+          35.155321
+        ],
+        "roadAddress": "",
+        "parcelAddress": "계림동 233-18",
+        "recordCount": 18
+      },
+      {
+        "coordinate": [
+          126.937849,
+          35.155537
+        ],
+        "roadAddress": "",
+        "parcelAddress": "산수동 86-10",
+        "recordCount": 14
+      },
+      {
+        "coordinate": [
+          126.921198,
+          35.154569
+        ],
+        "roadAddress": "",
+        "parcelAddress": "동명동267-3",
+        "recordCount": 4
+      },
+      {
+        "coordinate": [
+          126.924416,
+          35.153912
+        ],
+        "roadAddress": "",
+        "parcelAddress": "산수동370-2",
+        "recordCount": 11
+      },
+      {
+        "coordinate": [
+          126.931692,
+          35.122473
+        ],
+        "roadAddress": "",
+        "parcelAddress": "용산동636-287",
+        "recordCount": 8
+      },
+      {
+        "coordinate": [
+          126.936734,
+          35.149241
+        ],
+        "roadAddress": "",
+        "parcelAddress": "지산동724-1",
+        "recordCount": 7
+      },
+      {
+        "coordinate": [
+          126.926383,
+          35.16021
+        ],
+        "roadAddress": "",
+        "parcelAddress": "계림동1619",
+        "recordCount": 9
+      },
+      {
+        "coordinate": [
+          126.927761,
+          35.161117
+        ],
+        "roadAddress": "",
+        "parcelAddress": "계림동1730",
+        "recordCount": 7
+      },
+      {
+        "coordinate": [
+          126.923081,
+          35.148874
+        ],
+        "roadAddress": "",
+        "parcelAddress": "장동87-12",
+        "recordCount": 9
+      },
+      {
+        "coordinate": [
+          126.923401,
+          35.148849
+        ],
+        "roadAddress": "",
+        "parcelAddress": "장동87-12",
+        "recordCount": 10
+      },
+      {
+        "coordinate": [
+          126.934749,
+          35.123056
+        ],
+        "roadAddress": "",
+        "parcelAddress": "소태동638-14",
+        "recordCount": 13
+      },
+      {
+        "coordinate": [
+          126.909064,
+          35.151782
+        ],
+        "roadAddress": "",
+        "parcelAddress": "충장로5가96-4",
+        "recordCount": 6
+      },
+      {
+        "coordinate": [
+          126.950089,
+          35.089222
+        ],
+        "roadAddress": "",
+        "parcelAddress": "선교동472-34",
+        "recordCount": 17
+      },
+      {
+        "coordinate": [
+          126.950436,
+          35.088913
+        ],
+        "roadAddress": "",
+        "parcelAddress": "선교동270",
+        "recordCount": 11
+      },
+      {
+        "coordinate": [
+          126.953171,
+          35.090298
+        ],
+        "roadAddress": "",
+        "parcelAddress": "선교동339-1",
+        "recordCount": 15
+      }
+    ],
+    "distantSameName": [],
+    "addressConflicts": [],
+    "groupsOver50": [],
+    "sameAddressDistantRoads": [
+      {
+        "address": "학동 1003-1",
+        "coordinates": [
+          [
+            126.933875,
+            35.130334
+          ],
+          [
+            126.936769,
+            35.133155
+          ]
+        ],
+        "meters": 409
+      },
+      {
+        "address": "학동 1003-1",
+        "coordinates": [
+          [
+            126.933875,
+            35.130334
+          ],
+          [
+            126.922976,
+            35.134887
+          ]
+        ],
+        "meters": 1113
+      },
+      {
+        "address": "학동 1003-1",
+        "coordinates": [
+          [
+            126.936769,
+            35.133155
+          ],
+          [
+            126.922976,
+            35.134887
+          ]
+        ],
+        "meters": 1269
+      },
+      {
+        "address": "지산동 724-1",
+        "coordinates": [
+          [
+            126.936887,
+            35.149468
+          ],
+          [
+            126.92833,
+            35.151165
+          ]
+        ],
+        "meters": 801
+      },
+      {
+        "address": "산수동 561-1",
+        "coordinates": [
+          [
+            126.930936,
+            35.153012
+          ],
+          [
+            126.931096,
+            35.157751
+          ]
+        ],
+        "meters": 527
+      },
+      {
+        "address": "산수동 561-1",
+        "coordinates": [
+          [
+            126.930936,
+            35.153012
+          ],
+          [
+            126.927612,
+            35.158673
+          ]
+        ],
+        "meters": 698
+      },
+      {
+        "address": "산수동 561-1",
+        "coordinates": [
+          [
+            126.931096,
+            35.157751
+          ],
+          [
+            126.927612,
+            35.158673
+          ]
+        ],
+        "meters": 333
+      }
+    ],
+    "matchedRoadOver50": [
+      {
+        "roadId": "ngii-67cc6724369be926-1",
+        "recordCount": 57,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-e44a0ae257ba8592-2",
+        "recordCount": 57,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-e44a0ae257ba8592-1",
+        "recordCount": 57,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-258a623876af9ef8-2",
+        "recordCount": 52,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-258a623876af9ef8-3",
+        "recordCount": 52,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-7ed0b5795a3ec541-2",
+        "recordCount": 62,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-a5e0d60a7ed6f8b0-1",
+        "recordCount": 62,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-b8327ced24d366e6-1",
+        "recordCount": 62,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-278103d662a2b3b6-1",
+        "recordCount": 75,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-2f3e42277f239f84-1",
+        "recordCount": 61,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-2f3e42277f239f84-2",
+        "recordCount": 61,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-621b21fa5f3f2be9-1",
+        "recordCount": 61,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-621b21fa5f3f2be9-2",
+        "recordCount": 61,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-84eeb98747fd0846-1",
+        "recordCount": 75,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-84eeb98747fd0846-2",
+        "recordCount": 75,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-beee359adbc66245-1",
+        "recordCount": 61,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-00bc6d6f5f8d8ec9-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-01a1d6c432ec1e67-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-10ed15dc24963894-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-30c792fa874d7081-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-44b3b868dbfda5cb-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-44b3b868dbfda5cb-2",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-5985b05903e47775-1",
+        "recordCount": 69,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-5ec6df9da33e0479-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-66f5dd6667018394-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-75adac66e10c9ec0-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-75adac66e10c9ec0-2",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-7647b34ac0e251f0-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-861beba704a4bbba-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-8e1aba7c1eacbae2-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-b868caff87a406e3-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-ceedb05f85c0a558-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-f0a3ee219f6aff0c-1",
+        "recordCount": 69,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-fe20eec18050a6a3-1",
+        "recordCount": 78,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-03012f8f4d8df558-1",
+        "recordCount": 55,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-19418d29aee7c586-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-291d2ee38c5a68dd-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-291d2ee38c5a68dd-2",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-30b046e2160dad6a-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-44e5c9fb83e0476e-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-4515cf2567616436-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-518b23e1666b193a-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-64c268b0134fbd92-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-736e5a81fb8e7756-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-8360c5c3f645595a-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-92acce41d9b0c30a-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-940c00f0ed41d3b9-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-b4e16a2907054ebb-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-be907b5c95c382d1-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-e46b9b0b2591f98a-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-ec6a5f0b9b540647-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-fcfd812940bfc7aa-1",
+        "recordCount": 66,
+        "representativePoints": 5
+      },
+      {
+        "roadId": "ngii-5f57ccd0c80c327d-1",
+        "recordCount": 54,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-5f57ccd0c80c327d-2",
+        "recordCount": 54,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-888ad8ce15e4e24e-1",
+        "recordCount": 54,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-286ff45c09cfb6eb-1",
+        "recordCount": 52,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-49778866afe42f7d-1",
+        "recordCount": 52,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-4d1fac0b8bd31c20-1",
+        "recordCount": 52,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-4d1fac0b8bd31c20-2",
+        "recordCount": 52,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-7057b6f3c4e43331-1",
+        "recordCount": 52,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-a348c0dd80a9c5cd-1",
+        "recordCount": 52,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-af62db773094e5cb-1",
+        "recordCount": 52,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-dec93ab30fbabb12-1",
+        "recordCount": 52,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-f37ea3740dab00eb-1",
+        "recordCount": 52,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-48c69e2689bdbc7b-1",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-48c69e2689bdbc7b-2",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-b64d1627444e7551-1",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-b64d1627444e7551-2",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-b64d1627444e7551-3",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-53ff48840103c74e-1",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-53ff48840103c74e-2",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-53ff48840103c74e-3",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-53ff48840103c74e-4",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-630b0f914168dd8c-1",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-630b0f914168dd8c-2",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-666a48a11244af82-1",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-666a48a11244af82-2",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-6c3fce9c715cb7dd-1",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-9fc1bb97a8b526a1-4",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-c2a270724316ab6f-1",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-c62729568dfd44ea-1",
+        "recordCount": 62,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-c62729568dfd44ea-2",
+        "recordCount": 50,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-c62729568dfd44ea-3",
+        "recordCount": 50,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-024d251da701e029-1",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-2aa8111c62872806-1",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-2aaa5a7d7c4fe54e-1",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-88f34958ac065189-1",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-88f34958ac065189-2",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-9af38a788049b75e-1",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-a59d0221c427a36a-1",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-a59d0221c427a36a-2",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-e002ad9ef5806a5f-1",
+        "recordCount": 68,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-a54c7d1aa23f925f-3",
+        "recordCount": 53,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-a54c7d1aa23f925f-2",
+        "recordCount": 53,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-bd0071dbd49b7d5f-1",
+        "recordCount": 55,
+        "representativePoints": 4
+      },
+      {
+        "roadId": "ngii-31a57897ae3310e8-1",
+        "recordCount": 71,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-13225063683b843e-1",
+        "recordCount": 52,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-872fa1f3e5a3b7e4-1",
+        "recordCount": 52,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-96728780d172036e-1",
+        "recordCount": 52,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-96728780d172036e-2",
+        "recordCount": 52,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-96728780d172036e-3",
+        "recordCount": 52,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-d6affeaf552321aa-1",
+        "recordCount": 52,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-dda2ca9435f47b17-1",
+        "recordCount": 52,
+        "representativePoints": 2
+      },
+      {
+        "roadId": "ngii-4e385b56939922c0-1",
+        "recordCount": 56,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-4e385b56939922c0-2",
+        "recordCount": 56,
+        "representativePoints": 3
+      },
+      {
+        "roadId": "ngii-7d7f10b783dd79a6-1",
+        "recordCount": 56,
+        "representativePoints": 3
+      }
+    ],
+    "byParcelDong": {
+      "학동": {
+        "records": 490,
+        "representativePoints": 30
+      },
+      "산수동": {
+        "records": 422,
+        "representativePoints": 29
+      },
+      "계림동": {
+        "records": 414,
+        "representativePoints": 31
+      },
+      "소태동": {
+        "records": 393,
+        "representativePoints": 28
+      },
+      "선교동": {
+        "records": 318,
+        "representativePoints": 17
+      },
+      "용산동": {
+        "records": 277,
+        "representativePoints": 18
+      },
+      "운림동": {
+        "records": 190,
+        "representativePoints": 12
+      },
+      "지산동": {
+        "records": 173,
+        "representativePoints": 14
+      },
+      "동명동": {
+        "records": 159,
+        "representativePoints": 13
+      },
+      "월남동": {
+        "records": 148,
+        "representativePoints": 9
+      },
+      "내남동": {
+        "records": 139,
+        "representativePoints": 8
+      },
+      "충장로5가": {
+        "records": 84,
+        "representativePoints": 6
+      },
+      "대인동": {
+        "records": 83,
+        "representativePoints": 8
+      },
+      "서석동": {
+        "records": 64,
+        "representativePoints": 6
+      },
+      "궁동": {
+        "records": 47,
+        "representativePoints": 5
+      },
+      "광산동": {
+        "records": 46,
+        "representativePoints": 4
+      },
+      "장동": {
+        "records": 45,
+        "representativePoints": 4
+      },
+      "불로동": {
+        "records": 42,
+        "representativePoints": 3
+      },
+      "금남로2가": {
+        "records": 38,
+        "representativePoints": 2
+      },
+      "남동": {
+        "records": 34,
+        "representativePoints": 3
+      },
+      "금남로5가": {
+        "records": 32,
+        "representativePoints": 3
+      },
+      "충장로2가": {
+        "records": 26,
+        "representativePoints": 1
+      },
+      "호남동": {
+        "records": 22,
+        "representativePoints": 2
+      },
+      "수기동": {
+        "records": 22,
+        "representativePoints": 1
+      },
+      "대의동": {
+        "records": 20,
+        "representativePoints": 1
+      },
+      "금남로1가": {
+        "records": 17,
+        "representativePoints": 1
+      },
+      "황금동": {
+        "records": 14,
+        "representativePoints": 1
+      },
+      "용연동": {
+        "records": 13,
+        "representativePoints": 1
+      },
+      "금남로4가": {
+        "records": 12,
+        "representativePoints": 1
+      },
+      "금남로": {
+        "records": 12,
+        "representativePoints": 1
+      },
+      "금동": {
+        "records": 9,
+        "representativePoints": 1
+      }
+    },
+    "representativeAddressDiversity": {
+      "1 road / 1 parcel / 1 prefix": 144,
+      "0 road / 1 parcel / 1 prefix": 120
+    },
+    "linkedRoadCount": 2047
+  },
+  "lighting": {
+    "actual": {
+      "count": 10651,
+      "mean": 50.25,
+      "median": 49,
+      "p10": 2,
+      "p25": 7,
+      "p75": 93,
+      "p90": 97,
+      "le30": 45.97,
+      "ge80": 41.47
+    },
+    "A": {
+      "count": 10651,
+      "mean": 49.99,
+      "median": 48,
+      "p10": 2,
+      "p25": 9,
+      "p75": 91,
+      "p90": 97,
+      "le30": 45.33,
+      "ge80": 39.87
+    },
+    "B": {
+      "count": 10651,
+      "mean": 51.27,
+      "median": 50,
+      "p10": 2,
+      "p25": 9,
+      "p75": 93,
+      "p90": 98,
+      "le30": 44.51,
+      "ge80": 41.8
+    },
+    "previousDirectPoint": {
+      "count": 10651,
+      "mean": 54.02,
+      "median": 66,
+      "p10": 2,
+      "p25": 9,
+      "p75": 94,
+      "p90": 98,
+      "le30": 41.39,
+      "ge80": 45.64
+    }
+  },
+  "safetyV2": {
+    "actual": {
+      "count": 10651,
+      "mean": 50.71,
+      "median": 57,
+      "p10": 20,
+      "p25": 30,
+      "p75": 69,
+      "p90": 74,
+      "le30": 25.17,
+      "ge80": 1.87
+    },
+    "A": {
+      "count": 10651,
+      "mean": 50.64,
+      "median": 57,
+      "p10": 20,
+      "p25": 30,
+      "p75": 68,
+      "p90": 74,
+      "le30": 25.03,
+      "ge80": 1.42
+    },
+    "B": {
+      "count": 10651,
+      "mean": 50.99,
+      "median": 57,
+      "p10": 20,
+      "p25": 31,
+      "p75": 69,
+      "p90": 74,
+      "le30": 24.96,
+      "ge80": 1.97
+    }
+  },
+  "changes": {
+    "A": {
+      "ge10": 2.61,
+      "ge20": 0.08,
+      "ge30": 0
+    },
+    "B": {
+      "ge10": 3.68,
+      "ge20": 0.74,
+      "ge30": 0
+    }
+  },
+  "safetyChanges": {
+    "A": {
+      "ge10": 0,
+      "ge20": 0,
+      "maxIncrease": 7
+    },
+    "B": {
+      "ge10": 0,
+      "ge20": 0,
+      "maxIncrease": 9
+    }
+  },
+  "byDong": {
+    "지원2동": {
+      "n": 3236,
+      "actual": 27.8,
+      "A": 28,
+      "B": 28.5
+    },
+    "학운동": {
+      "n": 1457,
+      "actual": 34.2,
+      "A": 34,
+      "B": 34.8
+    },
+    "서남동": {
+      "n": 580,
+      "actual": 70,
+      "A": 69.3,
+      "B": 71.1
+    },
+    "산수1동": {
+      "n": 466,
+      "actual": 78.3,
+      "A": 77.4,
+      "B": 79.2
+    },
+    "지산2동": {
+      "n": 844,
+      "actual": 51,
+      "A": 50.8,
+      "B": 51.7
+    },
+    "산수2동": {
+      "n": 557,
+      "actual": 63.1,
+      "A": 61.7,
+      "B": 64.1
+    },
+    "지원1동": {
+      "n": 690,
+      "actual": 63.8,
+      "A": 63.3,
+      "B": 64.6
+    },
+    "계림2동": {
+      "n": 220,
+      "actual": 59.9,
+      "A": 59,
+      "B": 61.5
+    },
+    "동명동": {
+      "n": 555,
+      "actual": 85.5,
+      "A": 84.4,
+      "B": 86.1
+    },
+    "학동": {
+      "n": 398,
+      "actual": 45.3,
+      "A": 44.7,
+      "B": 47.1
+    },
+    "충장동": {
+      "n": 708,
+      "actual": 61.2,
+      "A": 62,
+      "B": 64.4
+    },
+    "계림1동": {
+      "n": 554,
+      "actual": 75.1,
+      "A": 75.4,
+      "B": 77
+    },
+    "지산1동": {
+      "n": 386,
+      "actual": 83.9,
+      "A": 83,
+      "B": 84.5
+    }
+  },
+  "anomalies": [
+    {
+      "roadId": "ngii-00bc6d6f5f8d8ec9-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 1,
+      "actual": 99,
+      "A": 99,
+      "B": 99
+    },
+    {
+      "roadId": "ngii-01a1d6c432ec1e67-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 67,
+      "A": 62,
+      "B": 70
+    },
+    {
+      "roadId": "ngii-024d251da701e029-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 92,
+      "A": 80,
+      "B": 93
+    },
+    {
+      "roadId": "ngii-03012f8f4d8df558-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 55,
+      "evidence": 0.32,
+      "actual": 32,
+      "A": 32,
+      "B": 37
+    },
+    {
+      "roadId": "ngii-10ed15dc24963894-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 95,
+      "A": 84,
+      "B": 96
+    },
+    {
+      "roadId": "ngii-13225063683b843e-1",
+      "name": "필문대로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 1,
+      "actual": 57,
+      "A": 66,
+      "B": 68
+    },
+    {
+      "roadId": "ngii-19418d29aee7c586-1",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 96,
+      "A": 85,
+      "B": 96
+    },
+    {
+      "roadId": "ngii-258a623876af9ef8-2",
+      "name": "남문로",
+      "adminDong": "지원2동",
+      "recordCount": 52,
+      "evidence": 0.32,
+      "actual": 3,
+      "A": 9,
+      "B": 11
+    },
+    {
+      "roadId": "ngii-258a623876af9ef8-3",
+      "name": "남문로",
+      "adminDong": "지원2동",
+      "recordCount": 52,
+      "evidence": 0.32,
+      "actual": 3,
+      "A": 9,
+      "B": 11
+    },
+    {
+      "roadId": "ngii-278103d662a2b3b6-1",
+      "name": "남문로",
+      "adminDong": "학동",
+      "recordCount": 75,
+      "evidence": 0.4,
+      "actual": 88,
+      "A": 78,
+      "B": 89
+    },
+    {
+      "roadId": "ngii-286ff45c09cfb6eb-1",
+      "name": "무등로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 16,
+      "A": 21,
+      "B": 24
+    },
+    {
+      "roadId": "ngii-291d2ee38c5a68dd-1",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 93,
+      "A": 82,
+      "B": 94
+    },
+    {
+      "roadId": "ngii-291d2ee38c5a68dd-2",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 90,
+      "A": 80,
+      "B": 91
+    },
+    {
+      "roadId": "ngii-2aa8111c62872806-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 40,
+      "A": 38,
+      "B": 45
+    },
+    {
+      "roadId": "ngii-2aaa5a7d7c4fe54e-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 97,
+      "A": 84,
+      "B": 97
+    },
+    {
+      "roadId": "ngii-2f3e42277f239f84-1",
+      "name": "남문로",
+      "adminDong": "학동",
+      "recordCount": 61,
+      "evidence": 0.32,
+      "actual": 91,
+      "A": 79,
+      "B": 92
+    },
+    {
+      "roadId": "ngii-2f3e42277f239f84-2",
+      "name": "남문로",
+      "adminDong": "학동",
+      "recordCount": 61,
+      "evidence": 0.32,
+      "actual": 28,
+      "A": 29,
+      "B": 34
+    },
+    {
+      "roadId": "ngii-30b046e2160dad6a-1",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 34,
+      "A": 35,
+      "B": 41
+    },
+    {
+      "roadId": "ngii-30c792fa874d7081-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 1,
+      "actual": 92,
+      "A": 94,
+      "B": 94
+    },
+    {
+      "roadId": "ngii-31a57897ae3310e8-1",
+      "name": "필문대로",
+      "adminDong": "산수1동",
+      "recordCount": 71,
+      "evidence": 0.32,
+      "actual": 50,
+      "A": 46,
+      "B": 54
+    },
+    {
+      "roadId": "ngii-44b3b868dbfda5cb-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 36,
+      "A": 37,
+      "B": 42
+    },
+    {
+      "roadId": "ngii-44b3b868dbfda5cb-2",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 95,
+      "A": 84,
+      "B": 96
+    },
+    {
+      "roadId": "ngii-44e5c9fb83e0476e-1",
+      "name": "필문대로",
+      "adminDong": "지산1동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 99,
+      "A": 87,
+      "B": 99
+    },
+    {
+      "roadId": "ngii-4515cf2567616436-1",
+      "name": "필문대로",
+      "adminDong": "지산1동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 99,
+      "A": 87,
+      "B": 99
+    },
+    {
+      "roadId": "ngii-48c69e2689bdbc7b-1",
+      "name": "무등로",
+      "adminDong": "계림1동",
+      "recordCount": 68,
+      "evidence": 0.4,
+      "actual": 12,
+      "A": 18,
+      "B": 21
+    },
+    {
+      "roadId": "ngii-48c69e2689bdbc7b-2",
+      "name": "무등로",
+      "adminDong": "계림1동",
+      "recordCount": 68,
+      "evidence": 0.4,
+      "actual": 12,
+      "A": 18,
+      "B": 21
+    },
+    {
+      "roadId": "ngii-49778866afe42f7d-1",
+      "name": "무등로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 14,
+      "A": 19,
+      "B": 23
+    },
+    {
+      "roadId": "ngii-4d1fac0b8bd31c20-1",
+      "name": "무등로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 12,
+      "A": 18,
+      "B": 21
+    },
+    {
+      "roadId": "ngii-4d1fac0b8bd31c20-2",
+      "name": "무등로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 12,
+      "A": 18,
+      "B": 21
+    },
+    {
+      "roadId": "ngii-4e385b56939922c0-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 56,
+      "evidence": 0.32,
+      "actual": 97,
+      "A": 84,
+      "B": 97
+    },
+    {
+      "roadId": "ngii-4e385b56939922c0-2",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 56,
+      "evidence": 0.32,
+      "actual": 98,
+      "A": 85,
+      "B": 98
+    },
+    {
+      "roadId": "ngii-518b23e1666b193a-1",
+      "name": "필문대로",
+      "adminDong": "지산1동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 91,
+      "A": 81,
+      "B": 92
+    },
+    {
+      "roadId": "ngii-53ff48840103c74e-1",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 5,
+      "A": 12,
+      "B": 15
+    },
+    {
+      "roadId": "ngii-53ff48840103c74e-2",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 6,
+      "A": 13,
+      "B": 15
+    },
+    {
+      "roadId": "ngii-53ff48840103c74e-3",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 6,
+      "A": 13,
+      "B": 15
+    },
+    {
+      "roadId": "ngii-53ff48840103c74e-4",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 6,
+      "A": 13,
+      "B": 15
+    },
+    {
+      "roadId": "ngii-5985b05903e47775-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 69,
+      "evidence": 0.4,
+      "actual": 98,
+      "A": 86,
+      "B": 98
+    },
+    {
+      "roadId": "ngii-5ec6df9da33e0479-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 1,
+      "actual": 98,
+      "A": 98,
+      "B": 99
+    },
+    {
+      "roadId": "ngii-5f57ccd0c80c327d-1",
+      "name": "제봉로",
+      "adminDong": "충장동",
+      "recordCount": 54,
+      "evidence": 0.4,
+      "actual": 32,
+      "A": 34,
+      "B": 39
+    },
+    {
+      "roadId": "ngii-5f57ccd0c80c327d-2",
+      "name": "제봉로",
+      "adminDong": "충장동",
+      "recordCount": 54,
+      "evidence": 0.4,
+      "actual": 12,
+      "A": 18,
+      "B": 21
+    },
+    {
+      "roadId": "ngii-621b21fa5f3f2be9-1",
+      "name": "남문로",
+      "adminDong": "학동",
+      "recordCount": 61,
+      "evidence": 0.4,
+      "actual": 43,
+      "A": 42,
+      "B": 49
+    },
+    {
+      "roadId": "ngii-621b21fa5f3f2be9-2",
+      "name": "남문로",
+      "adminDong": "학동",
+      "recordCount": 61,
+      "evidence": 0.4,
+      "actual": 97,
+      "A": 86,
+      "B": 97
+    },
+    {
+      "roadId": "ngii-630b0f914168dd8c-1",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 37,
+      "A": 38,
+      "B": 43
+    },
+    {
+      "roadId": "ngii-630b0f914168dd8c-2",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 93,
+      "A": 82,
+      "B": 94
+    },
+    {
+      "roadId": "ngii-64c268b0134fbd92-1",
+      "name": "필문대로",
+      "adminDong": "지산1동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 99,
+      "A": 87,
+      "B": 99
+    },
+    {
+      "roadId": "ngii-666a48a11244af82-1",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 97,
+      "A": 86,
+      "B": 97
+    },
+    {
+      "roadId": "ngii-666a48a11244af82-2",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 43,
+      "A": 42,
+      "B": 49
+    },
+    {
+      "roadId": "ngii-66f5dd6667018394-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 59,
+      "A": 55,
+      "B": 63
+    },
+    {
+      "roadId": "ngii-67cc6724369be926-1",
+      "name": "남문로",
+      "adminDong": "지원2동",
+      "recordCount": 57,
+      "evidence": 1,
+      "actual": 7,
+      "A": 26,
+      "B": 30
+    },
+    {
+      "roadId": "ngii-6c3fce9c715cb7dd-1",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 88,
+      "A": 78,
+      "B": 89
+    },
+    {
+      "roadId": "ngii-7057b6f3c4e43331-1",
+      "name": "무등로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 63,
+      "A": 58,
+      "B": 67
+    },
+    {
+      "roadId": "ngii-736e5a81fb8e7756-1",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 95,
+      "A": 84,
+      "B": 96
+    },
+    {
+      "roadId": "ngii-75adac66e10c9ec0-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 1,
+      "actual": 8,
+      "A": 26,
+      "B": 31
+    },
+    {
+      "roadId": "ngii-75adac66e10c9ec0-2",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 8,
+      "A": 14,
+      "B": 17
+    },
+    {
+      "roadId": "ngii-7647b34ac0e251f0-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 97,
+      "A": 86,
+      "B": 97
+    },
+    {
+      "roadId": "ngii-7d7f10b783dd79a6-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 56,
+      "evidence": 0.4,
+      "actual": 72,
+      "A": 66,
+      "B": 75
+    },
+    {
+      "roadId": "ngii-7ed0b5795a3ec541-2",
+      "name": "남문로",
+      "adminDong": "지원2동",
+      "recordCount": 62,
+      "evidence": 0.32,
+      "actual": 14,
+      "A": 18,
+      "B": 21
+    },
+    {
+      "roadId": "ngii-8360c5c3f645595a-1",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 99,
+      "A": 87,
+      "B": 99
+    },
+    {
+      "roadId": "ngii-84eeb98747fd0846-1",
+      "name": "남문로",
+      "adminDong": "학동",
+      "recordCount": 75,
+      "evidence": 0.4,
+      "actual": 44,
+      "A": 43,
+      "B": 50
+    },
+    {
+      "roadId": "ngii-84eeb98747fd0846-2",
+      "name": "남문로",
+      "adminDong": "학동",
+      "recordCount": 75,
+      "evidence": 0.4,
+      "actual": 90,
+      "A": 80,
+      "B": 91
+    },
+    {
+      "roadId": "ngii-861beba704a4bbba-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 93,
+      "A": 82,
+      "B": 94
+    },
+    {
+      "roadId": "ngii-872fa1f3e5a3b7e4-1",
+      "name": "필문대로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 1,
+      "actual": 56,
+      "A": 65,
+      "B": 67
+    },
+    {
+      "roadId": "ngii-888ad8ce15e4e24e-1",
+      "name": "제봉로",
+      "adminDong": "충장동",
+      "recordCount": 54,
+      "evidence": 0.4,
+      "actual": 88,
+      "A": 78,
+      "B": 89
+    },
+    {
+      "roadId": "ngii-88f34958ac065189-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 61,
+      "A": 55,
+      "B": 64
+    },
+    {
+      "roadId": "ngii-88f34958ac065189-2",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 2,
+      "A": 8,
+      "B": 10
+    },
+    {
+      "roadId": "ngii-8e1aba7c1eacbae2-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 1,
+      "actual": 87,
+      "A": 90,
+      "B": 90
+    },
+    {
+      "roadId": "ngii-92acce41d9b0c30a-1",
+      "name": "필문대로",
+      "adminDong": "지산1동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 76,
+      "A": 69,
+      "B": 78
+    },
+    {
+      "roadId": "ngii-940c00f0ed41d3b9-1",
+      "name": "필문대로",
+      "adminDong": "지산1동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 95,
+      "A": 84,
+      "B": 96
+    },
+    {
+      "roadId": "ngii-96728780d172036e-1",
+      "name": "필문대로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 1,
+      "actual": 97,
+      "A": 98,
+      "B": 98
+    },
+    {
+      "roadId": "ngii-96728780d172036e-2",
+      "name": "필문대로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 1,
+      "actual": 98,
+      "A": 98,
+      "B": 99
+    },
+    {
+      "roadId": "ngii-96728780d172036e-3",
+      "name": "필문대로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.32,
+      "actual": 70,
+      "A": 62,
+      "B": 72
+    },
+    {
+      "roadId": "ngii-9af38a788049b75e-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 95,
+      "A": 82,
+      "B": 95
+    },
+    {
+      "roadId": "ngii-9fc1bb97a8b526a1-4",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 7,
+      "A": 14,
+      "B": 16
+    },
+    {
+      "roadId": "ngii-a348c0dd80a9c5cd-1",
+      "name": "무등로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 66,
+      "A": 61,
+      "B": 69
+    },
+    {
+      "roadId": "ngii-a54c7d1aa23f925f-2",
+      "name": "필문대로",
+      "adminDong": "계림2동",
+      "recordCount": 53,
+      "evidence": 0.32,
+      "actual": 5,
+      "A": 10,
+      "B": 13
+    },
+    {
+      "roadId": "ngii-a54c7d1aa23f925f-3",
+      "name": "필문대로",
+      "adminDong": "계림2동",
+      "recordCount": 53,
+      "evidence": 0.32,
+      "actual": 5,
+      "A": 10,
+      "B": 13
+    },
+    {
+      "roadId": "ngii-a59d0221c427a36a-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 99,
+      "A": 86,
+      "B": 99
+    },
+    {
+      "roadId": "ngii-a59d0221c427a36a-2",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 77,
+      "A": 68,
+      "B": 79
+    },
+    {
+      "roadId": "ngii-a5e0d60a7ed6f8b0-1",
+      "name": "남문로",
+      "adminDong": "지원2동",
+      "recordCount": 62,
+      "evidence": 0.32,
+      "actual": 3,
+      "A": 9,
+      "B": 11
+    },
+    {
+      "roadId": "ngii-af62db773094e5cb-1",
+      "name": "무등로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 13,
+      "A": 18,
+      "B": 22
+    },
+    {
+      "roadId": "ngii-b4e16a2907054ebb-1",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 91,
+      "A": 81,
+      "B": 92
+    },
+    {
+      "roadId": "ngii-b64d1627444e7551-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 3,
+      "A": 9,
+      "B": 11
+    },
+    {
+      "roadId": "ngii-b64d1627444e7551-2",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 3,
+      "A": 9,
+      "B": 11
+    },
+    {
+      "roadId": "ngii-b64d1627444e7551-3",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.4,
+      "actual": 3,
+      "A": 10,
+      "B": 13
+    },
+    {
+      "roadId": "ngii-b8327ced24d366e6-1",
+      "name": "남문로",
+      "adminDong": "지원2동",
+      "recordCount": 62,
+      "evidence": 0.32,
+      "actual": 61,
+      "A": 55,
+      "B": 64
+    },
+    {
+      "roadId": "ngii-b868caff87a406e3-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 86,
+      "A": 77,
+      "B": 87
+    },
+    {
+      "roadId": "ngii-bd0071dbd49b7d5f-1",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 55,
+      "evidence": 0.4,
+      "actual": 38,
+      "A": 38,
+      "B": 44
+    },
+    {
+      "roadId": "ngii-be907b5c95c382d1-1",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 47,
+      "A": 46,
+      "B": 52
+    },
+    {
+      "roadId": "ngii-beee359adbc66245-1",
+      "name": "남문로",
+      "adminDong": "학동",
+      "recordCount": 61,
+      "evidence": 0.32,
+      "actual": 26,
+      "A": 27,
+      "B": 32
+    },
+    {
+      "roadId": "ngii-c2a270724316ab6f-1",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 92,
+      "A": 82,
+      "B": 93
+    },
+    {
+      "roadId": "ngii-c62729568dfd44ea-1",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 62,
+      "evidence": 0.4,
+      "actual": 7,
+      "A": 14,
+      "B": 16
+    },
+    {
+      "roadId": "ngii-c62729568dfd44ea-2",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 50,
+      "evidence": 0.4,
+      "actual": 47,
+      "A": 46,
+      "B": 52
+    },
+    {
+      "roadId": "ngii-c62729568dfd44ea-3",
+      "name": "금남로",
+      "adminDong": "충장동",
+      "recordCount": 50,
+      "evidence": 0.4,
+      "actual": 57,
+      "A": 54,
+      "B": 61
+    },
+    {
+      "roadId": "ngii-ceedb05f85c0a558-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 1,
+      "actual": 51,
+      "A": 61,
+      "B": 63
+    },
+    {
+      "roadId": "ngii-d6affeaf552321aa-1",
+      "name": "필문대로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 1,
+      "actual": 50,
+      "A": 60,
+      "B": 63
+    },
+    {
+      "roadId": "ngii-dda2ca9435f47b17-1",
+      "name": "필문대로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 31,
+      "A": 33,
+      "B": 38
+    },
+    {
+      "roadId": "ngii-dec93ab30fbabb12-1",
+      "name": "무등로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 64,
+      "A": 59,
+      "B": 68
+    },
+    {
+      "roadId": "ngii-e002ad9ef5806a5f-1",
+      "name": "무등로",
+      "adminDong": "계림2동",
+      "recordCount": 68,
+      "evidence": 0.32,
+      "actual": 96,
+      "A": 83,
+      "B": 96
+    },
+    {
+      "roadId": "ngii-e44a0ae257ba8592-1",
+      "name": "남문로",
+      "adminDong": "지원2동",
+      "recordCount": 57,
+      "evidence": 1,
+      "actual": 7,
+      "A": 26,
+      "B": 30
+    },
+    {
+      "roadId": "ngii-e44a0ae257ba8592-2",
+      "name": "남문로",
+      "adminDong": "지원2동",
+      "recordCount": 57,
+      "evidence": 1,
+      "actual": 7,
+      "A": 26,
+      "B": 30
+    },
+    {
+      "roadId": "ngii-e46b9b0b2591f98a-1",
+      "name": "필문대로",
+      "adminDong": "동명동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 95,
+      "A": 84,
+      "B": 96
+    },
+    {
+      "roadId": "ngii-ec6a5f0b9b540647-1",
+      "name": "필문대로",
+      "adminDong": "지산1동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 95,
+      "A": 84,
+      "B": 96
+    },
+    {
+      "roadId": "ngii-f0a3ee219f6aff0c-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 69,
+      "evidence": 0.4,
+      "actual": 56,
+      "A": 53,
+      "B": 60
+    },
+    {
+      "roadId": "ngii-f37ea3740dab00eb-1",
+      "name": "무등로",
+      "adminDong": "산수1동",
+      "recordCount": 52,
+      "evidence": 0.4,
+      "actual": 73,
+      "A": 66,
+      "B": 76
+    },
+    {
+      "roadId": "ngii-fcfd812940bfc7aa-1",
+      "name": "필문대로",
+      "adminDong": "지산1동",
+      "recordCount": 66,
+      "evidence": 0.4,
+      "actual": 93,
+      "A": 82,
+      "B": 94
+    },
+    {
+      "roadId": "ngii-fe20eec18050a6a3-1",
+      "name": "남문로",
+      "adminDong": "지원1동",
+      "recordCount": 78,
+      "evidence": 0.4,
+      "actual": 77,
+      "A": 70,
+      "B": 79
+    }
+  ]
+}

@@ -21,12 +21,13 @@ export interface CrimeRiskConfig {
 }
 
 /**
- * 보안등·가로등 위치 기반 상대적 조명 환경 설정. 실제 조도(lux)가 아닌
- * 위치·거리 분포의 초기 휴리스틱이며 광원별 조사 범위도 서로 다르다.
+ * 실제 보안등 좌표 기반 상대적 조명 환경 설정. 가로등 대표좌표는 광원으로 쓰지 않는다.
  */
 export interface LightingConfig {
   sampleIntervalMeters: number;
-  lightTypes: Record<"security_light" | "road_light", { sigmaMeters: number; cutoffMeters: number }>;
+  lightTypes: Record<"security_light", { sigmaMeters: number; cutoffMeters: number }>;
+  /** 도로 관리자료 추정치 결합. A/B 비교 후 실제 보안등 점수를 낮추지 않는 B를 채택. */
+  estimatedRoadLightModel: "actual" | "A" | "B";
   /** 표시·디버깅용 위치 집계 반경. 기존 50m 기준을 유지한다. */
   countRadiusMeters: number;
   coverageThreshold: number;
@@ -46,8 +47,8 @@ export const SAFETY_WEIGHTS = {
     sampleIntervalMeters: 5,
     lightTypes: {
       security_light: { sigmaMeters: 20, cutoffMeters: 60 },
-      road_light: { sigmaMeters: 28, cutoffMeters: 85 },
     },
+    estimatedRoadLightModel: "B" as LightingConfig["estimatedRoadLightModel"],
     countRadiusMeters: 50,
     coverageThreshold: 0.25,
     contributionPoints: 16,

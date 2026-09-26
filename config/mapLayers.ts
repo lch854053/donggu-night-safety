@@ -17,13 +17,6 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
     kind: "point",
   },
   {
-    key: "road_light",
-    label: "가로등",
-    description: "동구 가로등 자료의 중복 제거된 대표 위치",
-    color: "#a58a49",
-    kind: "point",
-  },
-  {
     key: "cctv",
     label: "CCTV",
     description: "설치 목적에 따라 감시 기여도 보정",
@@ -76,7 +69,7 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
 
 export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   security_light: true,
-  road_light: true,
+  road_light: false, // 레거시 Point 레이어는 노출하지 않는다. 도로 속성의 추정 근거만 표시.
   streetlight: false,
   cctv: true,
   emergency_bell: true,

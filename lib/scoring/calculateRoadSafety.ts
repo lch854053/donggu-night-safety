@@ -8,6 +8,7 @@ import type { Feature, LineString, Point } from "geojson";
 
 import { SAFETY_WEIGHTS, type ProximityWeight } from "@/config/safetyWeights";
 import { computeLightingMetrics } from "@/lib/scoring/lighting";
+import { estimatedRoadLightingModels } from "@/lib/scoring/estimatedRoadLighting";
 import { computeActivityScore } from "@/lib/scoring/activity";
 import { computeEnvironmentScore } from "@/lib/scoring/environment";
 import { computeSurveillanceScore, nearbyCctvSites } from "@/lib/scoring/surveillance";
@@ -64,12 +65,15 @@ export function calculateRoadSafety(
         SAFETY_WEIGHTS.lighting.countRadiusMeters,
       ) + pointsNearRoad(road, candidates, "streetlight", SAFETY_WEIGHTS.lighting.countRadiusMeters);
       const securityLightCount = streetlightCount;
-      const roadLightCount = pointsNearRoad(road, candidates, "road_light", SAFETY_WEIGHTS.lighting.countRadiusMeters);
       // 조명 환경은 개수가 아니라 구간 샘플별 감쇠 영향(위치·거리 분포)으로 산출한다.
       const lightFeatures = candidates.filter(
-        (candidate) => ["security_light", "streetlight", "road_light"].includes(candidate.properties.type),
+        (candidate) => candidate.properties.type === "security_light" || candidate.properties.type === "streetlight",
       );
       const lighting = computeLightingMetrics(road, lightFeatures, SAFETY_WEIGHTS.lighting);
+      const roadLight = dataset.roadLightingEvidenceByRoad?.[road.properties.id];
+      const estimatedModels = estimatedRoadLightingModels(lighting.lightingScore, roadLight, securityLightCount > 0);
+      const lightingScore = SAFETY_WEIGHTS.lighting.estimatedRoadLightModel === "actual"
+        ? lighting.lightingScore : estimatedModels[SAFETY_WEIGHTS.lighting.estimatedRoadLightModel];
       const nearbyCctv = nearbyCctvSites(road, candidates, SAFETY_WEIGHTS.cctv.radiusMeters);
       const cctvCount = nearbyCctv.length;
       const emergencyBellCount = pointsNearRoad(
@@ -151,7 +155,7 @@ export function calculateRoadSafety(
         clamp(100 - (Math.abs(crimeContribution) / maximumCrimePenalty) * 100),
       ) : null;
       const safetyScoreV2 = combineDimensionScores({
-        lighting: lighting.lightingScore,
+        lighting: lightingScore,
         surveillance: surveillance.score,
         activity: activity.score,
         environment: environment.score,
@@ -181,7 +185,8 @@ export function calculateRoadSafety(
       const properties: RoadSegmentProperties = {
         ...road.properties,
         lengthMeters: Math.round(length(road, { units: "kilometers" }) * 1000),
-        lightingScore: lighting.lightingScore,
+        lightingScore,
+        actualLightingScore: lighting.lightingScore,
         lightingCoverage: Math.round(lighting.coverageScore),
         maxDarkGapMeters: Math.round(lighting.maxDarkGapMeters),
         lightingUniformityScore: Math.round(lighting.uniformityScore),
@@ -195,7 +200,14 @@ export function calculateRoadSafety(
         safetyScore,
         streetlightCount,
         securityLightCount,
-        roadLightCount,
+        ...(roadLight ? {
+          roadLightingEstimated: true as const,
+          roadLightingEvidence: roadLight.roadLightingEvidence,
+          roadLightingConfidence: roadLight.matchConfidence,
+          roadLightingMatchMethod: roadLight.matchMethod,
+          roadLightingRecordCount: roadLight.matchedRecordCount,
+          roadLightingRepresentativePointCount: roadLight.uniqueRepresentativePointCount,
+        } : {}),
         cctvCount,
         emergencyBellCount,
         convenienceStoreCount,
