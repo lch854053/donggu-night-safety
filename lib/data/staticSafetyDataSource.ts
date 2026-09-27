@@ -3,7 +3,6 @@ import type { FeatureCollection, LineString, Point, Polygon } from "geojson";
 import type { SafetyDataSource } from "@/lib/data/SafetyDataSource";
 import { validateScoredRoads } from "@/lib/data/validateScoredRoads";
 import type {
-  ApartmentPoiProperties,
   RiskZoneProperties,
   ScoredRoadFile,
   SafetyDataset,
@@ -27,7 +26,7 @@ async function fetchJson<T>(url: string): Promise<T> {
 // scripts/fetch-real-data.mjs가 생성한 정적 공공데이터 GeoJSON을 읽는 공급자.
 export class StaticSafetyDataSource implements SafetyDataSource {
   async load(): Promise<SafetyDataset> {
-    const [features, riskZones, roadSegments, meta, roadLightCorridors, apartmentPois] = await Promise.all([
+    const [features, riskZones, roadSegments, meta, roadLightCorridors] = await Promise.all([
       fetchJson<FeatureCollection<Point, SafetyFeatureProperties>>(
         "/data/safety-features.geojson",
       ),
@@ -41,9 +40,6 @@ export class StaticSafetyDataSource implements SafetyDataSource {
       fetchJson<NonNullable<SafetyDataset["roadLightCorridors"]>>(
         "/data/road-light-corridors.geojson",
       ),
-      fetchJson<FeatureCollection<Point, ApartmentPoiProperties>>(
-        "/data/apartment-pois.geojson",
-      ),
     ]);
 
     return {
@@ -51,7 +47,6 @@ export class StaticSafetyDataSource implements SafetyDataSource {
       riskZones,
       roadSegments: validateScoredRoads(roadSegments),
       roadLightCorridors,
-      apartmentPois,
       metadata: {
         sourceKind: "static",
         scoreKind: "precomputed",
