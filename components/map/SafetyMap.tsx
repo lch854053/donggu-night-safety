@@ -220,6 +220,25 @@ function corridorPopupContent(properties: Record<string, unknown>) {
   return content;
 }
 
+function apartmentPopupContent(properties: Record<string, unknown>) {
+  const content = document.createElement("article");
+  content.className = "road-popup";
+  const title = document.createElement("p");
+  title.className = "road-popup-name";
+  title.textContent = String(properties.name ?? "공동주택");
+  const detail = document.createElement("p");
+  detail.className = "road-popup-label";
+  detail.textContent = [properties.kind, properties.address].filter(Boolean).join(" · ");
+  const note = document.createElement("p");
+  note.className = "road-popup-note";
+  note.textContent = "동구 공동주택 단지자료의 필지 내부 참고점입니다. 출입구나 개별 동 위치가 아니며 밤길 안전점수에 반영하지 않습니다.";
+  const source = document.createElement("p");
+  source.className = "road-popup-note";
+  source.textContent = "자료: donggu-building 공동주택 지도자료 (K-apt 등)";
+  content.append(title, detail, note, source);
+  return content;
+}
+
 function policePopupContent(properties: Record<string, unknown>) {
   const content = document.createElement("article");
   content.className = "road-popup";
@@ -394,6 +413,10 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       map.addSource("road-light-corridors", { type: "geojson", data: data.roadLightCorridors,
         attribution: "가로등 관리자료: 동구 가로등현황(2024-04-15) · 도로: 국토지리정보원" });
     }
+    if (data.apartmentPois?.features.length) {
+      map.addSource("apartment-pois", { type: "geojson", data: data.apartmentPois,
+        attribution: '<a href="https://github.com/lch854053/donggu-building">동구 공동주택 단지자료</a> · 필지 내부 참고점' });
+    }
 
     map.addLayer({
       id: "road-safety-casing",
@@ -449,6 +472,21 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
         paint: { "line-color": "#0b7285", "line-opacity": 0.01, "line-width": 14 } });
     }
 
+    if (map.getSource("apartment-pois")) {
+      map.addLayer({ id: "apartment-poi-dot", type: "circle", source: "apartment-pois",
+        minzoom: 14, layout: { visibility: "none" },
+        paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 14, 3.5, 17, 5],
+          "circle-color": "#665d52", "circle-opacity": 0.9,
+          "circle-stroke-color": "#fffdf8", "circle-stroke-width": 1.5 } });
+      map.addLayer({ id: "apartment-poi-label", type: "symbol", source: "apartment-pois",
+        minzoom: 14, layout: { visibility: "none", "text-field": ["get", "name"],
+          "text-font": ["noto_sans_regular"], "text-size": ["interpolate", ["linear"], ["zoom"], 14, 10, 17, 12],
+          "text-anchor": "left", "text-offset": [0.7, 0], "text-max-width": 11,
+          "text-optional": true },
+        paint: { "text-color": "#453d35", "text-halo-color": "#fffdf8",
+          "text-halo-width": 1.5, "text-opacity": 0.9 } });
+    }
+
     POINT_LAYER_KEYS.forEach((type) => {
       const definition = MAP_LAYER_DEFINITIONS.find((layer) => layer.key === type);
       if (!definition) return;
@@ -473,6 +511,8 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     const showRoadDetails = (event: maplibregl.MapLayerMouseEvent) => {
       if (map.getLayer("road-light-hit") && map.queryRenderedFeatures(event.point,
         { layers: ["road-light-hit"] }).length) return;
+      if (map.getLayer("apartment-poi-dot") && map.queryRenderedFeatures(event.point,
+        { layers: ["apartment-poi-dot", "apartment-poi-label"] }).length) return;
       const feature = event.features?.[0];
       if (!feature?.properties) return;
 
@@ -493,6 +533,8 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     map.on("mouseleave", "road-safety", hidePointer);
 
     const showCorridorDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      if (map.getLayer("apartment-poi-dot") && map.queryRenderedFeatures(event.point,
+        { layers: ["apartment-poi-dot", "apartment-poi-label"] }).length) return;
       const properties = event.features?.[0]?.properties;
       if (!properties) return;
       new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
@@ -502,6 +544,22 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
       map.on("click", "road-light-hit", showCorridorDetails);
       map.on("mouseenter", "road-light-hit", showPointer);
       map.on("mouseleave", "road-light-hit", hidePointer);
+    }
+
+    const showApartmentDetails = (event: maplibregl.MapLayerMouseEvent) => {
+      // 텍스트와 점이 겹치면 위쪽 텍스트 레이어의 핸들러 한 번만 연다.
+      if (event.features?.[0]?.layer.id === "apartment-poi-dot" && map.queryRenderedFeatures(event.point,
+        { layers: ["apartment-poi-label"] }).length) return;
+      const properties = event.features?.[0]?.properties;
+      if (!properties) return;
+      new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: "310px" })
+        .setLngLat(event.lngLat).setDOMContent(apartmentPopupContent(properties)).addTo(map);
+    };
+    for (const id of ["apartment-poi-dot", "apartment-poi-label"]) {
+      if (!map.getLayer(id)) continue;
+      map.on("click", id, showApartmentDetails);
+      map.on("mouseenter", id, showPointer);
+      map.on("mouseleave", id, hidePointer);
     }
 
     const policeLayer = pointLayerId("police_station");
@@ -569,6 +627,12 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
         map.off("mouseenter", "road-light-hit", showPointer);
         map.off("mouseleave", "road-light-hit", hidePointer);
       }
+      for (const id of ["apartment-poi-dot", "apartment-poi-label"]) {
+        if (!map.getLayer(id)) continue;
+        map.off("click", id, showApartmentDetails);
+        map.off("mouseenter", id, showPointer);
+        map.off("mouseleave", id, hidePointer);
+      }
       map.off("click", policeLayer, showPoliceDetails);
       map.off("mouseenter", policeLayer, showPointer);
       map.off("mouseleave", policeLayer, hidePointer);
@@ -585,9 +649,10 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
         const id = pointLayerId(type);
         if (map.getLayer(id)) map.removeLayer(id);
       });
-      ["road-light-hit", "road-light-low", "road-light-medium", "road-light-high", "road-safety", "road-safety-casing"].forEach((id) => {
+      ["apartment-poi-label", "apartment-poi-dot", "road-light-hit", "road-light-low", "road-light-medium", "road-light-high", "road-safety", "road-safety-casing"].forEach((id) => {
         if (map.getLayer(id)) map.removeLayer(id);
       });
+      if (map.getSource("apartment-pois")) map.removeSource("apartment-pois");
       if (map.getSource("road-light-corridors")) map.removeSource("road-light-corridors");
       if (map.getSource("road-segments")) map.removeSource("road-segments");
       if (map.getSource("safety-features")) map.removeSource("safety-features");
@@ -606,6 +671,9 @@ export function SafetyMap({ data, roadSegments, visibility }: SafetyMapProps) {
     });
     for (const id of ["road-light-high", "road-light-medium", "road-light-low", "road-light-hit"]) {
       if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", visibility.road_light_corridor ? "visible" : "none");
+    }
+    for (const id of ["apartment-poi-dot", "apartment-poi-label"]) {
+      if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", visibility.apartment_poi ? "visible" : "none");
     }
   }, [data, styleReady, visibility]);
 
