@@ -23,7 +23,18 @@ export type SafetyFeatureType =
   /** 공공데이터포털 동구 빈집 현황. */
   | "vacant_house";
 
-export type LayerKey = Exclude<SafetyFeatureType, "police_center"> | "road_light_corridor";
+export type LayerKey = Exclude<SafetyFeatureType, "police_center"> | "road_light_corridor" | "apartment_poi";
+
+/** 지도 맥락만 제공한다. 안전점수 입력 시설이나 단지 출입구 좌표가 아니다. */
+export interface ApartmentPoiProperties {
+  id: string;
+  name: string;
+  kind: string;
+  pnu: string;
+  address: string;
+  source: string;
+  households: number | null;
+}
 
 export type RoadPlanningGrade = "소로" | "중로" | "대로" | "광로";
 
@@ -155,6 +166,7 @@ export interface RoadSegmentProperties extends RoadSegmentInputProperties {
 
 export interface SafetyDataset {
   features: FeatureCollection<Point, SafetyFeatureProperties>;
+  apartmentPois?: FeatureCollection<Point, ApartmentPoiProperties>;
   riskZones: FeatureCollection<Polygon | LineString, RiskZoneProperties>;
   roadSegments: FeatureCollection<LineString, RoadSegmentInputProperties>;
   roadLightCorridors?: FeatureCollection<LineString | import("geojson").MultiLineString, {

@@ -148,6 +148,7 @@ test("static provider uses the shipped precomputed collection", async (t) => {
   assert.equal(loaded.roadSegments.features.length, roads.features.length);
   assert.deepEqual(loaded.roadSegments.features[0], roads.features[0]);
   assert.ok((loaded.roadLightCorridors?.features.length ?? 0) > 0);
+  assert.ok((loaded.apartmentPois?.features.length ?? 0) >= 100);
 });
 
 test("sidewalk penalty applies only to segments without adjacent sidewalks", () => {

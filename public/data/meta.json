@@ -1,6 +1,13 @@
 {
   "generatedAt": "2026-09-26",
   "sources": {
+    "apartment_poi": {
+      "source": "donggu-building/apt_geo.json (K-apt 등 공동주택 지도자료)",
+      "count": 354,
+      "metadata": "/data/apartment-pois.geojson",
+      "positionMeaning": "단지 필지 내부 참고점; 출입구 또는 개별 동 위치가 아님",
+      "scoring": "excluded"
+    },
     "road_segments": {
       "source": "국토지리정보원 연속수치지형도",
       "metadata": "/data/roads-meta.json"

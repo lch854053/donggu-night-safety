@@ -122,7 +122,7 @@ npm run build
 
 Node.js 20 이상이 필요합니다. 현재 GitHub 저장소를 직접 가져오는 경우 Vercel Root Directory는 기본값인 `./`을 사용합니다.
 
-지도는 VersaTiles의 OSM 벡터 타일 `gray` 스타일을 안전지도용으로 단순화해 사용합니다. 별도의 베이스맵 API 키는 필요하지 않습니다. `config/baseMap.ts`에서 POI 레이어 전체를 제외하고 지명·도로·건물·공원·수계 등 분석에 필요한 배경만 남깁니다. 안전시설 레이어와 도로 점수 데이터는 이 스타일과 분리되어 있습니다.
+지도는 VersaTiles의 OSM 벡터 타일 `gray` 스타일을 안전지도용으로 단순화해 사용합니다. 별도의 베이스맵 API 키는 필요하지 않습니다. `config/baseMap.ts`에서 일반 POI 레이어를 제외하고 지명·도로·건물·공원·수계 등 분석에 필요한 배경만 남깁니다. OSM 타일에는 동구 공동주택 단지명 POI가 없어, [동구 건축물대장 지도자료](https://github.com/lch854053/donggu-building)의 `apt_geo.json`에서 필지 내부 참고점 1개씩을 추출한 별도 **공동주택 단지명** 레이어를 기본 표시합니다. 레이어 패널에서 끌 수 있으며, 점은 실제 출입구나 개별 동 위치를 뜻하지 않습니다. `npm run update-apartment-pois`로 `public/data/apartment-pois.geojson`을 재생성하고 월간 전체 갱신 때도 갱신합니다. 안전시설·도로 점수 데이터와 분리돼 점수에는 반영되지 않습니다.
 
 ```dotenv
 NEXT_PUBLIC_SPATIAL_DATA_SOURCE=static
