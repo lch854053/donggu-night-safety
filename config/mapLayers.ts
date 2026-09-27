@@ -5,7 +5,7 @@ export interface MapLayerDefinition {
   label: string;
   description: string;
   color: string;
-  kind: "point" | "area" | "line" | "context";
+  kind: "point" | "area" | "line";
 }
 
 export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
@@ -72,13 +72,6 @@ export const MAP_LAYER_DEFINITIONS: readonly MapLayerDefinition[] = [
     color: "#6258a5",
     kind: "point",
   },
-  {
-    key: "apartment_poi",
-    label: "공동주택 단지명",
-    description: "단지 필지 내부 참고점 · 안전점수 미반영",
-    color: "#665d52",
-    kind: "context",
-  },
 ] as const;
 
 export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
@@ -95,7 +88,6 @@ export const INITIAL_LAYER_VISIBILITY: LayerVisibility = {
   // 좌표 데이터가 아직 수집되지 않은 타입. 데이터가 생기면 기본 표시로 바꾼다.
   night_activity: false,
   bus_stop: true,
-  apartment_poi: true,
   subway_entrance: false,
   vacant_house: true,
 };

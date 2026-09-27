@@ -1,8 +1,8 @@
 import type { StyleSpecification } from "maplibre-gl";
 
 // VersaTiles Gray uses OpenStreetMap Shortbread vector tiles (no API key).
-// Replace this URL and the source attribution to switch providers; the allowlist
-// below keeps third-party POIs out of the safety map even if a style adds them.
+// Replace this URL and the source attribution to switch providers; only the
+// Shortbread pois symbols are kept as optional map context, separate from scoring.
 export const BASEMAP_STYLE_URL = "https://tiles.versatiles.org/assets/styles/gray/style.json";
 export const BASEMAP_ATTRIBUTION =
   '<a href="https://versatiles.org">VersaTiles</a> · <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a> · <a href="https://esa-worldcover.org/en/data-access">ESA WorldCover (CC BY 4.0)</a>';
@@ -17,7 +17,13 @@ const PLACE_CLASSES = [
   "hamlet", "state", "country", "continent",
 ];
 
-/** Only geographic context is allowed through; no POI icon/text layer reaches MapLibre. */
+/** Match by source-layer, not by upstream layer IDs, which can change between styles. */
+export function isOsmPoiLayer(layer: StyleSpecification["layers"][number]) {
+  return layer.type === "symbol" && "source" in layer && layer.source === BASEMAP_SOURCE
+    && "source-layer" in layer && layer["source-layer"] === "pois";
+}
+
+/** Muted geography plus OSM POIs; other third-party symbols stay out of the safety map. */
 export function simplifyBaseMapStyle(style: StyleSpecification): StyleSpecification {
   const source = style.sources?.[BASEMAP_SOURCE];
   if (style.version !== 8 || source?.type !== "vector" || !Array.isArray(style.layers)) {
@@ -60,6 +66,17 @@ export function simplifyBaseMapStyle(style: StyleSpecification): StyleSpecificat
       layers.push({ ...layer, paint });
       continue;
     }
+    if (layer.type === "symbol" && isOsmPoiLayer(layer)) {
+      layers.push({ ...layer,
+        layout: { ...layer.layout,
+          "text-size": ["interpolate", ["linear"], ["zoom"], 14, 0, 15, 9, 17, 11, 19, 12] },
+        paint: { ...layer.paint,
+          "icon-opacity": ["interpolate", ["linear"], ["zoom"], 14, 0.45, 16, 0.55, 18, 0.65],
+          "text-opacity": ["interpolate", ["linear"], ["zoom"], 14, 0, 15, 0.45, 17, 0.65],
+          "text-color": "#5b625f", "text-halo-color": "#f4f2ed", "text-halo-width": 1.2 },
+      });
+      continue;
+    }
     if (layer.type === "symbol" && sourceLayer === "place_labels") {
       layers.push({
         ...layer,
@@ -84,7 +101,7 @@ export function simplifyBaseMapStyle(style: StyleSpecification): StyleSpecificat
   const { sky: _sky, projection: _projection, ...flatStyle } = style;
   return {
     ...flatStyle,
-    sprite: undefined,
+    sprite: layers.some(isOsmPoiLayer) ? style.sprite : undefined,
     sources: { [BASEMAP_SOURCE]: { ...source, attribution: BASEMAP_ATTRIBUTION } },
     layers,
   };
